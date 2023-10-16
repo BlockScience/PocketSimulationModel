@@ -1,13 +1,34 @@
-from ..types import uPOKTType, ServicerReportCardType, ServicerTestScoresType, PublicKeyType, GeoZoneType, ServiceType, ServiceURLType, BlockHeightType, StakeStatusType
+from ..types import (
+    uPOKTType,
+    ServicerReportCardType,
+    ServicerTestScoresType,
+    PublicKeyType,
+    GeoZoneType,
+    ServiceType,
+    ServiceURLType,
+    BlockHeightType,
+    StakeStatusType,
+)
 from typing import List
 
-class Servicer:
 
-    def __init__(self, name: str, servicer_salary: uPOKTType, report_card: ServicerReportCardType,
-                 test_scores: ServicerTestScoresType, pokt_holdings: uPOKTType, staked_pokt: uPOKTType,
-                 service_url: ServiceURLType, services: List[ServiceType], geo_zone: GeoZoneType,
-                 operator_public_key: PublicKeyType, pause_height: BlockHeightType, stake_status: StakeStatusType,
-                 unkstaking_height: BlockHeightType):
+class Servicer:
+    def __init__(
+        self,
+        name: str,
+        servicer_salary: uPOKTType,
+        report_card: ServicerReportCardType,
+        test_scores: ServicerTestScoresType,
+        pokt_holdings: uPOKTType,
+        staked_pokt: uPOKTType,
+        service_url: ServiceURLType,
+        services: List[ServiceType],
+        geo_zone: GeoZoneType,
+        operator_public_key: PublicKeyType,
+        pause_height: BlockHeightType,
+        stake_status: StakeStatusType,
+        unkstaking_height: BlockHeightType,
+    ):
         self.name = name
         self.public_key = self
         self.servicer_salary = servicer_salary
