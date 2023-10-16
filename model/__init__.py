@@ -7,3 +7,4 @@ from .types import (PublicKeyType, uPOKTType, ServiceURLType,
                          ActorType, StakeStatusType,
                          ServiceEntityType, ServicerEntityType, ApplicationEntityType, ServicerGroupType, PortalEntityType,
                          SessionType)
+from .config import build_state
