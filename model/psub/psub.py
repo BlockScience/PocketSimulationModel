@@ -1,6 +1,8 @@
 from .meta import p_update_time, s_update_height, s_update_day
 from .servicer import p_servicers_join, s_update_servicers
-from .service import p_service_linking, s_update_services
+from .service import p_service_linking, s_update_services, p_service_join
+from .portal import p_portal_join, s_update_portals
+from .application import p_application_join, s_update_applications
 
 # Block for recording things like time
 meta_update_block = {
@@ -12,13 +14,23 @@ meta_update_block = {
 
 # Block for anything joining the system
 join_block = {
-    "policies": {"servicer": p_servicers_join},
-    "variables": {"Servicers": s_update_servicers},
+    "policies": {
+        "servicer": p_servicers_join,
+        "service": p_service_join,
+        "portal": p_portal_join,
+        "application": p_application_join,
+    },
+    "variables": {
+        "Servicers": s_update_servicers,
+        "Services": s_update_services,
+        "Portals": s_update_portals,
+        "Applications": s_update_applications,
+    },
 }
 
 # Portal delegation and service linking
 delegation_service_block = {
-    "policies": {p_service_linking},
+    "policies": {"service_link": p_service_linking},
     "variables": {"Servicers": s_update_servicers, "Services": s_update_services},
 }
 

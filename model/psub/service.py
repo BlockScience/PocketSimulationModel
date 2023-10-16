@@ -5,3 +5,7 @@ def s_update_services(_params, substep, state_history, state, _input) -> tuple:
 
 def p_service_linking(_params, substep, state_history, state) -> tuple:
     return {}
+
+
+def p_service_join(_params, substep, state_history, state) -> tuple:
+    return {}
