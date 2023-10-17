@@ -26,5 +26,15 @@ from .types import (
     PortalEntityType,
     SessionType,
 )
-from .config import build_state, build_params
+from .config import build_state, build_params, experimental_setups
 from .psub import psub_blocks
+from .run import (
+    load_config,
+    add_config,
+    run,
+    compute_KPIs,
+    postprocessing,
+    run_experiments,
+    auto_run_sets,
+    write_to_csv,
+)
