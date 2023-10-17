@@ -82,7 +82,9 @@ def run_experiments(experiment_keys):
     experimental_setup = experimental_setups[experiment_keys[0]]
     state = build_state(experimental_setup["config_option_state"])
     params = build_params(experimental_setup["config_option_params"])
-    exp = load_config(experimental_setup["monte_carlo_n"], params, state)
+    exp = load_config(
+        experimental_setup["monte_carlo_n"], experimental_setup["T"], params, state
+    )
     meta_data.append(
         [
             experiment_keys[0],
@@ -95,7 +97,13 @@ def run_experiments(experiment_keys):
         experimental_setup = experimental_setups[key]
         state = build_state(experimental_setup["config_option_state"])
         params = build_params(experimental_setup["config_option_params"])
-        add_config(exp, experimental_setup["monte_carlo_n"], params, state)
+        add_config(
+            exp,
+            experimental_setup["monte_carlo_n"],
+            experimental_setup["T"],
+            params,
+            state,
+        )
         meta_data.append(
             [
                 key,
@@ -108,7 +116,7 @@ def run_experiments(experiment_keys):
     compute_KPIs(raw)
     df = postprocessing(raw)
     meta_data = pd.DataFrame(
-        meta_data, columns=["Experiment Name", "State Set", "Params Set", "Signal Set"]
+        meta_data, columns=["Experiment Name", "State Set", "Params Set"]
     )
     df = pd.concat([df, df["simulation"].apply(lambda x: meta_data.loc[x])], axis=1)
 
