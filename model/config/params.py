@@ -1,13 +1,16 @@
 from copy import deepcopy
 
-config_option_map = {"Test": {"System": "Test", "Behaviors": "Test"}}
+config_option_map = {
+    "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"}
+}
 
 
 def build_params(config_option):
     config_option = config_option_map[config_option]
     a = system_param_config[config_option["System"]]
     b = behavior_param_config[config_option["Behaviors"]]
-    params = {**a, **b}
+    c = functional_param_config[config_option["Functional"]]
+    params = {**a, **b, **c}
 
     params = deepcopy(params)
     return params
@@ -58,3 +61,5 @@ system_param_config = {
 }
 
 behavior_param_config = {"Test": {}}
+
+functional_param_config = {"Test": {}}

@@ -25,6 +25,9 @@ def build_state(config_option):
     state["Services"] = service_config[config_option["Services"]]
     state["Servicers"] = servicers_config[config_option["Servicers"]]
     state["Validators"] = validators_config[config_option["Validators"]]
+    state["height"] = 0
+    state["day"] = 0
+    state["Treasury"] = None
 
     state = deepcopy(state)
     return state
