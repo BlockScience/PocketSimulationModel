@@ -27,6 +27,7 @@ from .Application import (
     return_application_stake_space,
     application_stake_status_space,
     application_join_space,
+    application_entity_space,
 )
 from .Validator import (
     validator_stake_space,

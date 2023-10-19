@@ -21,6 +21,7 @@ def application_join_ba_simple_unfiform(
     if random.random() > threshold:
         return (
             {
+                "name": "",
                 "stake_amount": 100,  # The amount of uPOKT in escrow (i.e. a security deposit)
                 "geo_zone": "ABC",  # The physical geo-location identifier this Servicer registered in
                 "number_servicers": 1,  # The number of Servicers requested per session

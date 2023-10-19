@@ -8,15 +8,24 @@ from ..types import (
     AddressType,
     BlockHeightType,
     StakeStatusType,
+    ApplicationEntityType,
 )
 
 application_join_space = TypedDict(
     "Application Stake Space",
     {
+        "name": str,
         "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)
         "geo_zone": GeoZoneType,  # The physical geo-location identifier this Servicer registered in
         "number_servicers": int,  # The number of Servicers requested per session
         "personal_holdings": uPOKTType,  # Unstaked POKT the application personally holds
+    },
+)
+
+application_entity_space = TypedDict(
+    "Application Entity Space",
+    {
+        "application": ApplicationEntityType,
     },
 )
 
