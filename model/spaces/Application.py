@@ -12,7 +12,7 @@ from ..types import (
 )
 
 application_join_space = TypedDict(
-    "Application Stake Space",
+    "Application Join Space",
     {
         "name": str,
         "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)

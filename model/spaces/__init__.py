@@ -15,6 +15,7 @@ from .Servicer import (
     servicer_forced_unstake_space,
     servicer_stake_status_space,
     remove_servicer_space,
+    servicer_join_space
 )
 from .Application import (
     application_stake_space,

@@ -15,6 +15,18 @@ from ..types import (
 )
 from typing import TypedDict, List
 
+servicer_join_space = TypedDict(
+    "Servicer Join Space",
+    {
+        "name": str,
+        "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)
+        "geo_zone": GeoZoneType,  # The physical geo-location identifier this Servicer registered in
+        "number_servicers": int,  # The number of Servicers requested per session
+        "personal_holdings": uPOKTType,  # Unstaked POKT the application personally holds
+        "service_url": ServiceURLType
+    },
+)
+
 servicer_stake_space = TypedDict(
     "Servicer Stake Space",
     {
