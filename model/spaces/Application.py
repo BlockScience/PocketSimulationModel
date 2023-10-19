@@ -10,6 +10,16 @@ from ..types import (
     StakeStatusType,
 )
 
+application_join_space = TypedDict(
+    "Application Stake Space",
+    {
+        "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)
+        "geo_zone": GeoZoneType,  # The physical geo-location identifier this Servicer registered in
+        "number_servicers": int,  # The number of Servicers requested per session
+        "personal_holdings": uPOKTType,  # Unstaked POKT the application personally holds
+    },
+)
+
 application_stake_space = TypedDict(
     "Application Stake Space",
     {

@@ -26,6 +26,7 @@ from .Application import (
     submit_relay_request_space,
     return_application_stake_space,
     application_stake_status_space,
+    application_join_space,
 )
 from .Validator import (
     validator_stake_space,
