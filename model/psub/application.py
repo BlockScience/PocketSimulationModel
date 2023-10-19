@@ -1,4 +1,8 @@
+from ..action_chains import application_join_ac
+
+
 def p_application_join(_params, substep, state_history, state) -> tuple:
+    application_join_ac(state, _params)
     return {}
 
 
