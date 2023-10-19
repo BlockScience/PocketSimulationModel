@@ -44,6 +44,7 @@ from .Portal import (
     modify_portal_pokt_space,
     portal_stake_status_space,
     return_portal_stake_space,
+    portal_join_space
 )
 from .Treasury import (
     mint_block_rewards_space,
