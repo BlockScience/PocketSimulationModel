@@ -41,3 +41,4 @@ from .run import (
 from .action_chains import application_join_ac
 from .boundary_actions import application_join_ba
 from .policy import application_join_policy
+from .mechanisms import add_application
