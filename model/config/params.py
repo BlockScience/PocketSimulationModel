@@ -60,6 +60,6 @@ system_param_config = {
     }
 }
 
-behavior_param_config = {"Test": {}}
+behavior_param_config = {"Test": {"application_max_number": 20}}
 
-functional_param_config = {"Test": {}}
+functional_param_config = {"Test": {"application_join": "simple_unfiform"}}
