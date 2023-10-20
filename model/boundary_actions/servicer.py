@@ -1,6 +1,6 @@
-from ..types import StateType, ParamType
-from ..spaces import servicer_join_space
-from typing import Union, Tuple
+from ..types import StateType, ParamType, ServiceEntityType
+from ..spaces import servicer_join_space, service_linking_space
+from typing import Union, Tuple, List
 import random
 
 
@@ -32,3 +32,14 @@ def servicer_join_ba_simple_unfiform(
         )
     else:
         return (None,)
+
+def service_linking_ba(
+    state: StateType, params: ParamType, servicer: ServiceEntityType
+) -> List[Tuple[service_linking_space]]:
+     if params["servicer_linking_function"] == "test":
+         return service_linking_test(state, params, servicer)
+     else:
+        assert False, "Invalid servicer_linking_function"
+
+def service_linking_test(state: StateType, params: ParamType, servicer: ServiceEntityType) -> List[Tuple[service_linking_space]]:
+# Simple test function
