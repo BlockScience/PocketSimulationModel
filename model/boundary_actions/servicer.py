@@ -47,7 +47,7 @@ def service_linking_test(state: StateType, params: ParamType, servicer: ServiceE
         return []
     else:
         out = []
-        ct = len(servicer.services) - params["service_max_number"]
+        ct = params["service_max_number_link"] - len(servicer.services)
         for service in state["Services"][::-1]:
             if service not in servicer.services:
                 out.append(({"service": service,
