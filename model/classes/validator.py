@@ -2,6 +2,7 @@ from ..types import PublicKeyType, uPOKTType, ServiceURLType, StakeStatusType
 
 
 class Validator:
+    id_number = 0
     def __init__(
         self,
         name: str,
@@ -11,6 +12,8 @@ class Validator:
         operator_public_key: PublicKeyType,
         stake_status: StakeStatusType,
     ):
+        self.id_number = Validator.id_number
+        Validator.id_number += 1
         self.name = name
         self.public_key = self
         self.pokt_holdings = pokt_holdings
