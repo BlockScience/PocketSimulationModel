@@ -17,7 +17,7 @@ def servicer_join_ba_simple_unfiform(
     state: StateType, params: ParamType
 ) -> Tuple[Union[servicer_join_space, None]]:
     # Threshold is set by number of applicatons divided by the max servicers
-    threshold = len(state["servicers"]) / params["servicer_max_number"]
+    threshold = len(state["Servicers"]) / params["servicer_max_number"]
     if random.random() > threshold:
         return (
             {
@@ -26,7 +26,8 @@ def servicer_join_ba_simple_unfiform(
                 "geo_zone": "ABC",  # The physical geo-location identifier this Servicer registered in
                 "number_servicers": 1,  # The number of Servicers requested per session
                 "personal_holdings": 100,  # Unstaked POKT the servicer personally holds
-                "service_url": None
+                "service_url": None,
+                "operator_public_key": None
             },
         )
     else:

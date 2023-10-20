@@ -1,3 +1,5 @@
+from ..action_chains import service_join_ac
+
 def s_update_services(_params, substep, state_history, state, _input) -> tuple:
     # Pass through because they are updated by reference
     return ("Services", state["Services"])
@@ -8,6 +10,7 @@ def p_service_linking(_params, substep, state_history, state) -> tuple:
 
 
 def p_service_join(_params, substep, state_history, state) -> tuple:
+    service_join_ac(state, _params)
     return {}
 
 

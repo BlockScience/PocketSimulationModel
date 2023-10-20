@@ -17,7 +17,7 @@ def service_join_ba_simple_unfiform(
     state: StateType, params: ParamType
 ) -> Tuple[Union[service_join_space, None]]:
     # Threshold is set by number of applicatons divided by the max services
-    threshold = len(state["services"]) / params["service_max_number"]
+    threshold = len(state["Services"]) / params["service_max_number"]
     if random.random() > threshold:
         return (
             {"name": "ABC",

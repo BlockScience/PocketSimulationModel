@@ -27,7 +27,7 @@ class Servicer:
         operator_public_key: PublicKeyType,
         pause_height: BlockHeightType,
         stake_status: StakeStatusType,
-        unkstaking_height: BlockHeightType,
+        unstaking_height: BlockHeightType,
     ):
         self.name = name
         self.public_key = self
@@ -42,4 +42,4 @@ class Servicer:
         self.operator_public_key = operator_public_key
         self.pause_height = pause_height
         self.stake_status = stake_status
-        self.unkstaking_height = unkstaking_height
+        self.unkstaking_height = unstaking_height

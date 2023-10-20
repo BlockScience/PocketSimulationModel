@@ -17,7 +17,7 @@ def portal_join_ba_simple_unfiform(
     state: StateType, params: ParamType
 ) -> Tuple[Union[portal_join_space, None]]:
     # Threshold is set by number of portals divided by the max portals
-    threshold = len(state["portals"]) / params["portal_max_number"]
+    threshold = len(state["Portals"]) / params["portal_max_number"]
     if random.random() > threshold:
         return (
             {
