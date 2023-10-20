@@ -13,6 +13,7 @@ from typing import List
 
 
 class Servicer:
+    id_number = 0
     def __init__(
         self,
         name: str,
@@ -29,6 +30,8 @@ class Servicer:
         stake_status: StakeStatusType,
         unstaking_height: BlockHeightType,
     ):
+        self.id_number = Servicer.id_number
+        Servicer.id_number += 1
         self.name = name
         self.public_key = self
         self.servicer_salary = servicer_salary

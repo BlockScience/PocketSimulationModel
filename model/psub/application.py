@@ -1,4 +1,4 @@
-from ..action_chains import application_join_ac
+from ..action_chains import application_join_ac, portal_delegation_ac
 
 
 def p_application_join(_params, substep, state_history, state) -> tuple:
@@ -12,6 +12,8 @@ def s_update_applications(_params, substep, state_history, state, _input) -> tup
 
 
 def p_portal_delegation(_params, substep, state_history, state) -> tuple:
+    for application in state["Applications"]:
+        portal_delegation_ac(state, _params, application)
     return {}
 
 

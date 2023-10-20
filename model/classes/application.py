@@ -11,6 +11,9 @@ from typing import List
 
 
 class Application:
+
+    id_number = 0
+
     def __init__(
         self,
         name: str,
@@ -23,6 +26,8 @@ class Application:
         unstaking_height: BlockHeightType,
         delegate: PortalEntityType,
     ):
+        self.id_number = Application.id_number
+        Application.id_number += 1
         self.name = name
         self.public_key = self
         self.pokt_holdings = pokt_holdings

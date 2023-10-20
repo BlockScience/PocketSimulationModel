@@ -3,6 +3,7 @@ from typing import List
 
 
 class Portal:
+    id_number = 0
     def __init__(
         self,
         name: str,
@@ -11,6 +12,8 @@ class Portal:
         pokt_holdings: uPOKTType,
         staked_pokt: uPOKTType,
     ):
+        self.id_number = Portal.id_number
+        Portal.id_number += 1
         self.name = name
         self.stake_status = stake_status
         self.delegators = delegators
