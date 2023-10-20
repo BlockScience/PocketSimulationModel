@@ -39,8 +39,20 @@ def service_linking_ba(
      if params["service_linking_function"] == "test":
          return service_linking_test(state, params, servicer)
      else:
-        assert False, "Invalid servicer_linking_function"
+        assert False, "Invalid service_linking_function"
 
 def service_linking_test(state: StateType, params: ParamType, servicer: ServiceEntityType) -> List[Tuple[service_linking_space]]:
     # Simple test function where if maximum services is not reached then the current options are joined in reverse order
-    return []
+    if len(servicer.services) == params["service_max_number"]:
+        return []
+    else:
+        out = []
+        ct = len(servicer.services) - params["service_max_number"]
+        for service in state["Services"][::-1]:
+            if service not in servicer.services:
+                out.append(({"service": service,
+                             "servicer": servicer},))
+                ct -= 1
+                if ct == 0:
+                    break
+        return out

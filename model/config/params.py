@@ -66,6 +66,7 @@ behavior_param_config = {
         "servicer_max_number": [20],
         "service_max_number": [5],
         "portal_max_number": [5],
+        "service_max_number": [3]
     }
 }
 
