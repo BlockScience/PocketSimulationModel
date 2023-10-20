@@ -10,3 +10,6 @@ def servicer_join_ac(state, params):
     else:
         return
     add_servicer(state, params, spaces)
+
+def relay_requests_ac(state, params):
+    pass
