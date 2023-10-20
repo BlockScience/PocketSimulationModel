@@ -1,5 +1,5 @@
-from ..types import StateType, ParamType
-from ..spaces import application_join_space
+from ..types import StateType, ParamType, ApplicationEntityType
+from ..spaces import application_join_space, application_delegate_to_portal_space
 from typing import Union, Tuple
 import random
 
@@ -30,3 +30,7 @@ def application_join_ba_simple_unfiform(
         )
     else:
         return (None,)
+
+
+def portal_delegation_ba(state: StateType, params: ParamType, application: ApplicationEntityType) -> Tuple[Union[application_delegate_to_portal_space, None]]:
+    pass
