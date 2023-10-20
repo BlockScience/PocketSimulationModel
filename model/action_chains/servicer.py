@@ -3,7 +3,11 @@ from ..boundary_actions import (
     relay_requests_ba,
     submit_relay_requests_ba,
 )
-from ..policy import servicer_join_policy, submit_relay_requests_policy
+from ..policy import (
+    servicer_join_policy,
+    submit_relay_requests_policy,
+    servicer_relay_policy,
+)
 from ..mechanisms import add_servicer, create_new_session
 
 
@@ -28,4 +32,5 @@ def relay_requests_ac(state, params):
 
     # Relay the request
     spaces = relay_requests_ba(state, params)
+    spaces = servicer_relay_policy(state, params, spaces)
     print(spaces)
