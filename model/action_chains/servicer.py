@@ -18,7 +18,7 @@ def servicer_join_ac(state, params):
 
 def relay_requests_ac(state, params):
     spaces = submit_relay_requests_ba(state, params)
-    spaces = submit_relay_requests_policy(state, params)
+    spaces = submit_relay_requests_policy(state, params, spaces)
     # create_new_session(state, params, spaces)
     # spaces = relay_requests_ba(state, params)
     # print(spaces)

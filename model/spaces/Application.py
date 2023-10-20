@@ -9,6 +9,14 @@ from ..types import (
     BlockHeightType,
     StakeStatusType,
     ApplicationEntityType,
+    SessionType,
+)
+
+new_session_space = TypedDict(
+    "New Session Space",
+    {
+        "session": SessionType,
+    },
 )
 
 application_join_space = TypedDict(

@@ -80,5 +80,6 @@ functional_param_config = {
         "portal_delegation_function": ["test"],
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["test"],
+        "submit_relay_requests_policy_function": ["test"],
     }
 }
