@@ -11,13 +11,9 @@ def portal_join_policy(
     # Create entity
     portal = portal(
         name=space["name"],
+        stake_status="Staked",
+        delegators = [],
         pokt_holdings=space["personal_holdings"],
         staked_pokt=space["stake_amount"],
-        services=[],
-        geo_zone=space["geo_zone"],
-        number_of_services=space["number_servicers"],
-        stake_status="Staked",
-        unstaking_height=None,
-        delegate=None,
     )
     return ({"portal": portal},)
