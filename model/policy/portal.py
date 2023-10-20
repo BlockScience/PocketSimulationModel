@@ -1,7 +1,7 @@
 from ..types import StateType, ParamType
 from ..spaces import portal_join_space, portal_entity_space
 from typing import Tuple
-from ..classes import portal
+from ..classes import Portal
 
 
 def portal_join_policy(
@@ -9,7 +9,7 @@ def portal_join_policy(
 ) -> Tuple[portal_entity_space]:
     space: portal_join_space = domain[0]
     # Create entity
-    portal = portal(
+    portal = Portal(
         name=space["name"],
         stake_status="Staked",
         delegators = [],

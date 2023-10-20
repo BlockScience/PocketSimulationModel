@@ -1,7 +1,7 @@
 from ..types import StateType, ParamType
 from ..spaces import service_join_space, service_entity_space
 from typing import Tuple
-from ..classes import service
+from ..classes import Service
 
 
 def service_join_policy(
@@ -9,7 +9,7 @@ def service_join_policy(
 ) -> Tuple[service_entity_space]:
     space: service_join_space = domain[0]
     # Create entity
-    service = service(
+    service = Service(
         name=space["name"],
         portal_api_prefix=space["portal_api_prefix"],
         service_id=space["service_id"],
