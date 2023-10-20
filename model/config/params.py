@@ -60,6 +60,20 @@ system_param_config = {
     }
 }
 
-behavior_param_config = {"Test": {"application_max_number": 20}}
+behavior_param_config = {
+    "Test": {
+        "application_max_number": [20],
+        "servicer_max_number": [20],
+        "service_max_number": [5],
+        "portal_max_number": [5],
+    }
+}
 
-functional_param_config = {"Test": {"application_join": "simple_unfiform"}}
+functional_param_config = {
+    "Test": {
+        "application_join_function": ["simple_unfiform"],
+        "servicer_join_function": ["simple_unfiform"],
+        "service_join_function": ["simple_unfiform"],
+        "portal_join_function": ["simple_unfiform"],
+    }
+}
