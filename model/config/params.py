@@ -66,6 +66,7 @@ behavior_param_config = {
         "servicer_max_number": [20],
         "service_max_number": [5],
         "portal_max_number": [5],
+        "service_max_number_link": [3]
     }
 }
 
@@ -75,5 +76,6 @@ functional_param_config = {
         "servicer_join_function": ["simple_unfiform"],
         "service_join_function": ["simple_unfiform"],
         "portal_join_function": ["simple_unfiform"],
+        "service_linking_function": ["test"],
     }
 }

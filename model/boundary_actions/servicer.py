@@ -1,6 +1,6 @@
-from ..types import StateType, ParamType
-from ..spaces import servicer_join_space
-from typing import Union, Tuple
+from ..types import StateType, ParamType, ServiceEntityType
+from ..spaces import servicer_join_space, service_linking_space
+from typing import Union, Tuple, List
 import random
 
 
@@ -32,3 +32,27 @@ def servicer_join_ba_simple_unfiform(
         )
     else:
         return (None,)
+
+def service_linking_ba(
+    state: StateType, params: ParamType, servicer: ServiceEntityType
+) -> List[Tuple[service_linking_space]]:
+     if params["service_linking_function"] == "test":
+         return service_linking_test(state, params, servicer)
+     else:
+        assert False, "Invalid service_linking_function"
+
+def service_linking_test(state: StateType, params: ParamType, servicer: ServiceEntityType) -> List[Tuple[service_linking_space]]:
+    # Simple test function where if maximum services is not reached then the current options are joined in reverse order
+    if len(servicer.services) == params["service_max_number_link"]:
+        return []
+    else:
+        out = []
+        ct = params["service_max_number_link"] - len(servicer.services)
+        for service in state["Services"][::-1]:
+            if service not in servicer.services:
+                out.append(({"service": service,
+                             "servicer": servicer},))
+                ct -= 1
+                if ct == 0:
+                    break
+        return out

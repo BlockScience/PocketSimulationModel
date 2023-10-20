@@ -89,9 +89,9 @@ portals_config = {
 
 service_config = {
     "Test": [
-        Service(name="S1", portal_api_prefix="S1", service_id="S1"),
-        Service(name="S2", portal_api_prefix="S2", service_id="S2"),
-        Service(name="S3", portal_api_prefix="S3", service_id="S3"),
+        Service(name="S1", portal_api_prefix="S1", service_id="S1", servicers=[]),
+        Service(name="S2", portal_api_prefix="S2", service_id="S2", servicers=[]),
+        Service(name="S3", portal_api_prefix="S3", service_id="S3", servicers=[]),
     ]
 }
 

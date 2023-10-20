@@ -12,6 +12,7 @@ from ..types import (
     ApplicationEntityType,
     SessionType,
     ServicerGroupType,
+    ServiceEntityType
 )
 from typing import TypedDict, List
 
@@ -173,5 +174,13 @@ servicer_entity_space = TypedDict(
     "Servicer Entity Space",
     {
         "servicer": ServicerEntityType,
+    },
+)
+
+service_linking_space = TypedDict(
+    "Servicer Linking Space",
+    {
+        "servicer": ServicerEntityType,
+        "service": ServiceEntityType
     },
 )
