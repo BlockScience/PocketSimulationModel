@@ -1,5 +1,5 @@
 from ..types import StateType, ParamType, ServiceEntityType
-from ..spaces import servicer_join_space, service_linking_space
+from ..spaces import servicer_join_space, service_linking_space, servicer_relay_space
 from typing import Union, Tuple, List
 import random
 
@@ -56,3 +56,20 @@ def service_linking_test(state: StateType, params: ParamType, servicer: ServiceE
                 if ct == 0:
                     break
         return out
+    
+
+
+def relay_requests_ba(state: StateType, params: ParamType) -> Tuple[servicer_relay_space]:
+    if params["relay_requests_function"] == "test":
+         return relay_requests_ba_test(state, params)
+    else:
+        assert False, "Invalid relay_requests_function"
+
+
+def relay_requests_ba_test(state: StateType, params: ParamType) -> Tuple[servicer_relay_space]:
+    application = random.choice(state["Applications"])
+    num_servicers = application.number_of_services
+    servicers = random.sample(state["Servicers"], num_servicers)
+    out: servicer_relay_space = {"applications": application,
+                                 "servicers": servicers}
+    return (out,)
