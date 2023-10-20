@@ -1,4 +1,5 @@
-from typing import TypedDict, ServiceEntityType
+from typing import TypedDict
+from ..types import ServiceEntityType
 
 service_join_space = TypedDict("Service Join Space", {"name": str,
                                                               "portal_api_prefix": str,

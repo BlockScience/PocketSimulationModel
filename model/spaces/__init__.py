@@ -60,7 +60,7 @@ from .Treasury import (
     decrease_relay_fees_space,
 )
 from .Node import unjail_node_space
-from .Service import service_join_space, service_leave_space, servicer_entity_space
+from .Service import service_join_space, service_leave_space, service_entity_space
 from .DAO import dao_block_reward_space, modify_dao_pokt_space
 
 spaces = {

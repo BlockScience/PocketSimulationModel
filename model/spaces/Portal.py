@@ -5,6 +5,7 @@ from ..types import (
     ServiceURLType,
     StakeStatusType,
     BlockHeightType,
+    PortalEntityType
 )
 
 
