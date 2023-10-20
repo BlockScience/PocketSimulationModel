@@ -1,7 +1,6 @@
 from ..types import StateType, ParamType
 from ..spaces import application_join_space, application_entity_space
 from typing import Tuple
-from ..classes import Application
 
 
 def add_application(

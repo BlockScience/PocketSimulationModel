@@ -169,3 +169,9 @@ servicer_stake_burn_space = TypedDict(
 remove_servicer_space = TypedDict(
     "Remove Servicer Space", {"servicer": ServicerEntityType}
 )
+servicer_entity_space = TypedDict(
+    "Servicer Entity Space",
+    {
+        "servicer": ServicerEntityType,
+    },
+)

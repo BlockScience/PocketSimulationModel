@@ -7,12 +7,21 @@ from ..types import (
     BlockHeightType,
 )
 
+
+
 portal_join_space = TypedDict(
     "Portal Stake Space",
     {
         "name": str,
         "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)
         "personal_holdings": uPOKTType,  # Unstaked POKT the application personally holds
+    },
+)
+
+portal_entity_space = TypedDict(
+    "Portal Entity Space",
+    {
+        "portal": PortalEntityType,
     },
 )
 

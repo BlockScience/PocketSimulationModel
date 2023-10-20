@@ -7,4 +7,4 @@ def add_portal(
     state: StateType, params: ParamType, domain: Tuple[portal_entity_space]
 ) -> None:
     space: portal_entity_space = domain[0]
-    state["Portals"].append(space["Portal"])
+    state["Portals"].append(space["portal"])
