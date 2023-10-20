@@ -1,6 +1,6 @@
 from ..types import StateType, ParamType
-from ..spaces import application_join_space, application_entity_space
-from typing import Tuple
+from ..spaces import application_join_space, application_entity_space, application_delegate_to_portal_space
+from typing import Tuple, Union
 from ..classes import Application
 
 
@@ -21,3 +21,13 @@ def application_join_policy(
         delegate=None,
     )
     return ({"application": application},)
+
+
+
+def portal_delegation_policy(
+    state: StateType, params: ParamType, domain: Tuple[application_delegate_to_portal_space]
+) -> Tuple[Union[application_delegate_to_portal_space, None], Union[application_delegate_to_portal_space, None]]:
+    space: application_delegate_to_portal_space = domain[0]
+    # Pass through
+
+    return (space, space)
