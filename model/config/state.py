@@ -28,6 +28,7 @@ def build_state(config_option):
     state["height"] = 0
     state["day"] = 0
     state["Treasury"] = None
+    state["Sessions"] = []
 
     state = deepcopy(state)
     return state
