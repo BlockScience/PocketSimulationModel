@@ -66,7 +66,7 @@ behavior_param_config = {
         "servicer_max_number": [20],
         "service_max_number": [5],
         "portal_max_number": [5],
-        "service_max_number_link": [3]
+        "service_max_number_link": [3],
     }
 }
 
@@ -79,5 +79,6 @@ functional_param_config = {
         "service_linking_function": ["test"],
         "portal_delegation_function": ["test"],
         "relay_requests_function": ["test"],
+        "submit_relay_requests_function": ["test"],
     }
 }

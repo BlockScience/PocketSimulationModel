@@ -1,4 +1,8 @@
-from ..boundary_actions import servicer_join_ba, relay_requests_ba
+from ..boundary_actions import (
+    servicer_join_ba,
+    relay_requests_ba,
+    submit_relay_requests_ba,
+)
 from ..policy import servicer_join_policy
 from ..mechanisms import add_servicer
 
@@ -11,6 +15,9 @@ def servicer_join_ac(state, params):
         return
     add_servicer(state, params, spaces)
 
+
 def relay_requests_ac(state, params):
-    spaces = relay_requests_ba(state, params)
+    spaces = submit_relay_requests_ba(state, params)
     print(spaces)
+    # spaces = relay_requests_ba(state, params)
+    # print(spaces)
