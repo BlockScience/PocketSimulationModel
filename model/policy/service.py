@@ -13,6 +13,7 @@ def service_join_policy(
         name=space["name"],
         portal_api_prefix=space["portal_api_prefix"],
         service_id=space["service_id"],
+        servicers=[]
     )
     return ({"service": service},)
 
