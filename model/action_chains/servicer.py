@@ -17,8 +17,15 @@ def servicer_join_ac(state, params):
 
 
 def relay_requests_ac(state, params):
+    # Submit request
     spaces = submit_relay_requests_ba(state, params)
     spaces = submit_relay_requests_policy(state, params, spaces)
     create_new_session(state, params, spaces[:1])
-    # spaces = relay_requests_ba(state, params)
-    # print(spaces)
+
+    # spaces = burn_per_session_policy(state, params, spaces)
+    # burn_pokt_mechanism(state, params, spaces[:1])
+    # modify_application_stake(state, params, spaces[1:])
+
+    # Relay the request
+    spaces = relay_requests_ba(state, params)
+    print(spaces)
