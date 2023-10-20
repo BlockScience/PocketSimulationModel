@@ -3,8 +3,8 @@ from ..boundary_actions import (
     relay_requests_ba,
     submit_relay_requests_ba,
 )
-from ..policy import servicer_join_policy
-from ..mechanisms import add_servicer
+from ..policy import servicer_join_policy, submit_relay_requests_policy
+from ..mechanisms import add_servicer, create_new_session
 
 
 def servicer_join_ac(state, params):
@@ -18,6 +18,7 @@ def servicer_join_ac(state, params):
 
 def relay_requests_ac(state, params):
     spaces = submit_relay_requests_ba(state, params)
-    print(spaces)
+    spaces = submit_relay_requests_policy(state, params)
+    # create_new_session(state, params, spaces)
     # spaces = relay_requests_ba(state, params)
     # print(spaces)
