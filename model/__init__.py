@@ -38,4 +38,4 @@ from .run import (
     auto_run_sets,
     write_to_csv,
 )
-from .action_chains import application_join_ac, service_linking_ac, portal_join_ac, service_join_ac, servicer_join_ac
+from .action_chains import application_join_ac, service_linking_ac, portal_join_ac, service_join_ac, servicer_join_ac, portal_delegation_ac

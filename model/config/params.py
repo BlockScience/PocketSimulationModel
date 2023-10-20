@@ -77,5 +77,6 @@ functional_param_config = {
         "service_join_function": ["simple_unfiform"],
         "portal_join_function": ["simple_unfiform"],
         "service_linking_function": ["test"],
+        "portal_delegation_function": ["test"]
     }
 }
