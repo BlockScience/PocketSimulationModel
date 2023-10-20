@@ -19,4 +19,5 @@ def service_join_policy(
 
 def service_linking_policy(state: StateType, params: ParamType, domain: Tuple[service_linking_space]
 ) -> Tuple[service_linking_space]:
-    return (None,)
+    # Auto pass through
+    return domain

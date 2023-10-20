@@ -14,4 +14,7 @@ def add_service(
 
 def link_service_mechanism(state: StateType, params: ParamType, domain: Tuple[service_linking_space]
 ) -> None:
-    pass
+    service = domain[0]["service"]
+    servicer = domain[0]["servicer"]
+    service.servicers.append(servicer)
+    servicer.services.append(service)
