@@ -14,5 +14,5 @@ def service_join_ac(state, params):
 def service_linking_ac(state, params, servicer):
     spaces = service_linking_ba(state, params, servicer)
     for space in spaces:
-        spaces_i = service_linking_policy(state, params, spaces_i)
+        spaces_i = service_linking_policy(state, params, space)
         link_service_mechanism(spaces_i)

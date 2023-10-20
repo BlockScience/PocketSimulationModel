@@ -1,5 +1,5 @@
 from ..types import StateType, ParamType
-from ..spaces import service_join_space, service_entity_space
+from ..spaces import service_entity_space, service_linking_space
 from typing import Tuple
 
 
@@ -8,3 +8,10 @@ def add_service(
 ) -> None:
     space: service_entity_space = domain[0]
     state["Services"].append(space["service"])
+
+
+
+
+def link_service_mechanism(state: StateType, params: ParamType, domain: Tuple[service_linking_space]
+) -> None:
+    pass

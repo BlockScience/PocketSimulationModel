@@ -75,5 +75,6 @@ functional_param_config = {
         "servicer_join_function": ["simple_unfiform"],
         "service_join_function": ["simple_unfiform"],
         "portal_join_function": ["simple_unfiform"],
+        "service_linking_function": ["test"],
     }
 }

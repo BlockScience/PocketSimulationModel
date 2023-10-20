@@ -16,7 +16,8 @@ from .Servicer import (
     servicer_stake_status_space,
     remove_servicer_space,
     servicer_join_space,
-    servicer_entity_space
+    servicer_entity_space,
+    service_linking_space
 )
 from .Application import (
     application_stake_space,
