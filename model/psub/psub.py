@@ -77,7 +77,7 @@ relay_requests_block = {
 jailing_slashing_block = {
     "policies": {"jailing_slashing": p_jailing_slashing},
     "variables": {
-        "Services": s_update_services,
+        "Servicers": s_update_servicers,
         "Portals": s_update_portals,
     },
 }
