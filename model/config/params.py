@@ -81,5 +81,9 @@ functional_param_config = {
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["test"],
         "submit_relay_requests_policy_function": ["test"],
+        "application_leave_function": ["basic"],
+        "service_leave_function": ["basic"],
+        "servicer_leave_function": ["basic"],
+        "portal_leave_function": ["basic"],
     }
 }

@@ -24,5 +24,14 @@ def service_join_ba_simple_unfiform(
         return (None,)
 
 
-def service_leave_ba(state: StateType, params: ParamType) -> service_leave_space:
-    pass
+def service_leave_ba(state: StateType, params: ParamType) -> Tuple[service_leave_space]:
+    if params["service_leave_function"] == "basic":
+        return service_leave_ba_basic(state, params)
+    else:
+        assert False, "Invalid service_leave_function"
+
+
+def service_leave_ba_basic(
+    state: StateType, params: ParamType
+) -> Tuple[service_leave_space]:
+    return None

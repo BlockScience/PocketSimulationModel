@@ -80,5 +80,14 @@ def submit_relay_requests_ba_test(
 
 def application_leave_ba(
     state: StateType, params: ParamType
-) -> application_leave_space:
-    pass
+) -> Tuple[application_leave_space]:
+    if params["application_leave_function"] == "basic":
+        return application_leave_ba_basic(state, params)
+    else:
+        assert False, "Invalid application_leave_function"
+
+
+def application_leave_ba_basic(
+    state: StateType, params: ParamType
+) -> Tuple[application_leave_space]:
+    return None

@@ -87,5 +87,16 @@ def relay_requests_ba_test(
     return (out,)
 
 
-def servicer_leave_ba(state: StateType, params: ParamType) -> servicer_leave_space:
-    pass
+def servicer_leave_ba(
+    state: StateType, params: ParamType
+) -> Tuple[servicer_leave_space]:
+    if params["servicer_leave_function"] == "basic":
+        return servicer_leave_ba_basic(state, params)
+    else:
+        assert False, "Invalid servicer_leave_function"
+
+
+def servicer_leave_ba_basic(
+    state: StateType, params: ParamType
+) -> Tuple[servicer_leave_space]:
+    return None

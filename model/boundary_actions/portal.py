@@ -30,5 +30,14 @@ def portal_join_ba_simple_unfiform(
         return (None,)
 
 
-def portal_leave_ba(state: StateType, params: ParamType) -> portal_leave_space:
-    pass
+def portal_leave_ba(state: StateType, params: ParamType) -> Tuple[portal_leave_space]:
+    if params["portal_leave_function"] == "basic":
+        return portal_leave_ba_basic(state, params)
+    else:
+        assert False, "Invalid portal_leave_function"
+
+
+def portal_leave_ba_basic(
+    state: StateType, params: ParamType
+) -> Tuple[portal_leave_space]:
+    return None
