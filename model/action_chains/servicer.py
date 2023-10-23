@@ -13,6 +13,7 @@ from ..mechanisms import (
     create_new_session,
     modify_portal_stake,
     modify_application_stake,
+    increase_relay_fees,
 )
 from ..spaces import modify_portal_pokt_space
 
@@ -43,3 +44,7 @@ def relay_requests_ac(state, params):
         modify_portal_stake(state, params, spaces[:1])
     else:
         modify_application_stake(state, params, spaces[:1])
+    # spaces2 = burn_per_relay_policy(state, params, spaces[1:2])
+    # burn_pokt_mechanism(state, params, spaces2[:1])
+    # modify_application_stake(state, params, spaces2[1:])
+    increase_relay_fees(state, params, spaces[2:3])

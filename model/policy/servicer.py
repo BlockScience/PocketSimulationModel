@@ -40,6 +40,7 @@ def servicer_relay_policy(
 ) -> Tuple[
     Union[modify_portal_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
+    increase_relay_fees_space,
     List[modify_servicer_pokt_space],
     Union[servicer_relay_space, None],
 ]:
