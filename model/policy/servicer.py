@@ -8,7 +8,7 @@ from ..spaces import (
     increase_relay_fees_space,
     modify_servicer_pokt_space,
 )
-from typing import Tuple, Union
+from typing import Tuple, Union, List
 from ..classes import Servicer
 
 
@@ -40,20 +40,42 @@ def servicer_relay_policy(
 ) -> Tuple[
     Union[modify_portal_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
-    modify_servicer_pokt_space,
+    List[modify_servicer_pokt_space],
     Union[servicer_relay_space, None],
 ]:
+    application = domain[0]["applications"]
+    relay_payment = 100
+    fees_charged = 10
+    total_charge = relay_payment + fees_charged
+
     # Payment from the requestor
-    space1: Union[modify_portal_pokt_space, modify_application_pokt_space] = {}
+    if application.delegate:
+        space1: modify_portal_pokt_space = {
+            "public_key": application.delegate,
+            "amount": total_charge,
+        }
+    else:
+        space1: modify_application_pokt_space = {
+            "public_key": application,
+            "amount": total_charge,
+        }
 
     # Burn per relay policy
-    space2: servicer_relay_space = {}
+    space2: servicer_relay_space = domain[0]
 
     # Relay fees to add
-    space3: increase_relay_fees_space = {}
+    space3: increase_relay_fees_space = {"POKT Amount": fees_charged}
 
     # Payment to servicer
-    space4: modify_servicer_pokt_space = {}
+    space4: List[modify_servicer_pokt_space] = [
+        {
+            "amount": relay_payment,
+            "public_key": x,
+        }
+        for x in domain[0]["servicers"]
+    ]
 
     # Space for if the session should be removed
-    space5: Union[servicer_relay_space, None] = {}
+    space5: Union[servicer_relay_space, None] = domain[0]
+
+    return (space1, space2, space3, space4, space5)
