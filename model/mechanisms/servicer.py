@@ -1,5 +1,5 @@
 from ..types import StateType, ParamType
-from ..spaces import servicer_join_space, servicer_entity_space
+from ..spaces import servicer_entity_space, modify_servicer_pokt_space
 from typing import Tuple
 
 
@@ -8,3 +8,9 @@ def add_servicer(
 ) -> None:
     space: servicer_entity_space = domain[0]
     state["Servicers"].append(space["servicer"])
+
+
+def modify_servicer_pokt_holdings(
+    state: StateType, params: ParamType, domain: Tuple[modify_servicer_pokt_space]
+) -> None:
+    domain[0]["public_key"].pokt_holdings += domain[0]["amount"]

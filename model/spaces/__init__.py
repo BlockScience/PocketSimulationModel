@@ -17,7 +17,7 @@ from .Servicer import (
     remove_servicer_space,
     servicer_join_space,
     servicer_entity_space,
-    service_linking_space
+    service_linking_space,
 )
 from .Application import (
     application_stake_space,
@@ -31,6 +31,7 @@ from .Application import (
     application_stake_status_space,
     application_join_space,
     application_entity_space,
+    new_session_space,
 )
 from .Validator import (
     validator_stake_space,
@@ -48,7 +49,7 @@ from .Portal import (
     portal_stake_status_space,
     return_portal_stake_space,
     portal_join_space,
-    portal_entity_space
+    portal_entity_space,
 )
 from .Treasury import (
     mint_block_rewards_space,

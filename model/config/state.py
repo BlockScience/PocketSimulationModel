@@ -28,6 +28,8 @@ def build_state(config_option):
     state["height"] = 0
     state["day"] = 0
     state["Treasury"] = None
+    state["Sessions"] = []
+    state["relay_fees"] = 0
 
     state = deepcopy(state)
     return state
@@ -68,7 +70,7 @@ application_config = {
             number_of_services=1,
             stake_status="Staked",
             unstaking_height=None,
-            delegate="P1",
+            delegate=None,
         ),
     ]
 }

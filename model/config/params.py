@@ -31,12 +31,12 @@ system_param_config = {
         "replay_attack_burn_multiplier": [None],
         "max_jailed_blocks": [None],
         "downtime_jail_duration": [None],
-        "minimum_servicers_per_session": [None],
-        "maximum_servicers_per_session": [None],
+        "minimum_servicers_per_session": [1],
+        "maximum_servicers_per_session": [5],
         "application_unstaking_time": [None],
         "application_fee_per_relay": [None],
         "minimum_application_stake": [None],
-        "app_burn_per_session": [None],
+        "app_burn_per_session": [0],
         "app_burn_per_relay": [None],
         "block_proposer_allocation": [None],
         "stake_per_app_delegation": [None],
@@ -66,7 +66,7 @@ behavior_param_config = {
         "servicer_max_number": [20],
         "service_max_number": [5],
         "portal_max_number": [5],
-        "service_max_number_link": [3]
+        "service_max_number_link": [3],
     }
 }
 
@@ -77,6 +77,9 @@ functional_param_config = {
         "service_join_function": ["simple_unfiform"],
         "portal_join_function": ["simple_unfiform"],
         "service_linking_function": ["test"],
-        "portal_delegation_function": ["test"]
+        "portal_delegation_function": ["test"],
+        "relay_requests_function": ["test"],
+        "submit_relay_requests_function": ["test"],
+        "submit_relay_requests_policy_function": ["test"],
     }
 }

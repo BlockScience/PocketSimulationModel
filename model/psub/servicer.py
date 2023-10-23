@@ -1,4 +1,4 @@
-from ..action_chains import servicer_join_ac
+from ..action_chains import servicer_join_ac, relay_requests_ac
 def s_update_servicers(_params, substep, state_history, state, _input) -> tuple:
     # Pass through because they are updated by reference
     return ("Servicers", state["Servicers"])
@@ -10,6 +10,9 @@ def p_servicers_join(_params, substep, state_history, state) -> dict:
 
 
 def p_relay_requests(_params, substep, state_history, state) -> dict:
+    number_relays = 10
+    for _ in range(number_relays):
+        relay_requests_ac(state, _params)
     return {}
 
 

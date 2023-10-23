@@ -1,5 +1,9 @@
 from ..types import StateType, ParamType, ApplicationEntityType
-from ..spaces import application_join_space, application_delegate_to_portal_space
+from ..spaces import (
+    application_join_space,
+    application_delegate_to_portal_space,
+    submit_relay_request_space,
+)
 from typing import Union, Tuple
 import random
 
@@ -32,16 +36,42 @@ def application_join_ba_simple_unfiform(
         return (None,)
 
 
-def portal_delegation_ba(state: StateType, params: ParamType, application: ApplicationEntityType) -> Tuple[Union[application_delegate_to_portal_space, None]]:
+def portal_delegation_ba(
+    state: StateType, params: ParamType, application: ApplicationEntityType
+) -> Tuple[Union[application_delegate_to_portal_space, None]]:
     if params["portal_delegation_function"] == "test":
         return portal_delegation_ba_test(state, params, application)
     else:
         assert False, "Invalid portal_delegation_function"
 
-def portal_delegation_ba_test(state: StateType, params: ParamType, application: ApplicationEntityType) -> Tuple[Union[application_delegate_to_portal_space, None]]:
-    if not application.delegate and application.id_number % 2 == 1 and len(state["Portals"]) > 0:
+
+def portal_delegation_ba_test(
+    state: StateType, params: ParamType, application: ApplicationEntityType
+) -> Tuple[Union[application_delegate_to_portal_space, None]]:
+    if (
+        not application.delegate
+        and application.id_number % 2 == 1
+        and len(state["Portals"]) > 0
+    ):
         portal = random.choice(state["Portals"])
-        return ({"application_public_key": application,
-                 "portal_public_key": portal},)
+        return ({"application_public_key": application, "portal_public_key": portal},)
     else:
-        return (None, )
+        return (None,)
+
+
+def submit_relay_requests_ba(
+    state: StateType,
+    params: ParamType,
+) -> Tuple[submit_relay_request_space]:
+    if params["submit_relay_requests_function"] == "test":
+        return submit_relay_requests_ba_test(state, params)
+    else:
+        assert False, "Invalid submit_relay_requests_function"
+
+
+def submit_relay_requests_ba_test(
+    state: StateType,
+    params: ParamType,
+) -> Tuple[submit_relay_request_space]:
+    application = random.choice(state["Applications"])
+    return ({"application_address": application},)
