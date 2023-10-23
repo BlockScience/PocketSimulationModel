@@ -69,7 +69,7 @@ application_config = {
             number_of_services=1,
             stake_status="Staked",
             unstaking_height=None,
-            delegate="P1",
+            delegate=None,
         ),
     ]
 }

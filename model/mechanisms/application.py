@@ -3,6 +3,7 @@ from ..spaces import (
     application_entity_space,
     application_delegate_to_portal_space,
     submit_relay_request_space,
+    modify_application_pokt_space,
 )
 from typing import Tuple
 
@@ -27,3 +28,9 @@ def create_new_session(
     state: StateType, params: ParamType, domain: Tuple[submit_relay_request_space]
 ) -> None:
     state["Sessions"].append(domain[0]["session"])
+
+
+def modify_application_stake(
+    state: StateType, params: ParamType, domain: Tuple[modify_application_pokt_space]
+) -> None:
+    domain[0]["public_key"].staked_pokt += domain[0]["amount"]

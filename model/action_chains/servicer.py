@@ -8,7 +8,13 @@ from ..policy import (
     submit_relay_requests_policy,
     servicer_relay_policy,
 )
-from ..mechanisms import add_servicer, create_new_session
+from ..mechanisms import (
+    add_servicer,
+    create_new_session,
+    modify_portal_stake,
+    modify_application_stake,
+)
+from ..spaces import modify_portal_pokt_space
 
 
 def servicer_join_ac(state, params):
@@ -33,4 +39,7 @@ def relay_requests_ac(state, params):
     # Relay the request
     spaces = relay_requests_ba(state, params)
     spaces = servicer_relay_policy(state, params, spaces)
-    print(spaces)
+    if type(spaces[0]) == modify_portal_pokt_space:
+        modify_portal_stake(state, params, spaces[:1])
+    else:
+        modify_application_stake(state, params, spaces[:1])

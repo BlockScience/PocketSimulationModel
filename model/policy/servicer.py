@@ -52,12 +52,12 @@ def servicer_relay_policy(
     if application.delegate:
         space1: modify_portal_pokt_space = {
             "public_key": application.delegate,
-            "amount": total_charge,
+            "amount": -total_charge,
         }
     else:
         space1: modify_application_pokt_space = {
             "public_key": application,
-            "amount": total_charge,
+            "amount": -total_charge,
         }
 
     # Burn per relay policy
