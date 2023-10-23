@@ -14,6 +14,7 @@ from ..mechanisms import (
     modify_portal_stake,
     modify_application_stake,
     increase_relay_fees,
+    modify_servicer_pokt_holdings,
 )
 from ..spaces import modify_portal_pokt_space
 
@@ -48,3 +49,5 @@ def relay_requests_ac(state, params):
     # burn_pokt_mechanism(state, params, spaces2[:1])
     # modify_application_stake(state, params, spaces2[1:])
     increase_relay_fees(state, params, spaces[2:3])
+    for x in spaces[3]:
+        modify_servicer_pokt_holdings(state, params, x)

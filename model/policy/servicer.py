@@ -68,11 +68,14 @@ def servicer_relay_policy(
     space3: increase_relay_fees_space = {"POKT Amount": fees_charged}
 
     # Payment to servicer
+    relay_payment2 = relay_payment / len(domain[0]["servicers"])
     space4: List[modify_servicer_pokt_space] = [
-        {
-            "amount": relay_payment,
-            "public_key": x,
-        }
+        (
+            {
+                "amount": relay_payment2,
+                "public_key": x,
+            },
+        )
         for x in domain[0]["servicers"]
     ]
 
