@@ -15,6 +15,7 @@ from ..mechanisms import (
     modify_application_stake,
     increase_relay_fees,
     modify_servicer_pokt_holdings,
+    remove_session,
 )
 from ..spaces import modify_portal_pokt_space
 
@@ -51,3 +52,5 @@ def relay_requests_ac(state, params):
     increase_relay_fees(state, params, spaces[2:3])
     for x in spaces[3]:
         modify_servicer_pokt_holdings(state, params, x)
+    if spaces[4]:
+        remove_session(state, params, spaces[4:5])

@@ -4,6 +4,7 @@ from ..spaces import (
     application_delegate_to_portal_space,
     submit_relay_request_space,
     modify_application_pokt_space,
+    servicer_relay_space,
 )
 from typing import Tuple
 
@@ -34,3 +35,9 @@ def modify_application_stake(
     state: StateType, params: ParamType, domain: Tuple[modify_application_pokt_space]
 ) -> None:
     domain[0]["public_key"].staked_pokt += domain[0]["amount"]
+
+
+def remove_session(
+    state: StateType, params: ParamType, domain: Tuple[servicer_relay_space]
+) -> None:
+    state["Sessions"].remove(domain[0]["session"])
