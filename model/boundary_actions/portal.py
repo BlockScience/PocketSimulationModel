@@ -1,5 +1,5 @@
 from ..types import StateType, ParamType
-from ..spaces import portal_join_space
+from ..spaces import portal_join_space, portal_leave_space
 from typing import Union, Tuple
 import random
 
@@ -30,5 +30,5 @@ def portal_join_ba_simple_unfiform(
         return (None,)
 
 
-def portal_leave_ba(state: StateType, params: ParamType) -> None:
+def portal_leave_ba(state: StateType, params: ParamType) -> portal_leave_space:
     pass

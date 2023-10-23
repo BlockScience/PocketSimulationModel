@@ -3,6 +3,7 @@ from ..spaces import (
     application_join_space,
     application_delegate_to_portal_space,
     submit_relay_request_space,
+    application_leave_space,
 )
 from typing import Union, Tuple
 import random
@@ -77,5 +78,7 @@ def submit_relay_requests_ba_test(
     return ({"application_address": application},)
 
 
-def application_leave_ba(state: StateType, params: ParamType) -> None:
+def application_leave_ba(
+    state: StateType, params: ParamType
+) -> application_leave_space:
     pass

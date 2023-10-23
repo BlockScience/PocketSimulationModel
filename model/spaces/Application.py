@@ -1,4 +1,4 @@
-from typing import TypedDict, List
+from typing import TypedDict, List, Dict
 from ..types import (
     PublicKeyType,
     uPOKTType,
@@ -10,6 +10,13 @@ from ..types import (
     StakeStatusType,
     ApplicationEntityType,
     SessionType,
+)
+
+application_leave_space = TypedDict(
+    "Application Leave Space",
+    {
+        "applications": Dict[ApplicationEntityType, bool],
+    },
 )
 
 new_session_space = TypedDict(

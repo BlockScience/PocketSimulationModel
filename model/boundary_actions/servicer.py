@@ -1,5 +1,10 @@
 from ..types import StateType, ParamType, ServiceEntityType
-from ..spaces import servicer_join_space, service_linking_space, servicer_relay_space
+from ..spaces import (
+    servicer_join_space,
+    service_linking_space,
+    servicer_relay_space,
+    servicer_leave_space,
+)
 from typing import Union, Tuple, List
 import random
 
@@ -82,5 +87,5 @@ def relay_requests_ba_test(
     return (out,)
 
 
-def servicer_leave_ba(state: StateType, params: ParamType) -> None:
+def servicer_leave_ba(state: StateType, params: ParamType) -> servicer_leave_space:
     pass

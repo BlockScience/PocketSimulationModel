@@ -1,5 +1,5 @@
 from ..types import StateType, ParamType
-from ..spaces import service_join_space
+from ..spaces import service_join_space, service_leave_space
 from typing import Union, Tuple
 import random
 
@@ -24,5 +24,5 @@ def service_join_ba_simple_unfiform(
         return (None,)
 
 
-def service_leave_ba(state: StateType, params: ParamType) -> None:
+def service_leave_ba(state: StateType, params: ParamType) -> service_leave_space:
     pass

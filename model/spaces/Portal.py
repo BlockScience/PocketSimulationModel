@@ -1,13 +1,19 @@
-from typing import TypedDict, List
+from typing import TypedDict, List, Dict
 from ..types import (
     PublicKeyType,
     uPOKTType,
     ServiceURLType,
     StakeStatusType,
     BlockHeightType,
-    PortalEntityType
+    PortalEntityType,
 )
 
+portal_leave_space = TypedDict(
+    "Portal Leave Space",
+    {
+        "portals": Dict[PortalEntityType, bool],
+    },
+)
 
 
 portal_join_space = TypedDict(
