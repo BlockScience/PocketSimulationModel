@@ -28,3 +28,7 @@ def portal_join_ba_simple_unfiform(
         )
     else:
         return (None,)
+
+
+def portal_leave_ba(state: StateType, params: ParamType) -> None:
+    pass

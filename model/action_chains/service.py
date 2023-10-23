@@ -1,4 +1,4 @@
-from ..boundary_actions import service_join_ba, service_linking_ba
+from ..boundary_actions import service_join_ba, service_linking_ba, service_leave_ba
 from ..policy import service_join_policy, service_linking_policy
 from ..mechanisms import add_service, link_service_mechanism
 
@@ -20,4 +20,4 @@ def service_linking_ac(state, params, servicer):
 
 
 def service_leave_ac(state, params):
-    pass
+    spaces = service_leave_ba(state, params)

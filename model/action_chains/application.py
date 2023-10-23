@@ -1,4 +1,8 @@
-from ..boundary_actions import application_join_ba, portal_delegation_ba
+from ..boundary_actions import (
+    application_join_ba,
+    portal_delegation_ba,
+    application_leave_ba,
+)
 from ..policy import application_join_policy, portal_delegation_policy
 from ..mechanisms import (
     add_application,
@@ -31,4 +35,4 @@ def portal_delegation_ac(state, params, application):
 
 
 def application_leave_ac(state, params):
-    pass
+    spaces = application_leave_ba(state, params)

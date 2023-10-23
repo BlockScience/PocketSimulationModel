@@ -80,3 +80,7 @@ def relay_requests_ba_test(
         "session": session,
     }
     return (out,)
+
+
+def servicer_leave_ba(state: StateType, params: ParamType) -> None:
+    pass

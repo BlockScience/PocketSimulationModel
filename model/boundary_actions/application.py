@@ -75,3 +75,7 @@ def submit_relay_requests_ba_test(
 ) -> Tuple[submit_relay_request_space]:
     application = random.choice(state["Applications"])
     return ({"application_address": application},)
+
+
+def application_leave_ba(state: StateType, params: ParamType) -> None:
+    pass

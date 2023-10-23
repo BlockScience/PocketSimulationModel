@@ -19,10 +19,10 @@ def service_join_ba_simple_unfiform(
     # Threshold is set by number of applicatons divided by the max services
     threshold = len(state["Services"]) / params["service_max_number"]
     if random.random() > threshold:
-        return (
-            {"name": "ABC",
-                                                              "portal_api_prefix": "ABC",
-                                                              "service_id": "ABC"},
-        )
+        return ({"name": "ABC", "portal_api_prefix": "ABC", "service_id": "ABC"},)
     else:
         return (None,)
+
+
+def service_leave_ba(state: StateType, params: ParamType) -> None:
+    pass

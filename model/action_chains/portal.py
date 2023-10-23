@@ -1,4 +1,4 @@
-from ..boundary_actions import portal_join_ba
+from ..boundary_actions import portal_join_ba, portal_leave_ba
 from ..policy import portal_join_policy
 from ..mechanisms import add_portal
 
@@ -13,4 +13,4 @@ def portal_join_ac(state, params):
 
 
 def portal_leave_ac(state, params):
-    pass
+    spaces = portal_leave_ba(state, params)
