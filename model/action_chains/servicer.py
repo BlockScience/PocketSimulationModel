@@ -54,3 +54,7 @@ def relay_requests_ac(state, params):
         modify_servicer_pokt_holdings(state, params, x)
     if spaces[4]:
         remove_session(state, params, spaces[4:5])
+
+
+def servicer_leave_ac(state, params):
+    pass

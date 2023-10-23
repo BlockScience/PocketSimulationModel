@@ -1,4 +1,5 @@
-from ..action_chains import service_join_ac, service_linking_ac
+from ..action_chains import service_join_ac, service_linking_ac, service_leave_ac
+
 
 def s_update_services(_params, substep, state_history, state, _input) -> tuple:
     # Pass through because they are updated by reference
@@ -21,4 +22,5 @@ def p_service_unlinking(_params, substep, state_history, state) -> tuple:
 
 
 def p_service_leave(_params, substep, state_history, state) -> tuple:
+    service_leave_ac(state, _params)
     return {}

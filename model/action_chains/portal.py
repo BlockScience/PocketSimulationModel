@@ -10,3 +10,7 @@ def portal_join_ac(state, params):
     else:
         return
     add_portal(state, params, spaces)
+
+
+def portal_leave_ac(state, params):
+    pass
