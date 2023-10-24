@@ -98,5 +98,6 @@ def application_leave_policy(
         else:
             space1[application] = None
 
-    space2 = application
+    space2 = domain[0]
+
     return (space1, space2)
