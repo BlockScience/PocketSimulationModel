@@ -37,3 +37,12 @@ def remove_portal_delegator(
 ) -> None:
     space: application_undelegation_space = domain[0]
     space["portal_public_key"].delegators.remove(space["application_public_key"])
+
+
+def remove_portal(
+    state: StateType,
+    params: ParamType,
+    domain,
+) -> None:
+    space = domain[0]
+    state["Portals"].remove(space["portal"])

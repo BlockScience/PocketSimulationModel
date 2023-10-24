@@ -22,4 +22,4 @@ def portal_join_policy(
 def portal_leave_policy(
     state: StateType, params: ParamType, domain: Tuple[portal_leave_space]
 ) -> Tuple[portal_leave_space]:
-    pass
+    return domain

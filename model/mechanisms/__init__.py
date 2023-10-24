@@ -12,6 +12,7 @@ from .portal import (
     add_portal_delegator,
     modify_portal_stake,
     remove_portal_delegator,
+    remove_portal,
 )
 from .servicer import add_servicer, modify_servicer_pokt_holdings
 from .service import add_service, link_service_mechanism
