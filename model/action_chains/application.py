@@ -13,6 +13,7 @@ from ..mechanisms import (
     add_portal_delegator,
     update_application_delegate,
     application_undelegate,
+    remove_portal_delegator,
     remove_application,
 )
 
@@ -48,5 +49,6 @@ def application_leave_ac(state, params):
         spaces2 = spaces[1]["applications"][application]
         if spaces1:
             application_undelegate(state, params, (spaces1,))
+            remove_portal_delegator(state, params, (spaces1,))
         if spaces2:
-            remove_application(state, params, ({"application": spaces2},))
+            remove_application(state, params, ({"application": application},))

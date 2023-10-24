@@ -5,6 +5,7 @@ from ..spaces import (
     submit_relay_request_space,
     modify_application_pokt_space,
     servicer_relay_space,
+    application_undelegation_space,
 )
 from typing import Tuple
 
@@ -41,3 +42,20 @@ def remove_session(
     state: StateType, params: ParamType, domain: Tuple[servicer_relay_space]
 ) -> None:
     state["Sessions"].remove(domain[0]["session"])
+
+
+def application_undelegate(
+    state: StateType,
+    params: ParamType,
+    domain: Tuple[application_undelegation_space],
+) -> None:
+    space: application_undelegation_space = domain[0]
+    space["application_public_key"].delegate = None
+
+
+def remove_application(
+    state: StateType,
+    params: ParamType,
+    domain,
+) -> None:
+    state["Applications"].remove(domain[0]["application"])
