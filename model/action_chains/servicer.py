@@ -8,6 +8,7 @@ from ..policy import (
     servicer_join_policy,
     submit_relay_requests_policy,
     servicer_relay_policy,
+    servicer_leave_policy,
 )
 from ..mechanisms import (
     add_servicer,
@@ -59,3 +60,4 @@ def relay_requests_ac(state, params):
 
 def servicer_leave_ac(state, params):
     spaces = servicer_leave_ba(state, params)
+    spaces = servicer_leave_policy(state, params, spaces)

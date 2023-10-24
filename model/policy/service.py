@@ -13,12 +13,16 @@ def service_join_policy(
         name=space["name"],
         portal_api_prefix=space["portal_api_prefix"],
         service_id=space["service_id"],
-        servicers=[]
+        servicers=[],
     )
     return ({"service": service},)
 
 
-def service_linking_policy(state: StateType, params: ParamType, domain: Tuple[service_linking_space]
+def service_linking_policy(
+    state: StateType, params: ParamType, domain: Tuple[service_linking_space]
 ) -> Tuple[service_linking_space]:
     # Auto pass through
     return domain
+
+
+service_leave_policy

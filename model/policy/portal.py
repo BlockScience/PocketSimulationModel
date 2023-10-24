@@ -12,8 +12,11 @@ def portal_join_policy(
     portal = Portal(
         name=space["name"],
         stake_status="Staked",
-        delegators = [],
+        delegators=[],
         pokt_holdings=space["personal_holdings"],
         staked_pokt=space["stake_amount"],
     )
     return ({"portal": portal},)
+
+
+portal_leave_policy

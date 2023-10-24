@@ -83,3 +83,6 @@ def servicer_relay_policy(
     space5: Union[servicer_relay_space, None] = domain[0]
 
     return (space1, space2, space3, space4, space5)
+
+
+servicer_leave_policy

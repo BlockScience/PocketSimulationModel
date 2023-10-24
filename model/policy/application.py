@@ -71,3 +71,6 @@ def submit_relay_requests_policy_test(
         "session_number": None,
     }
     return ({"session": session}, {"session": session})
+
+
+application_leave_policy
