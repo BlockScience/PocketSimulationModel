@@ -41,3 +41,4 @@ def portal_delegation_ac(state, params, application):
 def application_leave_ac(state, params):
     spaces = application_leave_ba(state, params)
     spaces = application_leave_policy(state, params, spaces)
+    print(spaces)
