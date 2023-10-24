@@ -34,4 +34,7 @@ def service_leave_ba(state: StateType, params: ParamType) -> Tuple[service_leave
 def service_leave_ba_basic(
     state: StateType, params: ParamType
 ) -> Tuple[service_leave_space]:
-    return None
+    leaves = {}
+    for service in state["Services"]:
+        leaves[service] = random.random() < params["service_leave_probability"]
+    return ({"services": leaves},)

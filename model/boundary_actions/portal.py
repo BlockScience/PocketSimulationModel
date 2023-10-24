@@ -40,4 +40,7 @@ def portal_leave_ba(state: StateType, params: ParamType) -> Tuple[portal_leave_s
 def portal_leave_ba_basic(
     state: StateType, params: ParamType
 ) -> Tuple[portal_leave_space]:
-    return None
+    leaves = {}
+    for portal in state["Portals"]:
+        leaves[portal] = random.random() < params["portal_leave_probability"]
+    return ({"portals": leaves},)

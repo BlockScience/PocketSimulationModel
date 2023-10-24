@@ -67,6 +67,10 @@ behavior_param_config = {
         "service_max_number": [5],
         "portal_max_number": [5],
         "service_max_number_link": [3],
+        "application_leave_probability": [0.01],
+        "portal_leave_probability": [0.01],
+        "service_leave_probability": [0.01],
+        "servicer_leave_probability": [0.01],
     }
 }
 

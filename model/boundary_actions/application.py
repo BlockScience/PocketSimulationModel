@@ -90,4 +90,7 @@ def application_leave_ba(
 def application_leave_ba_basic(
     state: StateType, params: ParamType
 ) -> Tuple[application_leave_space]:
-    return None
+    leaves = {}
+    for application in state["Applications"]:
+        leaves[application] = random.random() < params["application_leave_probability"]
+    return ({"applications": leaves},)
