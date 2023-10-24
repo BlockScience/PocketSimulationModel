@@ -1,5 +1,10 @@
 from ..types import StateType, ParamType
-from ..spaces import service_join_space, service_entity_space, service_linking_space
+from ..spaces import (
+    service_join_space,
+    service_entity_space,
+    service_linking_space,
+    service_leave_space,
+)
 from typing import Tuple
 from ..classes import Service
 
@@ -25,4 +30,7 @@ def service_linking_policy(
     return domain
 
 
-service_leave_policy
+def service_leave_policy(
+    state: StateType, params: ParamType, domain: Tuple[service_leave_space]
+) -> Tuple[service_leave_space]:
+    pass

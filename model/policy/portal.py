@@ -1,5 +1,5 @@
 from ..types import StateType, ParamType
-from ..spaces import portal_join_space, portal_entity_space
+from ..spaces import portal_join_space, portal_entity_space, portal_leave_space
 from typing import Tuple
 from ..classes import Portal
 
@@ -19,4 +19,7 @@ def portal_join_policy(
     return ({"portal": portal},)
 
 
-portal_leave_policy
+def portal_leave_policy(
+    state: StateType, params: ParamType, domain: Tuple[portal_leave_space]
+) -> Tuple[portal_leave_space]:
+    pass

@@ -5,6 +5,7 @@ from ..spaces import (
     application_delegate_to_portal_space,
     submit_relay_request_space,
     new_session_space,
+    application_leave_space,
 )
 from typing import Tuple, Union
 from ..classes import Application
@@ -73,4 +74,7 @@ def submit_relay_requests_policy_test(
     return ({"session": session}, {"session": session})
 
 
-application_leave_policy
+def application_leave_policy(
+    state: StateType, params: ParamType, domain: Tuple[application_leave_space]
+) -> Tuple[application_leave_space]:
+    pass

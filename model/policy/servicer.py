@@ -7,6 +7,7 @@ from ..spaces import (
     modify_portal_pokt_space,
     increase_relay_fees_space,
     modify_servicer_pokt_space,
+    servicer_leave_space,
 )
 from typing import Tuple, Union, List
 from ..classes import Servicer
@@ -85,4 +86,7 @@ def servicer_relay_policy(
     return (space1, space2, space3, space4, space5)
 
 
-servicer_leave_policy
+def servicer_leave_policy(
+    state: StateType, params: ParamType, domain: Tuple[servicer_leave_space]
+) -> Tuple[servicer_leave_space]:
+    pass
