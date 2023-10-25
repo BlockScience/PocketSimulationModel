@@ -14,3 +14,10 @@ def modify_servicer_pokt_holdings(
     state: StateType, params: ParamType, domain: Tuple[modify_servicer_pokt_space]
 ) -> None:
     domain[0]["public_key"].pokt_holdings += domain[0]["amount"]
+
+
+def remove_servicer(
+    state: StateType, params: ParamType, domain: Tuple[servicer_entity_space]
+) -> None:
+    space: servicer_entity_space = domain[0]
+    state["Servicers"].remove(space["servicer"])

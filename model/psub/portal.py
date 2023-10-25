@@ -1,4 +1,5 @@
-from ..action_chains import portal_join_ac
+from ..action_chains import portal_join_ac, portal_leave_ac
+
 
 def p_portal_join(_params, substep, state_history, state) -> tuple:
     portal_join_ac(state, _params)
@@ -11,4 +12,5 @@ def s_update_portals(_params, substep, state_history, state, _input) -> tuple:
 
 
 def p_portal_leave(_params, substep, state_history, state) -> tuple:
+    portal_leave_ac(state, _params)
     return {}

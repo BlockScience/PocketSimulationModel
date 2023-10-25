@@ -3,6 +3,7 @@ from ..spaces import (
     application_join_space,
     application_delegate_to_portal_space,
     submit_relay_request_space,
+    application_leave_space,
 )
 from typing import Union, Tuple
 import random
@@ -75,3 +76,21 @@ def submit_relay_requests_ba_test(
 ) -> Tuple[submit_relay_request_space]:
     application = random.choice(state["Applications"])
     return ({"application_address": application},)
+
+
+def application_leave_ba(
+    state: StateType, params: ParamType
+) -> Tuple[application_leave_space]:
+    if params["application_leave_function"] == "basic":
+        return application_leave_ba_basic(state, params)
+    else:
+        assert False, "Invalid application_leave_function"
+
+
+def application_leave_ba_basic(
+    state: StateType, params: ParamType
+) -> Tuple[application_leave_space]:
+    leaves = {}
+    for application in state["Applications"]:
+        leaves[application] = random.random() < params["application_leave_probability"]
+    return ({"applications": leaves},)

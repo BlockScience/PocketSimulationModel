@@ -1,5 +1,10 @@
 from ..types import StateType, ParamType, ServiceEntityType
-from ..spaces import servicer_join_space, service_linking_space, servicer_relay_space
+from ..spaces import (
+    servicer_join_space,
+    service_linking_space,
+    servicer_relay_space,
+    servicer_leave_space,
+)
 from typing import Union, Tuple, List
 import random
 
@@ -80,3 +85,21 @@ def relay_requests_ba_test(
         "session": session,
     }
     return (out,)
+
+
+def servicer_leave_ba(
+    state: StateType, params: ParamType
+) -> Tuple[servicer_leave_space]:
+    if params["servicer_leave_function"] == "basic":
+        return servicer_leave_ba_basic(state, params)
+    else:
+        assert False, "Invalid servicer_leave_function"
+
+
+def servicer_leave_ba_basic(
+    state: StateType, params: ParamType
+) -> Tuple[servicer_leave_space]:
+    leaves = {}
+    for servicer in state["Servicers"]:
+        leaves[servicer] = random.random() < params["servicer_leave_probability"]
+    return ({"servicers": leaves},)

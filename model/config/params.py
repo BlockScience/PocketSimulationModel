@@ -67,6 +67,10 @@ behavior_param_config = {
         "service_max_number": [5],
         "portal_max_number": [5],
         "service_max_number_link": [3],
+        "application_leave_probability": [0.01],
+        "portal_leave_probability": [0.01],
+        "service_leave_probability": [0.01],
+        "servicer_leave_probability": [0.01],
     }
 }
 
@@ -81,5 +85,9 @@ functional_param_config = {
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["test"],
         "submit_relay_requests_policy_function": ["test"],
+        "application_leave_function": ["basic"],
+        "service_leave_function": ["basic"],
+        "servicer_leave_function": ["basic"],
+        "portal_leave_function": ["basic"],
     }
 }

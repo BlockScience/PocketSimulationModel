@@ -12,9 +12,16 @@ from ..types import (
     ApplicationEntityType,
     SessionType,
     ServicerGroupType,
-    ServiceEntityType
+    ServiceEntityType,
 )
-from typing import TypedDict, List
+from typing import TypedDict, List, Dict
+
+servicer_leave_space = TypedDict(
+    "Servicer Leave Space",
+    {
+        "servicers": Dict[ServicerEntityType, bool],
+    },
+)
 
 servicer_join_space = TypedDict(
     "Servicer Join Space",
@@ -24,7 +31,7 @@ servicer_join_space = TypedDict(
         "geo_zone": GeoZoneType,  # The physical geo-location identifier this Servicer registered in
         "number_servicers": int,  # The number of Servicers requested per session
         "personal_holdings": uPOKTType,  # Unstaked POKT the application personally holds
-        "service_url": ServiceURLType
+        "service_url": ServiceURLType,
     },
 )
 
@@ -179,8 +186,5 @@ servicer_entity_space = TypedDict(
 
 service_linking_space = TypedDict(
     "Servicer Linking Space",
-    {
-        "servicer": ServicerEntityType,
-        "service": ServiceEntityType
-    },
+    {"servicer": ServicerEntityType, "service": ServiceEntityType},
 )

@@ -1,12 +1,14 @@
-from ..types import StateType, ParamType, SessionType
+from ..types import StateType, ParamType, SessionType, ApplicationEntityType
 from ..spaces import (
     application_join_space,
     application_entity_space,
     application_delegate_to_portal_space,
     submit_relay_request_space,
     new_session_space,
+    application_leave_space,
+    application_undelegation_space,
 )
-from typing import Tuple, Union
+from typing import Tuple, Union, Dict
 from ..classes import Application
 import random
 
@@ -71,3 +73,31 @@ def submit_relay_requests_policy_test(
         "session_number": None,
     }
     return ({"session": session}, {"session": session})
+
+
+def application_leave_policy(
+    state: StateType, params: ParamType, domain: Tuple[application_leave_space]
+) -> Tuple[
+    Dict[ApplicationEntityType, Union[application_undelegation_space, None]],
+    application_leave_space,
+]:
+    applications = domain[0]["applications"]
+    space1: Dict[
+        ApplicationEntityType, Union[application_undelegation_space, None]
+    ] = {}
+    space2 = domain[0]
+    for application in applications:
+        if applications[application]:
+            if application.delegate:
+                space1[application] = {
+                    "application_public_key": application,
+                    "portal_public_key": application.delegate,
+                }
+            else:
+                space1[application] = None
+        else:
+            space1[application] = None
+
+    space2 = domain[0]
+
+    return (space1, space2)

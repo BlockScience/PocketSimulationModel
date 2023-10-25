@@ -18,6 +18,7 @@ from .Servicer import (
     servicer_join_space,
     servicer_entity_space,
     service_linking_space,
+    servicer_leave_space,
 )
 from .Application import (
     application_stake_space,
@@ -32,6 +33,7 @@ from .Application import (
     application_join_space,
     application_entity_space,
     new_session_space,
+    application_leave_space,
 )
 from .Validator import (
     validator_stake_space,
@@ -50,6 +52,7 @@ from .Portal import (
     return_portal_stake_space,
     portal_join_space,
     portal_entity_space,
+    portal_leave_space,
 )
 from .Treasury import (
     mint_block_rewards_space,
@@ -62,7 +65,12 @@ from .Treasury import (
     decrease_relay_fees_space,
 )
 from .Node import unjail_node_space
-from .Service import service_join_space, service_leave_space, service_entity_space
+from .Service import (
+    service_join_space,
+    service_leave_space,
+    service_entity_space,
+    service_leave_space,
+)
 from .DAO import dao_block_reward_space, modify_dao_pokt_space
 
 spaces = {
