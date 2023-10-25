@@ -4,4 +4,4 @@ from typing import Tuple
 
 
 def fee_reward_ba(state: StateType, params: ParamType) -> Tuple[distribute_fees_space]:
-    return ({},)
+    return ({"current_height": state["height"]},)

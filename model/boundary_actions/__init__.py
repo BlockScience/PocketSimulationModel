@@ -12,4 +12,4 @@ from .servicer import (
     servicer_leave_ba,
 )
 from .service import service_join_ba, service_leave_ba
-from .treasury import fee_reward_ba
+from .system import fee_reward_ba
