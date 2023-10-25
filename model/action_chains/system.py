@@ -10,7 +10,6 @@ from ..mechanisms import (
 def fee_reward_ac(state, params):
     spaces = fee_reward_ba(state, params)
     spaces = fee_reward_policy(state, params, spaces)
-    print(spaces)
     decrease_relay_fees(state, params, spaces[:1])
     for spaces_i in spaces[1]:
         modify_validator_pokt_holdings(state, params, spaces_i)

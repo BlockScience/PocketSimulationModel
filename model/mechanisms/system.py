@@ -12,4 +12,4 @@ def increase_relay_fees(
 def decrease_relay_fees(
     state: StateType, params: ParamType, domain: Tuple[decrease_relay_fees_space]
 ) -> None:
-    pass
+    state["relay_fees"] -= domain[0]["POKT Amount"]
