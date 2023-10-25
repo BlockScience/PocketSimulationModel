@@ -40,6 +40,6 @@ def service_leave_policy(
     for service in services:
         if services[service]:
             for servicer in service.servicers:
-                spaces1.append({"service": service, "servicer": servicer})
-            spaces2.append({"service": service})
+                spaces1.append(({"service": service, "servicer": servicer},))
+            spaces2.append(({"service": service},))
     return (spaces1, spaces2)

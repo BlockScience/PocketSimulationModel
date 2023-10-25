@@ -15,5 +15,10 @@ from .portal import (
     remove_portal,
 )
 from .servicer import add_servicer, modify_servicer_pokt_holdings
-from .service import add_service, link_service_mechanism
+from .service import (
+    add_service,
+    link_service_mechanism,
+    unlink_service_mechanism,
+    remove_service,
+)
 from .system import increase_relay_fees
