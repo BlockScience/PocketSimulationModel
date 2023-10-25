@@ -21,4 +21,6 @@ from .service import (
     unlink_service_mechanism,
     remove_service,
 )
-from .system import increase_relay_fees
+from .system import increase_relay_fees, decrease_relay_fees
+from .validator import modify_validator_pokt_holdings
+from .dao import modify_dao_pokt_holdings
