@@ -89,4 +89,12 @@ def servicer_relay_policy(
 def servicer_leave_policy(
     state: StateType, params: ParamType, domain: Tuple[servicer_leave_space]
 ) -> Tuple[servicer_leave_space]:
-    pass
+    spaces1 = []
+    spaces2 = []
+    servicers = domain[0]["servicers"]
+    for servicer in servicers:
+        if servicers[servicer]:
+            for service in servicer.services:
+                spaces1.append(({"service": service, "servicer": servicer},))
+            spaces2.append(({"servicer": servicer},))
+    return (spaces1, spaces2)
