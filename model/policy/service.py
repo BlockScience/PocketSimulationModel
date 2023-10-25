@@ -4,8 +4,9 @@ from ..spaces import (
     service_entity_space,
     service_linking_space,
     service_leave_space,
+    service_linking_space,
 )
-from typing import Tuple
+from typing import Tuple, List
 from ..classes import Service
 
 
@@ -32,5 +33,13 @@ def service_linking_policy(
 
 def service_leave_policy(
     state: StateType, params: ParamType, domain: Tuple[service_leave_space]
-) -> Tuple[service_leave_space]:
-    pass
+) -> Tuple[List[service_linking_space], List[service_entity_space]]:
+    spaces1 = []
+    spaces2 = []
+    services = domain[0]["services"]
+    for service in services:
+        if services[service]:
+            for servicer in service.servicers:
+                spaces1.append({"service": service, "servicer": servicer})
+            spaces2.append({"service": service})
+    return (spaces1, spaces2)

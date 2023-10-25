@@ -16,6 +16,6 @@ service_join_space = TypedDict(
 service_entity_space = TypedDict(
     "Service Entity Space",
     {
-        "application": ServiceEntityType,
+        "service": ServiceEntityType,
     },
 )
