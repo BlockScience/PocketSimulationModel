@@ -19,7 +19,7 @@ from ..mechanisms import (
     modify_servicer_pokt_holdings,
     remove_session,
     unlink_service_mechanism,
-    #    remove_servicer,
+    remove_servicer,
 )
 from ..spaces import modify_portal_pokt_space
 
@@ -63,9 +63,8 @@ def relay_requests_ac(state, params):
 def servicer_leave_ac(state, params):
     spaces = servicer_leave_ba(state, params)
     spaces = servicer_leave_policy(state, params, spaces)
-    print(spaces)
+
     for spaces_i in spaces[0]:
         unlink_service_mechanism(state, params, spaces_i)
     for spaces_i in spaces[1]:
-        pass
-        # remove_servicer(state, params, spaces_i)
+        remove_servicer(state, params, spaces_i)
