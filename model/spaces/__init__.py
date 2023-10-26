@@ -19,6 +19,7 @@ from .Servicer import (
     servicer_entity_space,
     service_linking_space,
     servicer_leave_space,
+    service_unlinking_space,
 )
 from .Application import (
     application_stake_space,

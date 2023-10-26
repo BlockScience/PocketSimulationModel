@@ -1,4 +1,9 @@
-from ..action_chains import service_join_ac, service_linking_ac, service_leave_ac
+from ..action_chains import (
+    service_join_ac,
+    service_linking_ac,
+    service_leave_ac,
+    service_unlinking_ac,
+)
 
 
 def s_update_services(_params, substep, state_history, state, _input) -> tuple:
@@ -18,6 +23,8 @@ def p_service_join(_params, substep, state_history, state) -> tuple:
 
 
 def p_service_unlinking(_params, substep, state_history, state) -> tuple:
+    for servicer in state["Servicers"]:
+        service_unlinking_ac(state, _params, servicer)
     return {}
 
 

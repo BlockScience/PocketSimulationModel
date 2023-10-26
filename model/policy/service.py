@@ -5,6 +5,7 @@ from ..spaces import (
     service_linking_space,
     service_leave_space,
     service_linking_space,
+    service_unlinking_space,
 )
 from typing import Tuple, List
 from ..classes import Service
@@ -27,6 +28,13 @@ def service_join_policy(
 def service_linking_policy(
     state: StateType, params: ParamType, domain: Tuple[service_linking_space]
 ) -> Tuple[service_linking_space]:
+    # Auto pass through
+    return domain
+
+
+def service_unlinking_policy(
+    state: StateType, params: ParamType, domain: Tuple[service_unlinking_space]
+) -> Tuple[service_unlinking_space]:
     # Auto pass through
     return domain
 

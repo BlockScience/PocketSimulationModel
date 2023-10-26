@@ -2,11 +2,13 @@ from ..boundary_actions import (
     application_join_ba,
     portal_delegation_ba,
     application_leave_ba,
+    portal_undelegation_ba,
 )
 from ..policy import (
     application_join_policy,
     portal_delegation_policy,
     application_leave_policy,
+    portal_undelegation_policy,
 )
 from ..mechanisms import (
     add_application,
@@ -52,3 +54,11 @@ def application_leave_ac(state, params):
             remove_portal_delegator(state, params, (spaces1,))
         if spaces2:
             remove_application(state, params, ({"application": application},))
+
+
+def portal_undelegation_ac(state, params, application):
+    spaces = portal_undelegation_ba(state, params, application)
+    spaces = portal_undelegation_policy(state, params, spaces)
+    if spaces[0]:
+        application_undelegate(state, params, spaces)
+        remove_portal_delegator(state, params, spaces)
