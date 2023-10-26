@@ -2,6 +2,7 @@ from ..action_chains import (
     application_join_ac,
     portal_delegation_ac,
     application_leave_ac,
+    portal_undelegation_ac,
 )
 
 
@@ -22,6 +23,7 @@ def p_portal_delegation(_params, substep, state_history, state) -> tuple:
 
 
 def p_portal_undelegation(_params, substep, state_history, state) -> tuple:
+    portal_undelegation_ac(state, _params)
     return {}
 
 

@@ -68,3 +68,7 @@ def servicer_leave_ac(state, params):
         unlink_service_mechanism(state, params, spaces_i)
     for spaces_i in spaces[1]:
         remove_servicer(state, params, spaces_i)
+
+
+def service_unlinking_ac(state, params):
+    pass

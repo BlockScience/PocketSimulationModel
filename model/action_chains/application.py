@@ -52,3 +52,7 @@ def application_leave_ac(state, params):
             remove_portal_delegator(state, params, (spaces1,))
         if spaces2:
             remove_application(state, params, ({"application": application},))
+
+
+def portal_undelegation_ac(state, params):
+    pass
