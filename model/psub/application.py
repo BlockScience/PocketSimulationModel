@@ -23,7 +23,8 @@ def p_portal_delegation(_params, substep, state_history, state) -> tuple:
 
 
 def p_portal_undelegation(_params, substep, state_history, state) -> tuple:
-    portal_undelegation_ac(state, _params)
+    for application in state["Applications"]:
+        portal_undelegation_ac(state, _params, application)
     return {}
 
 

@@ -72,6 +72,7 @@ behavior_param_config = {
         "service_leave_probability": [0.01],
         "servicer_leave_probability": [0.01],
         "service_unlinking_probability": [0.01],
+        "portal_undelegation_probability": [0.01],
     }
 }
 
@@ -91,5 +92,6 @@ functional_param_config = {
         "servicer_leave_function": ["basic"],
         "portal_leave_function": ["basic"],
         "service_unlinking_function": ["basic"],
+        "portal_undelegation_function": ["basic"],
     }
 }

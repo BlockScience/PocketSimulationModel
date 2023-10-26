@@ -4,6 +4,7 @@ from ..spaces import (
     application_delegate_to_portal_space,
     submit_relay_request_space,
     application_leave_space,
+    application_undelegation_space,
 )
 from typing import Union, Tuple
 import random
@@ -56,6 +57,31 @@ def portal_delegation_ba_test(
     ):
         portal = random.choice(state["Portals"])
         return ({"application_public_key": application, "portal_public_key": portal},)
+    else:
+        return (None,)
+
+
+def portal_undelegation_ba(
+    state: StateType, params: ParamType, application: ApplicationEntityType
+) -> Tuple[Union[application_undelegation_space, None]]:
+    if params["portal_undelegation_function"] == "basic":
+        return portal_delegation_ba_basic(state, params, application)
+    else:
+        assert False, "Invalid portal_undelegation_function"
+
+
+def portal_delegation_ba_basic(
+    state: StateType, params: ParamType, application: ApplicationEntityType
+) -> Tuple[Union[application_undelegation_space, None]]:
+    if application.delegate:
+        if random.random() < params["portal_undelegation_probability"]:
+            space: application_undelegation_space = {
+                "application_public_key": application,
+                "portal_public_key": application.delegate,
+            }
+            return (space,)
+        else:
+            return (None,)
     else:
         return (None,)
 
