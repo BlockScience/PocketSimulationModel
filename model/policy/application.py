@@ -101,3 +101,13 @@ def application_leave_policy(
     space2 = domain[0]
 
     return (space1, space2)
+
+
+def portal_undelegation_policy(
+    state: StateType,
+    params: ParamType,
+    domain: Tuple[application_undelegation_space],
+) -> Tuple[Union[application_undelegation_space, None],]:
+    # Pass through
+
+    return domain

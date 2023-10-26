@@ -3,6 +3,7 @@ from .application import (
     portal_delegation_policy,
     submit_relay_requests_policy,
     application_leave_policy,
+    portal_undelegation_policy,
 )
 from .portal import portal_join_policy, portal_leave_policy
 from .service import (
