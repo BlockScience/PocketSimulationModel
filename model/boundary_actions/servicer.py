@@ -122,6 +122,5 @@ def service_unlinking_ba_basic(
     out = []
     for service in servicer.services:
         if random.random() < params["service_unlinking_probability"]:
-            print("A")
             out.append(({"service": service, "servicer": servicer},))
     return out
