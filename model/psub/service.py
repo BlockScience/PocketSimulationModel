@@ -23,7 +23,8 @@ def p_service_join(_params, substep, state_history, state) -> tuple:
 
 
 def p_service_unlinking(_params, substep, state_history, state) -> tuple:
-    service_unlinking_ac(state, _params)
+    for servicer in state["Servicers"]:
+        service_unlinking_ac(state, _params, servicer)
     return {}
 
 

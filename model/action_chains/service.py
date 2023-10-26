@@ -1,4 +1,9 @@
-from ..boundary_actions import service_join_ba, service_linking_ba, service_leave_ba
+from ..boundary_actions import (
+    service_join_ba,
+    service_linking_ba,
+    service_leave_ba,
+    service_unlinking_ba,
+)
 from ..policy import service_join_policy, service_linking_policy, service_leave_policy
 from ..mechanisms import (
     add_service,
@@ -31,3 +36,8 @@ def service_leave_ac(state, params):
         unlink_service_mechanism(state, params, spaces_i)
     for spaces_i in spaces[1]:
         remove_service(state, params, spaces_i)
+
+
+def service_unlinking_ac(state, params, servicer):
+    spaces = service_unlinking_ba(state, params, servicer)
+    print(spaces)

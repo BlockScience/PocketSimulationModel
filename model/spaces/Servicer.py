@@ -188,3 +188,8 @@ service_linking_space = TypedDict(
     "Servicer Linking Space",
     {"servicer": ServicerEntityType, "service": ServiceEntityType},
 )
+
+service_unlinking_space = TypedDict(
+    "Servicer Unlinking Space",
+    {"servicer": ServicerEntityType, "service": ServiceEntityType},
+)

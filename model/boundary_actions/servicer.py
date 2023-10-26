@@ -4,6 +4,7 @@ from ..spaces import (
     service_linking_space,
     servicer_relay_space,
     servicer_leave_space,
+    service_unlinking_space,
 )
 from typing import Union, Tuple, List
 import random
@@ -103,3 +104,24 @@ def servicer_leave_ba_basic(
     for servicer in state["Servicers"]:
         leaves[servicer] = random.random() < params["servicer_leave_probability"]
     return ({"servicers": leaves},)
+
+
+def service_unlinking_ba(
+    state: StateType, params: ParamType, servicer: ServiceEntityType
+) -> List[Tuple[service_unlinking_space]]:
+    if params["service_unlinking_function"] == "basic":
+        return service_unlinking_ba_basic(state, params, servicer)
+    else:
+        assert False, "Invalid service_unlinking_function"
+
+
+def service_unlinking_ba_basic(
+    state: StateType, params: ParamType, servicer: ServiceEntityType
+) -> List[Tuple[service_unlinking_space]]:
+    # Simple test function where if maximum services is not reached then the current options are joined in reverse order
+    out = []
+    for service in servicer.services:
+        if random.random() < params["service_unlinking_probability"]:
+            print("A")
+            out.append(({"service": service, "servicer": servicer},))
+    return out
