@@ -10,6 +10,7 @@ from ..policy import (
     submit_relay_requests_policy,
     servicer_relay_policy,
     servicer_leave_policy,
+    servicer_stake_policy,
 )
 from ..mechanisms import (
     add_servicer,
@@ -73,4 +74,5 @@ def servicer_leave_ac(state, params):
 
 def servicers_stake_ac(state, params):
     spaces = servicer_stake_ba(state, params)
-    print(spaces)
+    for spaces_i in spaces:
+        spaces_i = servicer_stake_policy(state, params, spaces_i)

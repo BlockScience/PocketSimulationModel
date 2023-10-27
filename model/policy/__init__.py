@@ -12,5 +12,10 @@ from .service import (
     service_leave_policy,
     service_unlinking_policy,
 )
-from .servicer import servicer_join_policy, servicer_relay_policy, servicer_leave_policy
+from .servicer import (
+    servicer_join_policy,
+    servicer_relay_policy,
+    servicer_leave_policy,
+    servicer_stake_policy,
+)
 from .system import fee_reward_policy

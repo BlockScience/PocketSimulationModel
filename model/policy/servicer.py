@@ -8,6 +8,7 @@ from ..spaces import (
     increase_relay_fees_space,
     modify_servicer_pokt_space,
     servicer_leave_space,
+    servicer_stake_space,
 )
 from typing import Tuple, Union, List
 from ..classes import Servicer
@@ -98,3 +99,13 @@ def servicer_leave_policy(
                 spaces1.append(({"service": service, "servicer": servicer},))
             spaces2.append(({"servicer": servicer},))
     return (spaces1, spaces2)
+
+
+def servicer_stake_policy(
+    state: StateType, params: ParamType, domain: Tuple[servicer_stake_space]
+) -> Tuple[modify_servicer_pokt_space, modify_servicer_pokt_space]:
+    servicer = domain[0]["public_key"]
+    amount = domain[0]["stake_amount"]
+    space1: modify_servicer_pokt_space = {"amount": -amount, "public_key": servicer}
+    space2: modify_servicer_pokt_space = {"amount": amount, "public_key": servicer}
+    return (space1, space2)

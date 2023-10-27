@@ -154,5 +154,5 @@ def servicer_stake_ba_basic(
                 "services": servicer.services,
                 "stake_amount": amount,
             }
-            out.append(space)
+            out.append((space,))
     return out
