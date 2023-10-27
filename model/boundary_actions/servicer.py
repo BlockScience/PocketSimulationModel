@@ -5,6 +5,7 @@ from ..spaces import (
     servicer_relay_space,
     servicer_leave_space,
     service_unlinking_space,
+    servicer_stake_space,
 )
 from typing import Union, Tuple, List
 import random
@@ -123,4 +124,35 @@ def service_unlinking_ba_basic(
     for service in servicer.services:
         if random.random() < params["service_unlinking_probability"]:
             out.append(({"service": service, "servicer": servicer},))
+    return out
+
+
+def servicer_stake_ba(
+    state: StateType, params: ParamType
+) -> List[Tuple[servicer_stake_space]]:
+    if params["servicer_stake_function"] == "basic":
+        return servicer_stake_ba_basic(state, params)
+    else:
+        assert False, "Invalid servicer_stake_function"
+
+
+def servicer_stake_ba_basic(
+    state: StateType, params: ParamType
+) -> List[Tuple[servicer_stake_space]]:
+    out = []
+    for servicer in state["Servicers"]:
+        if servicer.staked_pokt < params["minimum_stake_servicer"]:
+            amount = min(
+                servicer.pokt_holdings,
+                params["minimum_stake_servicer"] - servicer.staked_pokt,
+            )
+            space: servicer_stake_space = {
+                "geo_zone": servicer.geo_zone,
+                "operator_public_key": servicer.operator_public_key,
+                "public_key": servicer,
+                "service_url": servicer.service_url,
+                "services": servicer.services,
+                "stake_amount": amount,
+            }
+            out.append((space,))
     return out

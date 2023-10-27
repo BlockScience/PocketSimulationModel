@@ -12,6 +12,7 @@ from .servicer import (
     relay_requests_ba,
     servicer_leave_ba,
     service_unlinking_ba,
+    servicer_stake_ba,
 )
 from .service import service_join_ba, service_leave_ba
 from .system import fee_reward_ba

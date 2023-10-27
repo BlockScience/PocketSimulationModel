@@ -3,12 +3,14 @@ from ..boundary_actions import (
     relay_requests_ba,
     submit_relay_requests_ba,
     servicer_leave_ba,
+    servicer_stake_ba,
 )
 from ..policy import (
     servicer_join_policy,
     submit_relay_requests_policy,
     servicer_relay_policy,
     servicer_leave_policy,
+    servicer_stake_policy,
 )
 from ..mechanisms import (
     add_servicer,
@@ -20,6 +22,7 @@ from ..mechanisms import (
     remove_session,
     unlink_service_mechanism,
     remove_servicer,
+    modify_servicer_stake,
 )
 from ..spaces import modify_portal_pokt_space
 
@@ -68,3 +71,11 @@ def servicer_leave_ac(state, params):
         unlink_service_mechanism(state, params, spaces_i)
     for spaces_i in spaces[1]:
         remove_servicer(state, params, spaces_i)
+
+
+def servicers_stake_ac(state, params):
+    spaces = servicer_stake_ba(state, params)
+    for spaces_i in spaces:
+        spaces_i = servicer_stake_policy(state, params, spaces_i)
+        modify_servicer_pokt_holdings(state, params, spaces_i[:1])
+        modify_servicer_stake(state, params, spaces_i[1:])

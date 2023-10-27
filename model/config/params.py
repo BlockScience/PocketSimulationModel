@@ -18,7 +18,7 @@ def build_params(config_option):
 
 system_param_config = {
     "Test": {
-        "minimum_stake_servicer": [None],
+        "minimum_stake_servicer": [15000],
         "minimum_stake_period_servicer": [None],
         "minimum_pause_time": [None],
         "max_chains_servicer": [None],
@@ -93,5 +93,6 @@ functional_param_config = {
         "portal_leave_function": ["basic"],
         "service_unlinking_function": ["basic"],
         "portal_undelegation_function": ["basic"],
+        "servicer_stake_function": ["basic"],
     }
 }
