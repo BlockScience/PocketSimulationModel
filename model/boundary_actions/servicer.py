@@ -5,6 +5,7 @@ from ..spaces import (
     servicer_relay_space,
     servicer_leave_space,
     service_unlinking_space,
+    servicer_stake_space,
 )
 from typing import Union, Tuple, List
 import random
@@ -124,3 +125,9 @@ def service_unlinking_ba_basic(
         if random.random() < params["service_unlinking_probability"]:
             out.append(({"service": service, "servicer": servicer},))
     return out
+
+
+def servicer_stake_ba(
+    state: StateType, params: ParamType
+) -> List[Tuple[servicer_stake_space]]:
+    pass

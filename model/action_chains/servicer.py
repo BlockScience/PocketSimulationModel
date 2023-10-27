@@ -3,6 +3,7 @@ from ..boundary_actions import (
     relay_requests_ba,
     submit_relay_requests_ba,
     servicer_leave_ba,
+    servicer_stake_ba,
 )
 from ..policy import (
     servicer_join_policy,
@@ -71,4 +72,4 @@ def servicer_leave_ac(state, params):
 
 
 def servicers_stake_ac(state, params):
-    pass
+    spaces = servicer_stake_ba(state, params)
