@@ -5,6 +5,7 @@ from .servicer import (
     p_relay_requests,
     p_jailing_slashing,
     p_servicers_leave,
+    p_servicers_stake,
 )
 from .service import (
     p_service_linking,
@@ -45,6 +46,16 @@ join_block = {
         "Services": s_update_services,
         "Portals": s_update_portals,
         "Applications": s_update_applications,
+    },
+}
+
+# Block for any staking
+stake_block = {
+    "policies": {
+        "servicer": p_servicers_stake,
+    },
+    "variables": {
+        "Servicers": s_update_servicers,
     },
 }
 
@@ -128,6 +139,7 @@ leave_block = {
 psub_blocks = [
     meta_update_block,
     join_block,
+    stake_block,
     delegation_service_block,
     relay_requests_block,
     jailing_slashing_block,

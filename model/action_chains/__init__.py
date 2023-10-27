@@ -15,5 +15,6 @@ from .servicer import (
     servicer_join_ac,
     relay_requests_ac,
     servicer_leave_ac,
+    servicers_stake_ac,
 )
 from .system import fee_reward_ac
