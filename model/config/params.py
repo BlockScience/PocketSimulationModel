@@ -93,5 +93,6 @@ functional_param_config = {
         "portal_leave_function": ["basic"],
         "service_unlinking_function": ["basic"],
         "portal_undelegation_function": ["basic"],
+        "servicer_stake_function": ["basic"],
     }
 }

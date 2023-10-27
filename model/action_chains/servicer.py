@@ -73,3 +73,4 @@ def servicer_leave_ac(state, params):
 
 def servicers_stake_ac(state, params):
     spaces = servicer_stake_ba(state, params)
+    print(spaces)
