@@ -21,3 +21,9 @@ def remove_servicer(
 ) -> None:
     space: servicer_entity_space = domain[0]
     state["Servicers"].remove(space["servicer"])
+
+
+def modify_servicer_stake(
+    state: StateType, params: ParamType, domain: Tuple[modify_servicer_pokt_space]
+) -> None:
+    domain[0]["public_key"].staked_pokt += domain[0]["amount"]

@@ -22,6 +22,7 @@ from ..mechanisms import (
     remove_session,
     unlink_service_mechanism,
     remove_servicer,
+    modify_servicer_stake,
 )
 from ..spaces import modify_portal_pokt_space
 
@@ -76,3 +77,5 @@ def servicers_stake_ac(state, params):
     spaces = servicer_stake_ba(state, params)
     for spaces_i in spaces:
         spaces_i = servicer_stake_policy(state, params, spaces_i)
+        modify_servicer_pokt_holdings(state, params, spaces_i[:1])
+        modify_servicer_stake(state, params, spaces_i[1:])
