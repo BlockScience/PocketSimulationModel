@@ -107,7 +107,7 @@ for i in range(1, 6):
             report_card=None,
             test_scores=None,
             pokt_holdings=1000,
-            staked_pokt=1000,
+            staked_pokt=15000,
             service_url=None,
             services=[],
             geo_zone="G{}".format(i % 3 + 1),
