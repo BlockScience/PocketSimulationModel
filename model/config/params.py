@@ -41,7 +41,7 @@ system_param_config = {
         "block_proposer_allocation": [None],
         "stake_per_app_delegation": [None],
         "portal_fee_per_relay": [None],
-        "portal_minimum_stake": [None],
+        "portal_minimum_stake": [150000],
         "portal_unstaking_time": [None],
         "session_block_frequency": [None],
         "session_token_bucket_coefficient": [None],

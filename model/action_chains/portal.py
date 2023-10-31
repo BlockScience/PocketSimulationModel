@@ -15,7 +15,10 @@ def portal_join_ac(state, params):
         spaces = portal_join_policy(state, params, spaces)
     else:
         return
-    add_portal(state, params, spaces)
+    if spaces[0]:
+        add_portal(state, params, spaces)
+    else:
+        pass
 
 
 def portal_leave_ac(state, params):

@@ -22,7 +22,7 @@ def portal_join_ba_simple_unfiform(
         return (
             {
                 "name": "",
-                "stake_amount": 100,  # The amount of uPOKT in escrow (i.e. a security deposit)
+                "stake_amount": 150000,  # The amount of uPOKT in escrow (i.e. a security deposit)
                 "personal_holdings": 100,  # Unstaked POKT the portal personally holds
             },
         )
