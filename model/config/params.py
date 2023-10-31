@@ -35,7 +35,7 @@ system_param_config = {
         "maximum_servicers_per_session": [5],
         "application_unstaking_time": [None],
         "application_fee_per_relay": [None],
-        "minimum_application_stake": [None],
+        "minimum_application_stake": [15000],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [None],
         "block_proposer_allocation": [None],
