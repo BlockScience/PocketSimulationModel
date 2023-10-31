@@ -15,8 +15,12 @@ import random
 
 def application_join_policy(
     state: StateType, params: ParamType, domain: Tuple[application_join_space]
-) -> Tuple[application_entity_space]:
+) -> Tuple[Union[application_entity_space, None]]:
     space: application_join_space = domain[0]
+
+    if space["stake_amount"] < params["minimum_application_stake"]:
+        return (None,)
+
     # Create entity
     application = Application(
         name=space["name"],

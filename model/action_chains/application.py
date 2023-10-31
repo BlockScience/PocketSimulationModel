@@ -26,7 +26,10 @@ def application_join_ac(state, params):
         spaces = application_join_policy(state, params, spaces)
     else:
         return
-    add_application(state, params, spaces)
+    if spaces[0]:
+        add_application(state, params, spaces)
+    else:
+        return
 
 
 def portal_delegation_ac(state, params, application):
