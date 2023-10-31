@@ -27,9 +27,9 @@ def application_join_ac(state, params):
     else:
         return
     if spaces[0]:
-        return
-    else:
         add_application(state, params, spaces)
+    else:
+        return
 
 
 def portal_delegation_ac(state, params, application):
