@@ -43,7 +43,6 @@ def servicer_relay_policy(
     Union[modify_portal_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
     increase_relay_fees_space,
-    List[modify_servicer_pokt_space],
     Union[servicer_relay_space, None],
 ]:
     application = domain[0]["applications"]
@@ -69,22 +68,10 @@ def servicer_relay_policy(
     # Relay fees to add
     space3: increase_relay_fees_space = {"POKT Amount": fees_charged}
 
-    # Payment to servicer
-    relay_payment2 = relay_payment / len(domain[0]["servicers"])
-    space4: List[modify_servicer_pokt_space] = [
-        (
-            {
-                "amount": relay_payment2,
-                "public_key": x,
-            },
-        )
-        for x in domain[0]["servicers"]
-    ]
-
     # Space for if the session should be removed
-    space5: Union[servicer_relay_space, None] = domain[0]
+    space4: Union[servicer_relay_space, None] = domain[0]
 
-    return (space1, space2, space3, space4, space5)
+    return (space1, space2, space3, space4)
 
 
 def servicer_leave_policy(

@@ -57,10 +57,8 @@ def relay_requests_ac(state, params):
     # burn_pokt_mechanism(state, params, spaces2[:1])
     # modify_application_stake(state, params, spaces2[1:])
     increase_relay_fees(state, params, spaces[2:3])
-    for x in spaces[3]:
-        modify_servicer_pokt_holdings(state, params, x)
-    if spaces[4]:
-        remove_session(state, params, spaces[4:5])
+    if spaces[3]:
+        remove_session(state, params, spaces[3:4])
 
 
 def servicer_leave_ac(state, params):
