@@ -96,4 +96,14 @@ Likewise, within model/config/state, there is a config_option_map for the specif
 
 ## Parameters
 
+Parameters are made from combining three subsets of parameters:
+
+1. System Parameters: All parameters that would be present in the actual implementation
+2. Behavior Parameters: All parameters used for assumptions in the model
+3. Function Parameters: All parameters which decide functions for either:
+    A. Behaviors in which case the functional parameters allow for experimenting with different classes of behavior (i.e. pulling from a random distribution or feeding in a specific signal that is meant to represent the randomness)
+    B. Policies: This allows for A/B testing of different implementations of policies, i.e. if one wanted to test out different schemes of reward disbursement based on quality of service or other factors.
+
 ## State
+
+The state can be seeded with different starting state representations so that for example one might test the impacts of starting with few servicers versus many.
