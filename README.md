@@ -6,7 +6,7 @@ The enclosed repository serves as a simulation model for testing economic scenar
 
 ## Model Background
 
-Math spec connection
+This model is the next step in the evolution from the [Pocket Math Spec](https://github.com/BlockScience/PocketMathSpec) which served as a foundational architecture document prior to development.
 
 ## Current Development
 
@@ -15,6 +15,7 @@ The current development updates are:
 1. Majority of the core development for action chains are completed but there is still refinement needed in terms of constraints and non-basic behaviors.
 2. Parameters are being filled in over time as all their relationships are filled in (sourced from the math spec for easily knowing where parameters need to be invoked).
 3. Basic scenario creation tools implemented which allow for testing iteratively during development.
+4. Lots of work in progress, all tracked through github issues and tagged for easier triage.
 
 ## Structure of the Model Repository
 
@@ -60,5 +61,27 @@ Within model/config/experiment, the experimental_configs dictionary can be modif
 
 Where each key represents a set, the config_option_state refers to a specific starting state, config_option_params does the same for parameters, monte_carlo_n defines the number of monte carlo runs, and T defines the number of timesteps for the experiment.
 
+Within model/config/params, the config_option_map is set up to handle the different options for creating parameter sweeps. More detail in the parameters section on specifics.
+
+    config_option_map = {
+        "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"}
+    }
+
+Likewise, within model/config/state, there is a config_option_map for the specific types of starting state assumptions to implement.
+
+    config_option_map = {
+        "Test": {
+            "Geozones": "Test",
+            "Applications": "Test",
+            "DAO": "Test",
+            "Portals": "Test",
+            "Services": "Test",
+            "Servicers": "Test",
+            "Validators": "Test",
+        }
+    }
+
 
 ## Parameters
+
+## State
