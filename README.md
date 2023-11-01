@@ -18,4 +18,47 @@ The current development updates are:
 
 ## Structure of the Model Repository
 
+1. Exploratory Folder: All jupytyer notebooks being used to test and build the system
+2. Model Folder
+    A. Action Chains: The code that pieces together the boundary actions, policies, and mechanisms
+    B. Boundary Actions, Policies, Mechanisms: All code which implements modular logic
+    C. Classes: The class definitions for entities used in the model
+    D. Spaces, Types: The annotations used for functions to make it more readable
+    E. PSUBs: The partial state update blocks that mostly are used as pass throughs to action chains
+    F. Config: The utility functions for setting up configurations as well as options for starting state + parameter sets
+
 ## Partial State Update Blocks
+
+## Running Simulations
+
+### run_experiments
+
+To run pre-packaged simulations, import run_experiments and then pass a list of experiment keys like so:
+
+    from model import run_experiments
+    df = run_experiments(["test1"])
+
+### auto_run_sets
+
+This option allows for running sets in chunks, saving down the results as CSV files, and picking up where last started off. The chunk size determines how many simulations to run at a time
+
+    from model import run_experiments
+    df = auto_run_sets(["test1"], "Data", 10)
+
+### Creating Simulation Configuration
+
+Within model/config/experiment, the experimental_configs dictionary can be modified to add in different experiments. The structure of it is like so:
+
+    experimental_setups = {
+        "test1": {
+            "config_option_state": "Test",
+            "config_option_params": "Test",
+            "monte_carlo_n": 1,
+            "T": 365,
+        }
+    }
+
+Where each key represents a set, the config_option_state refers to a specific starting state, config_option_params does the same for parameters, monte_carlo_n defines the number of monte carlo runs, and T defines the number of timesteps for the experiment.
+
+
+## Parameters
