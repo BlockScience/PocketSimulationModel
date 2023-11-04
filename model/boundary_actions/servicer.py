@@ -29,7 +29,9 @@ def servicer_join_ba_simple_unfiform(
         return (
             {
                 "name": "",
-                "stake_amount": 100,  # The amount of uPOKT in escrow (i.e. a security deposit)
+                "stake_amount": params[
+                    "minimum_stake_servicer"
+                ],  # The amount of uPOKT in escrow (i.e. a security deposit)
                 "geo_zone": "ABC",  # The physical geo-location identifier this Servicer registered in
                 "number_servicers": 1,  # The number of Servicers requested per session
                 "personal_holdings": 100,  # Unstaked POKT the servicer personally holds

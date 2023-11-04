@@ -33,7 +33,10 @@ def servicer_join_ac(state, params):
         spaces = servicer_join_policy(state, params, spaces)
     else:
         return
-    add_servicer(state, params, spaces)
+    if spaces[0]:
+        add_servicer(state, params, spaces)
+    else:
+        return
 
 
 def relay_requests_ac(state, params):
