@@ -1,11 +1,11 @@
 from .application import (
     application_join_ba,
-    portal_delegation_ba,
+    gateway_delegation_ba,
     submit_relay_requests_ba,
     application_leave_ba,
-    portal_undelegation_ba,
+    gateway_undelegation_ba,
 )
-from .portal import portal_join_ba, portal_leave_ba
+from .gateway import gateway_join_ba, gateway_leave_ba
 from .servicer import (
     servicer_join_ba,
     service_linking_ba,

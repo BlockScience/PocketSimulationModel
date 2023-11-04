@@ -33,14 +33,14 @@ The current development updates are:
 The following are the partial state update blocks which as a whole represent one timestep in the system. The current timestep is one day. Hence T = 365 in the scenario running would mean 365 days. 
 
 1. Meta Update Block: Updates the time in the system
-2. Join Block: All logic around servicers, services, portals, and applications joining.
+2. Join Block: All logic around servicers, services, gateways, and applications joining.
 3. Stake Block: Any logic for staking that happens in the system.
-4. Delegation and Service Linking Block: Block which takes care of applications delegating to portals and servicers linking to services.
+4. Delegation and Service Linking Block: Block which takes care of applications delegating to gateways and servicers linking to services.
 5. Relay Request Block: All logic around requests being created and relayed.
-6. Jailing & Slashing Block: Block for servicers or portals being slashed or jailed.
+6. Jailing & Slashing Block: Block for servicers or gateways being slashed or jailed.
 7. Block & Fee Rewards Block: The logic for both the block rewards as well as the fee rewards.
-8. Undelegation & Unservice Block: The block which handles any portals undelegating or any services being unlinked from.
-9. Leave Block: All logic around servicers, services, portals, and applications leaving.
+8. Undelegation & Unservice Block: The block which handles any gateways undelegating or any services being unlinked from.
+9. Leave Block: All logic around servicers, services, gateways, and applications leaving.
 
 ## Running Simulations
 
@@ -86,7 +86,7 @@ Likewise, within model/config/state, there is a config_option_map for the specif
             "Geozones": "Test",
             "Applications": "Test",
             "DAO": "Test",
-            "Portals": "Test",
+            "Gateways": "Test",
             "Services": "Test",
             "Servicers": "Test",
             "Validators": "Test",

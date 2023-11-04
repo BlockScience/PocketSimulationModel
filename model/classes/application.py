@@ -5,13 +5,12 @@ from ..types import (
     GeoZoneType,
     StakeStatusType,
     BlockHeightType,
-    PortalEntityType,
+    GatewayEntityType,
 )
 from typing import List
 
 
 class Application:
-
     id_number = 0
 
     def __init__(
@@ -24,7 +23,7 @@ class Application:
         number_of_services: int,
         stake_status: StakeStatusType,
         unstaking_height: BlockHeightType,
-        delegate: PortalEntityType,
+        delegate: GatewayEntityType,
     ):
         self.id_number = Application.id_number
         Application.id_number += 1

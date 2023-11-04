@@ -1,10 +1,10 @@
 from .application import (
     application_join_ac,
-    portal_delegation_ac,
+    gateway_delegation_ac,
     application_leave_ac,
-    portal_undelegation_ac,
+    gateway_undelegation_ac,
 )
-from .portal import portal_join_ac, portal_leave_ac
+from .gateway import gateway_join_ac, gateway_leave_ac
 from .service import (
     service_join_ac,
     service_linking_ac,

@@ -9,7 +9,7 @@ service_leave_space = TypedDict(
 )
 
 service_join_space = TypedDict(
-    "Service Join Space", {"name": str, "portal_api_prefix": str, "service_id": str}
+    "Service Join Space", {"name": str, "gateway_api_prefix": str, "service_id": str}
 )
 
 

@@ -2,7 +2,7 @@ from ..types import StateType, ParamType, SessionType, ApplicationEntityType
 from ..spaces import (
     application_join_space,
     application_entity_space,
-    application_delegate_to_portal_space,
+    application_delegate_to_gateway_space,
     submit_relay_request_space,
     new_session_space,
     application_leave_space,
@@ -36,15 +36,15 @@ def application_join_policy(
     return ({"application": application},)
 
 
-def portal_delegation_policy(
+def gateway_delegation_policy(
     state: StateType,
     params: ParamType,
-    domain: Tuple[application_delegate_to_portal_space],
+    domain: Tuple[application_delegate_to_gateway_space],
 ) -> Tuple[
-    Union[application_delegate_to_portal_space, None],
-    Union[application_delegate_to_portal_space, None],
+    Union[application_delegate_to_gateway_space, None],
+    Union[application_delegate_to_gateway_space, None],
 ]:
-    space: application_delegate_to_portal_space = domain[0]
+    space: application_delegate_to_gateway_space = domain[0]
     # Pass through
 
     return (space, space)
@@ -95,7 +95,7 @@ def application_leave_policy(
             if application.delegate:
                 space1[application] = {
                     "application_public_key": application,
-                    "portal_public_key": application.delegate,
+                    "gateway_public_key": application.delegate,
                 }
             else:
                 space1[application] = None
@@ -107,7 +107,7 @@ def application_leave_policy(
     return (space1, space2)
 
 
-def portal_undelegation_policy(
+def gateway_undelegation_policy(
     state: StateType,
     params: ParamType,
     domain: Tuple[application_undelegation_space],

@@ -7,12 +7,12 @@ from .application import (
     application_undelegate,
     remove_application,
 )
-from .portal import (
-    add_portal,
-    add_portal_delegator,
-    modify_portal_stake,
-    remove_portal_delegator,
-    remove_portal,
+from .gateway import (
+    add_gateway,
+    add_gateway_delegator,
+    modify_gateway_stake,
+    remove_gateway_delegator,
+    remove_gateway,
 )
 from .servicer import (
     add_servicer,

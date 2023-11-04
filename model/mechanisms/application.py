@@ -1,7 +1,7 @@
 from ..types import StateType, ParamType, SessionType
 from ..spaces import (
     application_entity_space,
-    application_delegate_to_portal_space,
+    application_delegate_to_gateway_space,
     submit_relay_request_space,
     modify_application_pokt_space,
     servicer_relay_space,
@@ -20,10 +20,10 @@ def add_application(
 def update_application_delegate(
     state: StateType,
     params: ParamType,
-    domain: Tuple[application_delegate_to_portal_space],
+    domain: Tuple[application_delegate_to_gateway_space],
 ) -> None:
-    space: application_delegate_to_portal_space = domain[0]
-    space["application_public_key"].delegate = space["portal_public_key"]
+    space: application_delegate_to_gateway_space = domain[0]
+    space["application_public_key"].delegate = space["gateway_public_key"]
 
 
 def create_new_session(

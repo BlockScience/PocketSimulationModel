@@ -84,11 +84,11 @@ application_unstake_space = TypedDict(
     },
 )
 
-application_delegate_to_portal_space = TypedDict(
-    "Application Delegate to Portal Space",
+application_delegate_to_gateway_space = TypedDict(
+    "Application Delegate to Gateway Space",
     {
         "application_public_key": PublicKeyType,  # The cryptographic ID of the Application
-        "portal_public_key": PublicKeyType,  # The cryptographic ID of the Portal
+        "gateway_public_key": PublicKeyType,  # The cryptographic ID of the Gateway
     },
 )
 
@@ -96,7 +96,7 @@ application_undelegation_space = TypedDict(
     "Application Undelegation Space",
     {
         "application_public_key": PublicKeyType,  # The cryptographic ID of the Application
-        "portal_public_key": PublicKeyType,  # The cryptographic ID of the Portal
+        "gateway_public_key": PublicKeyType,  # The cryptographic ID of the Gateway
     },
 )
 return_application_stake_space = TypedDict(

@@ -1,8 +1,8 @@
 from ..action_chains import (
     application_join_ac,
-    portal_delegation_ac,
+    gateway_delegation_ac,
     application_leave_ac,
-    portal_undelegation_ac,
+    gateway_undelegation_ac,
 )
 
 
@@ -16,15 +16,15 @@ def s_update_applications(_params, substep, state_history, state, _input) -> tup
     return ("Applications", state["Applications"])
 
 
-def p_portal_delegation(_params, substep, state_history, state) -> tuple:
+def p_gateway_delegation(_params, substep, state_history, state) -> tuple:
     for application in state["Applications"]:
-        portal_delegation_ac(state, _params, application)
+        gateway_delegation_ac(state, _params, application)
     return {}
 
 
-def p_portal_undelegation(_params, substep, state_history, state) -> tuple:
+def p_gateway_undelegation(_params, substep, state_history, state) -> tuple:
     for application in state["Applications"]:
-        portal_undelegation_ac(state, _params, application)
+        gateway_undelegation_ac(state, _params, application)
     return {}
 
 

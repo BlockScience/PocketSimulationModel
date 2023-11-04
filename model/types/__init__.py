@@ -23,7 +23,7 @@ from .Entity import (
     ServicerEntityType,
     ApplicationEntityType,
     ServicerGroupType,
-    PortalEntityType,
+    GatewayEntityType,
 )
 from .Data import SessionType
 from .Config import StateType, ParamType

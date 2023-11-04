@@ -14,12 +14,12 @@ from .service import (
     p_service_unlinking,
     p_service_leave,
 )
-from .portal import p_portal_join, s_update_portals, p_portal_leave
+from .gateway import p_gateway_join, s_update_gateways, p_gateway_leave
 from .application import (
     p_application_join,
     s_update_applications,
-    p_portal_delegation,
-    p_portal_undelegation,
+    p_gateway_delegation,
+    p_gateway_undelegation,
     p_application_leave,
 )
 from .treasury import p_block_reward, p_fee_reward, s_update_treasury
@@ -38,13 +38,13 @@ join_block = {
     "policies": {
         "servicer": p_servicers_join,
         "service": p_service_join,
-        "portal": p_portal_join,
+        "gateway": p_gateway_join,
         "application": p_application_join,
     },
     "variables": {
         "Servicers": s_update_servicers,
         "Services": s_update_services,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
         "Applications": s_update_applications,
     },
 }
@@ -59,16 +59,16 @@ stake_block = {
     },
 }
 
-# Portal delegation and service linking
+# Gateway delegation and service linking
 delegation_service_block = {
     "policies": {
         "service_link": p_service_linking,
-        "portal_delegation": p_portal_delegation,
+        "gateway_delegation": p_gateway_delegation,
     },
     "variables": {
         "Servicers": s_update_servicers,
         "Services": s_update_services,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
         "Applications": s_update_applications,
     },
 }
@@ -79,7 +79,7 @@ relay_requests_block = {
     "variables": {
         "Servicers": s_update_servicers,
         "Services": s_update_services,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
         "Applications": s_update_applications,
     },
 }
@@ -89,7 +89,7 @@ jailing_slashing_block = {
     "policies": {"jailing_slashing": p_jailing_slashing},
     "variables": {
         "Servicers": s_update_servicers,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
     },
 }
 
@@ -100,7 +100,7 @@ block_and_fee_rewards_block = {
         "Treasury": s_update_treasury,
         "Validators": s_update_validators,
         "Servicers": s_update_servicers,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
         "Applications": s_update_applications,
     },
 }
@@ -109,12 +109,12 @@ block_and_fee_rewards_block = {
 undelegation_unservice_block = {
     "policies": {
         "service_unlink": p_service_unlinking,
-        "portal_undelegation": p_portal_undelegation,
+        "gateway_undelegation": p_gateway_undelegation,
     },
     "variables": {
         "Servicers": s_update_servicers,
         "Services": s_update_services,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
         "Applications": s_update_applications,
     },
 }
@@ -124,13 +124,13 @@ leave_block = {
     "policies": {
         "servicer": p_servicers_leave,
         "service": p_service_leave,
-        "portal": p_portal_leave,
+        "gateway": p_gateway_leave,
         "application": p_application_leave,
     },
     "variables": {
         "Servicers": s_update_servicers,
         "Services": s_update_services,
-        "Portals": s_update_portals,
+        "Gateways": s_update_gateways,
         "Applications": s_update_applications,
     },
 }

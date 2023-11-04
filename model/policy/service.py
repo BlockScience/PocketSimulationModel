@@ -7,7 +7,7 @@ from ..spaces import (
     service_linking_space,
     service_unlinking_space,
 )
-from typing import Tuple, List
+from typing import Tuple, List, Union
 from ..classes import Service
 
 
@@ -18,7 +18,7 @@ def service_join_policy(
     # Create entity
     service = Service(
         name=space["name"],
-        portal_api_prefix=space["portal_api_prefix"],
+        gateway_api_prefix=space["gateway_api_prefix"],
         service_id=space["service_id"],
         servicers=[],
     )
@@ -27,9 +27,12 @@ def service_join_policy(
 
 def service_linking_policy(
     state: StateType, params: ParamType, domain: Tuple[service_linking_space]
-) -> Tuple[service_linking_space]:
-    # Auto pass through
-    return domain
+) -> Tuple[Union[service_linking_space, None]]:
+    space: service_linking_space = domain[0]
+    if len(space["servicer"].services) < params["max_chains_servicer"]:
+        return domain
+    else:
+        return (None,)
 
 
 def service_unlinking_policy(

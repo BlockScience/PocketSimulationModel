@@ -1,12 +1,12 @@
 from copy import deepcopy
-from model.classes import Application, DAO, Portal, Service, Servicer, Validator
+from model.classes import Application, DAO, Gateway, Service, Servicer, Validator
 
 config_option_map = {
     "Test": {
         "Geozones": "Test",
         "Applications": "Test",
         "DAO": "Test",
-        "Portals": "Test",
+        "Gateways": "Test",
         "Services": "Test",
         "Servicers": "Test",
         "Validators": "Test",
@@ -21,7 +21,7 @@ def build_state(config_option):
     state["Geozones"] = geo_zones_config[config_option["Geozones"]]
     state["Applications"] = application_config[config_option["Applications"]]
     state["DAO"] = dao_config[config_option["DAO"]]
-    state["Portals"] = portals_config[config_option["Portals"]]
+    state["Gateways"] = gateways_config[config_option["Gateways"]]
     state["Services"] = service_config[config_option["Services"]]
     state["Servicers"] = servicers_config[config_option["Servicers"]]
     state["Validators"] = validators_config[config_option["Validators"]]
@@ -77,9 +77,9 @@ application_config = {
 
 dao_config = {"Test": DAO(pokt_holdings=100000)}
 
-portals_config = {
+gateways_config = {
     "Test": [
-        Portal(
+        Gateway(
             name="P1",
             stake_status="Staked",
             delegators=[],
@@ -91,9 +91,9 @@ portals_config = {
 
 service_config = {
     "Test": [
-        Service(name="S1", portal_api_prefix="S1", service_id="S1", servicers=[]),
-        Service(name="S2", portal_api_prefix="S2", service_id="S2", servicers=[]),
-        Service(name="S3", portal_api_prefix="S3", service_id="S3", servicers=[]),
+        Service(name="S1", gateway_api_prefix="S1", service_id="S1", servicers=[]),
+        Service(name="S2", gateway_api_prefix="S2", service_id="S2", servicers=[]),
+        Service(name="S3", gateway_api_prefix="S3", service_id="S3", servicers=[]),
     ]
 }
 
