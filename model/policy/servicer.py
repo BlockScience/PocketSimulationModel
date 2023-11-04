@@ -4,7 +4,7 @@ from ..spaces import (
     servicer_entity_space,
     servicer_relay_space,
     modify_application_pokt_space,
-    modify_portal_pokt_space,
+    modify_gateway_pokt_space,
     increase_relay_fees_space,
     modify_servicer_pokt_space,
     servicer_leave_space,
@@ -43,7 +43,7 @@ def servicer_join_policy(
 def servicer_relay_policy(
     state: StateType, params: ParamType, domain: Tuple[servicer_relay_space]
 ) -> Tuple[
-    Union[modify_portal_pokt_space, modify_application_pokt_space],
+    Union[modify_gateway_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
     increase_relay_fees_space,
     Union[servicer_relay_space, None],
@@ -55,7 +55,7 @@ def servicer_relay_policy(
 
     # Payment from the requestor
     if application.delegate:
-        space1: modify_portal_pokt_space = {
+        space1: modify_gateway_pokt_space = {
             "public_key": application.delegate,
             "amount": -total_charge,
         }

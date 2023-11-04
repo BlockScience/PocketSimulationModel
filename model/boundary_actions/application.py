@@ -1,7 +1,7 @@
 from ..types import StateType, ParamType, ApplicationEntityType
 from ..spaces import (
     application_join_space,
-    application_delegate_to_portal_space,
+    application_delegate_to_gateway_space,
     submit_relay_request_space,
     application_leave_space,
     application_undelegation_space,
@@ -38,46 +38,46 @@ def application_join_ba_simple_unfiform(
         return (None,)
 
 
-def portal_delegation_ba(
+def gateway_delegation_ba(
     state: StateType, params: ParamType, application: ApplicationEntityType
-) -> Tuple[Union[application_delegate_to_portal_space, None]]:
-    if params["portal_delegation_function"] == "test":
-        return portal_delegation_ba_test(state, params, application)
+) -> Tuple[Union[application_delegate_to_gateway_space, None]]:
+    if params["gateway_delegation_function"] == "test":
+        return gateway_delegation_ba_test(state, params, application)
     else:
-        assert False, "Invalid portal_delegation_function"
+        assert False, "Invalid gateway_delegation_function"
 
 
-def portal_delegation_ba_test(
+def gateway_delegation_ba_test(
     state: StateType, params: ParamType, application: ApplicationEntityType
-) -> Tuple[Union[application_delegate_to_portal_space, None]]:
+) -> Tuple[Union[application_delegate_to_gateway_space, None]]:
     if (
         not application.delegate
         and application.id_number % 2 == 1
-        and len(state["Portals"]) > 0
+        and len(state["Gateways"]) > 0
     ):
-        portal = random.choice(state["Portals"])
-        return ({"application_public_key": application, "portal_public_key": portal},)
+        gateway = random.choice(state["Gateways"])
+        return ({"application_public_key": application, "gateway_public_key": gateway},)
     else:
         return (None,)
 
 
-def portal_undelegation_ba(
+def gateway_undelegation_ba(
     state: StateType, params: ParamType, application: ApplicationEntityType
 ) -> Tuple[Union[application_undelegation_space, None]]:
-    if params["portal_undelegation_function"] == "basic":
-        return portal_delegation_ba_basic(state, params, application)
+    if params["gateway_undelegation_function"] == "basic":
+        return gateway_delegation_ba_basic(state, params, application)
     else:
-        assert False, "Invalid portal_undelegation_function"
+        assert False, "Invalid gateway_undelegation_function"
 
 
-def portal_delegation_ba_basic(
+def gateway_delegation_ba_basic(
     state: StateType, params: ParamType, application: ApplicationEntityType
 ) -> Tuple[Union[application_undelegation_space, None]]:
     if application.delegate:
-        if random.random() < params["portal_undelegation_probability"]:
+        if random.random() < params["gateway_undelegation_probability"]:
             space: application_undelegation_space = {
                 "application_public_key": application,
-                "portal_public_key": application.delegate,
+                "gateway_public_key": application.delegate,
             }
             return (space,)
         else:

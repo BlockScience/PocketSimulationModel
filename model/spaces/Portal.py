@@ -5,19 +5,19 @@ from ..types import (
     ServiceURLType,
     StakeStatusType,
     BlockHeightType,
-    PortalEntityType,
+    GatewayEntityType,
 )
 
-portal_leave_space = TypedDict(
-    "Portal Leave Space",
+gateway_leave_space = TypedDict(
+    "Gateway Leave Space",
     {
-        "portals": Dict[PortalEntityType, bool],
+        "gateways": Dict[GatewayEntityType, bool],
     },
 )
 
 
-portal_join_space = TypedDict(
-    "Portal Stake Space",
+gateway_join_space = TypedDict(
+    "Gateway Stake Space",
     {
         "name": str,
         "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)
@@ -25,48 +25,48 @@ portal_join_space = TypedDict(
     },
 )
 
-portal_entity_space = TypedDict(
-    "Portal Entity Space",
+gateway_entity_space = TypedDict(
+    "Gateway Entity Space",
     {
-        "portal": PortalEntityType,
+        "gateway": GatewayEntityType,
     },
 )
 
-portal_registration_space = TypedDict(
-    "Portal Registration Space",
+gateway_registration_space = TypedDict(
+    "Gateway Registration Space",
     {
-        "public_key": PublicKeyType,  # The public cryptographic id of the Portal account
+        "public_key": PublicKeyType,  # The public cryptographic id of the Gateway account
         "stake_amount": uPOKTType,  # The amount of uPOKT in escrow (i.e. a security deposit)
-        "service_url": ServiceURLType,  # The API endpoint where the Portal service is provided
+        "service_url": ServiceURLType,  # The API endpoint where the Gateway service is provided
     },
 )
 
-portal_unregistration_space = TypedDict(
-    "Portal Unregistration Space",
+gateway_unregistration_space = TypedDict(
+    "Gateway Unregistration Space",
     {
-        "public_key": PublicKeyType,  # The public cryptographic id of the Portal account
+        "public_key": PublicKeyType,  # The public cryptographic id of the Gateway account
     },
 )
 
-portal_relay_request_space = TypedDict(
-    "Portal Relay Request Space",
+gateway_relay_request_space = TypedDict(
+    "Gateway Relay Request Space",
     {
         "payload": dict,  # the data payload of the request
         "meta": dict,  # metadata for the relay request
         "proof": dict,  # the authentication scheme needed for work
         "application_address": PublicKeyType,
-        "portal_address": PublicKeyType,
+        "gateway_address": PublicKeyType,
     },
 )
-modify_portal_pokt_space = TypedDict(
-    "Modify Portal POKT Space",
+modify_gateway_pokt_space = TypedDict(
+    "Modify Gateway POKT Space",
     {
         "public_key": PublicKeyType,
         "amount": uPOKTType,
     },
 )
 
-portal_stake_status_space = TypedDict(
+gateway_stake_status_space = TypedDict(
     "Servicer Stake Status Space",
     {
         "address": PublicKeyType,  # address of the unstaking servicer
@@ -75,8 +75,8 @@ portal_stake_status_space = TypedDict(
     },
 )
 
-return_portal_stake_space = TypedDict(
-    "Return Portal Stake Space",
+return_gateway_stake_space = TypedDict(
+    "Return Gateway Stake Space",
     {
         "public_key": PublicKeyType,  # The public cryptographic id of the custodial account
         "amount": uPOKTType,

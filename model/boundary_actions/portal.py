@@ -1,46 +1,46 @@
 from ..types import StateType, ParamType
-from ..spaces import portal_join_space, portal_leave_space
+from ..spaces import gateway_join_space, gateway_leave_space
 from typing import Union, Tuple
 import random
 
 
-def portal_join_ba(
+def gateway_join_ba(
     state: StateType, params: ParamType
-) -> Tuple[Union[portal_join_space, None]]:
-    if params["portal_join_function"] == "simple_unfiform":
-        return portal_join_ba_simple_unfiform(state, params)
+) -> Tuple[Union[gateway_join_space, None]]:
+    if params["gateway_join_function"] == "simple_unfiform":
+        return gateway_join_ba_simple_unfiform(state, params)
     else:
-        assert False, "Invalid portal_join_function"
+        assert False, "Invalid gateway_join_function"
 
 
-def portal_join_ba_simple_unfiform(
+def gateway_join_ba_simple_unfiform(
     state: StateType, params: ParamType
-) -> Tuple[Union[portal_join_space, None]]:
-    # Threshold is set by number of portals divided by the max portals
-    threshold = len(state["Portals"]) / params["portal_max_number"]
+) -> Tuple[Union[gateway_join_space, None]]:
+    # Threshold is set by number of gateways divided by the max gateways
+    threshold = len(state["Gateways"]) / params["gateway_max_number"]
     if random.random() > threshold:
         return (
             {
                 "name": "",
                 "stake_amount": 150000,  # The amount of uPOKT in escrow (i.e. a security deposit)
-                "personal_holdings": 100,  # Unstaked POKT the portal personally holds
+                "personal_holdings": 100,  # Unstaked POKT the gateway personally holds
             },
         )
     else:
         return (None,)
 
 
-def portal_leave_ba(state: StateType, params: ParamType) -> Tuple[portal_leave_space]:
-    if params["portal_leave_function"] == "basic":
-        return portal_leave_ba_basic(state, params)
+def gateway_leave_ba(state: StateType, params: ParamType) -> Tuple[gateway_leave_space]:
+    if params["gateway_leave_function"] == "basic":
+        return gateway_leave_ba_basic(state, params)
     else:
-        assert False, "Invalid portal_leave_function"
+        assert False, "Invalid gateway_leave_function"
 
 
-def portal_leave_ba_basic(
+def gateway_leave_ba_basic(
     state: StateType, params: ParamType
-) -> Tuple[portal_leave_space]:
+) -> Tuple[gateway_leave_space]:
     leaves = {}
-    for portal in state["Portals"]:
-        leaves[portal] = random.random() < params["portal_leave_probability"]
-    return ({"portals": leaves},)
+    for gateway in state["Gateways"]:
+        leaves[gateway] = random.random() < params["gateway_leave_probability"]
+    return ({"gateways": leaves},)

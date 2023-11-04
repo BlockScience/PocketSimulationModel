@@ -15,7 +15,7 @@ from ..policy import (
 from ..mechanisms import (
     add_servicer,
     create_new_session,
-    modify_portal_stake,
+    modify_gateway_stake,
     modify_application_stake,
     increase_relay_fees,
     modify_servicer_pokt_holdings,
@@ -24,7 +24,7 @@ from ..mechanisms import (
     remove_servicer,
     modify_servicer_stake,
 )
-from ..spaces import modify_portal_pokt_space
+from ..spaces import modify_gateway_pokt_space
 
 
 def servicer_join_ac(state, params):
@@ -52,8 +52,8 @@ def relay_requests_ac(state, params):
     # Relay the request
     spaces = relay_requests_ba(state, params)
     spaces = servicer_relay_policy(state, params, spaces)
-    if type(spaces[0]) == modify_portal_pokt_space:
-        modify_portal_stake(state, params, spaces[:1])
+    if type(spaces[0]) == modify_gateway_pokt_space:
+        modify_gateway_stake(state, params, spaces[:1])
     else:
         modify_application_stake(state, params, spaces[:1])
     # spaces2 = burn_per_relay_policy(state, params, spaces[1:2])

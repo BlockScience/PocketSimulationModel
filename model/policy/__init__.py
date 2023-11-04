@@ -1,11 +1,11 @@
 from .application import (
     application_join_policy,
-    portal_delegation_policy,
+    gateway_delegation_policy,
     submit_relay_requests_policy,
     application_leave_policy,
-    portal_undelegation_policy,
+    gateway_undelegation_policy,
 )
-from .portal import portal_join_policy, portal_leave_policy
+from .gateway import gateway_join_policy, gateway_leave_policy
 from .service import (
     service_join_policy,
     service_linking_policy,

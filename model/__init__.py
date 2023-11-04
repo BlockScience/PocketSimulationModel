@@ -1,4 +1,4 @@
-from .classes import Application, DAO, Portal, Service, Servicer, Validator
+from .classes import Application, DAO, Gateway, Service, Servicer, Validator
 from .types import (
     PublicKeyType,
     uPOKTType,
@@ -23,7 +23,7 @@ from .types import (
     ServicerEntityType,
     ApplicationEntityType,
     ServicerGroupType,
-    PortalEntityType,
+    GatewayEntityType,
     SessionType,
 )
 from .config import build_state, build_params, experimental_setups
@@ -38,4 +38,12 @@ from .run import (
     auto_run_sets,
     write_to_csv,
 )
-from .action_chains import application_join_ac, service_linking_ac, portal_join_ac, service_join_ac, servicer_join_ac, portal_delegation_ac, relay_requests_ac
+from .action_chains import (
+    application_join_ac,
+    service_linking_ac,
+    gateway_join_ac,
+    service_join_ac,
+    servicer_join_ac,
+    gateway_delegation_ac,
+    relay_requests_ac,
+)

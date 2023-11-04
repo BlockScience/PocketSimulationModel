@@ -1,36 +1,36 @@
-from ..boundary_actions import portal_join_ba, portal_leave_ba
-from ..policy import portal_join_policy, portal_leave_policy
+from ..boundary_actions import gateway_join_ba, gateway_leave_ba
+from ..policy import gateway_join_policy, gateway_leave_policy
 from ..mechanisms import (
-    add_portal,
+    add_gateway,
     application_undelegate,
-    remove_portal_delegator,
-    remove_portal,
+    remove_gateway_delegator,
+    remove_gateway,
 )
 from ..spaces import application_undelegation_space
 
 
-def portal_join_ac(state, params):
-    spaces = portal_join_ba(state, params)
+def gateway_join_ac(state, params):
+    spaces = gateway_join_ba(state, params)
     if spaces[0]:
-        spaces = portal_join_policy(state, params, spaces)
+        spaces = gateway_join_policy(state, params, spaces)
     else:
         return
     if spaces[0]:
-        add_portal(state, params, spaces)
+        add_gateway(state, params, spaces)
     else:
         pass
 
 
-def portal_leave_ac(state, params):
-    spaces = portal_leave_ba(state, params)
-    spaces = portal_leave_policy(state, params, spaces)
-    for portal in spaces[0]["portals"]:
-        if spaces[0]["portals"][portal]:
-            for application in portal.delegators:
+def gateway_leave_ac(state, params):
+    spaces = gateway_leave_ba(state, params)
+    spaces = gateway_leave_policy(state, params, spaces)
+    for gateway in spaces[0]["gateways"]:
+        if spaces[0]["gateways"][gateway]:
+            for application in gateway.delegators:
                 spaces1: application_undelegation_space = {
                     "application_public_key": application,
-                    "portal_public_key": portal,
+                    "gateway_public_key": gateway,
                 }
                 application_undelegate(state, params, (spaces1,))
-                remove_portal_delegator(state, params, (spaces1,))
-            remove_portal(state, params, ({"portal": portal},))
+                remove_gateway_delegator(state, params, (spaces1,))
+            remove_gateway(state, params, ({"gateway": gateway},))

@@ -1,21 +1,21 @@
 from ..boundary_actions import (
     application_join_ba,
-    portal_delegation_ba,
+    gateway_delegation_ba,
     application_leave_ba,
-    portal_undelegation_ba,
+    gateway_undelegation_ba,
 )
 from ..policy import (
     application_join_policy,
-    portal_delegation_policy,
+    gateway_delegation_policy,
     application_leave_policy,
-    portal_undelegation_policy,
+    gateway_undelegation_policy,
 )
 from ..mechanisms import (
     add_application,
-    add_portal_delegator,
+    add_gateway_delegator,
     update_application_delegate,
     application_undelegate,
-    remove_portal_delegator,
+    remove_gateway_delegator,
     remove_application,
 )
 
@@ -32,15 +32,15 @@ def application_join_ac(state, params):
         return
 
 
-def portal_delegation_ac(state, params, application):
-    spaces = portal_delegation_ba(state, params, application)
+def gateway_delegation_ac(state, params, application):
+    spaces = gateway_delegation_ba(state, params, application)
     if spaces[0]:
-        spaces = portal_delegation_policy(state, params, spaces)
+        spaces = gateway_delegation_policy(state, params, spaces)
     else:
         return
 
     if spaces[0]:
-        add_portal_delegator(state, params, (spaces[0],))
+        add_gateway_delegator(state, params, (spaces[0],))
         update_application_delegate(state, params, (spaces[1],))
     else:
         return
@@ -54,14 +54,14 @@ def application_leave_ac(state, params):
         spaces2 = spaces[1]["applications"][application]
         if spaces1:
             application_undelegate(state, params, (spaces1,))
-            remove_portal_delegator(state, params, (spaces1,))
+            remove_gateway_delegator(state, params, (spaces1,))
         if spaces2:
             remove_application(state, params, ({"application": application},))
 
 
-def portal_undelegation_ac(state, params, application):
-    spaces = portal_undelegation_ba(state, params, application)
-    spaces = portal_undelegation_policy(state, params, spaces)
+def gateway_undelegation_ac(state, params, application):
+    spaces = gateway_undelegation_ba(state, params, application)
+    spaces = gateway_undelegation_policy(state, params, spaces)
     if spaces[0]:
         application_undelegate(state, params, spaces)
-        remove_portal_delegator(state, params, spaces)
+        remove_gateway_delegator(state, params, spaces)

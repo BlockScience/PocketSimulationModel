@@ -18,7 +18,7 @@ def service_join_policy(
     # Create entity
     service = Service(
         name=space["name"],
-        portal_api_prefix=space["portal_api_prefix"],
+        gateway_api_prefix=space["gateway_api_prefix"],
         service_id=space["service_id"],
         servicers=[],
     )
