@@ -77,6 +77,7 @@ def submit_relay_requests_policy_test(
         "servicers": servicers,
         "session_height": None,
         "session_number": None,
+        "number_of_requests": 10,
     }
     return ({"session": session}, {"session": session})
 
@@ -84,9 +85,23 @@ def submit_relay_requests_policy_test(
 def submit_relay_requests_policy_v1(
     state: StateType, params: ParamType, domain: Tuple[submit_relay_request_space]
 ) -> Tuple[new_session_space, new_session_space]:
+    """During each Session, the amount of POKT an Application has staked is mapped to "Service Tokens" that represent the amount of work a Servicer can provide using the SessionTokenBucketCoefficient governance parameter.
+
+    The Token Bucket rate limiting algorithm is used to determine the maximum number of requests a Servicer can relay, and be rewarded for, thereby disincentivizing it to process relays for the Application once the cap is reached.
+
+    At the beginning of the session, each Servicer initializes: AppSessionTokens = (AppStakeAmount * SessionTokenBucketCoefficient) / NumServicersPerSession.
+
+    When one of the Servicers in the session is out of session tokens, the Application can continue to use other Servicers until every they are all exhausted.
+
+    The mechanism described above enables future iterations of the protocol where different types of request may vary the required number of AppSessionTokens per request. The selection of servicers is random but assigns higher probability for higher QoS servicers.
+    """
     num_servicers = domain[0]["application_address"].number_of_services
     servicers = random.sample(state["Servicers"], num_servicers)
     service = random.choice(state["Services"])
+
+    number_of_requests = domain[0]["number_of_requests"]
+    # TODO Add clipping
+
     session: SessionType = {
         "application": domain[0]["application_address"],
         "fishermen": None,
@@ -97,6 +112,7 @@ def submit_relay_requests_policy_v1(
         "servicers": servicers,
         "session_height": None,
         "session_number": None,
+        "number_of_requests": number_of_requests,
     }
     return ({"session": session}, {"session": session})
 
