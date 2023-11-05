@@ -44,7 +44,7 @@ system_param_config = {
         "gateway_minimum_stake": [150000],
         "gateway_unstaking_time": [None],
         "session_block_frequency": [None],
-        "session_token_bucket_coefficient": [None],
+        "session_token_bucket_coefficient": [10],
         "dao_fee_percentage": [0.1],
         "validator_fee_percentage": [0.9],
         "maturity_relay_cost": [None],
