@@ -86,7 +86,7 @@ functional_param_config = {
         "gateway_delegation_function": ["test"],
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["test"],
-        "submit_relay_requests_policy_function": ["test"],
+        "submit_relay_requests_policy_function": ["V1"],
         "application_leave_function": ["basic"],
         "service_leave_function": ["basic"],
         "servicer_leave_function": ["basic"],
