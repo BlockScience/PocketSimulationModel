@@ -101,7 +101,11 @@ def submit_relay_requests_ba_test(
     params: ParamType,
 ) -> Tuple[submit_relay_request_space]:
     application = random.choice(state["Applications"])
-    return ({"application_address": application},)
+    # TODO: Fill in proper assumption
+    number_of_requests = 10
+    return (
+        {"application_address": application, "number_of_requests": number_of_requests},
+    )
 
 
 def application_leave_ba(
