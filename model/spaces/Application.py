@@ -114,6 +114,7 @@ submit_relay_request_space = TypedDict(
         "meta": dict,  # metadata for the relay request
         "proof": dict,  # the authentication scheme needed for work
         "application_address": PublicKeyType,
+        "number_of_requests": int,
     },
 )
 
