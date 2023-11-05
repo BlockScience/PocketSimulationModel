@@ -49,7 +49,9 @@ def servicer_relay_policy(
     Union[servicer_relay_space, None],
 ]:
     application = domain[0]["applications"]
-    relay_payment = 100
+    relay_payment = (
+        domain[0]["session"]["number_of_requests"] * params["application_fee_per_relay"]
+    )
     fees_charged = 10
     total_charge = relay_payment + fees_charged
 
