@@ -92,6 +92,8 @@ def submit_relay_requests_ba(
 ) -> Tuple[submit_relay_request_space]:
     if params["submit_relay_requests_function"] == "test":
         return submit_relay_requests_ba_test(state, params)
+    if params["submit_relay_requests_function"] == "basic_gamma":
+        return submit_relay_requests_ba_gamma(state, params)
     else:
         assert False, "Invalid submit_relay_requests_function"
 
@@ -101,8 +103,20 @@ def submit_relay_requests_ba_test(
     params: ParamType,
 ) -> Tuple[submit_relay_request_space]:
     application = random.choice(state["Applications"])
-    # TODO: Fill in proper assumption
     number_of_requests = 10
+
+    return (
+        {"application_address": application, "number_of_requests": number_of_requests},
+    )
+
+
+def submit_relay_requests_ba_gamma(
+    state: StateType,
+    params: ParamType,
+) -> Tuple[submit_relay_request_space]:
+    application = random.choice(state["Applications"])
+    number_of_requests = 10
+
     return (
         {"application_address": application, "number_of_requests": number_of_requests},
     )
