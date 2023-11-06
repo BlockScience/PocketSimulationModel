@@ -104,7 +104,7 @@ def submit_relay_requests_policy_v1(
         domain[0]["application_address"].staked_pokt
         * params["session_token_bucket_coefficient"]
     )
-    number_of_requests = min(number_of_requests, max_requests_allowed)
+    number_of_requests = max(min(number_of_requests, max_requests_allowed), 0)
 
     session: SessionType = {
         "application": domain[0]["application_address"],

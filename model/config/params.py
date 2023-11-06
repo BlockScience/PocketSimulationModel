@@ -73,6 +73,8 @@ behavior_param_config = {
         "servicer_leave_probability": [0.01],
         "service_unlinking_probability": [0.01],
         "gateway_undelegation_probability": [0.01],
+        "relays_per_session_gamma_distribution_shape": [3],
+        "relays_per_session_gamma_distribution_scale": [1000],
     }
 }
 

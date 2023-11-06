@@ -8,6 +8,7 @@ from ..spaces import (
 )
 from typing import Union, Tuple
 import random
+import numpy as np
 
 
 def application_join_ba(
@@ -115,7 +116,12 @@ def submit_relay_requests_ba_gamma(
     params: ParamType,
 ) -> Tuple[submit_relay_request_space]:
     application = random.choice(state["Applications"])
-    number_of_requests = 10
+    number_of_requests = int(
+        np.random.gamma(
+            params["relays_per_session_gamma_distribution_shape"],
+            params["relays_per_session_gamma_distribution_scale"],
+        )
+    )
 
     return (
         {"application_address": application, "number_of_requests": number_of_requests},
