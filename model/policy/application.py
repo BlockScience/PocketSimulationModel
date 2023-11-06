@@ -157,3 +157,6 @@ def gateway_undelegation_policy(
     # Pass through
 
     return domain
+
+
+# def application_stake_policy

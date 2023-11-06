@@ -79,6 +79,7 @@ behavior_param_config = {
     }
 }
 
+
 functional_param_config = {
     "Test": {
         "application_join_function": ["simple_unfiform"],
@@ -97,5 +98,6 @@ functional_param_config = {
         "service_unlinking_function": ["basic"],
         "gateway_undelegation_function": ["basic"],
         "servicer_stake_function": ["basic"],
+        "application_stake_function": ["basic"],
     }
 }

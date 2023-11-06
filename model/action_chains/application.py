@@ -10,7 +10,7 @@ from ..policy import (
     gateway_delegation_policy,
     application_leave_policy,
     gateway_undelegation_policy,
-    application_stake_policy,
+    #    application_stake_policy,
 )
 from ..mechanisms import (
     add_application,
@@ -19,7 +19,7 @@ from ..mechanisms import (
     application_undelegate,
     remove_gateway_delegator,
     remove_application,
-    modify_application_pokt_holdings,
+    #    modify_application_pokt_holdings,
     modify_application_stake,
 )
 
@@ -73,7 +73,7 @@ def gateway_undelegation_ac(state, params, application):
 
 def application_stake_ac(state, params):
     spaces = application_stake_ba(state, params)
-    for spaces_i in spaces:
-        spaces_i = application_stake_policy(state, params, spaces_i)
-        modify_application_pokt_holdings(state, params, spaces_i[:1])
-        modify_application_stake(state, params, spaces_i[1:])
+    # for spaces_i in spaces:
+    #    spaces_i = application_stake_policy(state, params, spaces_i)
+    #    modify_application_pokt_holdings(state, params, spaces_i[:1])
+    #    modify_application_stake(state, params, spaces_i[1:])
