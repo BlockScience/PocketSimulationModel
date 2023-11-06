@@ -59,3 +59,9 @@ def remove_application(
     domain,
 ) -> None:
     state["Applications"].remove(domain[0]["application"])
+
+
+def modify_application_pokt_holdings(
+    state: StateType, params: ParamType, domain: Tuple[modify_application_pokt_space]
+) -> None:
+    domain[0]["public_key"].pokt_holdings += domain[0]["amount"]

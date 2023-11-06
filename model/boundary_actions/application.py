@@ -167,7 +167,10 @@ def application_stake_ba_basic(
             * params["relays_per_session_gamma_distribution_scale"]
         )
         target_stake = (
-            buffer * average_relays * params["average_session_per_application"]
+            buffer
+            * average_relays
+            * params["average_session_per_application"]
+            * params["relays_to_tokens_multiplier"]
         )
         if application.staked_pokt < target_stake:
             amount = max(
