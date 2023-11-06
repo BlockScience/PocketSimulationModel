@@ -43,7 +43,7 @@ def relay_requests_ac(state, params):
     # Submit request
     spaces = submit_relay_requests_ba(state, params)
     spaces = submit_relay_requests_policy(state, params, spaces)
-    print(spaces)
+
     create_new_session(state, params, spaces[:1])
 
     # spaces = burn_per_session_policy(state, params, spaces)

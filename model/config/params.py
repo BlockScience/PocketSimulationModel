@@ -75,6 +75,7 @@ behavior_param_config = {
         "gateway_undelegation_probability": [0.01],
         "relays_per_session_gamma_distribution_shape": [3],
         "relays_per_session_gamma_distribution_scale": [1000],
+        "average_session_per_application": [3],
     }
 }
 

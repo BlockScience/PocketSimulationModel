@@ -21,6 +21,7 @@ from .application import (
     p_gateway_delegation,
     p_gateway_undelegation,
     p_application_leave,
+    p_application_stake,
 )
 from .treasury import p_block_reward, p_fee_reward, s_update_treasury
 from .validator import s_update_validators
@@ -53,9 +54,11 @@ join_block = {
 stake_block = {
     "policies": {
         "servicer": p_servicers_stake,
+        "application": p_application_stake,
     },
     "variables": {
         "Servicers": s_update_servicers,
+        "Applications": s_update_applications,
     },
 }
 
