@@ -3,6 +3,7 @@ from ..action_chains import (
     gateway_delegation_ac,
     application_leave_ac,
     gateway_undelegation_ac,
+    application_stake_ac,
 )
 
 
@@ -30,4 +31,9 @@ def p_gateway_undelegation(_params, substep, state_history, state) -> tuple:
 
 def p_application_leave(_params, substep, state_history, state) -> tuple:
     application_leave_ac(state, _params)
+    return {}
+
+
+def p_application_stake(_params, substep, state_history, state) -> tuple:
+    application_stake_ac(state, _params)
     return {}

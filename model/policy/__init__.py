@@ -4,6 +4,7 @@ from .application import (
     submit_relay_requests_policy,
     application_leave_policy,
     gateway_undelegation_policy,
+    application_stake_policy,
 )
 from .gateway import gateway_join_policy, gateway_leave_policy
 from .service import (

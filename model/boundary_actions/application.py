@@ -5,9 +5,11 @@ from ..spaces import (
     submit_relay_request_space,
     application_leave_space,
     application_undelegation_space,
+    application_stake_space,
 )
-from typing import Union, Tuple
+from typing import Union, Tuple, List
 import random
+import numpy as np
 
 
 def application_join_ba(
@@ -92,6 +94,8 @@ def submit_relay_requests_ba(
 ) -> Tuple[submit_relay_request_space]:
     if params["submit_relay_requests_function"] == "test":
         return submit_relay_requests_ba_test(state, params)
+    if params["submit_relay_requests_function"] == "basic_gamma":
+        return submit_relay_requests_ba_gamma(state, params)
     else:
         assert False, "Invalid submit_relay_requests_function"
 
@@ -101,8 +105,25 @@ def submit_relay_requests_ba_test(
     params: ParamType,
 ) -> Tuple[submit_relay_request_space]:
     application = random.choice(state["Applications"])
-    # TODO: Fill in proper assumption
     number_of_requests = 10
+
+    return (
+        {"application_address": application, "number_of_requests": number_of_requests},
+    )
+
+
+def submit_relay_requests_ba_gamma(
+    state: StateType,
+    params: ParamType,
+) -> Tuple[submit_relay_request_space]:
+    application = random.choice(state["Applications"])
+    number_of_requests = int(
+        np.random.gamma(
+            params["relays_per_session_gamma_distribution_shape"],
+            params["relays_per_session_gamma_distribution_scale"],
+        )
+    )
+
     return (
         {"application_address": application, "number_of_requests": number_of_requests},
     )
@@ -124,3 +145,47 @@ def application_leave_ba_basic(
     for application in state["Applications"]:
         leaves[application] = random.random() < params["application_leave_probability"]
     return ({"applications": leaves},)
+
+
+def application_stake_ba(
+    state: StateType, params: ParamType
+) -> List[Tuple[application_stake_space]]:
+    if params["application_stake_function"] == "basic":
+        return application_stake_ba_basic(state, params)
+    else:
+        assert False, "Invalid application_stake_function"
+
+
+def application_stake_ba_basic(
+    state: StateType, params: ParamType
+) -> List[Tuple[application_stake_space]]:
+    out = []
+    for application in state["Applications"]:
+        buffer = 1.2
+        average_relays = (
+            params["relays_per_session_gamma_distribution_shape"]
+            * params["relays_per_session_gamma_distribution_scale"]
+        )
+        target_stake = (
+            buffer
+            * average_relays
+            * params["average_session_per_application"]
+            * params["relays_to_tokens_multiplier"]
+        )
+        if application.staked_pokt < target_stake:
+            amount = max(
+                min(
+                    application.pokt_holdings,
+                    target_stake - application.staked_pokt,
+                ),
+                0,
+            )
+            space: application_stake_space = {
+                "geo_zone": application.geo_zone,
+                "number_servicers": application.number_of_services,
+                "public_key": application,
+                "services": application.services,
+                "stake_amount": amount,
+            }
+            out.append((space,))
+    return out

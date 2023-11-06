@@ -26,7 +26,7 @@ system_param_config = {
         "minimum_test_score_threshold": [None],
         "minimum_report_card_threshold": [None],
         "servicer_unbounding_period": [None],
-        "relays_to_tokens_multiplier": [None],
+        "relays_to_tokens_multiplier": [100],
         "slash_fraction_downtime": [None],
         "replay_attack_burn_multiplier": [None],
         "max_jailed_blocks": [None],
@@ -73,8 +73,12 @@ behavior_param_config = {
         "servicer_leave_probability": [0.01],
         "service_unlinking_probability": [0.01],
         "gateway_undelegation_probability": [0.01],
+        "relays_per_session_gamma_distribution_shape": [3],
+        "relays_per_session_gamma_distribution_scale": [1000],
+        "average_session_per_application": [3],
     }
 }
+
 
 functional_param_config = {
     "Test": {
@@ -85,7 +89,7 @@ functional_param_config = {
         "service_linking_function": ["test"],
         "gateway_delegation_function": ["test"],
         "relay_requests_function": ["test"],
-        "submit_relay_requests_function": ["test"],
+        "submit_relay_requests_function": ["basic_gamma"],
         "submit_relay_requests_policy_function": ["V1"],
         "application_leave_function": ["basic"],
         "service_leave_function": ["basic"],
@@ -94,5 +98,6 @@ functional_param_config = {
         "service_unlinking_function": ["basic"],
         "gateway_undelegation_function": ["basic"],
         "servicer_stake_function": ["basic"],
+        "application_stake_function": ["basic"],
     }
 }

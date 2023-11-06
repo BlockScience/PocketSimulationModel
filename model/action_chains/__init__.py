@@ -3,6 +3,7 @@ from .application import (
     gateway_delegation_ac,
     application_leave_ac,
     gateway_undelegation_ac,
+    application_stake_ac,
 )
 from .gateway import gateway_join_ac, gateway_leave_ac
 from .service import (

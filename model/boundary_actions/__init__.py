@@ -4,6 +4,7 @@ from .application import (
     submit_relay_requests_ba,
     application_leave_ba,
     gateway_undelegation_ba,
+    application_stake_ba,
 )
 from .gateway import gateway_join_ba, gateway_leave_ba
 from .servicer import (

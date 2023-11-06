@@ -17,7 +17,9 @@ def p_servicers_join(_params, substep, state_history, state) -> dict:
 
 
 def p_relay_requests(_params, substep, state_history, state) -> dict:
-    number_relays = 10
+    number_relays = _params["average_session_per_application"] * len(
+        state["Applications"]
+    )
     for _ in range(number_relays):
         relay_requests_ac(state, _params)
     return {}

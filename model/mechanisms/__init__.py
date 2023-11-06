@@ -6,6 +6,7 @@ from .application import (
     remove_session,
     application_undelegate,
     remove_application,
+    modify_application_pokt_holdings,
 )
 from .gateway import (
     add_gateway,
