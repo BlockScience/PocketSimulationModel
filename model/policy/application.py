@@ -7,6 +7,8 @@ from ..spaces import (
     new_session_space,
     application_leave_space,
     application_undelegation_space,
+    application_stake_space,
+    modify_application_pokt_space,
 )
 from typing import Tuple, Union, Dict
 from ..classes import Application
@@ -159,4 +161,17 @@ def gateway_undelegation_policy(
     return domain
 
 
-# def application_stake_policy
+def application_stake_policy(
+    state: StateType, params: ParamType, domain: Tuple[application_stake_space]
+) -> Tuple[modify_application_pokt_space, modify_application_pokt_space]:
+    application = domain[0]["public_key"]
+    amount = domain[0]["stake_amount"]
+    space1: modify_application_pokt_space = {
+        "amount": -amount,
+        "public_key": application,
+    }
+    space2: modify_application_pokt_space = {
+        "amount": amount,
+        "public_key": application,
+    }
+    return (space1, space2)
