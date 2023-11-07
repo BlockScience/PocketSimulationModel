@@ -4,6 +4,7 @@ from ..boundary_actions import (
     submit_relay_requests_ba,
     servicer_leave_ba,
     servicer_stake_ba,
+    jailing_ba,
 )
 from ..policy import (
     servicer_join_policy,
@@ -81,3 +82,10 @@ def servicers_stake_ac(state, params):
         spaces_i = servicer_stake_policy(state, params, spaces_i)
         modify_servicer_pokt_holdings(state, params, spaces_i[:1])
         modify_servicer_stake(state, params, spaces_i[1:])
+
+
+def jailing_slashing_ac(state, params):
+    # Any of the unjailing stuff
+
+    # Jailing
+    spaces = jailing_ba(state, params)

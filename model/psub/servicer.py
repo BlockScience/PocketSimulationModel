@@ -3,6 +3,7 @@ from ..action_chains import (
     relay_requests_ac,
     servicer_leave_ac,
     servicers_stake_ac,
+    jailing_slashing_ac,
 )
 
 
@@ -26,6 +27,7 @@ def p_relay_requests(_params, substep, state_history, state) -> dict:
 
 
 def p_jailing_slashing(_params, substep, state_history, state) -> dict:
+    jailing_slashing_ac(state, _params)
     return {}
 
 
