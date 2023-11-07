@@ -6,6 +6,7 @@ from ..spaces import (
     servicer_leave_space,
     service_unlinking_space,
     servicer_stake_space,
+    jail_node_space,
 )
 from typing import Union, Tuple, List
 import random
@@ -157,4 +158,28 @@ def servicer_stake_ba_basic(
                 "stake_amount": amount,
             }
             out.append((space,))
+    return out
+
+
+def jailing_ba(state: StateType, params: ParamType) -> List[Tuple[jail_node_space]]:
+    if params["jailing_function"] == "basic":
+        return jailing_ba_basic(state, params)
+    else:
+        assert False, "Invalid jailing_function"
+
+
+def jailing_ba_basic(
+    state: StateType, params: ParamType
+) -> List[Tuple[jail_node_space]]:
+    out = []
+    for servicer in state["Servicers"]:
+        if random.random() < params["servicer_jailing_probability"]:
+            space = (
+                {
+                    "block_height": state["height"],
+                    "jailer_address": None,
+                    "node_address": servicer,
+                },
+            )
+            out.append(space)
     return out

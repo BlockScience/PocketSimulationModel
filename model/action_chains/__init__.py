@@ -17,5 +17,6 @@ from .servicer import (
     relay_requests_ac,
     servicer_leave_ac,
     servicers_stake_ac,
+    jailing_slashing_ac,
 )
 from .system import fee_reward_ac

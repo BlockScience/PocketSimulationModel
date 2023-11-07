@@ -76,6 +76,7 @@ behavior_param_config = {
         "relays_per_session_gamma_distribution_shape": [3],
         "relays_per_session_gamma_distribution_scale": [1000],
         "average_session_per_application": [3],
+        "servicer_jailing_probability": [0.001],
     }
 }
 
@@ -99,5 +100,6 @@ functional_param_config = {
         "gateway_undelegation_function": ["basic"],
         "servicer_stake_function": ["basic"],
         "application_stake_function": ["basic"],
+        "jailing_function": ["basic"],
     }
 }
