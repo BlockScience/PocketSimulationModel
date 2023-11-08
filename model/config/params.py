@@ -77,6 +77,7 @@ behavior_param_config = {
         "relays_per_session_gamma_distribution_scale": [1000],
         "average_session_per_application": [3],
         "servicer_jailing_probability": [0.001],
+        "uses_gateway_probability": [0.5],
     }
 }
 
@@ -88,7 +89,7 @@ functional_param_config = {
         "service_join_function": ["simple_unfiform"],
         "gateway_join_function": ["simple_unfiform"],
         "service_linking_function": ["test"],
-        "gateway_delegation_function": ["test"],
+        "gateway_delegation_function": ["basic"],
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["basic_gamma"],
         "submit_relay_requests_policy_function": ["V1"],

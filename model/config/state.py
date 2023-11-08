@@ -49,6 +49,7 @@ application_config = {
             stake_status="Staked",
             unstaking_height=None,
             delegate=None,
+            uses_gateway=True,
         ),
         Application(
             name="A2",
@@ -60,6 +61,7 @@ application_config = {
             stake_status="Staked",
             unstaking_height=None,
             delegate=None,
+            uses_gateway=False,
         ),
         Application(
             name="A3",
@@ -71,6 +73,7 @@ application_config = {
             stake_status="Staked",
             unstaking_height=None,
             delegate=None,
+            uses_gateway=True,
         ),
     ]
 }

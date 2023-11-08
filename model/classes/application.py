@@ -24,6 +24,7 @@ class Application:
         stake_status: StakeStatusType,
         unstaking_height: BlockHeightType,
         delegate: GatewayEntityType,
+        uses_gateway: bool,
     ):
         self.id_number = Application.id_number
         Application.id_number += 1
@@ -37,3 +38,6 @@ class Application:
         self.stake_status = stake_status
         self.unstaking_height = unstaking_height
         self.delegate = delegate
+
+        # Behavioral assumption of whether an application uses gateways or not
+        self.uses_gateway = uses_gateway
