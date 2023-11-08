@@ -77,6 +77,7 @@ behavior_param_config = {
         "relays_per_session_gamma_distribution_scale": [1000],
         "average_session_per_application": [3],
         "servicer_jailing_probability": [0.001],
+        "uses_gateway_probability": [0.5],
     }
 }
 

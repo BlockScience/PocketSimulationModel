@@ -23,6 +23,8 @@ def application_join_policy(
     if space["stake_amount"] < params["minimum_application_stake"]:
         return (None,)
 
+    uses_gateway = random.random() < params["uses_gateway_probability"]
+
     # Create entity
     application = Application(
         name=space["name"],
@@ -34,6 +36,7 @@ def application_join_policy(
         stake_status="Staked",
         unstaking_height=None,
         delegate=None,
+        uses_gateway=uses_gateway,
     )
     return ({"application": application},)
 
