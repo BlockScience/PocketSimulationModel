@@ -45,6 +45,8 @@ def gateway_delegation_ba(
 ) -> Tuple[Union[application_delegate_to_gateway_space, None]]:
     if params["gateway_delegation_function"] == "test":
         return gateway_delegation_ba_test(state, params, application)
+    elif params["gateway_delegation_function"] == "basic":
+        return gateway_delegation_ba_basic(state, params, application)
     else:
         assert False, "Invalid gateway_delegation_function"
 
@@ -63,16 +65,30 @@ def gateway_delegation_ba_test(
         return (None,)
 
 
+def gateway_delegation_ba_basic(
+    state: StateType, params: ParamType, application: ApplicationEntityType
+) -> Tuple[Union[application_delegate_to_gateway_space, None]]:
+    if (
+        not application.delegate
+        and application.id_number % 2 == 1
+        and len(state["Gateways"]) > 0
+    ):
+        gateway = random.choice(state["Gateways"])
+        return ({"application_public_key": application, "gateway_public_key": gateway},)
+    else:
+        return (None,)
+
+
 def gateway_undelegation_ba(
     state: StateType, params: ParamType, application: ApplicationEntityType
 ) -> Tuple[Union[application_undelegation_space, None]]:
     if params["gateway_undelegation_function"] == "basic":
-        return gateway_delegation_ba_basic(state, params, application)
+        return gateway_undelegation_ba_basic(state, params, application)
     else:
         assert False, "Invalid gateway_undelegation_function"
 
 
-def gateway_delegation_ba_basic(
+def gateway_undelegation_ba_basic(
     state: StateType, params: ParamType, application: ApplicationEntityType
 ) -> Tuple[Union[application_undelegation_space, None]]:
     if application.delegate:

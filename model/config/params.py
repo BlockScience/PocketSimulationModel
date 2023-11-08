@@ -89,7 +89,7 @@ functional_param_config = {
         "service_join_function": ["simple_unfiform"],
         "gateway_join_function": ["simple_unfiform"],
         "service_linking_function": ["test"],
-        "gateway_delegation_function": ["test"],
+        "gateway_delegation_function": ["basic"],
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["basic_gamma"],
         "submit_relay_requests_policy_function": ["V1"],
