@@ -69,8 +69,8 @@ def gateway_delegation_ba_basic(
     state: StateType, params: ParamType, application: ApplicationEntityType
 ) -> Tuple[Union[application_delegate_to_gateway_space, None]]:
     if (
-        not application.delegate
-        and application.id_number % 2 == 1
+        application.uses_gateway
+        and not application.delegate
         and len(state["Gateways"]) > 0
     ):
         gateway = random.choice(state["Gateways"])
