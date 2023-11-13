@@ -50,7 +50,7 @@ def servicer_relay_policy(
 ]:
     application = domain[0]["applications"]
     relay_payment = (
-        domain[0]["session"]["number_of_requests"] * params["application_fee_per_relay"]
+        domain[0]["session"]["number_of_relays"] * params["application_fee_per_relay"]
     )
     fees_charged = 10
     total_charge = relay_payment + fees_charged

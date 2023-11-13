@@ -82,7 +82,7 @@ def submit_relay_requests_policy_test(
         "servicers": servicers,
         "session_height": None,
         "session_number": None,
-        "number_of_requests": 10,
+        "number_of_relays": 10,
     }
     return ({"session": session}, {"session": session})
 
@@ -104,12 +104,12 @@ def submit_relay_requests_policy_v1(
     servicers = random.sample(state["Servicers"], num_servicers)
     service = random.choice(state["Services"])
 
-    number_of_requests = domain[0]["number_of_requests"]
-    max_requests_allowed = int(
+    number_of_relays = domain[0]["number_of_relays"]
+    max_relays_allowed = int(
         domain[0]["application_address"].staked_pokt
         * params["session_token_bucket_coefficient"]
     )
-    number_of_requests = max(min(number_of_requests, max_requests_allowed), 0)
+    number_of_relays = max(min(number_of_relays, max_relays_allowed), 0)
 
     session: SessionType = {
         "application": domain[0]["application_address"],
@@ -121,7 +121,7 @@ def submit_relay_requests_policy_v1(
         "servicers": servicers,
         "session_height": None,
         "session_number": None,
-        "number_of_requests": number_of_requests,
+        "number_of_relays": number_of_relays,
     }
     return ({"session": session}, {"session": session})
 
