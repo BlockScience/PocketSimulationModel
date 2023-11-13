@@ -1,4 +1,4 @@
-from ..boundary_actions import gateway_join_ba, gateway_leave_ba
+from ..boundary_actions import gateway_join_ba, gateway_leave_ba, gateway_stake_ba
 from ..policy import gateway_join_policy, gateway_leave_policy
 from ..mechanisms import (
     add_gateway,
@@ -37,4 +37,8 @@ def gateway_leave_ac(state, params):
 
 
 def gateway_stake_ac(state, params):
-    pass
+    spaces = gateway_stake_ba(state, params)
+    # for spaces_i in spaces:
+    #    spaces_i = gateway_stake_policy(state, params, spaces_i)
+    #    modify_gateway_pokt_holdings(state, params, spaces_i[:1])
+    #    modify_gateway_stake(state, params, spaces_i[1:])

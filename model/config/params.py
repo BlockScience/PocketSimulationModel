@@ -39,7 +39,7 @@ system_param_config = {
         "app_burn_per_session": [0],
         "app_burn_per_relay": [None],
         "block_proposer_allocation": [None],
-        "stake_per_app_delegation": [None],
+        "stake_per_app_delegation": [15000],
         "gateway_fee_per_relay": [None],
         "gateway_minimum_stake": [150000],
         "gateway_unstaking_time": [None],
@@ -102,5 +102,6 @@ functional_param_config = {
         "servicer_stake_function": ["basic"],
         "application_stake_function": ["basic"],
         "jailing_function": ["basic"],
+        "gateway_stake_function": ["basic"],
     }
 }

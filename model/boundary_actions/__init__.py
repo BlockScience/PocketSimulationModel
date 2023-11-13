@@ -6,7 +6,7 @@ from .application import (
     gateway_undelegation_ba,
     application_stake_ba,
 )
-from .gateway import gateway_join_ba, gateway_leave_ba
+from .gateway import gateway_join_ba, gateway_leave_ba, gateway_stake_ba
 from .servicer import (
     servicer_join_ba,
     service_linking_ba,
