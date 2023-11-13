@@ -5,7 +5,7 @@ from .application import (
     gateway_undelegation_ac,
     application_stake_ac,
 )
-from .gateway import gateway_join_ac, gateway_leave_ac
+from .gateway import gateway_join_ac, gateway_leave_ac, gateway_stake_ac
 from .service import (
     service_join_ac,
     service_linking_ac,

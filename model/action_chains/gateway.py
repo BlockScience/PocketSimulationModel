@@ -1,10 +1,12 @@
-from ..boundary_actions import gateway_join_ba, gateway_leave_ba
-from ..policy import gateway_join_policy, gateway_leave_policy
+from ..boundary_actions import gateway_join_ba, gateway_leave_ba, gateway_stake_ba
+from ..policy import gateway_join_policy, gateway_leave_policy, gateway_stake_policy
 from ..mechanisms import (
     add_gateway,
     application_undelegate,
     remove_gateway_delegator,
     remove_gateway,
+    modify_gateway_pokt_holdings,
+    modify_gateway_stake,
 )
 from ..spaces import application_undelegation_space
 
@@ -34,3 +36,11 @@ def gateway_leave_ac(state, params):
                 application_undelegate(state, params, (spaces1,))
                 remove_gateway_delegator(state, params, (spaces1,))
             remove_gateway(state, params, ({"gateway": gateway},))
+
+
+def gateway_stake_ac(state, params):
+    spaces = gateway_stake_ba(state, params)
+    for spaces_i in spaces:
+        spaces_i = gateway_stake_policy(state, params, spaces_i)
+        modify_gateway_pokt_holdings(state, params, spaces_i[:1])
+        modify_gateway_stake(state, params, spaces_i[1:])

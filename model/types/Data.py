@@ -25,7 +25,7 @@ SessionType = NewType(
             "fishermen": List[
                 FishermanEntityType
             ],  # the set of fishermen that are fishing for servicers,
-            "number_of_requests": int,  # A variable only for simuluation mocking up how many requests would be done on a session
+            "number_of_relays": int,  # A variable only for simuluation mocking up how many relays would be done on a session
         },
     ),
 )

@@ -1,6 +1,6 @@
 from ..types import StateType, ParamType
-from ..spaces import gateway_join_space, gateway_leave_space
-from typing import Union, Tuple
+from ..spaces import gateway_join_space, gateway_leave_space, gateway_registration_space
+from typing import Union, Tuple, List
 import random
 
 
@@ -44,3 +44,42 @@ def gateway_leave_ba_basic(
     for gateway in state["Gateways"]:
         leaves[gateway] = random.random() < params["gateway_leave_probability"]
     return ({"gateways": leaves},)
+
+
+def gateway_stake_ba(
+    state: StateType, params: ParamType
+) -> List[Tuple[gateway_registration_space]]:
+    if params["gateway_stake_function"] == "basic":
+        return gateway_stake_ba_basic(state, params)
+    else:
+        assert False, "Invalid gateway_stake_function"
+
+
+def gateway_stake_ba_basic(
+    state: StateType, params: ParamType
+) -> List[Tuple[gateway_registration_space]]:
+    out = []
+    for gateway in state["Gateways"]:
+        # Basic target that says even if you had every single one on one portal there would be enough stake
+        target_stake = max(
+            params["gateway_minimum_stake"],
+            params["stake_per_app_delegation"]
+            * len(state["Applications"])
+            * params["uses_gateway_probability"],
+        )
+
+        if gateway.staked_pokt < target_stake:
+            amount = max(
+                min(
+                    gateway.pokt_holdings,
+                    target_stake - gateway.staked_pokt,
+                ),
+                0,
+            )
+            space: gateway_registration_space = {
+                "stake_amount": amount,
+                "public_key": gateway,
+                "service_url": None,
+            }
+            out.append((space,))
+    return out

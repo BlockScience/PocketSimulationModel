@@ -6,7 +6,7 @@ from .application import (
     gateway_undelegation_policy,
     application_stake_policy,
 )
-from .gateway import gateway_join_policy, gateway_leave_policy
+from .gateway import gateway_join_policy, gateway_leave_policy, gateway_stake_policy
 from .service import (
     service_join_policy,
     service_linking_policy,

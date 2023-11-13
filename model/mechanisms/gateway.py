@@ -30,6 +30,12 @@ def modify_gateway_stake(
     domain[0]["public_key"].staked_pokt += domain[0]["amount"]
 
 
+def modify_gateway_pokt_holdings(
+    state: StateType, params: ParamType, domain: Tuple[modify_gateway_pokt_space]
+) -> None:
+    domain[0]["public_key"].pokt_holdings += domain[0]["amount"]
+
+
 def remove_gateway_delegator(
     state: StateType,
     params: ParamType,
