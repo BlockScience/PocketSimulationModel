@@ -65,7 +65,7 @@ behavior_param_config = {
         "application_max_number": [20],
         "servicer_max_number": [20],
         "service_max_number": [5],
-        "gateway_max_number": [5],
+        "gateway_max_number": [25],
         "service_max_number_link": [3],
         "application_leave_probability": [0.01],
         "gateway_leave_probability": [0.01],
