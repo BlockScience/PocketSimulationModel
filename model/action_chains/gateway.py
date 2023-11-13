@@ -5,6 +5,8 @@ from ..mechanisms import (
     application_undelegate,
     remove_gateway_delegator,
     remove_gateway,
+    modify_gateway_pokt_holdings,
+    modify_gateway_stake,
 )
 from ..spaces import application_undelegation_space
 
@@ -40,5 +42,5 @@ def gateway_stake_ac(state, params):
     spaces = gateway_stake_ba(state, params)
     for spaces_i in spaces:
         spaces_i = gateway_stake_policy(state, params, spaces_i)
-    #    modify_gateway_pokt_holdings(state, params, spaces_i[:1])
-    #    modify_gateway_stake(state, params, spaces_i[1:])
+        modify_gateway_pokt_holdings(state, params, spaces_i[:1])
+        modify_gateway_stake(state, params, spaces_i[1:])

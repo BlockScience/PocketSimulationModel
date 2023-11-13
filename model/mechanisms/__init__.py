@@ -14,6 +14,7 @@ from .gateway import (
     modify_gateway_stake,
     remove_gateway_delegator,
     remove_gateway,
+    modify_gateway_pokt_holdings,
 )
 from .servicer import (
     add_servicer,
