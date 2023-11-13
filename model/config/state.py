@@ -94,9 +94,13 @@ gateways_config = {
 
 service_config = {
     "Test": [
-        Service(name="S1", gateway_api_prefix="S1", service_id="S1", servicers=[]),
-        Service(name="S2", gateway_api_prefix="S2", service_id="S2", servicers=[]),
-        Service(name="S3", gateway_api_prefix="S3", service_id="S3", servicers=[]),
+        Service(
+            name="S{}".format(x),
+            gateway_api_prefix="S{}".format(x),
+            service_id="S{}".format(x),
+            servicers=[],
+        )
+        for x in range(1, 9)
     ]
 }
 
