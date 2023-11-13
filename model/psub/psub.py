@@ -14,7 +14,7 @@ from .service import (
     p_service_unlinking,
     p_service_leave,
 )
-from .gateway import p_gateway_join, s_update_gateways, p_gateway_leave
+from .gateway import p_gateway_join, s_update_gateways, p_gateway_leave, p_gateway_stake
 from .application import (
     p_application_join,
     s_update_applications,
@@ -55,10 +55,12 @@ stake_block = {
     "policies": {
         "servicer": p_servicers_stake,
         "application": p_application_stake,
+        "gateway": p_gateway_stake,
     },
     "variables": {
         "Servicers": s_update_servicers,
         "Applications": s_update_applications,
+        "Gateways": s_update_gateways,
     },
 }
 

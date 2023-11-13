@@ -34,3 +34,7 @@ def gateway_leave_ac(state, params):
                 application_undelegate(state, params, (spaces1,))
                 remove_gateway_delegator(state, params, (spaces1,))
             remove_gateway(state, params, ({"gateway": gateway},))
+
+
+def gateway_stake_ac(state, params):
+    pass
