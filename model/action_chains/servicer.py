@@ -64,9 +64,8 @@ def relay_requests_ac(state, params):
     # spaces2 = burn_per_relay_policy(state, params, spaces[1:2])
     # burn_pokt_mechanism(state, params, spaces2[:1])
     # modify_application_stake(state, params, spaces2[1:])
-    increase_relay_fees(state, params, spaces[2:3])
-    if spaces[3]:
-        remove_session(state, params, spaces[3:4])
+    if spaces[2]:
+        remove_session(state, params, spaces[2:3])
 
     return out
 

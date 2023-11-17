@@ -45,38 +45,32 @@ def servicer_relay_policy(
 ) -> Tuple[
     Union[modify_gateway_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
-    increase_relay_fees_space,
     Union[servicer_relay_space, None],
 ]:
     application = domain[0]["applications"]
-    relay_payment = (
+    relay_charge = (
         domain[0]["session"]["number_of_relays"] * params["application_fee_per_relay"]
     )
-    fees_charged = 10
-    total_charge = relay_payment + fees_charged
 
     # Payment from the requestor
     if application.delegate:
         space1: modify_gateway_pokt_space = {
             "public_key": application.delegate,
-            "amount": -total_charge,
+            "amount": -relay_charge,
         }
     else:
         space1: modify_application_pokt_space = {
             "public_key": application,
-            "amount": -total_charge,
+            "amount": -relay_charge,
         }
 
     # Burn per relay policy
     space2: servicer_relay_space = domain[0]
 
-    # Relay fees to add
-    space3: increase_relay_fees_space = {"POKT Amount": fees_charged}
-
     # Space for if the session should be removed
-    space4: Union[servicer_relay_space, None] = domain[0]
+    space3: Union[servicer_relay_space, None] = domain[0]
 
-    return (space1, space2, space3, space4)
+    return (space1, space2, space3)
 
 
 def servicer_leave_policy(
