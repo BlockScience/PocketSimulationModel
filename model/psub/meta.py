@@ -22,3 +22,7 @@ def p_transactions(_params, substep, state_history, state) -> dict:
 
 def s_update_n_transactions(_params, substep, state_history, state, _input) -> tuple:
     return ("n_transactions", _input["n_transactions"])
+
+
+def s_update_relay_log(_params, substep, state_history, state, _input) -> tuple:
+    return ("relay_log", _input["relay_log"])

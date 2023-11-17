@@ -4,6 +4,7 @@ from .meta import (
     s_update_day,
     p_transactions,
     s_update_n_transactions,
+    s_update_relay_log,
 )
 from .servicer import (
     p_servicers_join,
@@ -113,6 +114,7 @@ relay_requests_block = {
         "Applications": s_update_applications,
         "total_relays": s_update_total_relays,
         "processed_relays": s_update_processed_relays,
+        "relay_log": s_update_relay_log,
     },
 }
 
