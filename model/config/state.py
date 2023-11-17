@@ -34,6 +34,7 @@ def build_state(config_option):
     state["processed_relays"] = None
     state["pokt_price_true"] = 0.06
     state["pokt_price_oracle"] = 0.06
+    state["n_transactions"] = None
 
     state = deepcopy(state)
     return state
