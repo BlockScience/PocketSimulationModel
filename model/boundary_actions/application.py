@@ -31,9 +31,17 @@ def application_join_ba_simple_unfiform(
             {
                 "name": "",
                 "stake_amount": 15000,  # The amount of uPOKT in escrow (i.e. a security deposit)
-                "geo_zone": "ABC",  # The physical geo-location identifier this application is registered in
-                "number_servicers": 1,  # The number of Servicers requested per session
-                "personal_holdings": 150000,  # Unstaked POKT the application personally holds
+                "geo_zone": random.choice(
+                    state["Geozones"]
+                ),  # The physical geo-location identifier this application is registered in
+                "number_servicers": random.randint(
+                    params["applications_use_min_servicers"],
+                    params["applications_use_max_servicers"],
+                ),  # The number of Servicers requested per session
+                "personal_holdings": max(
+                    np.random.normal(30937797160586.477, 25104455260369.2),
+                    30000000000000 * 0.05,
+                ),  # Unstaked POKT the application personally holds
             },
         )
     else:

@@ -1,4 +1,10 @@
-from .meta import p_update_time, s_update_height, s_update_day
+from .meta import (
+    p_update_time,
+    s_update_height,
+    s_update_day,
+    p_transactions,
+    s_update_n_transactions,
+)
 from .servicer import (
     p_servicers_join,
     s_update_servicers,
@@ -29,6 +35,9 @@ from .treasury import (
     s_update_treasury,
     s_update_total_relays,
     s_update_processed_relays,
+    p_update_price,
+    s_update_pokt_price_true,
+    s_update_pokt_price_oracle,
 )
 from .validator import s_update_validators
 
@@ -37,9 +46,18 @@ from .validator import s_update_validators
 meta_update_block = {
     "policies": {
         "t": p_update_time,
+        "price": p_update_price,
+        "transactions": p_transactions,
     },
-    "variables": {"day": s_update_day, "height": s_update_height},
+    "variables": {
+        "day": s_update_day,
+        "height": s_update_height,
+        "pokt_price_true": s_update_pokt_price_true,
+        "pokt_price_oracle": s_update_pokt_price_oracle,
+        "n_transactions": s_update_n_transactions,
+    },
 }
+
 
 # Block for anything joining the system
 join_block = {

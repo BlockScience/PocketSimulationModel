@@ -65,7 +65,10 @@ def application_leave_ac(state, params):
 
 def gateway_undelegation_ac(state, params, application):
     spaces = gateway_undelegation_ba(state, params, application)
-    spaces = gateway_undelegation_policy(state, params, spaces)
+    if spaces[0]:
+        spaces = gateway_undelegation_policy(state, params, spaces)
+    else:
+        return
     if spaces[0]:
         application_undelegate(state, params, spaces)
         remove_gateway_delegator(state, params, spaces)

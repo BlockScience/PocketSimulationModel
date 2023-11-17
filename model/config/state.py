@@ -32,12 +32,15 @@ def build_state(config_option):
     state["relay_fees"] = 0
     state["total_relays"] = None
     state["processed_relays"] = None
+    state["pokt_price_true"] = 0.06
+    state["pokt_price_oracle"] = 0.06
+    state["n_transactions"] = None
 
     state = deepcopy(state)
     return state
 
 
-geo_zones_config = {"Test": ["G1", "G2", "G3"]}
+geo_zones_config = {"Test": ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"]}
 
 application_config = {
     "Test": [

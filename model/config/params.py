@@ -78,6 +78,8 @@ behavior_param_config = {
         "average_session_per_application": [24],
         "servicer_jailing_probability": [0.001],
         "uses_gateway_probability": [0.5],
+        "applications_use_min_servicers": [1],
+        "applications_use_max_servicers": [3],
     }
 }
 
