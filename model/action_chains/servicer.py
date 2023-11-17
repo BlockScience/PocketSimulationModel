@@ -41,9 +41,11 @@ def servicer_join_ac(state, params):
 
 
 def relay_requests_ac(state, params):
+    out = {}
     # Submit request
     spaces = submit_relay_requests_ba(state, params)
     spaces = submit_relay_requests_policy(state, params, spaces)
+    out["total_relays"] = spaces[0]["session"]["number_of_relays"]
 
     create_new_session(state, params, spaces[:1])
 
@@ -54,6 +56,7 @@ def relay_requests_ac(state, params):
     # Relay the request
     spaces = relay_requests_ba(state, params)
     spaces = servicer_relay_policy(state, params, spaces)
+    out["processed_relays"] = spaces[-1]["session"]["number_of_relays"]
     if type(spaces[0]) == modify_gateway_pokt_space:
         modify_gateway_stake(state, params, spaces[:1])
     else:
@@ -64,6 +67,8 @@ def relay_requests_ac(state, params):
     increase_relay_fees(state, params, spaces[2:3])
     if spaces[3]:
         remove_session(state, params, spaces[3:4])
+
+    return out
 
 
 def servicer_leave_ac(state, params):

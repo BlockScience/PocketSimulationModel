@@ -23,8 +23,15 @@ from .application import (
     p_application_leave,
     p_application_stake,
 )
-from .treasury import p_block_reward, p_fee_reward, s_update_treasury
+from .treasury import (
+    p_block_reward,
+    p_fee_reward,
+    s_update_treasury,
+    s_update_total_relays,
+    s_update_processed_relays,
+)
 from .validator import s_update_validators
+
 
 # Block for recording things like time
 meta_update_block = {
@@ -86,6 +93,8 @@ relay_requests_block = {
         "Services": s_update_services,
         "Gateways": s_update_gateways,
         "Applications": s_update_applications,
+        "total_relays": s_update_total_relays,
+        "processed_relays": s_update_processed_relays,
     },
 }
 

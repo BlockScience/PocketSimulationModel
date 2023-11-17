@@ -30,6 +30,8 @@ def build_state(config_option):
     state["Treasury"] = None
     state["Sessions"] = []
     state["relay_fees"] = 0
+    state["total_relays"] = None
+    state["processed_relays"] = None
 
     state = deepcopy(state)
     return state
