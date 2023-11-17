@@ -48,17 +48,21 @@ def servicer_relay_policy(
     Union[servicer_relay_space, None],
 ]:
     application = domain[0]["applications"]
-    relay_charge = (
-        domain[0]["session"]["number_of_relays"] * params["application_fee_per_relay"]
-    )
 
     # Payment from the requestor
     if application.delegate:
+        relay_charge = (
+            domain[0]["session"]["number_of_relays"] * params["gateway_fee_per_relay"]
+        )
         space1: modify_gateway_pokt_space = {
             "public_key": application.delegate,
             "amount": -relay_charge,
         }
     else:
+        relay_charge = (
+            domain[0]["session"]["number_of_relays"]
+            * params["application_fee_per_relay"]
+        )
         space1: modify_application_pokt_space = {
             "public_key": application,
             "amount": -relay_charge,
