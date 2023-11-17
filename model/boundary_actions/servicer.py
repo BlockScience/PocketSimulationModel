@@ -10,6 +10,7 @@ from ..spaces import (
 )
 from typing import Union, Tuple, List
 import random
+import numpy as np
 
 
 def servicer_join_ba(
@@ -36,7 +37,10 @@ def servicer_join_ba_simple_unfiform(
                 "geo_zone": random.choice(
                     state["Geozones"]
                 ),  # The physical geo-location identifier this Servicer registered in
-                "personal_holdings": 100,  # Unstaked POKT the servicer personally holds
+                "personal_holdings": max(
+                    np.random.norma(30937797160586.477, 25104455260369.2),
+                    30000000000000 * 0.05,
+                ),  # Unstaked POKT the servicer personally holds
                 "service_url": None,
                 "operator_public_key": None,
             },
