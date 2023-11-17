@@ -37,7 +37,7 @@ def build_state(config_option):
     return state
 
 
-geo_zones_config = {"Test": ["G1", "G2", "G3"]}
+geo_zones_config = {"Test": ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"]}
 
 application_config = {
     "Test": [
