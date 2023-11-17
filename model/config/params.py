@@ -55,7 +55,7 @@ system_param_config = {
         "servicer_bootstrap_end": [None],
         "gateway_bootstrap_unwind_start": [None],
         "gateway_bootstrap_unwind_end": [None],
-        "transaction_fee": [None],
+        "transaction_fee": [0.01],
         "supported_services": [None],
     }
 }
