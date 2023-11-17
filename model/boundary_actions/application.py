@@ -31,9 +31,9 @@ def application_join_ba_simple_unfiform(
             {
                 "name": "",
                 "stake_amount": 15000,  # The amount of uPOKT in escrow (i.e. a security deposit)
-                "geo_zone": "ABC",  # The physical geo-location identifier this Servicer registered in
+                "geo_zone": "ABC",  # The physical geo-location identifier this application is registered in
                 "number_servicers": 1,  # The number of Servicers requested per session
-                "personal_holdings": 100,  # Unstaked POKT the application personally holds
+                "personal_holdings": 150000,  # Unstaked POKT the application personally holds
             },
         )
     else:
