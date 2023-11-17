@@ -38,7 +38,7 @@ def servicer_join_ba_simple_unfiform(
                     state["Geozones"]
                 ),  # The physical geo-location identifier this Servicer registered in
                 "personal_holdings": max(
-                    np.random.norma(30937797160586.477, 25104455260369.2),
+                    np.random.normal(30937797160586.477, 25104455260369.2),
                     30000000000000 * 0.05,
                 ),  # Unstaked POKT the servicer personally holds
                 "service_url": None,
