@@ -38,7 +38,10 @@ def application_join_ba_simple_unfiform(
                     params["applications_use_min_servicers"],
                     params["applications_use_max_servicers"],
                 ),  # The number of Servicers requested per session
-                "personal_holdings": 150000,  # Unstaked POKT the application personally holds
+                "personal_holdings": max(
+                    np.random.normal(30937797160586.477, 25104455260369.2),
+                    30000000000000 * 0.05,
+                ),  # Unstaked POKT the application personally holds
             },
         )
     else:
