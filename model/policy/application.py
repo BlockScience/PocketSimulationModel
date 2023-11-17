@@ -159,8 +159,9 @@ def gateway_undelegation_policy(
     params: ParamType,
     domain: Tuple[application_undelegation_space],
 ) -> Tuple[Union[application_undelegation_space, None],]:
-    # Pass through
-
+    # Quick check
+    if domain[0]["application_public_key"].delegate != domain[0]["gateway_public_key"]:
+        return (None,)
     return domain
 
 
