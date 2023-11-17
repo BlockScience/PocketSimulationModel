@@ -29,17 +29,24 @@ from .treasury import (
     s_update_treasury,
     s_update_total_relays,
     s_update_processed_relays,
+    p_update_price,
+    s_update_pokt_price_true,
+    s_update_pokt_price_oracle,
 )
 from .validator import s_update_validators
 
 
 # Block for recording things like time
 meta_update_block = {
-    "policies": {
-        "t": p_update_time,
+    "policies": {"t": p_update_time, "price": p_update_price},
+    "variables": {
+        "day": s_update_day,
+        "height": s_update_height,
+        "pokt_price_true": s_update_pokt_price_true,
+        "pokt_price_oracle": s_update_pokt_price_oracle,
     },
-    "variables": {"day": s_update_day, "height": s_update_height},
 }
+
 
 # Block for anything joining the system
 join_block = {
