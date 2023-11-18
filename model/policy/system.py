@@ -64,11 +64,20 @@ def block_reward_policy_aggregate(
 
 def assign_servicer_salary_policy(
     state: StateType, params: ParamType, domain: Tuple[assign_servicer_salary_space]
-) -> Tuple[modify_servicer_pokt_space, burn_pokt_mechanism_space]:
+) -> List[Tuple[modify_servicer_pokt_space, burn_pokt_mechanism_space]]:
     space = domain[0]
     service = space["service"]
     servicers = service.servicers
     geo_servicers = [x for x in servicers if x.geo_zone == space["geo_zone"]]
     if len(geo_servicers) > 0:
         servicers = geo_servicers
-    print(servicers)
+    # This is probably a bad failsafe
+    if len(geo_servicers) == 0:
+        servicers = state["Servicers"]
+    out = []
+    payment_per = space["reward"] // len(servicers)
+    for servicer in servicers:
+        space1: modify_servicer_pokt_space = {}
+        space2: burn_pokt_mechanism_space = {}
+        out.append((space1, space2))
+    return out
