@@ -65,4 +65,10 @@ def block_reward_policy_aggregate(
 def assign_servicer_salary_policy(
     state: StateType, params: ParamType, domain: Tuple[assign_servicer_salary_space]
 ) -> Tuple[modify_servicer_pokt_space, burn_pokt_mechanism_space]:
-    pass
+    space = domain[0]
+    service = space["service"]
+    servicers = service.servicers
+    geo_servicers = [x for x in servicers if x.geo_zone == space["geo_zone"]]
+    if len(geo_servicers) > 0:
+        servicers = geo_servicers
+    print(servicers)
