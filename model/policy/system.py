@@ -9,6 +9,8 @@ from ..spaces import (
     mint_pokt_mechanism_space,
     validator_block_reward_space,
     dao_block_reward_space,
+    modify_servicer_pokt_space,
+    burn_pokt_mechanism_space,
 )
 from typing import Tuple, List
 from math import isclose
@@ -58,3 +60,9 @@ def block_reward_policy_aggregate(
         "reward_amount": reward * params["dao_allocation"]
     }
     return (space1, space2, space3, space4)
+
+
+def assign_servicer_salary_policy(
+    state: StateType, params: ParamType, domain: Tuple[assign_servicer_salary_space]
+) -> Tuple[modify_servicer_pokt_space, burn_pokt_mechanism_space]:
+    pass

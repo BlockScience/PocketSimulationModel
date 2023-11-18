@@ -19,4 +19,8 @@ from .servicer import (
     servicer_leave_policy,
     servicer_stake_policy,
 )
-from .system import fee_reward_policy, block_reward_policy_aggregate
+from .system import (
+    fee_reward_policy,
+    block_reward_policy_aggregate,
+    assign_servicer_salary_policy,
+)
