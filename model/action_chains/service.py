@@ -48,4 +48,5 @@ def service_unlinking_ac(state, params, servicer):
     spaces = service_unlinking_ba(state, params, servicer)
     for space in spaces:
         spaces_i = service_unlinking_policy(state, params, space)
-        unlink_service_mechanism(state, params, spaces_i)
+        if spaces_i[0]:
+            unlink_service_mechanism(state, params, spaces_i)
