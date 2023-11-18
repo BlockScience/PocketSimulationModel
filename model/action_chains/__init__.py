@@ -19,4 +19,4 @@ from .servicer import (
     servicers_stake_ac,
     jailing_slashing_ac,
 )
-from .system import fee_reward_ac
+from .system import fee_reward_ac, block_reward_ac
