@@ -77,7 +77,12 @@ def assign_servicer_salary_policy(
     out = []
     payment_per = space["reward"] // len(servicers)
     for servicer in servicers:
-        space1: modify_servicer_pokt_space = {}
-        space2: burn_pokt_mechanism_space = {}
+        space1: modify_servicer_pokt_space = {
+            "amount": payment_per * servicer.QoS,
+            "public_key": servicer,
+        }
+        space2: burn_pokt_mechanism_space = {
+            "burn_amount": payment_per * (1 - servicer.QoS)
+        }
         out.append((space1, space2))
     return out
