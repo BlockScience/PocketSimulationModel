@@ -4,6 +4,7 @@ from ..policy import (
     block_reward_policy_aggregate,
     assign_servicer_salary_policy,
     validator_block_reward_policy,
+    dao_block_reward_policy,
 )
 from ..mechanisms import (
     decrease_relay_fees,
@@ -33,4 +34,6 @@ def block_reward_ac(state, params):
             modify_servicer_pokt_holdings(state, params, spaces_j[:1])
             burn_pokt_mechanism(state, params, spaces_j[1:2])
         spaces_i3 = validator_block_reward_policy(state, params, spaces_i[2:3])
-        modify_dao_pokt_holdings(state, params, spaces_i3)
+        modify_validator_pokt_holdings(state, params, spaces_i3)
+        spaces_i4 = dao_block_reward_policy(state, params, spaces_i[3:4])
+        modify_dao_pokt_holdings(state, params, spaces_i4)

@@ -96,3 +96,10 @@ def validator_block_reward_policy(
         "public_key": domain[0]["public_key"],
     }
     return (out,)
+
+
+def dao_block_reward_policy(
+    state: StateType, params: ParamType, domain: Tuple[dao_block_reward_space]
+) -> Tuple[modify_dao_pokt_space]:
+    out: modify_dao_pokt_space = {"amount": domain[0]["reward_amount"]}
+    return (out,)
