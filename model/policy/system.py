@@ -4,6 +4,11 @@ from ..spaces import (
     decrease_relay_fees_space,
     modify_validator_pokt_space,
     modify_dao_pokt_space,
+    mint_block_rewards_space,
+    assign_servicer_salary_space,
+    mint_pokt_mechanism_space,
+    validator_block_reward_space,
+    dao_block_reward_space,
 )
 from typing import Tuple, List
 from math import isclose
@@ -24,3 +29,14 @@ def fee_reward_policy(
     space2: modify_dao_pokt_space = {"amount": dao_share}
 
     return (space1, space2)
+
+
+def block_reward_policy_aggregate(
+    state: StateType, params: ParamType, domain: Tuple[mint_block_rewards_space]
+) -> Tuple[
+    List[assign_servicer_salary_space],
+    mint_pokt_mechanism_space,
+    validator_block_reward_space,
+    dao_block_reward_space,
+]:
+    pass
