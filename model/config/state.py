@@ -123,11 +123,12 @@ for i in range(1, 6):
             staked_pokt=14000,
             service_url=None,
             services=[],
-            geo_zone="G{}".format(i % 3 + 1),
+            geo_zone="Zone ".format(i % 5 + 1),
             operator_public_key=None,
             pause_height=None,
             stake_status="Staked",
             unstaking_height=None,
+            QoS=0.8,
         )
     )
 

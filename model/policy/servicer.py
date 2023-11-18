@@ -12,6 +12,7 @@ from ..spaces import (
 )
 from typing import Tuple, Union, List
 from ..classes import Servicer
+import random
 
 
 def servicer_join_policy(
@@ -36,6 +37,7 @@ def servicer_join_policy(
             pause_height=None,
             stake_status="Staked",
             unstaking_height=None,
+            QoS=random.uniform(0.7, 1),
         )
         return ({"servicer": servicer},)
 
