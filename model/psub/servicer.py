@@ -25,7 +25,7 @@ def p_relay_requests(_params, substep, state_history, state) -> dict:
     processed_relays = 0
     relay_log = {}
     for _ in range(number_relays):
-        out = relay_requests_ac(state, _params)
+        out = relay_requests_ac(state, _params, relay_log)
         total_relays += out["total_relays"]
         processed_relays += out["processed_relays"]
     return {

@@ -41,13 +41,24 @@ def servicer_join_policy(
 
 
 def servicer_relay_policy(
-    state: StateType, params: ParamType, domain: Tuple[servicer_relay_space]
+    state: StateType, params: ParamType, domain: Tuple[servicer_relay_space], relay_log
 ) -> Tuple[
     Union[modify_gateway_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
     Union[servicer_relay_space, None],
 ]:
     application = domain[0]["applications"]
+
+    # Log relays
+    session = domain[0]["session"]
+    n_relays = session["number_of_relays"]
+    geo_zone = session["application"].geo_zone
+    service = session["service"]
+    key = (service, geo_zone)
+    if key in relay_log:
+        relay_log[key] += n_relays
+    else:
+        relay_log[key] = n_relays
 
     # Payment from the requestor
     if application.delegate:
