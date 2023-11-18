@@ -26,7 +26,7 @@ system_param_config = {
         "minimum_test_score_threshold": [None],
         "minimum_report_card_threshold": [None],
         "servicer_unbounding_period": [None],
-        "relays_to_tokens_multiplier": [100],
+        "relays_to_tokens_multiplier": [161.29],
         "slash_fraction_downtime": [None],
         "replay_attack_burn_multiplier": [None],
         "max_jailed_blocks": [None],
