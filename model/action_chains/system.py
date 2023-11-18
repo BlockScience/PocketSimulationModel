@@ -17,3 +17,4 @@ def fee_reward_ac(state, params):
 
 def block_reward_ac(state, params):
     spaces = block_reward_ba(state, params)
+    print(spaces)
