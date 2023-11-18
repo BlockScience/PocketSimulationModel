@@ -23,11 +23,16 @@ def p_relay_requests(_params, substep, state_history, state) -> dict:
     )
     total_relays = 0
     processed_relays = 0
+    relay_log = {}
     for _ in range(number_relays):
-        out = relay_requests_ac(state, _params)
+        out = relay_requests_ac(state, _params, relay_log)
         total_relays += out["total_relays"]
         processed_relays += out["processed_relays"]
-    return {"total_relays": total_relays, "processed_relays": processed_relays}
+    return {
+        "total_relays": total_relays,
+        "processed_relays": processed_relays,
+        "relay_log": relay_log,
+    }
 
 
 def p_jailing_slashing(_params, substep, state_history, state) -> dict:

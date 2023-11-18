@@ -35,6 +35,7 @@ def build_state(config_option):
     state["pokt_price_true"] = 0.06
     state["pokt_price_oracle"] = 0.06
     state["n_transactions"] = None
+    state["relay_log"] = None
 
     state = deepcopy(state)
     return state
@@ -49,7 +50,7 @@ application_config = {
             pokt_holdings=1000,
             staked_pokt=1000,
             services=[],
-            geo_zone="G1",
+            geo_zone="Zone 1",
             number_of_services=1,
             stake_status="Staked",
             unstaking_height=None,
@@ -61,7 +62,7 @@ application_config = {
             pokt_holdings=5000,
             staked_pokt=1000,
             services=[],
-            geo_zone="G2",
+            geo_zone="Zone 2",
             number_of_services=2,
             stake_status="Staked",
             unstaking_height=None,
@@ -73,7 +74,7 @@ application_config = {
             pokt_holdings=3000,
             staked_pokt=1000,
             services=[],
-            geo_zone="G3",
+            geo_zone="Zone 3",
             number_of_services=1,
             stake_status="Staked",
             unstaking_height=None,

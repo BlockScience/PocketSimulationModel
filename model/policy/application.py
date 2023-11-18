@@ -111,6 +111,19 @@ def submit_relay_requests_policy_v1(
     )
     number_of_relays = max(min(number_of_relays, max_relays_allowed), 0)
 
+    # Check there is going to be enough money to pay!
+    if domain[0]["application_address"].delegate:
+        max_relays_allowed = (
+            domain[0]["application_address"].delegate.staked_pokt
+            // params["gateway_fee_per_relay"]
+        )
+    else:
+        max_relays_allowed = (
+            domain[0]["application_address"].staked_pokt
+            // params["application_fee_per_relay"]
+        )
+    number_of_relays = max(min(number_of_relays, max_relays_allowed), 0)
+
     session: SessionType = {
         "application": domain[0]["application_address"],
         "fishermen": None,

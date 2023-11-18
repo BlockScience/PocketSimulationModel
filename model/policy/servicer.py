@@ -41,42 +41,51 @@ def servicer_join_policy(
 
 
 def servicer_relay_policy(
-    state: StateType, params: ParamType, domain: Tuple[servicer_relay_space]
+    state: StateType, params: ParamType, domain: Tuple[servicer_relay_space], relay_log
 ) -> Tuple[
     Union[modify_gateway_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
-    increase_relay_fees_space,
     Union[servicer_relay_space, None],
 ]:
     application = domain[0]["applications"]
-    relay_payment = (
-        domain[0]["session"]["number_of_relays"] * params["application_fee_per_relay"]
-    )
-    fees_charged = 10
-    total_charge = relay_payment + fees_charged
+
+    # Log relays
+    session = domain[0]["session"]
+    n_relays = session["number_of_relays"]
+    geo_zone = session["application"].geo_zone
+    service = session["service"]
+    key = (service, geo_zone)
+    if key in relay_log:
+        relay_log[key] += n_relays
+    else:
+        relay_log[key] = n_relays
 
     # Payment from the requestor
     if application.delegate:
+        relay_charge = (
+            domain[0]["session"]["number_of_relays"] * params["gateway_fee_per_relay"]
+        )
         space1: modify_gateway_pokt_space = {
             "public_key": application.delegate,
-            "amount": -total_charge,
+            "amount": -relay_charge,
         }
     else:
+        relay_charge = (
+            domain[0]["session"]["number_of_relays"]
+            * params["application_fee_per_relay"]
+        )
         space1: modify_application_pokt_space = {
             "public_key": application,
-            "amount": -total_charge,
+            "amount": -relay_charge,
         }
 
     # Burn per relay policy
     space2: servicer_relay_space = domain[0]
 
-    # Relay fees to add
-    space3: increase_relay_fees_space = {"POKT Amount": fees_charged}
-
     # Space for if the session should be removed
-    space4: Union[servicer_relay_space, None] = domain[0]
+    space3: Union[servicer_relay_space, None] = domain[0]
 
-    return (space1, space2, space3, space4)
+    return (space1, space2, space3)
 
 
 def servicer_leave_policy(
