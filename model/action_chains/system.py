@@ -10,6 +10,7 @@ from ..mechanisms import (
     modify_dao_pokt_holdings,
     modify_servicer_pokt_holdings,
     burn_pokt_mechanism,
+    mint_pokt_mechanism,
 )
 
 
@@ -25,6 +26,7 @@ def block_reward_ac(state, params):
     spaces = block_reward_ba(state, params)
     for spaces_i in spaces:
         spaces_i = block_reward_policy_aggregate(state, params, spaces_i)
+        mint_pokt_mechanism(state, params, spaces_i[1:2])
         spaces_i2 = assign_servicer_salary_policy(state, params, spaces_i[:1])
         for spaces_j in spaces_i2:
             modify_servicer_pokt_holdings(state, params, spaces_j[:1])
