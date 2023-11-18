@@ -36,6 +36,7 @@ def build_state(config_option):
     state["pokt_price_oracle"] = 0.06
     state["n_transactions"] = None
     state["relay_log"] = None
+    state["floating_supply"] = 1521517215
 
     state = deepcopy(state)
     return state
