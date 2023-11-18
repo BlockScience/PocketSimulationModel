@@ -123,6 +123,7 @@ assign_servicer_salary_space = TypedDict(
         "geo_zone": GeoZoneType,  # The physical geo-location identifier
         "service": ServiceType,
         "height": BlockHeightType,
+        "reward": int,
     },
 )
 

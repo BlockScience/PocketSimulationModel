@@ -34,9 +34,27 @@ def fee_reward_policy(
 def block_reward_policy_aggregate(
     state: StateType, params: ParamType, domain: Tuple[mint_block_rewards_space]
 ) -> Tuple[
-    List[assign_servicer_salary_space],
+    assign_servicer_salary_space,
     mint_pokt_mechanism_space,
     validator_block_reward_space,
     dao_block_reward_space,
 ]:
-    pass
+    space = domain[0]
+
+    reward = int(space["relays"] * params["relays_to_tokens_multiplier"])
+
+    space1: assign_servicer_salary_space = {
+        "geo_zone": space["geo_zone"],
+        "reward": reward * params["servicer_allocation"],
+        "service": space["service"],
+    }
+
+    space2: mint_pokt_mechanism_space = {"mint_amount": reward}
+    space3: validator_block_reward_space = {
+        "public_key": space["block_producer"],
+        "reward_amount": reward * params["block_proposer_allocation"],
+    }
+    space4: dao_block_reward_space = {
+        "reward_amount": reward * params["dao_allocation"]
+    }
+    return (space1, space2, space3, space4)
