@@ -37,8 +37,12 @@ def service_linking_policy(
 
 def service_unlinking_policy(
     state: StateType, params: ParamType, domain: Tuple[service_unlinking_space]
-) -> Tuple[service_unlinking_space]:
-    # Auto pass through
+) -> Tuple[Union[service_unlinking_space, None]]:
+    # Add quick check
+
+    if domain[0]["service"] not in domain[0]["servicer"].services:
+        return (None,)
+
     return domain
 
 

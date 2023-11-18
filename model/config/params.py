@@ -38,7 +38,9 @@ system_param_config = {
         "minimum_application_stake": [15000],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [None],
-        "block_proposer_allocation": [None],
+        "block_proposer_allocation": [0.05],
+        "dao_allocation": [0.1],
+        "servicer_allocation": [0.85],
         "stake_per_app_delegation": [15000],
         "gateway_fee_per_relay": [27.42],
         "gateway_minimum_stake": [150000],
@@ -59,6 +61,7 @@ system_param_config = {
         "supported_services": [None],
     }
 }
+
 
 behavior_param_config = {
     "Test": {

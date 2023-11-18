@@ -14,6 +14,7 @@ from typing import List
 
 class Servicer:
     id_number = 0
+
     def __init__(
         self,
         name: str,
@@ -29,6 +30,7 @@ class Servicer:
         pause_height: BlockHeightType,
         stake_status: StakeStatusType,
         unstaking_height: BlockHeightType,
+        QoS: float,
     ):
         self.id_number = Servicer.id_number
         Servicer.id_number += 1
@@ -46,3 +48,4 @@ class Servicer:
         self.pause_height = pause_height
         self.stake_status = stake_status
         self.unkstaking_height = unstaking_height
+        self.QoS = QoS

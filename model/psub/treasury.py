@@ -1,8 +1,9 @@
-from ..action_chains import fee_reward_ac
+from ..action_chains import fee_reward_ac, block_reward_ac
 import numpy as np
 
 
 def p_block_reward(_params, substep, state_history, state) -> tuple:
+    block_reward_ac(state, _params)
     return {}
 
 

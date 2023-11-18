@@ -1,5 +1,11 @@
 from typing import TypedDict
-from ..types import uPOKTType, BlockHeightType, PublicKeyType
+from ..types import (
+    uPOKTType,
+    BlockHeightType,
+    PublicKeyType,
+    GeoZoneType,
+    ServiceEntityType,
+)
 
 mint_pokt_mechanism_space = TypedDict(
     "Mint POKT Mechanism Space", {"mint_amount": uPOKTType}
@@ -13,6 +19,9 @@ mint_block_rewards_space = TypedDict(
     {
         "current_height": BlockHeightType,  # Height of the block
         "block_producer": PublicKeyType,  # The address of the validator which created the block
+        "geo_zone": GeoZoneType,
+        "service": ServiceEntityType,
+        "relays": int,
     },
 )
 
