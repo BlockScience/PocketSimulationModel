@@ -23,4 +23,5 @@ from .system import (
     fee_reward_policy,
     block_reward_policy_aggregate,
     assign_servicer_salary_policy,
+    validator_block_reward_policy,
 )

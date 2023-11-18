@@ -86,3 +86,13 @@ def assign_servicer_salary_policy(
         }
         out.append((space1, space2))
     return out
+
+
+def validator_block_reward_policy(
+    state: StateType, params: ParamType, domain: Tuple[validator_block_reward_space]
+) -> Tuple[modify_validator_pokt_space]:
+    out: modify_validator_pokt_space = {
+        "amount": domain[0]["reward_amount"],
+        "public_key": domain[0]["public_key"],
+    }
+    return (out,)
