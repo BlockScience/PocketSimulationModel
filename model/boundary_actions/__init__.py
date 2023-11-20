@@ -15,6 +15,7 @@ from .servicer import (
     service_unlinking_ba,
     servicer_stake_ba,
     jailing_ba,
+    unjailing_ba,
 )
 from .service import service_join_ba, service_leave_ba
 from .system import fee_reward_ba, block_reward_ba
