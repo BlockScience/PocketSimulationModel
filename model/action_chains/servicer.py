@@ -12,6 +12,7 @@ from ..policy import (
     servicer_relay_policy,
     servicer_leave_policy,
     servicer_stake_policy,
+    jail_node_policy,
 )
 from ..mechanisms import (
     add_servicer,
@@ -96,3 +97,5 @@ def jailing_slashing_ac(state, params):
 
     # Jailing
     spaces = jailing_ba(state, params)
+    for spaces_i in spaces:
+        jail_node_policy(state, params, spaces_i)

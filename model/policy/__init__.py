@@ -18,6 +18,7 @@ from .servicer import (
     servicer_relay_policy,
     servicer_leave_policy,
     servicer_stake_policy,
+    jail_node_policy,
 )
 from .system import (
     fee_reward_policy,

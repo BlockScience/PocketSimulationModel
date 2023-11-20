@@ -9,6 +9,9 @@ from ..spaces import (
     modify_servicer_pokt_space,
     servicer_leave_space,
     servicer_stake_space,
+    servicer_pause_space2,
+    burn_pokt_mechanism_space,
+    jail_node_space,
 )
 from typing import Tuple, Union, List
 from ..classes import Servicer
@@ -112,3 +115,11 @@ def servicer_stake_policy(
     space1: modify_servicer_pokt_space = {"amount": -amount, "public_key": servicer}
     space2: modify_servicer_pokt_space = {"amount": amount, "public_key": servicer}
     return (space1, space2)
+
+
+def jail_node_policy(
+    state: StateType, params: ParamType, domain: Tuple[jail_node_space]
+) -> Tuple[
+    servicer_pause_space2, modify_servicer_pokt_space, burn_pokt_mechanism_space
+]:
+    print(domain)
