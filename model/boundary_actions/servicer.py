@@ -178,6 +178,8 @@ def jailing_ba_basic(
 ) -> List[Tuple[jail_node_space]]:
     out = []
     for servicer in state["Servicers"]:
+        if servicer.pause_height:
+            continue
         if random.random() < params["servicer_jailing_probability"]:
             space = (
                 {
