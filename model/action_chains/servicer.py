@@ -101,7 +101,8 @@ def jailing_slashing_ac(state, params):
     spaces = unjailing_ba(state, params)
     for spaces_i in spaces:
         spaces_i = unjail_policy(state, params, spaces_i)
-        print(spaces_i)
+        if spaces_i[0]:
+            servicer_update_pause_height(state, params, spaces_i)
 
     # Jailing
     spaces = jailing_ba(state, params)
