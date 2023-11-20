@@ -1,4 +1,4 @@
-from ..types import StateType, ParamType
+from ..types import StateType, ParamType, ServiceEntityType
 from ..spaces import (
     servicer_join_space,
     servicer_entity_space,
@@ -122,4 +122,17 @@ def jail_node_policy(
 ) -> Tuple[
     servicer_pause_space2, modify_servicer_pokt_space, burn_pokt_mechanism_space
 ]:
-    print(domain)
+    burn_stake = domain[0]["node_address"].staked_pokt * 0.2
+    space1: servicer_pause_space2 = {
+        "actor_type": ServiceEntityType,
+        "address": domain[0]["node_address"],
+        "caller_address": None,
+        "signer": None,
+    }
+    space2: modify_servicer_pokt_space = {
+        "amount": -burn_stake,
+        "public_key": domain[0]["node_address"],
+    }
+    space3: burn_pokt_mechanism_space = {"burn_amount": burn_stake}
+
+    return (space1, space2, space3)

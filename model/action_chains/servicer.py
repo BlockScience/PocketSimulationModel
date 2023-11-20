@@ -98,4 +98,5 @@ def jailing_slashing_ac(state, params):
     # Jailing
     spaces = jailing_ba(state, params)
     for spaces_i in spaces:
-        jail_node_policy(state, params, spaces_i)
+        spaces_i = jail_node_policy(state, params, spaces_i)
+        print(spaces_i)
