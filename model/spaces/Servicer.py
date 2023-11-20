@@ -104,6 +104,7 @@ servicer_pause_space2 = TypedDict(
         "address": AddressType,
         "caller_address": AddressType,  # Who called for the servicer to be paused
         "signer": AddressType,
+        "height": BlockHeightType,
     },
 )
 

@@ -68,12 +68,14 @@ def assign_servicer_salary_policy(
     space = domain[0]
     service = space["service"]
     servicers = service.servicers
-    geo_servicers = [x for x in servicers if x.geo_zone == space["geo_zone"]]
+    geo_servicers = [
+        x for x in servicers if x.geo_zone == space["geo_zone"] and not x.pause_height
+    ]
     if len(geo_servicers) > 0:
         servicers = geo_servicers
     # This is probably a bad failsafe
     if len(geo_servicers) == 0:
-        servicers = state["Servicers"]
+        servicers = [x for x in state["Servicers"] if not x.pause_height]
     out = []
     payment_per = space["reward"] // len(servicers)
     for servicer in servicers:

@@ -1,4 +1,4 @@
-from ..types import StateType, ParamType
+from ..types import StateType, ParamType, ServiceEntityType
 from ..spaces import (
     servicer_join_space,
     servicer_entity_space,
@@ -9,6 +9,10 @@ from ..spaces import (
     modify_servicer_pokt_space,
     servicer_leave_space,
     servicer_stake_space,
+    servicer_pause_space2,
+    burn_pokt_mechanism_space,
+    jail_node_space,
+    unjail_node_space,
 )
 from typing import Tuple, Union, List
 from ..classes import Servicer
@@ -112,3 +116,45 @@ def servicer_stake_policy(
     space1: modify_servicer_pokt_space = {"amount": -amount, "public_key": servicer}
     space2: modify_servicer_pokt_space = {"amount": amount, "public_key": servicer}
     return (space1, space2)
+
+
+def jail_node_policy(
+    state: StateType, params: ParamType, domain: Tuple[jail_node_space]
+) -> Tuple[
+    servicer_pause_space2, modify_servicer_pokt_space, burn_pokt_mechanism_space
+]:
+    burn_stake = domain[0]["node_address"].staked_pokt * 0.2
+    space1: servicer_pause_space2 = {
+        "actor_type": ServiceEntityType,
+        "address": domain[0]["node_address"],
+        "caller_address": None,
+        "signer": None,
+        "height": state["height"],
+    }
+    space2: modify_servicer_pokt_space = {
+        "amount": -burn_stake,
+        "public_key": domain[0]["node_address"],
+    }
+    space3: burn_pokt_mechanism_space = {"burn_amount": burn_stake}
+
+    return (space1, space2, space3)
+
+
+def unjail_policy(
+    state: StateType, params: ParamType, domain: Tuple[unjail_node_space]
+) -> Tuple[Union[servicer_pause_space2, None]]:
+    servicer = domain[0]["node_address"]
+    delta_height = state["height"] - servicer.pause_height
+    if delta_height >= params["minimum_pause_time"]:
+        # Height is none to turn off pause height
+        return (
+            {
+                "actor_type": "Servicer",
+                "address": servicer,
+                "caller_address": None,
+                "height": None,
+                "signer": None,
+            },
+        )
+    else:
+        return (None,)

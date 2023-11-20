@@ -70,7 +70,9 @@ def submit_relay_requests_policy_test(
     state: StateType, params: ParamType, domain: Tuple[submit_relay_request_space]
 ) -> Tuple[new_session_space, new_session_space]:
     num_servicers = domain[0]["application_address"].number_of_services
-    servicers = random.sample(state["Servicers"], num_servicers)
+    servicers = random.sample(
+        [x for x in state["Servicers"] if not x.pause_height], num_servicers
+    )
     service = random.choice(state["Services"])
     session: SessionType = {
         "application": domain[0]["application_address"],

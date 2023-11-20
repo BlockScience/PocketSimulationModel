@@ -5,6 +5,7 @@ from ..boundary_actions import (
     servicer_leave_ba,
     servicer_stake_ba,
     jailing_ba,
+    unjailing_ba,
 )
 from ..policy import (
     servicer_join_policy,
@@ -12,6 +13,8 @@ from ..policy import (
     servicer_relay_policy,
     servicer_leave_policy,
     servicer_stake_policy,
+    jail_node_policy,
+    unjail_policy,
 )
 from ..mechanisms import (
     add_servicer,
@@ -24,6 +27,8 @@ from ..mechanisms import (
     unlink_service_mechanism,
     remove_servicer,
     modify_servicer_stake,
+    servicer_update_pause_height,
+    burn_pokt_mechanism,
 )
 from ..spaces import modify_gateway_pokt_space
 
@@ -93,6 +98,16 @@ def servicers_stake_ac(state, params):
 
 def jailing_slashing_ac(state, params):
     # Any of the unjailing stuff
+    spaces = unjailing_ba(state, params)
+    for spaces_i in spaces:
+        spaces_i = unjail_policy(state, params, spaces_i)
+        if spaces_i[0]:
+            servicer_update_pause_height(state, params, spaces_i)
 
     # Jailing
     spaces = jailing_ba(state, params)
+    for spaces_i in spaces:
+        spaces_i = jail_node_policy(state, params, spaces_i)
+        servicer_update_pause_height(state, params, spaces_i[:1])
+        modify_servicer_stake(state, params, spaces_i[1:2])
+        burn_pokt_mechanism(state, params, spaces_i[2:3])
