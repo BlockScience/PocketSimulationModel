@@ -14,6 +14,7 @@ from ..policy import (
     servicer_leave_policy,
     servicer_stake_policy,
     jail_node_policy,
+    unjail_policy,
 )
 from ..mechanisms import (
     add_servicer,
@@ -98,7 +99,9 @@ def servicers_stake_ac(state, params):
 def jailing_slashing_ac(state, params):
     # Any of the unjailing stuff
     spaces = unjailing_ba(state, params)
-    print(spaces)
+    for spaces_i in spaces:
+        spaces_i = unjail_policy(state, params, spaces_i)
+        print(spaces_i)
 
     # Jailing
     spaces = jailing_ba(state, params)

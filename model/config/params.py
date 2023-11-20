@@ -20,7 +20,7 @@ system_param_config = {
     "Test": {
         "minimum_stake_servicer": [15000],
         "minimum_stake_period_servicer": [None],
-        "minimum_pause_time": [None],
+        "minimum_pause_time": [10],
         "max_chains_servicer": [15],
         "salary_block_frequency": [None],
         "minimum_test_score_threshold": [None],

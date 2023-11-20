@@ -12,6 +12,7 @@ from ..spaces import (
     servicer_pause_space2,
     burn_pokt_mechanism_space,
     jail_node_space,
+    unjail_node_space,
 )
 from typing import Tuple, Union, List
 from ..classes import Servicer
@@ -137,3 +138,23 @@ def jail_node_policy(
     space3: burn_pokt_mechanism_space = {"burn_amount": burn_stake}
 
     return (space1, space2, space3)
+
+
+def unjail_policy(
+    state: StateType, params: ParamType, domain: Tuple[unjail_node_space]
+) -> Tuple[Union[servicer_pause_space2, None]]:
+    servicer = domain[0]["node_address"]
+    delta_height = state["height"] - servicer.pause_height
+    if delta_height >= params["minimum_pause_time"]:
+        # Height is none to turn off pause height
+        return (
+            {
+                "actor_type": "Servicer",
+                "address": servicer,
+                "caller_address": None,
+                "height": None,
+                "signer": None,
+            },
+        )
+    else:
+        return (None,)
