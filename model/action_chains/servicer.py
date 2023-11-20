@@ -25,6 +25,7 @@ from ..mechanisms import (
     unlink_service_mechanism,
     remove_servicer,
     modify_servicer_stake,
+    servicer_update_pause_height,
 )
 from ..spaces import modify_gateway_pokt_space
 
@@ -99,4 +100,5 @@ def jailing_slashing_ac(state, params):
     spaces = jailing_ba(state, params)
     for spaces_i in spaces:
         spaces_i = jail_node_policy(state, params, spaces_i)
+        servicer_update_pause_height(state, params, spaces_i[:1])
         print(spaces_i)

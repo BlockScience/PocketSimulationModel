@@ -21,6 +21,7 @@ from .servicer import (
     modify_servicer_pokt_holdings,
     remove_servicer,
     modify_servicer_stake,
+    servicer_update_pause_height,
 )
 from .service import (
     add_service,

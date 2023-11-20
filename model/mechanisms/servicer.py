@@ -1,5 +1,9 @@
 from ..types import StateType, ParamType
-from ..spaces import servicer_entity_space, modify_servicer_pokt_space
+from ..spaces import (
+    servicer_entity_space,
+    modify_servicer_pokt_space,
+    servicer_pause_space2,
+)
 from typing import Tuple
 
 
@@ -27,3 +31,9 @@ def modify_servicer_stake(
     state: StateType, params: ParamType, domain: Tuple[modify_servicer_pokt_space]
 ) -> None:
     domain[0]["public_key"].staked_pokt += domain[0]["amount"]
+
+
+def servicer_update_pause_height(
+    state: StateType, params: ParamType, domain: Tuple[servicer_pause_space2]
+) -> None:
+    domain[0]["address"].pause_height = domain[0]["height"]

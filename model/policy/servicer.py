@@ -128,6 +128,7 @@ def jail_node_policy(
         "address": domain[0]["node_address"],
         "caller_address": None,
         "signer": None,
+        "height": state["height"],
     }
     space2: modify_servicer_pokt_space = {
         "amount": -burn_stake,
