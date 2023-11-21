@@ -37,6 +37,9 @@ def build_state(config_option):
     state["n_transactions"] = None
     state["relay_log"] = None
     state["floating_supply"] = 1521517215
+    state["understaked_servicers"] = []
+    state["understaked_gateways"] = []
+    state["understaked_applications"] = []
 
     state = deepcopy(state)
     return state
@@ -106,6 +109,7 @@ service_config = {
             gateway_api_prefix="S{}".format(x),
             service_id="S{}".format(x),
             servicers=[],
+            join_height=-1,
         )
         for x in range(1, 9)
     ]

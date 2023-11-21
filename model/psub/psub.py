@@ -13,6 +13,7 @@ from .servicer import (
     p_jailing_slashing,
     p_servicers_leave,
     p_servicers_stake,
+    s_update_understaked_servicers,
 )
 from .service import (
     p_service_linking,
@@ -21,7 +22,13 @@ from .service import (
     p_service_unlinking,
     p_service_leave,
 )
-from .gateway import p_gateway_join, s_update_gateways, p_gateway_leave, p_gateway_stake
+from .gateway import (
+    p_gateway_join,
+    s_update_gateways,
+    p_gateway_leave,
+    p_gateway_stake,
+    s_update_understaked_gateways,
+)
 from .application import (
     p_application_join,
     s_update_applications,
@@ -29,6 +36,7 @@ from .application import (
     p_gateway_undelegation,
     p_application_leave,
     p_application_stake,
+    s_update_understaked_applications,
 )
 from .treasury import (
     p_block_reward,
@@ -166,6 +174,9 @@ leave_block = {
         "Services": s_update_services,
         "Gateways": s_update_gateways,
         "Applications": s_update_applications,
+        "understaked_servicers": s_update_understaked_servicers,
+        "understaked_gateways": s_update_understaked_gateways,
+        "understaked_applications": s_update_understaked_applications,
     },
 }
 

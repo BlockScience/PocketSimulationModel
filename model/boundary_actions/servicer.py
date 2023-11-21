@@ -55,6 +55,8 @@ def service_linking_ba(
 ) -> List[Tuple[service_linking_space]]:
     if params["service_linking_function"] == "test":
         return service_linking_test(state, params, servicer)
+    elif params["service_linking_function"] == "basic":
+        return service_linking_basic(state, params, servicer)
     else:
         assert False, "Invalid service_linking_function"
 
@@ -72,6 +74,29 @@ def service_linking_test(
             if service not in servicer.services:
                 out.append(({"service": service, "servicer": servicer},))
                 ct -= 1
+                if ct == 0:
+                    break
+        return out
+
+
+def service_linking_basic(
+    state: StateType, params: ParamType, servicer: ServiceEntityType
+) -> List[Tuple[service_linking_space]]:
+    # Simple probability of joining + conditional probability if it is a new service
+    if len(servicer.services) == params["service_max_number_link"]:
+        return []
+    else:
+        out = []
+        ct = params["service_max_number_link"] - len(servicer.services)
+        for service in state["Services"][::-1]:
+            if service not in servicer.services:
+                if service.join_height == state["height"]:
+                    threshold = params["service_linking_probability_normal"]
+                else:
+                    threshold = params["service_linking_probability_just_joined"]
+                if random.random() < threshold:
+                    out.append(({"service": service, "servicer": servicer},))
+                    ct -= 1
                 if ct == 0:
                     break
         return out
@@ -112,7 +137,13 @@ def servicer_leave_ba_basic(
 ) -> Tuple[servicer_leave_space]:
     leaves = {}
     for servicer in state["Servicers"]:
-        leaves[servicer] = random.random() < params["servicer_leave_probability"]
+        if (
+            servicer in state["understaked_servicers"]
+            and servicer.staked_pokt < params["minimum_stake_servicer"]
+        ):
+            leaves[servicer] = True
+        else:
+            leaves[servicer] = random.random() < params["servicer_leave_probability"]
     return ({"servicers": leaves},)
 
 
@@ -130,9 +161,18 @@ def service_unlinking_ba_basic(
 ) -> List[Tuple[service_unlinking_space]]:
     # Simple test function where if maximum services is not reached then the current options are joined in reverse order
     out = []
+    kick_bottom = False
     for service in servicer.services:
+        if service.join_height == state["height"]:
+            kick_bottom = True
         if random.random() < params["service_unlinking_probability"]:
             out.append(({"service": service, "servicer": servicer},))
+    if kick_bottom:
+        bottom = servicer.services_by_revenue()[0][0]
+        add = ({"service": bottom, "servicer": servicer},)
+        if add not in out:
+            if random.random() < params["kick_bottom_probability"]:
+                out.append(add)
     return out
 
 

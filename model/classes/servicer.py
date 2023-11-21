@@ -49,3 +49,13 @@ class Servicer:
         self.stake_status = stake_status
         self.unkstaking_height = unstaking_height
         self.QoS = QoS
+
+        self.revenue_expectations = {}
+
+    def services_by_revenue(self):
+        out = [
+            (service, self.revenue_expectations[service])
+            for service in self.revenue_expectations
+        ]
+        out = sorted(out, key=lambda x: x[1])
+        return out

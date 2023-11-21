@@ -63,7 +63,10 @@ def block_reward_policy_aggregate(
 
 
 def assign_servicer_salary_policy(
-    state: StateType, params: ParamType, domain: Tuple[assign_servicer_salary_space]
+    state: StateType,
+    params: ParamType,
+    domain: Tuple[assign_servicer_salary_space],
+    servicer_earnings,
 ) -> List[Tuple[modify_servicer_pokt_space, burn_pokt_mechanism_space]]:
     space = domain[0]
     service = space["service"]
@@ -79,6 +82,13 @@ def assign_servicer_salary_policy(
     out = []
     payment_per = space["reward"] // len(servicers)
     for servicer in servicers:
+        if servicer not in servicer_earnings:
+            servicer_earnings[servicer] = {}
+        if service not in servicer_earnings[servicer]:
+            servicer_earnings[servicer][service] = payment_per
+        else:
+            servicer_earnings[servicer][service] += payment_per
+
         space1: modify_servicer_pokt_space = {
             "amount": payment_per * servicer.QoS,
             "public_key": servicer,
