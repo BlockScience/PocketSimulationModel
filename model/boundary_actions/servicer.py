@@ -155,9 +155,14 @@ def service_unlinking_ba_basic(
 ) -> List[Tuple[service_unlinking_space]]:
     # Simple test function where if maximum services is not reached then the current options are joined in reverse order
     out = []
+    kick_bottom = False
     for service in servicer.services:
+        if service.join_height == state["height"]:
+            kick_bottom = True
         if random.random() < params["service_unlinking_probability"]:
             out.append(({"service": service, "servicer": servicer},))
+    if kick_bottom:
+        print(servicer.services_by_revenue)
     return out
 
 
