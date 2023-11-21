@@ -49,3 +49,5 @@ class Servicer:
         self.stake_status = stake_status
         self.unkstaking_height = unstaking_height
         self.QoS = QoS
+
+        self.revenue_expectations = {}

@@ -24,6 +24,11 @@ def fee_reward_ac(state, params):
     modify_dao_pokt_holdings(state, params, spaces[1:2])
 
 
+def update_revenue_expectations(state, params, servicer_earnings):
+    for servicer in state["Servicers"]:
+        last = servicer.revenue_expectations
+
+
 def block_reward_ac(state, params):
     servicer_earnings = {}
     spaces = block_reward_ba(state, params)
@@ -40,4 +45,4 @@ def block_reward_ac(state, params):
         modify_validator_pokt_holdings(state, params, spaces_i3)
         spaces_i4 = dao_block_reward_policy(state, params, spaces_i[3:4])
         modify_dao_pokt_holdings(state, params, spaces_i4)
-    print(servicer_earnings)
+    update_revenue_expectations(state, params, servicer_earnings)
