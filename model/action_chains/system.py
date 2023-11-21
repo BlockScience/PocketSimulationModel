@@ -25,11 +25,14 @@ def fee_reward_ac(state, params):
 
 
 def block_reward_ac(state, params):
+    servicer_earnings = {}
     spaces = block_reward_ba(state, params)
     for spaces_i in spaces:
         spaces_i = block_reward_policy_aggregate(state, params, spaces_i)
         mint_pokt_mechanism(state, params, spaces_i[1:2])
-        spaces_i2 = assign_servicer_salary_policy(state, params, spaces_i[:1])
+        spaces_i2 = assign_servicer_salary_policy(
+            state, params, spaces_i[:1], servicer_earnings
+        )
         for spaces_j in spaces_i2:
             modify_servicer_pokt_holdings(state, params, spaces_j[:1])
             burn_pokt_mechanism(state, params, spaces_j[1:2])
@@ -37,3 +40,4 @@ def block_reward_ac(state, params):
         modify_validator_pokt_holdings(state, params, spaces_i3)
         spaces_i4 = dao_block_reward_policy(state, params, spaces_i[3:4])
         modify_dao_pokt_holdings(state, params, spaces_i4)
+    print(servicer_earnings)
