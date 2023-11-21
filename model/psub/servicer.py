@@ -42,9 +42,20 @@ def p_jailing_slashing(_params, substep, state_history, state) -> dict:
 
 def p_servicers_leave(_params, substep, state_history, state) -> dict:
     servicer_leave_ac(state, _params)
-    return {}
+    understaked_servicers = [
+        x
+        for x in state["Servicers"]
+        if x.staked_pokt < _params["minimum_stake_servicer"]
+    ]
+    return {"understaked_servicers": understaked_servicers}
 
 
 def p_servicers_stake(_params, substep, state_history, state) -> dict:
     servicers_stake_ac(state, _params)
     return {}
+
+
+def s_update_understaked_servicers(
+    _params, substep, state_history, state, _input
+) -> tuple:
+    return ("understaked_servicers", _input["understaked_servicers"])
