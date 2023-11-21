@@ -158,12 +158,15 @@ def service_unlinking_ba_basic(
     kick_bottom = False
     for service in servicer.services:
         if service.join_height == state["height"]:
-            print("A")
             kick_bottom = True
         if random.random() < params["service_unlinking_probability"]:
             out.append(({"service": service, "servicer": servicer},))
     if kick_bottom:
-        print(servicer.services_by_revenue())
+        bottom = servicer.services_by_revenue()[0][0]
+        add = ({"service": bottom, "servicer": servicer},)
+        if add not in out:
+            if random.random() < params["kick_bottom_probability"]:
+                out.append(add)
     return out
 
 

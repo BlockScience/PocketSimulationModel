@@ -69,7 +69,7 @@ behavior_param_config = {
         "servicer_max_number": [20],
         "service_max_number": [10],
         "gateway_max_number": [25],
-        "service_max_number_link": [3],
+        "service_max_number_link": [8],
         "application_leave_probability": [0.01],
         "gateway_leave_probability": [0.01],
         "service_leave_probability": [0.0025],
@@ -86,6 +86,7 @@ behavior_param_config = {
         "lambda_ewm_revenue_expectation": [0.9],
         "service_linking_probability_normal": [0.01],
         "service_linking_probability_just_joined": [0.5],
+        "kick_bottom_probability": [0.5],
     }
 }
 
