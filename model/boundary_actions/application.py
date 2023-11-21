@@ -163,7 +163,15 @@ def application_leave_ba_basic(
 ) -> Tuple[application_leave_space]:
     leaves = {}
     for application in state["Applications"]:
-        leaves[application] = random.random() < params["application_leave_probability"]
+        if (
+            application in state["understaked_applications"]
+            and application.staked_pokt < params["minimum_application_stake"]
+        ):
+            leaves[application] = True
+        else:
+            leaves[application] = (
+                random.random() < params["application_leave_probability"]
+            )
     return ({"applications": leaves},)
 
 
