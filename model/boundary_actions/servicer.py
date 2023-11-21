@@ -137,7 +137,13 @@ def servicer_leave_ba_basic(
 ) -> Tuple[servicer_leave_space]:
     leaves = {}
     for servicer in state["Servicers"]:
-        leaves[servicer] = random.random() < params["servicer_leave_probability"]
+        if (
+            servicer in state["understaked_servicers"]
+            and servicer.staked_pokt < params["minimum_stake_servicer"]
+        ):
+            leaves[servicer] = True
+        else:
+            leaves[servicer] = random.random() < params["servicer_leave_probability"]
     return ({"servicers": leaves},)
 
 

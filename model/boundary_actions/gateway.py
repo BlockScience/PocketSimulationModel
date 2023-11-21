@@ -42,7 +42,10 @@ def gateway_leave_ba_basic(
 ) -> Tuple[gateway_leave_space]:
     leaves = {}
     for gateway in state["Gateways"]:
-        if gateway in state["understaked_gateways"]:
+        if (
+            gateway in state["understaked_gateways"]
+            and gateway.staked_pokt < params["gateway_minimum_stake"]
+        ):
             leaves[gateway] = True
         else:
             leaves[gateway] = random.random() < params["gateway_leave_probability"]
