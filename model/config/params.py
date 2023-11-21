@@ -84,6 +84,8 @@ behavior_param_config = {
         "applications_use_min_servicers": [1],
         "applications_use_max_servicers": [3],
         "lambda_ewm_revenue_expectation": [0.9],
+        "service_linking_probability_normal": [0.01],
+        "service_linking_probability_just_joined": [0.5],
     }
 }
 
@@ -94,7 +96,7 @@ functional_param_config = {
         "servicer_join_function": ["simple_unfiform"],
         "service_join_function": ["simple_unfiform"],
         "gateway_join_function": ["simple_unfiform"],
-        "service_linking_function": ["test"],
+        "service_linking_function": ["basic"],
         "gateway_delegation_function": ["basic"],
         "relay_requests_function": ["test"],
         "submit_relay_requests_function": ["basic_gamma"],
