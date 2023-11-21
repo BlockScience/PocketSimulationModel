@@ -42,7 +42,10 @@ def gateway_leave_ba_basic(
 ) -> Tuple[gateway_leave_space]:
     leaves = {}
     for gateway in state["Gateways"]:
-        leaves[gateway] = random.random() < params["gateway_leave_probability"]
+        if gateway in state["understaked_gateways"]:
+            leaves[gateway] = True
+        else:
+            leaves[gateway] = random.random() < params["gateway_leave_probability"]
     return ({"gateways": leaves},)
 
 
