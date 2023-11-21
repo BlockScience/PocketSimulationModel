@@ -83,6 +83,7 @@ behavior_param_config = {
         "uses_gateway_probability": [0.5],
         "applications_use_min_servicers": [1],
         "applications_use_max_servicers": [3],
+        "lambda_ewm_revenue_expectation": [0.9],
     }
 }
 

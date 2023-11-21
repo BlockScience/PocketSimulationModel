@@ -25,8 +25,19 @@ def fee_reward_ac(state, params):
 
 
 def update_revenue_expectations(state, params, servicer_earnings):
+    lambda_ewm = params["lambda_ewm_revenue_expectation"]
     for servicer in state["Servicers"]:
+        if servicer not in servicer_earnings:
+            servicer_earnings[servicer] = {}
         last = servicer.revenue_expectations
+        new = {}
+        for service in servicer.services:
+            val = servicer_earnings[servicer].get(service, 0)
+            if service in last:
+                new[service] = lambda_ewm * last[service] + (1 - lambda_ewm) * val
+            else:
+                new[service] = val
+        servicer.revenue_expectations = new
 
 
 def block_reward_ac(state, params):
