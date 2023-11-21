@@ -11,10 +11,12 @@ class Service:
         gateway_api_prefix: str,
         service_id: str,
         servicers: List[ServicerEntityType],
+        join_height: int,
     ):
         self.id_number = Service.id_number
         Service.id_number += 1
         self.name = name
         self.gateway_api_prefix = gateway_api_prefix
         self.service_id = service_id
-        self.servicers = []
+        self.servicers = servicers
+        self.join_height = join_height

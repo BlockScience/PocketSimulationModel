@@ -21,6 +21,7 @@ def service_join_policy(
         gateway_api_prefix=space["gateway_api_prefix"],
         service_id=space["service_id"],
         servicers=[],
+        join_height=state["height"],
     )
     return ({"service": service},)
 

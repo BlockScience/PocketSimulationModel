@@ -106,6 +106,7 @@ service_config = {
             gateway_api_prefix="S{}".format(x),
             service_id="S{}".format(x),
             servicers=[],
+            join_height=-1,
         )
         for x in range(1, 9)
     ]
