@@ -19,13 +19,13 @@ def build_params(config_option):
 system_param_config = {
     "Test": {
         "minimum_stake_servicer": [15000],
-        "minimum_stake_period_servicer": [None],
+        "minimum_stake_period_servicer": [10],
         "minimum_pause_time": [10],
         "max_chains_servicer": [15],
-        "salary_block_frequency": [None],
-        "minimum_test_score_threshold": [None],
-        "minimum_report_card_threshold": [None],
-        "servicer_unbounding_period": [None],
+        # "salary_block_frequency": [None],
+        # "minimum_test_score_threshold": [None],
+        # "minimum_report_card_threshold": [None],
+        # "servicer_unbounding_period": [None],
         "relays_to_tokens_multiplier": [161.29],
         "slash_fraction_downtime": [None],
         "replay_attack_burn_multiplier": [None],
