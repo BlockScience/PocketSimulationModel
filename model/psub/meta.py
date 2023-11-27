@@ -26,3 +26,9 @@ def s_update_n_transactions(_params, substep, state_history, state, _input) -> t
 
 def s_update_relay_log(_params, substep, state_history, state, _input) -> tuple:
     return ("relay_log", _input["relay_log"])
+
+
+def s_update_servicer_relay_log(
+    _params, substep, state_history, state, _input
+) -> tuple:
+    return ("servicer_relay_log", _input["servicer_relay_log"])
