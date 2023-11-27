@@ -89,6 +89,19 @@ def servicer_relay_policy(
             "amount": -relay_charge,
         }
 
+    # Log which servicers did which work, modulo added to the first
+    split_relays = n_relays // len(session["servicers"])
+    modulo_relays = n_relays % len(session["servicers"])
+    for i in range(len(session["servicers"])):
+        amt = split_relays
+        if i == 0:
+            amt += modulo_relays
+        s = session["servicers"][i]
+        if s in servicer_relay_log:
+            servicer_relay_log[s] += amt
+        else:
+            servicer_relay_log[s] = amt
+
     # Burn per relay policy
     space2: servicer_relay_space = domain[0]
 

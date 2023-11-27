@@ -29,6 +29,8 @@ def p_relay_requests(_params, substep, state_history, state) -> dict:
         out = relay_requests_ac(state, _params, relay_log, servicer_relay_log)
         total_relays += out["total_relays"]
         processed_relays += out["processed_relays"]
+    assert sum(relay_log.values()) == processed_relays
+    assert sum(servicer_relay_log.values()) == processed_relays
     return {
         "total_relays": total_relays,
         "processed_relays": processed_relays,
