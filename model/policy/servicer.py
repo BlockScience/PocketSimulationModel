@@ -47,7 +47,11 @@ def servicer_join_policy(
 
 
 def servicer_relay_policy(
-    state: StateType, params: ParamType, domain: Tuple[servicer_relay_space], relay_log
+    state: StateType,
+    params: ParamType,
+    domain: Tuple[servicer_relay_space],
+    relay_log,
+    servicer_relay_log,
 ) -> Tuple[
     Union[modify_gateway_pokt_space, modify_application_pokt_space],
     servicer_relay_space,
