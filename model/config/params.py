@@ -1,18 +1,27 @@
 from copy import deepcopy
+from ..types import ParamType
 
+# A map of simulation configurations to the three components (system, behaviors, and functional parameterization)
 config_option_map = {
     "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"}
 }
 
 
-def build_params(config_option):
+def build_params(config_option: str) -> ParamType:
+    # Find the mapping of configuration option to the system, behaviors, and functional parameterization selections
     config_option = config_option_map[config_option]
+
+    # Pull the relevant parameterizations
     a = system_param_config[config_option["System"]]
     b = behavior_param_config[config_option["Behaviors"]]
     c = functional_param_config[config_option["Functional"]]
+
+    # Combine parameterizations
     params = {**a, **b, **c}
 
+    # Deepcopy to avoid changing source
     params = deepcopy(params)
+
     return params
 
 
