@@ -45,7 +45,7 @@ def servicer_join_ac(state, params):
         return
 
 
-def relay_requests_ac(state, params, relay_log):
+def relay_requests_ac(state, params, relay_log, servicer_relay_log):
     out = {}
     # Submit request
     spaces = submit_relay_requests_ba(state, params)
@@ -63,7 +63,7 @@ def relay_requests_ac(state, params, relay_log):
 
     # Relay the request
     spaces = relay_requests_ba(state, params)
-    spaces = servicer_relay_policy(state, params, spaces, relay_log)
+    spaces = servicer_relay_policy(state, params, spaces, relay_log, servicer_relay_log)
     out["processed_relays"] = spaces[-1]["session"]["number_of_relays"]
     if type(spaces[0]) == modify_gateway_pokt_space:
         modify_gateway_stake(state, params, spaces[:1])
