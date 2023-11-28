@@ -41,6 +41,10 @@ def build_state(config_option):
     state["understaked_servicers"] = []
     state["understaked_gateways"] = []
     state["understaked_applications"] = []
+    state["POKT_burned"] = 0
+    state["POKT_minted"] = 0
+    state["period_slashing_costs"] = 0
+    state["period_jailing_opportunity_cost"] = 0
 
     state = deepcopy(state)
     return state

@@ -24,9 +24,11 @@ def burn_pokt_mechanism(
     state: StateType, params: ParamType, domain: Tuple[burn_pokt_mechanism_space]
 ) -> None:
     state["floating_supply"] -= domain[0]["burn_amount"]
+    state["POKT_burned"] += domain[0]["burn_amount"]
 
 
 def mint_pokt_mechanism(
     state: StateType, params: ParamType, domain: Tuple[mint_pokt_mechanism_space]
 ) -> None:
     state["floating_supply"] += domain[0]["mint_amount"]
+    state["POKT_minted"] += domain[0]["mint_amount"]

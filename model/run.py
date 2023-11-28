@@ -59,7 +59,25 @@ def run(exp) -> pd.DataFrame:
 
 
 def compute_KPIs(df: pd.DataFrame):
-    pass
+    df["POKT_net_mint"] = df["POKT_minted"] - df["POKT_burned"]
+    df["total_application_stake"] = df["Applications"].apply(
+        lambda x: sum([y.staked_pokt for y in x])
+    )
+    df["total_servicer_stake"] = df["Servicers"].apply(
+        lambda x: sum([y.staked_pokt for y in x])
+    )
+    df["total_gateway_stake"] = df["Gateways"].apply(
+        lambda x: sum([y.staked_pokt for y in x])
+    )
+    df["total_stake"] = (
+        df["total_application_stake"]
+        + df["total_servicer_stake"]
+        + df["total_gateway_stake"]
+    )
+    df["circulating_supply"] = df["floating_supply"] - df["total_stake"]
+    df["dao_value_capture"] = (
+        df["DAO"].apply(lambda x: x.pokt_holdings) / df["floating_supply"]
+    )
 
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
