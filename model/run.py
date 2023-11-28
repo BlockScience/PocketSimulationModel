@@ -75,6 +75,9 @@ def compute_KPIs(df: pd.DataFrame):
         + df["total_gateway_stake"]
     )
     df["circulating_supply"] = df["floating_supply"] - df["total_stake"]
+    df["dao_value_capture"] = (
+        df["DAO"].apply(lambda x: x.pokt_holdings) / df["floating_supply"]
+    )
 
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
