@@ -32,3 +32,11 @@ def s_update_servicer_relay_log(
     _params, substep, state_history, state, _input
 ) -> tuple:
     return ("servicer_relay_log", _input["servicer_relay_log"])
+
+
+def s_set_to_zero_pokt_burned(_params, substep, state_history, state, _input) -> tuple:
+    return ("POKT_burned", 0)
+
+
+def s_set_to_zero_pokt_minted(_params, substep, state_history, state, _input) -> tuple:
+    return ("POKT_minted", 0)

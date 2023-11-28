@@ -6,6 +6,8 @@ from .meta import (
     s_update_n_transactions,
     s_update_relay_log,
     s_update_servicer_relay_log,
+    s_set_to_zero_pokt_burned,
+    s_set_to_zero_pokt_minted,
 )
 from .servicer import (
     p_servicers_join,
@@ -65,9 +67,10 @@ meta_update_block = {
         "pokt_price_true": s_update_pokt_price_true,
         "pokt_price_oracle": s_update_pokt_price_oracle,
         "n_transactions": s_update_n_transactions,
+        "POKT_burned": s_set_to_zero_pokt_burned,
+        "POKT_minted": s_set_to_zero_pokt_minted,
     },
 }
-
 
 # Block for anything joining the system
 join_block = {

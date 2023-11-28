@@ -59,7 +59,7 @@ def run(exp) -> pd.DataFrame:
 
 
 def compute_KPIs(df: pd.DataFrame):
-    pass
+    df["POKT_net_mint"] = df["POKT_minted"] - df["POKT_burned"]
 
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
