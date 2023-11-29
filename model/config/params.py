@@ -39,7 +39,7 @@ system_param_config = {
         "slash_fraction_downtime": [0.000001000000000000],
         # "replay_attack_burn_multiplier": [3],
         # "max_jailed_blocks": [37960],
-        "downtime_jail_duration": [3600000000000],
+        "downtime_jail_duration": [3600000000000],  # In nanoseconds
         "minimum_servicers_per_session": [1],
         "maximum_servicers_per_session": [5],
         # "application_unstaking_time": [None],
