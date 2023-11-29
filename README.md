@@ -8,15 +8,6 @@ The enclosed repository serves as a simulation model for testing economic scenar
 
 This model is the next step in the evolution from the [Pocket Math Spec](https://github.com/BlockScience/PocketMathSpec) which served as a foundational architecture document prior to development.
 
-## Current Development
-
-The current development updates are:
-
-1. Majority of the core development for action chains are completed but there is still refinement needed in terms of constraints and non-basic behaviors.
-2. Parameters are being filled in over time as all their relationships are filled in (sourced from the math spec for easily knowing where parameters need to be invoked).
-3. Basic scenario creation tools implemented which allow for testing iteratively during development.
-4. Lots of work in progress, all tracked through github issues and tagged for easier triage.
-
 ## Structure of the Model Repository
 
 1. Exploratory Folder: All jupytyer notebooks being used to test and build the system
@@ -32,15 +23,15 @@ The current development updates are:
 
 The following are the partial state update blocks which as a whole represent one timestep in the system. The current timestep is one day. Hence T = 365 in the scenario running would mean 365 days. 
 
-1. Meta Update Block: Updates the time in the system
+1. Meta Update Block: Updates the time in the system, the price (true and oracle) for POKT in USD, simulates the number of transactions on the network, and sets certain timestep tracking variables to 0
 2. Join Block: All logic around servicers, services, gateways, and applications joining.
 3. Stake Block: Any logic for staking that happens in the system.
 4. Delegation and Service Linking Block: Block which takes care of applications delegating to gateways and servicers linking to services.
-5. Relay Request Block: All logic around requests being created and relayed.
-6. Jailing & Slashing Block: Block for servicers or gateways being slashed or jailed.
+5. Relay Request Block: All logic around requests being created and relayed, recording of relays in different groups is also recorded.
+6. Jailing & Slashing Block: Block for servicers or gateways being slashed or jailed as well as the inverse actions + penalties.
 7. Block & Fee Rewards Block: The logic for both the block rewards as well as the fee rewards.
 8. Undelegation & Unservice Block: The block which handles any gateways undelegating or any services being unlinked from.
-9. Leave Block: All logic around servicers, services, gateways, and applications leaving.
+9. Leave Block: All logic around servicers, services, gateways, and applications leaving. There is also a substep to check which nodes might be understaked and kick certain ones from the system depending on the policy.
 
 ## Running Simulations
 
