@@ -10,7 +10,16 @@ config_option_map = {
         "Services": "Test",
         "Servicers": "Test",
         "Validators": "Test",
-    }
+    },
+    "Base": {
+        "Geozones": "Test",
+        "Applications": "Test",
+        "DAO": "Test",
+        "Gateways": "Test",
+        "Services": "Test",
+        "Servicers": "Test",
+        "Validators": "Test",
+    },
 }
 
 

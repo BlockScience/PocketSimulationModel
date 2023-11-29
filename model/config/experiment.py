@@ -4,5 +4,11 @@ experimental_setups = {
         "config_option_params": "Test",
         "monte_carlo_n": 1,
         "T": 365,
-    }
+    },
+    "Base": {
+        "config_option_state": "Base",
+        "config_option_params": "Base",
+        "monte_carlo_n": 1,
+        "T": 365,
+    },
 }

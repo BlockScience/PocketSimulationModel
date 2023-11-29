@@ -9,7 +9,8 @@ from typing import Dict
 
 # A map of simulation configurations to the three components (system, behaviors, and functional parameterization)
 config_option_map = {
-    "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"}
+    "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
+    "Base": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
 }
 
 
@@ -74,7 +75,8 @@ system_param_config: Dict[str, SystemParamsType] = {
         # "gateway_bootstrap_unwind_end": [None],
         "transaction_fee": [0.01],
         # "supported_services": [None],
-    }
+    },
+    "Base": {},
 }
 
 
