@@ -140,7 +140,9 @@ def jail_node_policy(
 ) -> Tuple[
     servicer_pause_space2, modify_servicer_pokt_space, burn_pokt_mechanism_space
 ]:
-    burn_stake = domain[0]["node_address"].staked_pokt * 0.2
+    burn_stake = (
+        domain[0]["node_address"].staked_pokt * params["slash_fraction_downtime"]
+    )
     space1: servicer_pause_space2 = {
         "actor_type": ServiceEntityType,
         "address": domain[0]["node_address"],
