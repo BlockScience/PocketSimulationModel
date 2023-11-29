@@ -76,7 +76,31 @@ system_param_config: Dict[str, SystemParamsType] = {
         "transaction_fee": [0.01],
         # "supported_services": [None],
     },
-    "Base": {},
+    "Base": {
+        "minimum_stake_servicer": [15000 * 10e6],
+        "minimum_stake_period_servicer": [10],
+        "minimum_pause_time": [10],
+        "max_chains_servicer": [15],
+        "relays_to_tokens_multiplier": [161.29],
+        "slash_fraction_downtime": [0.000001000000000000],
+        "downtime_jail_duration": [3600000000000],  # In nanoseconds
+        "minimum_servicers_per_session": [1],
+        "maximum_servicers_per_session": [5],
+        "application_fee_per_relay": [27.42],
+        "minimum_application_stake": [15000 * 10e6],
+        "app_burn_per_session": [0],
+        "app_burn_per_relay": [0],
+        "block_proposer_allocation": [0.05],
+        "dao_allocation": [0.1],
+        "servicer_allocation": [0.85],
+        "stake_per_app_delegation": [15000 * 10e6],
+        "gateway_fee_per_relay": [27.42],
+        "gateway_minimum_stake": [150000 * 10e6],
+        "session_token_bucket_coefficient": [100],
+        "dao_fee_percentage": [0.1],
+        "validator_fee_percentage": [0.9],
+        "transaction_fee": [0.01],
+    },
 }
 
 
