@@ -56,8 +56,8 @@ application_config = {
     "Test": [
         Application(
             name="A1",
-            pokt_holdings=1000,
-            staked_pokt=1000,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
             services=[],
             geo_zone="Zone 1",
             number_of_services=1,
@@ -68,8 +68,8 @@ application_config = {
         ),
         Application(
             name="A2",
-            pokt_holdings=5000,
-            staked_pokt=1000,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
             services=[],
             geo_zone="Zone 2",
             number_of_services=2,
@@ -80,8 +80,8 @@ application_config = {
         ),
         Application(
             name="A3",
-            pokt_holdings=3000,
-            staked_pokt=1000,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
             services=[],
             geo_zone="Zone 3",
             number_of_services=1,
@@ -93,7 +93,7 @@ application_config = {
     ]
 }
 
-dao_config = {"Test": DAO(pokt_holdings=100000)}
+dao_config = {"Test": DAO(pokt_holdings=0)}
 
 gateways_config = {
     "Test": [
@@ -101,8 +101,8 @@ gateways_config = {
             name="P1",
             stake_status="Staked",
             delegators=[],
-            pokt_holdings=100,
-            staked_pokt=100,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
         )
     ]
 }
@@ -129,8 +129,8 @@ for i in range(1, 6):
             servicer_salary=0,
             report_card=None,
             test_scores=None,
-            pokt_holdings=6000,
-            staked_pokt=14000,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
             service_url=None,
             services=[],
             geo_zone="Zone ".format(i % 5 + 1),
@@ -146,8 +146,8 @@ validators_config = {
     "Test": [
         Validator(
             name="Mega Validator",
-            pokt_holdings=1000,
-            staked_pokt=1000,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
             service_url=None,
             operator_public_key=None,
             stake_status="Staked",
