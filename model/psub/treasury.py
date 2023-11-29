@@ -29,9 +29,8 @@ def s_update_processed_relays(_params, substep, state_history, state, _input) ->
 
 def p_update_price(_params, substep, state_history, state) -> tuple:
     pokt_price_true = (
-        np.random.normal(0.00332054298962304, 0.06562764398482432)
-        * state["pokt_price_true"]
-    )
+        np.random.normal(0.00332054298962304, 0.06562764398482432) + 1
+    ) * state["pokt_price_true"]
     pokt_price_oracle = (
         0.95 * state["pokt_price_oracle"]
         + (pokt_price_true + np.random.normal(0, 0.03) * pokt_price_true) * 0.05
