@@ -26,4 +26,10 @@ from .Entity import (
     GatewayEntityType,
 )
 from .Data import SessionType
-from .Config import StateType, ParamType
+from .Config import (
+    StateType,
+    ParamType,
+    SystemParamsType,
+    BehaviorParamsType,
+    FunctionalParamsType,
+)

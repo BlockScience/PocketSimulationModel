@@ -1,5 +1,11 @@
 from copy import deepcopy
-from ..types import ParamType
+from ..types import (
+    ParamType,
+    SystemParamsType,
+    BehaviorParamsType,
+    FunctionalParamsType,
+)
+from typing import Dict
 
 # A map of simulation configurations to the three components (system, behaviors, and functional parameterization)
 config_option_map = {
@@ -25,7 +31,7 @@ def build_params(config_option: str) -> ParamType:
     return params
 
 
-system_param_config = {
+system_param_config: Dict[str, SystemParamsType] = {
     "Test": {
         "minimum_stake_servicer": [15000 * 10e6],
         "minimum_stake_period_servicer": [10],
@@ -72,7 +78,7 @@ system_param_config = {
 }
 
 
-behavior_param_config = {
+behavior_param_config: Dict[str, BehaviorParamsType] = {
     "Test": {
         "application_max_number": [20],
         "servicer_max_number": [20],
@@ -100,7 +106,7 @@ behavior_param_config = {
 }
 
 
-functional_param_config = {
+functional_param_config: Dict[str, FunctionalParamsType] = {
     "Test": {
         "application_join_function": ["simple_unfiform"],
         "servicer_join_function": ["simple_unfiform"],
