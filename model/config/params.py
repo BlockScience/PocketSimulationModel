@@ -27,7 +27,7 @@ def build_params(config_option: str) -> ParamType:
 
 system_param_config = {
     "Test": {
-        "minimum_stake_servicer": [15000],
+        "minimum_stake_servicer": [15000 * 10e6],
         "minimum_stake_period_servicer": [10],
         "minimum_pause_time": [10],
         "max_chains_servicer": [15],
@@ -44,15 +44,15 @@ system_param_config = {
         "maximum_servicers_per_session": [5],
         # "application_unstaking_time": [None],
         "application_fee_per_relay": [27.42],
-        "minimum_application_stake": [15000],
+        "minimum_application_stake": [15000 * 10e6],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
         "servicer_allocation": [0.85],
-        "stake_per_app_delegation": [15000],
+        "stake_per_app_delegation": [15000 * 10e6],
         "gateway_fee_per_relay": [27.42],
-        "gateway_minimum_stake": [150000],
+        "gateway_minimum_stake": [150000 * 10e6],
         # "gateway_unstaking_time": [None],
         # "session_block_frequency": [None],
         "session_token_bucket_coefficient": [100],
