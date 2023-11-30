@@ -79,6 +79,8 @@ def compute_KPIs(df: pd.DataFrame):
         df["DAO"].apply(lambda x: x.pokt_holdings) / df["floating_supply"]
     )
 
+    df["kpi_a"] = df["processed_relays"] / df["total_relays"]
+
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
     # Get only the last timestep
