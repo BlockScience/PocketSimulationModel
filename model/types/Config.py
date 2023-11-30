@@ -23,32 +23,24 @@ StateType = NewType(
             "height": int,
             "day": int,
             "Sessions": List[SessionType],
+            "total_relays": int,
+            "processed_relays": int,
+            "pokt_price_true": float,
+            "pokt_price_oracle": float,
+            "n_transactions": int,
+            "relay_log": dict,
+            "servicer_relay_log": dict,
+            "floating_supply": int,
+            "understaked_servicers": List[ServiceEntityType],
+            "understaked_gateways": List[GatewayEntityType],
+            "understaked_applications": List[GatewayEntityType],
+            "POKT_burned": int,
+            "POKT_minted": int,
+            "period_slashing_costs": int,
+            "period_jailing_opportunity_cost": int,
         },
     ),
 )
-
-"""
-    state["height"] = 0
-    state["day"] = 0
-    state["Treasury"] = None
-    state["Sessions"] = []
-    state["relay_fees"] = 0
-    state["total_relays"] = None
-    state["processed_relays"] = None
-    state["pokt_price_true"] = 0.06 / 1e6
-    state["pokt_price_oracle"] = 0.06 / 1e6
-    state["n_transactions"] = None
-    state["relay_log"] = None
-    state["servicer_relay_log"] = None
-    state["floating_supply"] = 1521517215 * 10e6
-    state["understaked_servicers"] = []
-    state["understaked_gateways"] = []
-    state["understaked_applications"] = []
-    state["POKT_burned"] = 0
-    state["POKT_minted"] = 0
-    state["period_slashing_costs"] = 0
-    state["period_jailing_opportunity_cost"] = 0
-"""
 
 
 SystemParamsType = NewType(
