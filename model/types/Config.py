@@ -1,9 +1,53 @@
 from typing import NewType, TypedDict, List, Literal
-from .Primitives import POKTType, PercentType, NanoSecondsType
+from .Primitives import POKTType, PercentType, NanoSecondsType, GeoZoneType
+from .Entity import (
+    ApplicationEntityType,
+    GatewayEntityType,
+    ServiceEntityType,
+    ServicerEntityType,
+)
 
-StateType = NewType("State", TypedDict("State", {}))
+StateType = NewType(
+    "State",
+    TypedDict(
+        "State",
+        {
+            "Geozones": List[GeoZoneType],
+            "Applications": List[ApplicationEntityType],
+            "DAO": object,
+            "Gateways": List[GatewayEntityType],
+            "Services": List[ServicerEntityType],
+            "Servicers": List[ServiceEntityType],
+            "Validators": List[object],
+            "height": int,
+            "day": int,
+        },
+    ),
+)
 
-ParamType = NewType("Params", TypedDict("Params", {}))
+"""
+    state["height"] = 0
+    state["day"] = 0
+    state["Treasury"] = None
+    state["Sessions"] = []
+    state["relay_fees"] = 0
+    state["total_relays"] = None
+    state["processed_relays"] = None
+    state["pokt_price_true"] = 0.06 / 1e6
+    state["pokt_price_oracle"] = 0.06 / 1e6
+    state["n_transactions"] = None
+    state["relay_log"] = None
+    state["servicer_relay_log"] = None
+    state["floating_supply"] = 1521517215 * 10e6
+    state["understaked_servicers"] = []
+    state["understaked_gateways"] = []
+    state["understaked_applications"] = []
+    state["POKT_burned"] = 0
+    state["POKT_minted"] = 0
+    state["period_slashing_costs"] = 0
+    state["period_jailing_opportunity_cost"] = 0
+"""
+
 
 SystemParamsType = NewType(
     "SystemParams",
@@ -93,3 +137,5 @@ FunctionalParamsType = NewType(
         },
     ),
 )
+
+ParamType = NewType("Params", TypedDict("Params", {}))

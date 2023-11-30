@@ -1,5 +1,6 @@
 from copy import deepcopy
 from model.classes import Application, DAO, Gateway, Service, Servicer, Validator
+from ..types import StateType
 
 config_option_map = {
     "Test": {
@@ -23,7 +24,7 @@ config_option_map = {
 }
 
 
-def build_state(config_option):
+def build_state(config_option) -> StateType:
     config_option = config_option_map[config_option]
     state = {}
 
@@ -36,7 +37,6 @@ def build_state(config_option):
     state["Validators"] = validators_config[config_option["Validators"]]
     state["height"] = 0
     state["day"] = 0
-    state["Treasury"] = None
     state["Sessions"] = []
     state["relay_fees"] = 0
     state["total_relays"] = None

@@ -10,7 +10,7 @@ from typing import Dict
 # A map of simulation configurations to the three components (system, behaviors, and functional parameterization)
 config_option_map = {
     "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
-    "Base": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
+    "Base": {"System": "Base", "Behaviors": "Base", "Functional": "Base"},
 }
 
 
