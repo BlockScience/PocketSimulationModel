@@ -13,13 +13,13 @@ config_option_map = {
         "Validators": "Test",
     },
     "Base": {
-        "Geozones": "Test",
-        "Applications": "Test",
-        "DAO": "Test",
-        "Gateways": "Test",
-        "Services": "Test",
-        "Servicers": "Test",
-        "Validators": "Test",
+        "Geozones": "Base",
+        "Applications": "Base",
+        "DAO": "Base",
+        "Gateways": "Base",
+        "Services": "Base",
+        "Servicers": "Base",
+        "Validators": "Base",
     },
 }
 
@@ -58,7 +58,10 @@ def build_state(config_option) -> StateType:
     return state
 
 
-geo_zones_config = {"Test": ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"]}
+geo_zones_config = {
+    "Test": ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"],
+    "Base": ["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"],
+}
 
 application_config = {
     "Test": [
@@ -98,10 +101,48 @@ application_config = {
             delegate=None,
             uses_gateway=True,
         ),
-    ]
+    ],
+    "Base": [
+        Application(
+            name="A1",
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
+            services=[],
+            geo_zone="Zone 1",
+            number_of_services=1,
+            stake_status="Staked",
+            unstaking_height=None,
+            delegate=None,
+            uses_gateway=True,
+        ),
+        Application(
+            name="A2",
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
+            services=[],
+            geo_zone="Zone 2",
+            number_of_services=2,
+            stake_status="Staked",
+            unstaking_height=None,
+            delegate=None,
+            uses_gateway=False,
+        ),
+        Application(
+            name="A3",
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
+            services=[],
+            geo_zone="Zone 3",
+            number_of_services=1,
+            stake_status="Staked",
+            unstaking_height=None,
+            delegate=None,
+            uses_gateway=True,
+        ),
+    ],
 }
 
-dao_config = {"Test": DAO(pokt_holdings=0)}
+dao_config = {"Test": DAO(pokt_holdings=0), "Base": DAO(pokt_holdings=0)}
 
 gateways_config = {
     "Test": [
@@ -112,7 +153,16 @@ gateways_config = {
             pokt_holdings=15000 * 10e6,
             staked_pokt=15000 * 10e6,
         )
-    ]
+    ],
+    "Base": [
+        Gateway(
+            name="P1",
+            stake_status="Staked",
+            delegators=[],
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
+        )
+    ],
 }
 
 service_config = {
@@ -125,13 +175,44 @@ service_config = {
             join_height=-1,
         )
         for x in range(1, 9)
-    ]
+    ],
+    "Base": [
+        Service(
+            name="S{}".format(x),
+            gateway_api_prefix="S{}".format(x),
+            service_id="S{}".format(x),
+            servicers=[],
+            join_height=-1,
+        )
+        for x in range(1, 9)
+    ],
 }
 
-servicers_config = {"Test": []}
+servicers_config = {"Test": [], "Base": []}
 
 for i in range(1, 6):
     servicers_config["Test"].append(
+        Servicer(
+            name="X{}".format(i),
+            servicer_salary=0,
+            report_card=None,
+            test_scores=None,
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
+            service_url=None,
+            services=[],
+            geo_zone="Zone ".format(i % 5 + 1),
+            operator_public_key=None,
+            pause_height=None,
+            stake_status="Staked",
+            unstaking_height=None,
+            QoS=0.8,
+        )
+    )
+
+
+for i in range(1, 11):
+    servicers_config["Base"].append(
         Servicer(
             name="X{}".format(i),
             servicer_salary=0,
@@ -160,5 +241,15 @@ validators_config = {
             operator_public_key=None,
             stake_status="Staked",
         )
-    ]
+    ],
+    "Base": [
+        Validator(
+            name="Mega Validator",
+            pokt_holdings=15000 * 10e6,
+            staked_pokt=15000 * 10e6,
+            service_url=None,
+            operator_public_key=None,
+            stake_status="Staked",
+        )
+    ],
 }
