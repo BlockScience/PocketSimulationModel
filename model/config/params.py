@@ -128,7 +128,31 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "service_linking_probability_normal": [0.01],
         "service_linking_probability_just_joined": [0.5],
         "kick_bottom_probability": [0.5],
-    }
+    },
+    "Base": {
+        "application_max_number": [20],
+        "servicer_max_number": [20],
+        "service_max_number": [10],
+        "gateway_max_number": [25],
+        "service_max_number_link": [8],
+        "application_leave_probability": [0.01],
+        "gateway_leave_probability": [0.01],
+        "service_leave_probability": [0.0025],
+        "servicer_leave_probability": [0.01],
+        "service_unlinking_probability": [0.01],
+        "gateway_undelegation_probability": [0.01],
+        "relays_per_session_gamma_distribution_shape": [500],
+        "relays_per_session_gamma_distribution_scale": [50],
+        "average_session_per_application": [24],
+        "servicer_jailing_probability": [0.001],
+        "uses_gateway_probability": [0.5],
+        "applications_use_min_servicers": [1],
+        "applications_use_max_servicers": [3],
+        "lambda_ewm_revenue_expectation": [0.9],
+        "service_linking_probability_normal": [0.01],
+        "service_linking_probability_just_joined": [0.5],
+        "kick_bottom_probability": [0.5],
+    },
 }
 
 

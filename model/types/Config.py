@@ -36,5 +36,34 @@ SystemParamsType = NewType(
         },
     ),
 )
-BehaviorParamsType = NewType("BehaviorParams", TypedDict("Behavior Params", {}))
+BehaviorParamsType = NewType(
+    "BehaviorParams",
+    TypedDict(
+        "Behavior Params",
+        {
+            "application_max_number": List[int],
+            "servicer_max_number": List[int],
+            "service_max_number": List[int],
+            "gateway_max_number": List[int],
+            "service_max_number_link": List[int],
+            "application_leave_probability": List[float],
+            "gateway_leave_probability": List[float],
+            "service_leave_probability": List[float],
+            "servicer_leave_probability": List[float],
+            "service_unlinking_probability": List[float],
+            "gateway_undelegation_probability": List[float],
+            "relays_per_session_gamma_distribution_shape": List[float],
+            "relays_per_session_gamma_distribution_scale": List[float],
+            "average_session_per_application": List[int],
+            "servicer_jailing_probability": List[float],
+            "uses_gateway_probability": List[float],
+            "applications_use_min_servicers": List[int],
+            "applications_use_max_servicers": List[int],
+            "lambda_ewm_revenue_expectation": List[float],
+            "service_linking_probability_normal": List[float],
+            "service_linking_probability_just_joined": List[float],
+            "kick_bottom_probability": List[float],
+        },
+    ),
+)
 FunctionalParamsType = NewType("FunctionalParams", TypedDict("Functional Params", {}))
