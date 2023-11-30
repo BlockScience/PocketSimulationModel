@@ -80,6 +80,9 @@ def compute_KPIs(df: pd.DataFrame):
     )
 
     df["kpi_a"] = df["processed_relays"] / df["total_relays"]
+    df["burn_rate"] = df["POKT_burned"] / df["floating_supply"].shift(1)
+    df["mint_rate"] = df["POKT_minted"] / df["floating_supply"].shift(1)
+    df["net_mint_rate"] = df["POKT_net_mint"] / df["floating_supply"].shift(1)
 
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
