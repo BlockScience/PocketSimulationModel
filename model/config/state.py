@@ -41,12 +41,12 @@ def build_state(config_option):
     state["relay_fees"] = 0
     state["total_relays"] = None
     state["processed_relays"] = None
-    state["pokt_price_true"] = 0.06
-    state["pokt_price_oracle"] = 0.06
+    state["pokt_price_true"] = 0.06 / 1e6
+    state["pokt_price_oracle"] = 0.06 / 1e6
     state["n_transactions"] = None
     state["relay_log"] = None
     state["servicer_relay_log"] = None
-    state["floating_supply"] = 1521517215
+    state["floating_supply"] = 1521517215 * 10e6
     state["understaked_servicers"] = []
     state["understaked_gateways"] = []
     state["understaked_applications"] = []
