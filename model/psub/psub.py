@@ -43,10 +43,9 @@ from .application import (
     p_application_stake,
     s_update_understaked_applications,
 )
-from .treasury import (
+from .system import (
     p_block_reward,
     p_fee_reward,
-    s_update_treasury,
     s_update_total_relays,
     s_update_processed_relays,
     p_update_price,
@@ -148,7 +147,6 @@ jailing_slashing_block = {
 block_and_fee_rewards_block = {
     "policies": {"block_reward": p_block_reward, "fee_reward": p_fee_reward},
     "variables": {
-        "Treasury": s_update_treasury,
         "Validators": s_update_validators,
         "Servicers": s_update_servicers,
         "Gateways": s_update_gateways,
