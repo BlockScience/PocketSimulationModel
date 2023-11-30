@@ -1,4 +1,4 @@
-from typing import NewType, TypedDict, List
+from typing import NewType, TypedDict, List, Literal
 from .Primitives import POKTType, PercentType, NanoSecondsType
 
 StateType = NewType("State", TypedDict("State", {}))
@@ -66,4 +66,30 @@ BehaviorParamsType = NewType(
         },
     ),
 )
-FunctionalParamsType = NewType("FunctionalParams", TypedDict("Functional Params", {}))
+FunctionalParamsType = NewType(
+    "FunctionalParams",
+    TypedDict(
+        "Functional Params",
+        {
+            "application_join_function": List[Literal["simple_unfiform"]],
+            "servicer_join_function": List[Literal["simple_unfiform"]],
+            "service_join_function": List[Literal["simple_unfiform"]],
+            "gateway_join_function": List[Literal["simple_unfiform"]],
+            "service_linking_function": List[Literal["test", "basic"]],
+            "gateway_delegation_function": List[Literal["test", "basic"]],
+            "relay_requests_function": List[Literal["test"]],
+            "submit_relay_requests_function": List[Literal["test", "basic_gamma"]],
+            "submit_relay_requests_policy_function": List[Literal["test", "V1"]],
+            "application_leave_function": List[Literal["basic"]],
+            "service_leave_function": List[Literal["basic"]],
+            "servicer_leave_function": List[Literal["basic"]],
+            "gateway_leave_function": List[Literal["basic"]],
+            "service_unlinking_function": List[Literal["basic"]],
+            "gateway_undelegation_function": List[Literal["basic"]],
+            "servicer_stake_function": List[Literal["basic"]],
+            "application_stake_function": List[Literal["basic"]],
+            "jailing_function": List[Literal["basic"]],
+            "gateway_stake_function": List[Literal["basic"]],
+        },
+    ),
+)
