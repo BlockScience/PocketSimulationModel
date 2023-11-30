@@ -38,7 +38,6 @@ def build_state(config_option) -> StateType:
     state["height"] = 0
     state["day"] = 0
     state["Sessions"] = []
-    state["relay_fees"] = 0
     state["total_relays"] = None
     state["processed_relays"] = None
     state["pokt_price_true"] = 0.06 / 1e6

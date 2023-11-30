@@ -6,6 +6,7 @@ from .Entity import (
     ServiceEntityType,
     ServicerEntityType,
 )
+from .Data import SessionType
 
 StateType = NewType(
     "State",
@@ -21,6 +22,7 @@ StateType = NewType(
             "Validators": List[object],
             "height": int,
             "day": int,
+            "Sessions": List[SessionType],
         },
     ),
 )
