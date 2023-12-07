@@ -134,7 +134,7 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "servicer_max_number": [20],
         "service_max_number": [10],
         "gateway_max_number": [25],
-        "service_max_number_link": [8],
+        "service_max_number_link": [15],
         "application_leave_probability": [0.01],
         "gateway_leave_probability": [0.01],
         "service_leave_probability": [0.0025],
