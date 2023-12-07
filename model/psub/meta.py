@@ -69,3 +69,9 @@ def p_copy_block(_params, substep, state_history, state) -> dict:
     ]:
         out[x] = deepcopy(state[x])
     return out
+
+
+def s_update_floating_supply_from_state(
+    _params, substep, state_history, state, _input
+) -> tuple:
+    return ("floating_supply", state["floating_supply"])

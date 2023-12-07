@@ -11,6 +11,7 @@ from .meta import (
     s_set_to_zero_slashing_cost,
     s_set_to_zero_jail_cost,
     p_copy_block,
+    s_update_floating_supply_from_state,
 )
 from .servicer import (
     p_servicers_join,
@@ -152,6 +153,7 @@ block_and_fee_rewards_block = {
         "Servicers": s_update_servicers,
         "Gateways": s_update_gateways,
         "Applications": s_update_applications,
+        "floating_supply": s_update_floating_supply_from_state,
     },
 }
 
