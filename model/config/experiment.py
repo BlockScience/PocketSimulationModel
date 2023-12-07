@@ -8,7 +8,7 @@ experimental_setups = {
     "Base": {
         "config_option_state": "Base",
         "config_option_params": "Base",
-        "monte_carlo_n": 2,
+        "monte_carlo_n": 1,
         "T": 365,
     },
 }

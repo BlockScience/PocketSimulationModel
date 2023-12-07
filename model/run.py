@@ -58,6 +58,67 @@ def run(exp) -> pd.DataFrame:
     return df
 
 
+def calculate_gini_from_list(values: list[float] == None) -> float:
+    """
+    Calculate the Gini coefficient from a list of values.
+
+    Parameters:
+    -----------
+    values : list
+        A list of floats representing the data points for which
+        the Gini coefficient is to be calculated.
+
+    Returns:
+    --------
+    float
+        The Gini coefficient calculated from the data.
+    """
+
+    if values is None:
+        return None
+
+    else:
+        n = len(values)
+
+    # Handle case where values list is empty or all values are zero
+    if n == 0:
+        return None
+
+    x_bar = sum(values) / n
+
+    # Calculating the sum of absolute differences
+    sum_of_differences = sum(abs(j - k) for j in values for k in values)
+
+    # Calculating the Gini coefficient
+    gini = sum_of_differences / (2 * n**2 * x_bar)
+
+    return gini
+
+
+def calculate_gini_from_dict(dict_to_use: dict = None) -> float:
+    """
+    Calculate the Gini coefficient from a list of values.
+
+    Parameters:
+    -----------
+    values : list
+        A list of floats representing the data points for which
+        the Gini coefficient is to be calculated.
+
+    Returns:
+    --------
+    float
+        The Gini coefficient calculated from the data.
+    """
+
+    if dict_to_use is None:
+        return None
+
+    values = dict_to_use.values()
+    gini = calculate_gini_from_list(values)
+    return gini
+
+
 def compute_KPIs(df: pd.DataFrame):
     df["POKT_net_mint"] = df["POKT_minted"] - df["POKT_burned"]
     df["total_application_stake"] = df["Applications"].apply(
@@ -83,6 +144,7 @@ def compute_KPIs(df: pd.DataFrame):
     df["burn_rate"] = df["POKT_burned"] / df["floating_supply"].shift(1)
     df["mint_rate"] = df["POKT_minted"] / df["floating_supply"].shift(1)
     df["net_mint_rate"] = df["POKT_net_mint"] / df["floating_supply"].shift(1)
+    df["kpi_c"] = df["servicer_relay_log"].apply(calculate_gini_from_dict)
 
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
