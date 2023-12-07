@@ -1,10 +1,11 @@
 from model import run_experiments
 import pickle
+import sys
 
-experiment_name = "Base"
-df = run_experiments([experiment_name])
+experiments = sys.argv[1:]
+df = run_experiments(experiments)
 
-file_name = open("data/{}.pkl".format(experiment_name), "ab")
+file_name = open("data/{}.pkl".format("-".join(experiments)), "ab")
 pickle.dump(df, file_name)
 file_name.close()
 print("Complete!")
