@@ -57,6 +57,7 @@ def run(exp) -> pd.DataFrame:
     df = pd.DataFrame(raw_system_events)
     return df
 
+
 def calculate_gini_from_list(values: list[float] == None) -> float:
     """
     Calculate the Gini coefficient from a list of values.
@@ -64,7 +65,7 @@ def calculate_gini_from_list(values: list[float] == None) -> float:
     Parameters:
     -----------
     values : list
-        A list of floats representing the data points for which 
+        A list of floats representing the data points for which
         the Gini coefficient is to be calculated.
 
     Returns:
@@ -74,14 +75,14 @@ def calculate_gini_from_list(values: list[float] == None) -> float:
     """
 
     if values is None:
-        return 0.0 
+        return None
 
-    else: 
+    else:
         n = len(values)
 
     # Handle case where values list is empty or all values are zero
     if n == 0:
-        return 0.0
+        return None
 
     x_bar = sum(values) / n
 
@@ -93,6 +94,7 @@ def calculate_gini_from_list(values: list[float] == None) -> float:
 
     return gini
 
+
 def calculate_gini_from_dict(dict_to_use: dict = None) -> float:
     """
     Calculate the Gini coefficient from a list of values.
@@ -100,7 +102,7 @@ def calculate_gini_from_dict(dict_to_use: dict = None) -> float:
     Parameters:
     -----------
     values : list
-        A list of floats representing the data points for which 
+        A list of floats representing the data points for which
         the Gini coefficient is to be calculated.
 
     Returns:
@@ -110,23 +112,11 @@ def calculate_gini_from_dict(dict_to_use: dict = None) -> float:
     """
 
     if dict_to_use is None:
-        return 0.0
+        return None
 
     values = dict_to_use.values()
     gini = calculate_gini_from_list(values)
     return gini
-
-def kpi_c(df: pd.DataFrame,
-         col_name: str) -> float:
-    """
-    KPI-C is the average Gini coefficient over the entries in the column.
-    """
-    filtered_df = df[df[col_name].apply(lambda x: not(x is None))]
-    num_entries = filtered_df.shape[0]
-    total_gini_coeff = sum(filtered_df[col_name].apply(lambda x: calculate_gini_from_dict(x)))
-    average_gini_coeff = total_gini_coeff/num_entries
-    return average_gini_coeff
-
 
 
 def compute_KPIs(df: pd.DataFrame):
@@ -154,7 +144,7 @@ def compute_KPIs(df: pd.DataFrame):
     df["burn_rate"] = df["POKT_burned"] / df["floating_supply"].shift(1)
     df["mint_rate"] = df["POKT_minted"] / df["floating_supply"].shift(1)
     df["net_mint_rate"] = df["POKT_net_mint"] / df["floating_supply"].shift(1)
-    df["load_balance"] = kpi_c(df, col_name = "servicer_relay_log")
+    df["kpi_c"] = df["servicer_relay_log"].apply(calculate_gini_from_dict)
 
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:

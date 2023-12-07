@@ -1,7 +1,10 @@
 import numpy as np
+from datetime import datetime
 
 
 def p_update_time(_params, substep, state_history, state) -> dict:
+    if state["timestep"] == 1:
+        print(datetime.now())
     return {
         "height": state["height"] + 60 * 60 * 24,
         "day": state["day"] + 1,
