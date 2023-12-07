@@ -1,5 +1,6 @@
 import numpy as np
 from datetime import datetime
+from copy import deepcopy
 
 
 def p_update_time(_params, substep, state_history, state) -> dict:
@@ -53,3 +54,18 @@ def s_set_to_zero_slashing_cost(
 
 def s_set_to_zero_jail_cost(_params, substep, state_history, state, _input) -> tuple:
     return ("period_jailing_opportunity_cost", 0)
+
+
+def p_copy_block(_params, substep, state_history, state) -> dict:
+    out = {}
+    for x in [
+        "Servicers",
+        "Services",
+        "Gateways",
+        "Applications",
+        "understaked_servicers",
+        "understaked_gateways",
+        "understaked_applications",
+    ]:
+        out[x] = deepcopy(state[x])
+    return out

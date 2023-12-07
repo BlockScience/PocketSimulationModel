@@ -10,6 +10,7 @@ from .meta import (
     s_set_to_zero_pokt_minted,
     s_set_to_zero_slashing_cost,
     s_set_to_zero_jail_cost,
+    p_copy_block,
 )
 from .servicer import (
     p_servicers_join,
@@ -187,6 +188,21 @@ leave_block = {
     },
 }
 
+copy_block = {
+    "policies": {
+        "copy_block": p_copy_block,
+    },
+    "variables": {
+        "Servicers": s_update_servicers,
+        "Services": s_update_services,
+        "Gateways": s_update_gateways,
+        "Applications": s_update_applications,
+        "understaked_servicers": s_update_understaked_servicers,
+        "understaked_gateways": s_update_understaked_gateways,
+        "understaked_applications": s_update_understaked_applications,
+    },
+}
+
 
 psub_blocks = [
     meta_update_block,
@@ -198,4 +214,5 @@ psub_blocks = [
     block_and_fee_rewards_block,
     undelegation_unservice_block,
     leave_block,
+    copy_block,
 ]

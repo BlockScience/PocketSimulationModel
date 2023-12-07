@@ -30,7 +30,6 @@ from .config import build_state, build_params, experimental_setups
 from .psub import psub_blocks
 from .run import (
     load_config,
-    add_config,
     run,
     compute_KPIs,
     postprocessing,
