@@ -63,7 +63,7 @@ def calculate_gini_from_dict(dict_to_use: dict = None) -> float:
     gini = calculate_gini_from_list(values)
     return gini
 
-def KPI_C(df: pd.DataFrame,
+def kpi_c(df: pd.DataFrame,
          col_name: str) -> float:
     """
     KPI-C is the average Gini coefficient over the entries in the column.
