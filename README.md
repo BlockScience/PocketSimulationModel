@@ -98,3 +98,7 @@ Parameters are made from combining three subsets of parameters:
 ## State
 
 The state can be seeded with different starting state representations so that for example one might test the impacts of starting with few servicers versus many.
+
+## Cloud Running
+
+- The container must be built with docker build . -t pocketsimulation --platform linux/x86_64  
