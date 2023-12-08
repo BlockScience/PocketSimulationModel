@@ -1,3 +1,7 @@
+import os
+
+print(os.listdir("."))
+
 from model import run_experiments
 import pickle
 import sys
