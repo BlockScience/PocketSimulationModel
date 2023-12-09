@@ -13,8 +13,9 @@ file_name = open("data/{}.pkl".format("-".join(experiments)), "ab")
 pickle.dump(df, file_name)
 file_name.close()
 print("Complete!")
-s3 = boto3.resource("s3")
-s3.meta.client.upload_file(
+session = boto3.Session(profile_name="sean")
+s3 = session.client("s3")
+s3.upload_file(
     "data/{}.pkl".format("-".join(experiments)),
     "pocketsimulation",
     "data/{}.pkl".format("-".join(experiments)),
