@@ -51,6 +51,7 @@ class Servicer:
         self.QoS = QoS
 
         self.revenue_expectations = {}
+        self.slashing_history = {}
 
     def services_by_revenue(self):
         out = [
