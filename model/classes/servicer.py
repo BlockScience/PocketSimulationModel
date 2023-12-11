@@ -51,6 +51,7 @@ class Servicer:
         self.QoS = QoS
 
         self.revenue_expectations = {}
+        self.slashing_history = {}
 
     def services_by_revenue(self):
         out = [
@@ -59,3 +60,6 @@ class Servicer:
         ]
         out = sorted(out, key=lambda x: x[1])
         return out
+
+    def __lt__(self, other):
+        self.id_number < other.id_number

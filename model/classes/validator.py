@@ -3,6 +3,7 @@ from ..types import PublicKeyType, uPOKTType, ServiceURLType, StakeStatusType
 
 class Validator:
     id_number = 0
+
     def __init__(
         self,
         name: str,
