@@ -41,6 +41,3 @@ class Application:
 
         # Behavioral assumption of whether an application uses gateways or not
         self.uses_gateway = uses_gateway
-
-    def __eq__(self, other):
-        return self.id_number == other.id_number

@@ -22,6 +22,3 @@ class Validator:
         self.service_url = service_url
         self.operator_public_key = operator_public_key
         self.stake_status = stake_status
-
-    def __eq__(self, other):
-        return self.id_number == other.id_number

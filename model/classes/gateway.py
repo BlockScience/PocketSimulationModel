@@ -20,6 +20,3 @@ class Gateway:
         self.delegators = delegators
         self.pokt_holdings = pokt_holdings
         self.staked_pokt = staked_pokt
-
-    def __eq__(self, other):
-        return self.id_number == other.id_number

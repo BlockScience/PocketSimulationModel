@@ -20,6 +20,3 @@ class Service:
         self.service_id = service_id
         self.servicers = servicers
         self.join_height = join_height
-
-    def __eq__(self, other):
-        return self.id_number == other.id_number
