@@ -60,3 +60,6 @@ class Servicer:
         ]
         out = sorted(out, key=lambda x: x[1])
         return out
+
+    def __eq__(self, other):
+        return self.id_number == other.id_number
