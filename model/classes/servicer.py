@@ -52,6 +52,7 @@ class Servicer:
 
         self.revenue_expectations = {}
         self.slashing_history = {}
+        self.jail_lost_revenue_history = {}
 
     def services_by_revenue(self):
         out = [

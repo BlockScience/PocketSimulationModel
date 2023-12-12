@@ -238,8 +238,8 @@ def unjailing_ba(state: StateType, params: ParamType) -> List[Tuple[unjail_node_
     for servicer in state["Servicers"]:
         if servicer.pause_height:
             # Tracking for lost wages
-            state["period_jailing_opportunity_cost"] += sum(
-                servicer.revenue_expectations.values()
-            )
+            lost_wages = sum(servicer.revenue_expectations.values())
+            state["period_jailing_opportunity_cost"] += lost_wages
+            servicer.jail_lost_revenue_history[state["height"]] = lost_wages
             out.append(({"block_height": state["height"], "node_address": servicer},))
     return out
