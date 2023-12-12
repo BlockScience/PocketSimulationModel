@@ -26,6 +26,11 @@ def build_params(config_option: str) -> ParamType:
     # Combine parameterizations
     params = {**a, **b, **c}
 
+    # Add a check which makes it only single dimension lists
+    assert all(
+        [len(x) == 1 for x in params.values()]
+    ), "All the lengths must be 1 for this set of cadCAD simulations"
+
     # Deepcopy to avoid changing source
     params = deepcopy(params)
 
