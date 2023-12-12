@@ -8,6 +8,7 @@ from cadCAD.configuration import Experiment
 from copy import deepcopy
 from model.config import build_state, build_params, experimental_setups
 import os
+from .kpis import create_simulation_kpis
 
 
 def load_config(monte_carlo_runs: int, t: int, params, initial_state):
@@ -155,9 +156,10 @@ def compute_KPIs(df: pd.DataFrame):
     df["n_understaked_applications"] = df["understaked_applications"].apply(len)
 
 
-def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
+def postprocessing(df: pd.DataFrame, meta_data, compute_kpis=True) -> pd.DataFrame:
     # Get only the last timestep
     df = df.groupby(["simulation", "subset", "run", "timestep"]).last().reset_index()
+    df = pd.concat([df, df["simulation"].apply(lambda x: meta_data.loc[x])], axis=1)
 
     df["key"] = df.apply(
         lambda x: "{}-{}-{}".format(x["simulation"], x["subset"], x["run"]), axis=1
@@ -165,8 +167,11 @@ def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
 
     if compute_kpis:
         compute_KPIs(df)
+        simulation_kpis = create_simulation_kpis(df)
+    else:
+        simulation_kpis = None
 
-    return df
+    return df, simulation_kpis
 
 
 def run_experiments(experiment_keys):
@@ -206,14 +211,12 @@ def run_experiments(experiment_keys):
         )
 
     raw = run(exp)
-    compute_KPIs(raw)
-    df = postprocessing(raw)
     meta_data = pd.DataFrame(
         meta_data, columns=["Experiment Name", "State Set", "Params Set"]
     )
-    df = pd.concat([df, df["simulation"].apply(lambda x: meta_data.loc[x])], axis=1)
+    df, simulation_kpis = postprocessing(raw, meta_data)
 
-    return df
+    return df, simulation_kpis
 
 
 def write_to_csv(df, data_folder, over_write=False):
