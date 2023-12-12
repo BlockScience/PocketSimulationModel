@@ -146,6 +146,14 @@ def compute_KPIs(df: pd.DataFrame):
     df["net_mint_rate"] = df["POKT_net_mint"] / df["floating_supply"].shift(1)
     df["kpi_c"] = df["servicer_relay_log"].apply(calculate_gini_from_dict)
 
+    df["n_servicers"] = df["Servicers"].apply(len)
+    df["n_applications"] = df["Applications"].apply(len)
+    df["n_gateways"] = df["Gateways"].apply(len)
+    df["n_services"] = df["Services"].apply(len)
+    df["n_understaked_servicers"] = df["understaked_servicers"].apply(len)
+    df["n_understaked_gateways"] = df["understaked_gateways"].apply(len)
+    df["n_understaked_applications"] = df["understaked_applications"].apply(len)
+
 
 def postprocessing(df: pd.DataFrame, compute_kpis=True) -> pd.DataFrame:
     # Get only the last timestep
