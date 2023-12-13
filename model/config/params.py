@@ -43,12 +43,12 @@ def build_params(config_option: str) -> ParamType:
 def create_sweep(prefix, sweep, config_option_map_sweep):
     i = 1
 
-    cartesian_product = list(product(sweep.values()))
+    cartesian_product = list(product(*sweep.values()))
     for i in range(len(cartesian_product)):
         vals = cartesian_product[i]
         config_option_map_sweep["{}{}".format(prefix, i + 1)] = {}
-        for k, x in zip(config_option_map_sweep.keys(), vals):
-            config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = x
+        for k, x in zip(sweep.keys(), vals):
+            config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = [x]
 
 
 system_param_config: Dict[str, SystemParamsType] = {
