@@ -6,6 +6,7 @@ from ..types import (
     FunctionalParamsType,
 )
 from typing import Dict
+from itertools import product
 
 # A map of simulation configurations to the three components (system, behaviors, and functional parameterization)
 config_option_map = {
@@ -37,6 +38,17 @@ def build_params(config_option: str) -> ParamType:
     params = deepcopy(params)
 
     return params
+
+
+def create_sweep(prefix, sweep, config_option_map_sweep):
+    i = 1
+
+    cartesian_product = list(product(sweep.values()))
+    for i in range(len(cartesian_product)):
+        vals = cartesian_product[i]
+        config_option_map_sweep["{}{}".format(prefix, i + 1)] = {}
+        for k, x in zip(config_option_map_sweep.keys(), vals):
+            config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = x
 
 
 system_param_config: Dict[str, SystemParamsType] = {
@@ -210,5 +222,7 @@ functional_param_config: Dict[str, FunctionalParamsType] = {
 config_option_map_sweep = {}
 
 test_sweep = build_params("Base")
-for i in range(1, 5):
-    config_option_map_sweep["Test{}".format(i)] = test_sweep
+test_sweep["application_max_number"] = [20, 40]
+test_sweep["servicer_max_number"] = [20, 40]
+
+create_sweep("Test", test_sweep, config_option_map_sweep)
