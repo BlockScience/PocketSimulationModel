@@ -60,11 +60,11 @@ def compute_kpi_14(unique_servicers):
     kpi_14 = {}
     for key in unique_servicers:
         servicers = unique_servicers[key]
-        for servicer in servicers:
+        for servicer in servicers.values():
             servicer.kpi_14 = (
                 servicer.staked_pokt_total_inflow / servicer.total_revenues
             )
-        temp = [x.kpi_14 for x in servicers]
+        temp = [x.kpi_14 for x in servicers.values()]
         kpi_14[key] = sum(temp) / len(temp)
     return pd.Series(kpi_14)
 
