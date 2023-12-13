@@ -6,6 +6,7 @@ from ..types import (
     FunctionalParamsType,
 )
 from typing import Dict
+from itertools import product
 
 # A map of simulation configurations to the three components (system, behaviors, and functional parameterization)
 config_option_map = {
@@ -16,15 +17,17 @@ config_option_map = {
 
 def build_params(config_option: str) -> ParamType:
     # Find the mapping of configuration option to the system, behaviors, and functional parameterization selections
-    config_option = config_option_map[config_option]
+    if config_option in config_option_map:
+        config_option = config_option_map[config_option]
+        # Pull the relevant parameterizations
+        a = system_param_config[config_option["System"]]
+        b = behavior_param_config[config_option["Behaviors"]]
+        c = functional_param_config[config_option["Functional"]]
 
-    # Pull the relevant parameterizations
-    a = system_param_config[config_option["System"]]
-    b = behavior_param_config[config_option["Behaviors"]]
-    c = functional_param_config[config_option["Functional"]]
-
-    # Combine parameterizations
-    params = {**a, **b, **c}
+        # Combine parameterizations
+        params = {**a, **b, **c}
+    else:
+        params = config_option_map_sweep[config_option]
 
     # Add a check which makes it only single dimension lists
     assert all(
@@ -35,6 +38,17 @@ def build_params(config_option: str) -> ParamType:
     params = deepcopy(params)
 
     return params
+
+
+def create_sweep(prefix, sweep, config_option_map_sweep):
+    i = 1
+
+    cartesian_product = list(product(*sweep.values()))
+    for i in range(len(cartesian_product)):
+        vals = cartesian_product[i]
+        config_option_map_sweep["{}{}".format(prefix, i + 1)] = {}
+        for k, x in zip(sweep.keys(), vals):
+            config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = [x]
 
 
 system_param_config: Dict[str, SystemParamsType] = {
@@ -205,3 +219,10 @@ functional_param_config: Dict[str, FunctionalParamsType] = {
         "gateway_stake_function": ["basic"],
     },
 }
+config_option_map_sweep = {}
+
+test_sweep = build_params("Base")
+test_sweep["application_max_number"] = [20, 40]
+test_sweep["servicer_max_number"] = [20, 40]
+
+create_sweep("Test", test_sweep, config_option_map_sweep)
