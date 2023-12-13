@@ -51,6 +51,7 @@ class Servicer:
         self.QoS = QoS
 
         self.revenue_expectations = {}
+        self.slashing_from_jailing_history = {}
         self.slashing_history = {}
         self.jail_lost_revenue_history = {}
 
