@@ -45,7 +45,11 @@ def compute_kpi_e(unique_servicers):
             [sum(x.slashing_history.values()) for x in servicers.values()]
         )
         jailing_cost = -sum(
-            [sum(x.jail_lost_revenue_history.values()) for x in servicers.values()]
+            [
+                sum(x.jail_lost_revenue_history.values())
+                + sum(x.slashing_history.values())
+                for x in servicers.values()
+            ]
         )
         kpi_e[key] = np.exp(-slashing_cost / jailing_cost)
         return pd.Series(kpi_e)
@@ -82,6 +86,6 @@ def create_simulation_kpis(df):
     params.columns = "param_" + params.columns
     params = params.applymap(lambda x: x[0])
     simulation_kpis = simulation_kpis.join(params)
-    simulation_kpis["KPI 8"] = compute_kpi8(unique_servicers)
+    # simulation_kpis["KPI 8"] = compute_kpi8(unique_servicers)
     simulation_kpis["KPI E"] = compute_kpi_e(unique_servicers)
     return simulation_kpis

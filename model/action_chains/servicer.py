@@ -110,9 +110,10 @@ def jailing_slashing_ac(state, params):
         spaces_i = jail_node_policy(state, params, spaces_i)
         servicer_update_pause_height(state, params, spaces_i[:1])
         # Keep track of burned stake from slashing
-        state["period_slashing_costs"] += -spaces_i[1]["amount"]
-        spaces_i[1]["public_key"].slashing_history[state["height"]] = spaces_i[1][
-            "amount"
-        ]
+
+        # state["period_slashing_costs"] += -spaces_i[1]["amount"]
+        spaces_i[1]["public_key"].slashing_from_jailing_history[
+            state["height"]
+        ] = spaces_i[1]["amount"]
         modify_servicer_stake(state, params, spaces_i[1:2])
         burn_pokt_mechanism(state, params, spaces_i[2:3])
