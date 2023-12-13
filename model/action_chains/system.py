@@ -51,6 +51,7 @@ def block_reward_ac(state, params):
         )
         for spaces_j in spaces_i2:
             modify_servicer_pokt_holdings(state, params, spaces_j[:1])
+            spaces_j[0]["public_key"].total_revenues += spaces_j[0]["amount"]
             burn_pokt_mechanism(state, params, spaces_j[1:2])
         spaces_i3 = validator_block_reward_policy(state, params, spaces_i[2:3])
         modify_validator_pokt_holdings(state, params, spaces_i3)
