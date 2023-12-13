@@ -12,3 +12,11 @@ experimental_setups = {
         "T": 365,
     },
 }
+
+for i in range(1, 5):
+    experimental_setups["Test{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "Test{}".format(i),
+        "monte_carlo_n": 1,
+        "T": 365,
+    }

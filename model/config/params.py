@@ -16,15 +16,17 @@ config_option_map = {
 
 def build_params(config_option: str) -> ParamType:
     # Find the mapping of configuration option to the system, behaviors, and functional parameterization selections
-    config_option = config_option_map[config_option]
+    if config_option in config_option_map:
+        config_option = config_option_map[config_option]
+        # Pull the relevant parameterizations
+        a = system_param_config[config_option["System"]]
+        b = behavior_param_config[config_option["Behaviors"]]
+        c = functional_param_config[config_option["Functional"]]
 
-    # Pull the relevant parameterizations
-    a = system_param_config[config_option["System"]]
-    b = behavior_param_config[config_option["Behaviors"]]
-    c = functional_param_config[config_option["Functional"]]
-
-    # Combine parameterizations
-    params = {**a, **b, **c}
+        # Combine parameterizations
+        params = {**a, **b, **c}
+    else:
+        params = config_option_map_sweep[config_option]
 
     # Add a check which makes it only single dimension lists
     assert all(
@@ -205,3 +207,8 @@ functional_param_config: Dict[str, FunctionalParamsType] = {
         "gateway_stake_function": ["basic"],
     },
 }
+config_option_map_sweep = {}
+
+test_sweep = build_params("Base")
+for i in range(1, 5):
+    config_option_map_sweep["Test{}".format(i)] = test_sweep
