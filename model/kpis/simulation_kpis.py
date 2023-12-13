@@ -73,6 +73,46 @@ def compute_kpi_11(unique_servicers):
     return pd.Series(kpi_11)
 
 
+def compute_kpi_1(
+    unique_servicers,
+    simulation_kpis,
+    r=0.05,
+):
+    kpi_1 = {}
+    for key in unique_servicers:
+        servicers = unique_servicers[key]
+        for servicer in servicers.values():
+            t = simulation_kpis.loc[key, "timestep"]
+            p_j = (
+                1
+                - (1 - simulation_kpis.loc[key, "param_servicer_jailing_probability"])
+                ** t
+            )
+            npv = (1 + 1 / r) * (
+                servicer.total_revenues
+                - r * servicer.staked_pokt
+                + (
+                    1
+                    / (1 + r)
+                    * (1 - p_j)
+                    * sum(servicer.jail_lost_revenue_history.values())
+                )
+            )
+
+            if servicer.total_revenues > 0:
+                servicer.kpi_14 = (
+                    servicer.staked_pokt_total_inflow / servicer.total_revenues
+                )
+            else:
+                servicer.kpi_14 = None
+        temp = [x.kpi_14 for x in servicers.values() if x.kpi_14]
+        if len(temp) > 0:
+            kpi_1[key] = sum(temp) / len(temp)
+        else:
+            kpi_1[key] = None
+    return pd.Series(kpi_1)
+
+
 def compute_kpi_14(unique_servicers):
     # Add in KPI 14, average slashing
     kpi_14 = {}
@@ -126,6 +166,10 @@ def create_simulation_kpis(df):
     simulation_kpis = simulation_kpis.join(params)
     # simulation_kpis["KPI 8"] = compute_kpi8(unique_servicers)
     simulation_kpis["KPI E"] = compute_kpi_e(unique_servicers)
+    simulation_kpis["KPI 1"] = compute_kpi_1(
+        unique_servicers,
+        simulation_kpis,
+    )
     simulation_kpis["KPI 11"] = compute_kpi_11(unique_servicers)
     simulation_kpis["KPI 14"] = compute_kpi_14(unique_servicers)
 
