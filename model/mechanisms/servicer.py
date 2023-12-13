@@ -31,6 +31,7 @@ def modify_servicer_stake(
     state: StateType, params: ParamType, domain: Tuple[modify_servicer_pokt_space]
 ) -> None:
     domain[0]["public_key"].staked_pokt += domain[0]["amount"]
+    domain[0]["public_key"].staked_pokt_total_inflow += domain[0]["amount"]
 
 
 def servicer_update_pause_height(
