@@ -21,9 +21,9 @@ This model is the next step in the evolution from the [Pocket Math Spec](https:/
 
 ## Partial State Update Blocks
 
-The following are the partial state update blocks used in the model; each block represents one timestep in the system. The current timestep is one day. Hence T = 365 in the scenario running would mean 365 days. 
+The following are the partial state update blocks used in the model; each block represents one timestep in the system. The current timestep is one day, i.e. setting `T = 365` in the scenario running would correspond to a period of 365 days. 
 
-1. **Meta Update Block: updates the time in the system, the price (both true and oracle) for POKT in USD, simulates the number of transactions on the network, and sets certain timestep tracking variables to 0.
+1. Meta Update Block: updates the time in the system, the price (both true and oracle) for POKT in USD, simulates the number of transactions on the network, and sets certain timestep tracking variables to 0.
 2. Join Block: contains all logic around servicers, services, gateways, and applications joining.
 3. Stake Block: implements the logic for staking in the system.
 4. Delegation and Service Linking Block: takes care of applications delegating to gateways and servicers linking to services.
