@@ -12,12 +12,12 @@ This model is the next step in the evolution from the [Pocket Math Spec](https:/
 
 1. Exploratory Folder: All jupytyer notebooks being used to test and build the system
 2. Model Folder
-    A. Action Chains: The code that pieces together the boundary actions, policies, and mechanisms
-    B. Boundary Actions, Policies, Mechanisms: All code which implements modular logic
-    C. Classes: The class definitions for entities used in the model
-    D. Spaces, Types: The annotations used for functions to make it more readable
-    E. PSUBs: The partial state update blocks that mostly are used as pass throughs to action chains
-    F. Config: The utility functions for setting up configurations, as well as options for starting state and parameter sets
+      * A. Action Chains: The code that pieces together the boundary actions, policies, and mechanisms
+      * B. Boundary Actions, Policies, Mechanisms: All code which implements modular logic
+      * C. Classes: The class definitions for entities used in the model
+      * D. Spaces, Types: The annotations used for functions to make it more readable
+      * E. PSUBs: The partial state update blocks that mostly are used as pass throughs to action chains
+      * F. Config: The utility functions for setting up configurations, as well as options for starting state and parameter sets
 
 ## Partial State Update Blocks
 
