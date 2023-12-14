@@ -2,7 +2,7 @@
 
 ## Summary
 
-The enclosed repository serves as a simulation model for testing economic scenarios related to the Pocket Network. It utilizes cadCAD as the underlying simulation engine.
+This repository serves as a simulation model for testing economic scenarios related to the Pocket Network. It utilizes cadCAD as the underlying simulation engine.
 
 ## Model Background
 
