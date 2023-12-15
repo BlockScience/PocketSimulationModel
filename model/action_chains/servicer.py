@@ -66,6 +66,9 @@ def relay_requests_ac(state, params, relay_log, servicer_relay_log):
     spaces = servicer_relay_policy(state, params, spaces, relay_log, servicer_relay_log)
     out["processed_relays"] = spaces[-1]["session"]["number_of_relays"]
     if type(spaces[0]) == modify_gateway_pokt_space:
+        # Track the fees paid
+        spaces[0]["public_key"].fees_paid += spaces[0]["amount"]
+
         modify_gateway_stake(state, params, spaces[:1])
     else:
         modify_application_stake(state, params, spaces[:1])
