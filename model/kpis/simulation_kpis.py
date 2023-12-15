@@ -16,6 +16,19 @@ def get_unique_servicers(df):
     return unique_servicers
 
 
+def get_unique_gateways(df):
+    unique_gateways = {}
+    # Iterate through the simulations
+    for key in df["key"].unique():
+        # Assign as the last of timestep with one
+        unique_gateways[key] = {}
+        df_mini = df[df["key"] == key]
+        for x in df_mini["Gateways"]:
+            for y in x:
+                unique_gateways[key][y.id_number] = y
+    return unique_gateways
+
+
 def compute_kpi8(unique_servicers):
     # Add in KPI 8, average slashing
     kpi8 = {}

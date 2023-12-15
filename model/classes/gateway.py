@@ -20,3 +20,4 @@ class Gateway:
         self.delegators = delegators
         self.pokt_holdings = pokt_holdings
         self.staked_pokt = staked_pokt
+        self.fees_paid = 0
