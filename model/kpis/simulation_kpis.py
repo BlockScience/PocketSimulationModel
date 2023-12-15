@@ -67,7 +67,7 @@ def compute_kpi_11(unique_servicers):
                     / servicer.total_revenues
                 )
             else:
-                servicer.total_revenues = None
+                servicer.kpi_11 = None
         temp = [x.kpi_11 for x in servicers.values()]
         if len(temp) > 0:
             kpi_11[key] = sum(temp) / len(temp)
