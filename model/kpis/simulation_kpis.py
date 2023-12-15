@@ -68,6 +68,31 @@ def compute_kpi_e(unique_servicers):
     return pd.Series(kpi_e)
 
 
+def compute_kpi3(unique_gateways, simulation_kpis, r=0.05):
+    # Add in KPI 3
+    kpi3 = {}
+    for key in unique_gateways:
+        gateways = unique_gateways[key].values()
+        average_stake = sum([x.staked_pokt for x in gateways]) / len(gateways)
+        for gateway in gateways:
+            gateway.kpi3 = (
+                gateway.staked_pokt
+                - average_stake
+                - (1 + 1 / r) * gateway.fees_paid
+                - (1 / r)
+                * max(
+                    0,
+                    simulation_kpis.loc[key, "param_gateway_minimum_stake"]
+                    - average_stake,
+                )
+            )
+        vals = [x.kpi3 for x in gateways]
+        kpi3[key] = sum(vals) / len(vals)
+
+    kpi3 = pd.Series(kpi3)
+    return kpi3
+
+
 def compute_kpi_11(unique_servicers):
     # Add in KPI 11
     kpi_11 = {}
@@ -147,6 +172,7 @@ def compute_kpi_14(unique_servicers):
 def create_simulation_kpis(df):
     # Get unique servicers
     unique_servicers = get_unique_servicers(df)
+    unique_gateways = get_unique_gateways(df)
 
     simulation_kpis = []
 
@@ -181,6 +207,7 @@ def create_simulation_kpis(df):
         unique_servicers,
         simulation_kpis,
     )
+    simulation_kpis["KPI 3"] = compute_kpi3(unique_gateways, simulation_kpis)
     simulation_kpis["KPI 11"] = compute_kpi_11(unique_servicers)
     simulation_kpis["KPI 14"] = compute_kpi_14(unique_servicers)
 
