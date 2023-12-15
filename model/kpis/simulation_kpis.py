@@ -68,7 +68,7 @@ def compute_kpi_11(unique_servicers):
                 )
             else:
                 servicer.kpi_11 = None
-        temp = [x.kpi_11 for x in servicers.values()]
+        temp = [x.kpi_11 for x in servicers.values() if x]
         if len(temp) > 0:
             kpi_11[key] = sum(temp) / len(temp)
         else:
