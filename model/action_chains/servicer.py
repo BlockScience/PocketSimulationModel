@@ -31,6 +31,7 @@ from ..mechanisms import (
     burn_pokt_mechanism,
 )
 from ..spaces import modify_gateway_pokt_space
+from ..classes import Gateway
 
 
 def servicer_join_ac(state, params):
@@ -65,7 +66,7 @@ def relay_requests_ac(state, params, relay_log, servicer_relay_log):
     spaces = relay_requests_ba(state, params)
     spaces = servicer_relay_policy(state, params, spaces, relay_log, servicer_relay_log)
     out["processed_relays"] = spaces[-1]["session"]["number_of_relays"]
-    if type(spaces[0]) == modify_gateway_pokt_space:
+    if type(spaces[0]["public_key"]) == Gateway:
         # Track the fees paid
         spaces[0]["public_key"].fees_paid += spaces[0]["amount"]
 
