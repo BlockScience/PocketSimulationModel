@@ -13,10 +13,10 @@ experimental_setups = {
     },
 }
 
-for i in range(1, 5):
+for i in range(1, 28):
     experimental_setups["Test{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "Test{}".format(i),
-        "monte_carlo_n": 1,
+        "monte_carlo_n": 30,
         "T": 365,
     }

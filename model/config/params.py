@@ -222,7 +222,9 @@ functional_param_config: Dict[str, FunctionalParamsType] = {
 config_option_map_sweep = {}
 
 test_sweep = build_params("Base")
-test_sweep["application_max_number"] = [20, 40]
-test_sweep["servicer_max_number"] = [20, 40]
+test_sweep["application_max_number"] = [20, 30, 40]
+test_sweep["servicer_max_number"] = [20, 30, 40]
+test_sweep["relays_per_session_gamma_distribution_scale"] = [200000, 300000, 400000]
+
 
 create_sweep("Test", test_sweep, config_option_map_sweep)

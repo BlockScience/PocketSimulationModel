@@ -4,6 +4,9 @@ import boto3
 from model import run_experiments
 import pickle
 import sys
+from datetime import datetime
+
+print(datetime.now())
 
 experiments = sys.argv[1:]
 df, simulation_kpis = run_experiments(experiments)
@@ -32,3 +35,4 @@ s3.upload_file(
     "data/Simulation-{}.pkl".format("-".join(experiments)),
 )
 print("Uploaded!")
+print(datetime.now())
