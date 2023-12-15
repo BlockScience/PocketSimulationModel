@@ -102,5 +102,5 @@ The state can be seeded with different starting state representations so that fo
 ## Cloud Running
 
 - The container must be built with docker build . -t pocketsimulation --platform linux/x86_64
-- To run one experiment locally do: docker run . -t pocketsimulation Base
-- To run two or more for example: docker run . -t pocketsimulation Base test1
+- To run one experiment locally do: docker run -t pocketsimulation Base
+- To run two or more for example: docker run -t pocketsimulation Base test1
