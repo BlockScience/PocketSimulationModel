@@ -16,6 +16,19 @@ def get_unique_servicers(df):
     return unique_servicers
 
 
+def get_unique_gateways(df):
+    unique_gateways = {}
+    # Iterate through the simulations
+    for key in df["key"].unique():
+        # Assign as the last of timestep with one
+        unique_gateways[key] = {}
+        df_mini = df[df["key"] == key]
+        for x in df_mini["Gateways"]:
+            for y in x:
+                unique_gateways[key][y.id_number] = y
+    return unique_gateways
+
+
 def compute_kpi8(unique_servicers):
     # Add in KPI 8, average slashing
     kpi8 = {}
@@ -55,6 +68,31 @@ def compute_kpi_e(unique_servicers):
     return pd.Series(kpi_e)
 
 
+def compute_kpi3(unique_gateways, simulation_kpis, r=0.05):
+    # Add in KPI 3
+    kpi3 = {}
+    for key in unique_gateways:
+        gateways = unique_gateways[key].values()
+        average_stake = sum([x.staked_pokt for x in gateways]) / len(gateways)
+        for gateway in gateways:
+            gateway.kpi3 = (
+                gateway.staked_pokt
+                - average_stake
+                - (1 + 1 / r) * gateway.fees_paid
+                - (1 / r)
+                * max(
+                    0,
+                    simulation_kpis.loc[key, "param_gateway_minimum_stake"]
+                    - average_stake,
+                )
+            )
+        vals = [x.kpi3 for x in gateways]
+        kpi3[key] = sum(vals) / len(vals)
+
+    kpi3 = pd.Series(kpi3)
+    return kpi3
+
+
 def compute_kpi_11(unique_servicers):
     # Add in KPI 11
     kpi_11 = {}
@@ -68,7 +106,7 @@ def compute_kpi_11(unique_servicers):
                 )
             else:
                 servicer.kpi_11 = None
-        temp = [x.kpi_11 for x in servicers.values()]
+        temp = [x.kpi_11 for x in servicers.values() if x.kpi_11]
         if len(temp) > 0:
             kpi_11[key] = sum(temp) / len(temp)
         else:
@@ -101,14 +139,9 @@ def compute_kpi_1(
                     * sum(servicer.jail_lost_revenue_history.values())
                 )
             )
+            servicer.kpi_1 = npv
 
-            if servicer.total_revenues > 0:
-                servicer.kpi_14 = (
-                    servicer.staked_pokt_total_inflow / servicer.total_revenues
-                )
-            else:
-                servicer.kpi_14 = None
-        temp = [x.kpi_14 for x in servicers.values() if x.kpi_14]
+        temp = [x.kpi_1 for x in servicers.values() if x.kpi_1]
         if len(temp) > 0:
             kpi_1[key] = sum(temp) / len(temp)
         else:
@@ -139,6 +172,7 @@ def compute_kpi_14(unique_servicers):
 def create_simulation_kpis(df):
     # Get unique servicers
     unique_servicers = get_unique_servicers(df)
+    unique_gateways = get_unique_gateways(df)
 
     simulation_kpis = []
 
@@ -173,6 +207,7 @@ def create_simulation_kpis(df):
         unique_servicers,
         simulation_kpis,
     )
+    simulation_kpis["KPI 3"] = compute_kpi3(unique_gateways, simulation_kpis)
     simulation_kpis["KPI 11"] = compute_kpi_11(unique_servicers)
     simulation_kpis["KPI 14"] = compute_kpi_14(unique_servicers)
 
