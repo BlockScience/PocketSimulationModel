@@ -114,14 +114,9 @@ def compute_kpi_1(
                     * sum(servicer.jail_lost_revenue_history.values())
                 )
             )
+            servicer.kpi_1 = npv
 
-            if servicer.total_revenues > 0:
-                servicer.kpi_14 = (
-                    servicer.staked_pokt_total_inflow / servicer.total_revenues
-                )
-            else:
-                servicer.kpi_14 = None
-        temp = [x.kpi_14 for x in servicers.values() if x.kpi_14]
+        temp = [x.kpi_1 for x in servicers.values() if x.kpi_1]
         if len(temp) > 0:
             kpi_1[key] = sum(temp) / len(temp)
         else:
