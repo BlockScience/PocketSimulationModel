@@ -253,3 +253,13 @@ validators_config = {
         )
     ],
 }
+
+
+def find_total_service_connections(state):
+    return sum(map(lambda x: len(x.services), state["Servicers"]))
+
+
+def find_service_density(state):
+    total_services = find_total_service_connections(state)
+    density = total_services / len(state["Services"]) / len(state["Servicers"])
+    return density
