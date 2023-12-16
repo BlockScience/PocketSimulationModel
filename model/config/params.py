@@ -15,7 +15,7 @@ config_option_map = {
 }
 
 
-def build_params(config_option: str) -> ParamType:
+def build_params(config_option: str, singles: bool = False) -> ParamType:
     # Find the mapping of configuration option to the system, behaviors, and functional parameterization selections
     if config_option in config_option_map:
         config_option = config_option_map[config_option]
@@ -36,6 +36,10 @@ def build_params(config_option: str) -> ParamType:
 
     # Deepcopy to avoid changing source
     params = deepcopy(params)
+
+    if singles:
+        for x in params:
+            params[x] = params[x][0]
 
     return params
 
