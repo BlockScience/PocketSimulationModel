@@ -1,6 +1,10 @@
 from copy import deepcopy
 from model.classes import Application, DAO, Gateway, Service, Servicer, Validator
 from ..types import StateType
+from model.policy import service_linking_policy
+from model.mechanisms import link_service_mechanism
+from itertools import product
+import random
 
 config_option_map = {
     "Test": {
@@ -253,3 +257,26 @@ validators_config = {
         )
     ],
 }
+
+
+def find_total_service_connections(state):
+    return sum(map(lambda x: len(x.services), state["Servicers"]))
+
+
+def find_service_density(state):
+    total_services = find_total_service_connections(state)
+    density = total_services / len(state["Services"]) / len(state["Servicers"])
+    return density
+
+
+def enforce_density_service_servicers(state, params_density):
+    pairs = list(product(state["Servicers"], state["Services"]))
+    random.shuffle(pairs)
+    while (
+        len(pairs) > 0
+        and find_service_density(state) < params_density["target_density"]
+    ):
+        pair = pairs.pop()
+        space = ({"service": pair[1], "servicer": pair[0]},)
+        space = service_linking_policy(state, params_density, space)
+        link_service_mechanism(state, params_density, space)
