@@ -211,4 +211,21 @@ def create_simulation_kpis(df):
     simulation_kpis["KPI 11"] = compute_kpi_11(unique_servicers)
     simulation_kpis["KPI 14"] = compute_kpi_14(unique_servicers)
 
+    agg1 = df.groupby("key")[["total_relays", "processed_relays"]].sum()
+    agg2 = df.groupby("key")[["kpi_a"]].mean()
+    agg3 = df.groupby("key")[
+        [
+            "floating_supply",
+            "circulating_supply",
+            "dao_value_capture",
+            "POKT_burned_cummulative",
+            "POKT_minted_cummulative",
+            "POKT_net_mint_cummulative",
+            "burn_rate_cummulative",
+            "mint_rate_cummulative",
+            "net_mint_rate_cummulative",
+        ]
+    ].last()
+    simulation_kpis = pd.concat([simulation_kpis, agg1, agg2, agg3], axis=1)
+
     return simulation_kpis

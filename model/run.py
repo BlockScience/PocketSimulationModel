@@ -141,10 +141,37 @@ def compute_KPIs(df: pd.DataFrame):
         df["DAO"].apply(lambda x: x.pokt_holdings) / df["floating_supply"]
     )
 
+    df["POKT_burned_cummulative"] = (
+        df.groupby("key")["POKT_burned"].expanding().sum().reset_index(drop=True)
+    )
+    df["POKT_minted_cummulative"] = (
+        df.groupby("key")["POKT_minted"].expanding().sum().reset_index(drop=True)
+    )
+    df["POKT_net_mint_cummulative"] = (
+        df["POKT_minted_cummulative"] - df["POKT_burned_cummulative"]
+    )
+
     df["kpi_a"] = df["processed_relays"] / df["total_relays"]
     df["burn_rate"] = df["POKT_burned"] / df["floating_supply"].shift(1)
     df["mint_rate"] = df["POKT_minted"] / df["floating_supply"].shift(1)
     df["net_mint_rate"] = df["POKT_net_mint"] / df["floating_supply"].shift(1)
+
+    df["burn_rate_cummulative"] = (
+        df.groupby("key")
+        .apply(lambda x: x["POKT_burned_cummulative"] / x["floating_supply"].iloc[0])
+        .reset_index(drop=True)
+    )
+    df["mint_rate_cummulative"] = (
+        df.groupby("key")
+        .apply(lambda x: x["POKT_minted_cummulative"] / x["floating_supply"].iloc[0])
+        .reset_index(drop=True)
+    )
+    df["net_mint_rate_cummulative"] = (
+        df.groupby("key")
+        .apply(lambda x: x["POKT_net_mint_cummulative"] / x["floating_supply"].iloc[0])
+        .reset_index(drop=True)
+    )
+
     df["kpi_c"] = df["servicer_relay_log"].apply(calculate_gini_from_dict)
 
     df["n_servicers"] = df["Servicers"].apply(len)
