@@ -107,6 +107,16 @@ The state can be seeded with different starting state representations so that fo
 
 ## Adaptive Grid Protocol
 
+### Algorithm
+
+1. Run the 30MC simulations with 2 sweep values (call them (x,y)) per protocol parameter
+2. Post-processing for KPIs for this scenario
+3. One PSuU round, assessing threshold inequalities to arrive at an interim “best” parameter constellation (this may be an ‘automated heuristic’)
+4. Exogenous sweep values are not updated, and remain as they originally were. For each parameter, an expansion around either x or y, depending upon which was contained in the “best” constellation. This would be determined by either:
+- standard interval defined from the previous parameter sweep values
+- sensitivity analysis step to provide the next range
+5. Re-run the simulation again with the new adaptive parameter grid (i.e. GOTO #1), until N loops are completed.
+
 ### Configuration Files
 
 - For each sweep, there will be a suffix to the label like ag1, ag2, etc. to signify which iteration of the adaptive grid is being used.
