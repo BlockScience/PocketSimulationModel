@@ -230,5 +230,26 @@ test_sweep["application_max_number"] = [20, 30, 40]
 test_sweep["servicer_max_number"] = [20, 30, 40]
 test_sweep["relays_per_session_gamma_distribution_scale"] = [200000, 300000, 400000]
 
-
 create_sweep("Test", test_sweep, config_option_map_sweep)
+
+gateway_viability_sweep_ag1_ = build_params("Base")
+gateway_viability_sweep_ag1_["relays_to_tokens_multiplier"] = [25, 400]
+gateway_viability_sweep_ag1_["gateway_fee_per_relay"] = [20, 30]
+gateway_viability_sweep_ag1_["application_fee_per_relay"] = [20, 30]
+gateway_viability_sweep_ag1_["gateway_minimum_stake"] = [100000 * 10e6, 200000 * 10e6]
+gateway_viability_sweep_ag1_["application_minimum_stake"] = [
+    100000 * 10e6,
+    200000 * 10e6,
+]
+gateway_viability_sweep_ag1_["application_max_number"] = [5, 20, 100]
+gateway_viability_sweep_ag1_["relays_per_session_gamma_distribution_scale"] = [
+    100000,
+    300000,
+    900000,
+]
+
+create_sweep(
+    "gateway_viability_sweep_ag1_",
+    gateway_viability_sweep_ag1_,
+    config_option_map_sweep,
+)
