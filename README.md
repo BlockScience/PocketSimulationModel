@@ -104,3 +104,10 @@ The state can be seeded with different starting state representations so that fo
 - The container must be built with docker build . -t pocketsimulation --platform linux/x86_64
 - To run one experiment locally do: docker run -t pocketsimulation Base
 - To run two or more for example: docker run -t pocketsimulation Base test1
+
+## Adaptive Grid Protocol
+
+### Configuration Files
+
+- For each sweep, there will be a suffix to the label like ag1, ag2, etc. to signify which iteration of the adaptive grid is being used.
+- As research progress, adaptive grids will be created sequentially to store all configurations used in determining results
