@@ -25,6 +25,6 @@ for i in range(1, 289):
     experimental_setups["gateway_viability_sweep_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "gateway_viability_sweep_ag1_{}".format(i),
-        "monte_carlo_n": 30,
+        "monte_carlo_n": 1,
         "T": 365,
     }
