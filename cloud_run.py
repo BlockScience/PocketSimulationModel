@@ -11,28 +11,29 @@ print(datetime.now())
 experiments = sys.argv[1:]
 df, simulation_kpis = run_experiments(experiments)
 
+for key in df["Experiment Name"].unique():
+    file_name = open("data/{}.pkl".format(key), "ab")
+    pickle.dump(df[df["Experiment Name"] == key], file_name)
+    file_name.close()
 
-file_name = open("data/{}.pkl".format("-".join(experiments)), "ab")
-pickle.dump(df, file_name)
-file_name.close()
-
-file_name = open("data/Simulation-{}.pkl".format("-".join(experiments)), "ab")
-pickle.dump(simulation_kpis, file_name)
-file_name.close()
+    file_name = open("data/Simulation-{}.pkl".format(key), "ab")
+    pickle.dump(simulation_kpis[simulation_kpis["Experiment Name"] == key], file_name)
+    file_name.close()
 
 print("Complete!")
 
 session = boto3.Session(profile_name="sean")
 s3 = session.client("s3")
-s3.upload_file(
-    "data/{}.pkl".format("-".join(experiments)),
-    "pocketsimulation",
-    "data/{}.pkl".format("-".join(experiments)),
-)
-s3.upload_file(
-    "data/Simulation-{}.pkl".format("-".join(experiments)),
-    "pocketsimulation",
-    "data/Simulation-{}.pkl".format("-".join(experiments)),
-)
+for key in df["Experiment Name"].unique():
+    s3.upload_file(
+        "data/{}.pkl".format(key),
+        "pocketsimulation",
+        "data/{}.pkl".format(key),
+    )
+    s3.upload_file(
+        "data/Simulation-{}.pkl".format(key),
+        "pocketsimulation",
+        "data/Simulation-{}.pkl".format(key),
+    )
 print("Uploaded!")
 print(datetime.now())
