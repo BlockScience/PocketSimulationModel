@@ -75,3 +75,24 @@ def run_tasks(ecs, experiments):
             }
         },
     )
+
+
+def download_experiment_kpi(experiment, s3):
+    experiment = "gateway_viability_sweep_ag1_"
+
+    runs = create_expected_runs_dataframe(s3, experiment)
+    assert runs["Complete"].all()
+
+    files = []
+    for file in runs["KPI File"]:
+        file2 = file.replace("data", "simulation_data")
+        files.append(file2)
+        with open(file2, "wb") as f:
+            s3.download_fileobj("pocketsimulation", file, f)
+
+    dataframes = []
+    for file in files:
+        dataframes.append(pd.read_pickle(file))
+    df = pd.concat(dataframes)
+    df = df.reset_index(drop=True)
+    df.to_csv("simulation_data/{}.csv".format(experiment))
