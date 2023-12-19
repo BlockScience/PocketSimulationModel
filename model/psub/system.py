@@ -44,6 +44,9 @@ def s_update_pokt_price_oracle(_params, substep, state_history, state, _input) -
 def p_update_gfpr(_params, substep, state_history, state) -> dict:
     if type(_params["gateway_fee_per_relay"]) in [float, int]:
         return {"gateway_fee_per_relay": _params["gateway_fee_per_relay"]}
+    elif _params["gateway_fee_per_relay"] == "Dynamic":
+        print("X")
+        return {"gateway_fee_per_relay": 100}
     else:
         assert False, "Not implemented"
 
@@ -51,6 +54,9 @@ def p_update_gfpr(_params, substep, state_history, state) -> dict:
 def p_update_rttm(_params, substep, state_history, state) -> dict:
     if type(_params["relays_to_tokens_multiplier"]) in [float, int]:
         return {"relays_to_tokens_multiplier": _params["relays_to_tokens_multiplier"]}
+    elif _params["relays_to_tokens_multiplier"] == "Dynamic":
+        print("Y")
+        return {"relays_to_tokens_multiplier": 100}
     else:
         assert False, "Not implemented"
 

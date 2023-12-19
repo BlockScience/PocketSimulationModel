@@ -12,6 +12,7 @@ from itertools import product
 config_option_map = {
     "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
     "Base": {"System": "Base", "Behaviors": "Base", "Functional": "Base"},
+    "BaseDynamic": {"System": "BaseDynamic", "Behaviors": "Base", "Functional": "Base"},
 }
 
 
@@ -126,6 +127,9 @@ system_param_config: Dict[str, SystemParamsType] = {
     },
 }
 
+system_param_config["BaseDynamic"] = deepcopy(system_param_config["Base"])
+system_param_config["BaseDynamic"]["relays_to_tokens_multiplier"] = ["Dynamic"]
+system_param_config["BaseDynamic"]["gateway_fee_per_relay"] = ["Dynamic"]
 
 behavior_param_config: Dict[str, BehaviorParamsType] = {
     "Test": {
