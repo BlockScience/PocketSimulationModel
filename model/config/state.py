@@ -57,6 +57,8 @@ def build_state(config_option) -> StateType:
     state["POKT_minted"] = 0
     state["period_slashing_costs"] = 0
     state["period_jailing_opportunity_cost"] = 0
+    state["relays_to_tokens_multiplier"] = None
+    state["gateway_fee_per_relay"] = None
 
     state = deepcopy(state)
     return state
