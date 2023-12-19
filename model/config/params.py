@@ -90,13 +90,13 @@ system_param_config: Dict[str, SystemParamsType] = {
         "dao_fee_percentage": [0.1],
         "validator_fee_percentage": [0.9],
         # "maturity_relay_cost": [None],
-        # "maturity_relay_charge": [None],
-        # "min_bootstrap_gateway_fee_per_relay": [None],
+        "maturity_relay_charge": [0.000001971],
+        "min_bootstrap_gateway_fee_per_relay": [0.00000085],
         # "max_bootstrap_servicer_cost_per_relay": [None],
         # "servicer_bootstrap_unwind_start": [None],
         # "servicer_bootstrap_end": [None],
-        # "gateway_bootstrap_unwind_start": [None],
-        # "gateway_bootstrap_unwind_end": [None],
+        "gateway_bootstrap_unwind_start": [3],  # In billion
+        "gateway_bootstrap_end": [20],  # In billion
         "transaction_fee": [0.01],
         # "supported_services": [None],
     },
@@ -124,6 +124,10 @@ system_param_config: Dict[str, SystemParamsType] = {
         "dao_fee_percentage": [0.1],
         "validator_fee_percentage": [0.9],
         "transaction_fee": [0.01],
+        "min_bootstrap_gateway_fee_per_relay": [0.00000085],
+        "maturity_relay_charge": [0.000001971],
+        "gateway_bootstrap_unwind_start": [3],  # In billion
+        "gateway_bootstrap_end": [20],  # In billion
     },
 }
 

@@ -45,11 +45,22 @@ def p_update_gfpr(_params, substep, state_history, state) -> dict:
     if type(_params["gateway_fee_per_relay"]) in [float, int]:
         return {"gateway_fee_per_relay": _params["gateway_fee_per_relay"]}
     elif _params["gateway_fee_per_relay"] == "Dynamic":
-        a_gfpr = 0
+        a_gfpr = (
+            (
+                _params["min_bootstrap_gateway_fee_per_relay"]
+                - _params["maturity_relay_charge"]
+            )
+            * (1 / (state["pokt_price_oracle"] * 1e6))
+            / (
+                _params["gateway_bootstrap_unwind_start"]
+                - _params["gateway_bootstrap_end"]
+            )
+        )
+        print(a_gfpr)
         b_gfpr = 0
         cap_relays_gfpr = 0
         gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1000
-        print(gfpr)
+        # print(gfpr)
         return {"gateway_fee_per_relay": 100}
     else:
         assert False, "Not implemented"
