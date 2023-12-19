@@ -43,7 +43,7 @@ def block_reward_policy_aggregate(
 ]:
     space = domain[0]
 
-    reward = int(space["relays"] * params["relays_to_tokens_multiplier"])
+    reward = int(space["relays"] * state["relays_to_tokens_multiplier"])
 
     space1: assign_servicer_salary_space = {
         "geo_zone": space["geo_zone"],

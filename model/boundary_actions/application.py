@@ -199,7 +199,7 @@ def application_stake_ba_basic(
             buffer
             * average_relays
             * params["average_session_per_application"]
-            * params["relays_to_tokens_multiplier"]
+            * state["relays_to_tokens_multiplier"]
         )
         if application.staked_pokt < target_stake:
             amount = max(

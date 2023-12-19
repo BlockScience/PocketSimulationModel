@@ -117,7 +117,7 @@ def submit_relay_requests_policy_v1(
     if domain[0]["application_address"].delegate:
         max_relays_allowed = (
             domain[0]["application_address"].delegate.staked_pokt
-            // params["gateway_fee_per_relay"]
+            // state["gateway_fee_per_relay"]
         )
     else:
         max_relays_allowed = (
