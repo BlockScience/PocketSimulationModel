@@ -1,0 +1,19 @@
+
+                  ___________    ____
+  ________ __ ___/ / ____/   |  / __ \
+ / ___/ __` / __  / /   / /| | / / / /
+/ /__/ /_/ / /_/ / /___/ ___ |/ /_/ /
+\___/\__,_/\__,_/\____/_/  |_/_____/
+by cadCAD
+
+cadCAD Version: 0.5.0
+Execution Mode: multi_proc
+Simulation Dimensions:
+Entire Simulation: (Models, Unique Timesteps, Params, Total Runs, Sub-States) = (3, 1095, 195, 3, 25)
+     Simulation 0: (Timesteps, Params, Runs, Sub-States) = (365, 65, 1, 25)
+     Simulation 1: (Timesteps, Params, Runs, Sub-States) = (365, 65, 1, 25)
+     Simulation 2: (Timesteps, Params, Runs, Sub-States) = (365, 65, 1, 25)
+Execution Method: parallelize_simulations
+Execution Mode: parallelized
+2023-12-19 17:42:56.725089
+Total execution time: 77.81s

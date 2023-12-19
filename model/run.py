@@ -55,7 +55,11 @@ def run(exp, context=None, disable_deepcopy=False) -> pd.DataFrame:
         _context = exec_mode.local_mode
     else:
         _context = context
-    local_mode_ctx = ExecutionContext(context=_context, additional_objs={'deepcopy_off': disable_deepcopy})
+
+    if disable_deepcopy:
+        local_mode_ctx = ExecutionContext(context=_context, additional_objs={'deepcopy_off': disable_deepcopy})
+    else:
+        local_mode_ctx = ExecutionContext(context=_context)
 
     sim = Executor(exec_context=local_mode_ctx, configs=exp.configs)
     raw_system_events, _, _ = sim.execute()

@@ -12,4 +12,4 @@ df, simulation_kpis = run_experiments(["gateway_viability_sweep_ag1_1",
                                        "gateway_viability_sweep_ag1_3"],
                                        disable_postprocessing=True,
                                        disable_deepcopy=True,
-                                       context=ExecutionMode().single_mode)
+                                       context=ExecutionMode().multi_proc)
