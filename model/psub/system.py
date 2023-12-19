@@ -45,7 +45,11 @@ def p_update_gfpr(_params, substep, state_history, state) -> dict:
     if type(_params["gateway_fee_per_relay"]) in [float, int]:
         return {"gateway_fee_per_relay": _params["gateway_fee_per_relay"]}
     elif _params["gateway_fee_per_relay"] == "Dynamic":
-        print("X")
+        a_gfpr = 0
+        b_gfpr = 0
+        cap_relays_gfpr = 0
+        gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1000
+        print(gfpr)
         return {"gateway_fee_per_relay": 100}
     else:
         assert False, "Not implemented"
@@ -55,7 +59,16 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
     if type(_params["relays_to_tokens_multiplier"]) in [float, int]:
         return {"relays_to_tokens_multiplier": _params["relays_to_tokens_multiplier"]}
     elif _params["relays_to_tokens_multiplier"] == "Dynamic":
-        print("Y")
+        uses_supply_growth = True
+
+        rttm_uncap = 0
+        rttm_cap = 0
+
+        if uses_supply_growth:
+            rttm = min(rttm_uncap, rttm_cap)
+        else:
+            rttm = rttm_uncap
+        print(rttm)
         return {"relays_to_tokens_multiplier": 100}
     else:
         assert False, "Not implemented"
