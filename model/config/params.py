@@ -253,3 +253,11 @@ create_sweep(
     gateway_viability_sweep_ag1_,
     config_option_map_sweep,
 )
+
+network_failures_service_ag1_ = build_params("Base")
+network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-6, 1e-1]
+network_failures_service_ag1_["downtime_jail_duration"] = [
+    60 * 1e9,
+    3600 * 1e9,
+    28800 * 1e9,
+]
