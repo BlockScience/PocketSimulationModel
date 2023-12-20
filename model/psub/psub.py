@@ -51,6 +51,10 @@ from .system import (
     p_update_price,
     s_update_pokt_price_true,
     s_update_pokt_price_oracle,
+    p_update_gfpr,
+    p_update_rttm,
+    s_update_rttm,
+    s_update_gfpr,
 )
 from .validator import s_update_validators
 
@@ -72,6 +76,17 @@ meta_update_block = {
         "POKT_minted": s_set_to_zero_pokt_minted,
         "period_slashing_costs": s_set_to_zero_slashing_cost,
         "period_jailing_opportunity_cost": s_set_to_zero_jail_cost,
+    },
+}
+
+gfpr_rttm_block = {
+    "policies": {
+        "gfpr": p_update_gfpr,
+        "rttm": p_update_rttm,
+    },
+    "variables": {
+        "relays_to_tokens_multiplier": s_update_rttm,
+        "gateway_fee_per_relay": s_update_gfpr,
     },
 }
 
@@ -190,6 +205,7 @@ leave_block = {
 
 psub_blocks = [
     meta_update_block,
+    gfpr_rttm_block,
     join_block,
     stake_block,
     delegation_service_block,

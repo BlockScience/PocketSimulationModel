@@ -39,3 +39,116 @@ def s_update_pokt_price_true(_params, substep, state_history, state, _input) -> 
 
 def s_update_pokt_price_oracle(_params, substep, state_history, state, _input) -> tuple:
     return ("pokt_price_oracle", _input["pokt_price_oracle"])
+
+
+def p_update_gfpr(_params, substep, state_history, state) -> dict:
+    if type(_params["gateway_fee_per_relay"]) in [float, int]:
+        return {"gateway_fee_per_relay": _params["gateway_fee_per_relay"]}
+    elif _params["gateway_fee_per_relay"] == "Dynamic":
+        a_gfpr = (
+            (
+                _params["min_bootstrap_gateway_fee_per_relay"]
+                - _params["maturity_relay_charge"]
+            )
+            * (1 / (state["pokt_price_oracle"] * 1e6))
+            / (
+                _params["gateway_bootstrap_unwind_start"]
+                - _params["gateway_bootstrap_end"]
+            )
+        )
+
+        b_gfpr = (
+            _params["maturity_relay_charge"] * (1 / (state["pokt_price_oracle"] * 1e6))
+            - a_gfpr * _params["gateway_bootstrap_end"]
+        )
+
+        # If it is the first timestep we don't have relays completed yet
+        # And convert to billions for the unit
+        if state["processed_relays"]:
+            relays_per_day = state["processed_relays"] / 1000000000
+        else:
+            relays_per_day = 1
+        cap_relays_gfpr = min(
+            max(relays_per_day, _params["gateway_bootstrap_unwind_start"]),
+            _params["gateway_bootstrap_end"],
+        )
+        gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1e6
+        return {"gateway_fee_per_relay": gfpr}
+    else:
+        assert False, "Not implemented"
+
+
+def p_update_rttm(_params, substep, state_history, state) -> dict:
+    if type(_params["relays_to_tokens_multiplier"]) in [float, int]:
+        return {"relays_to_tokens_multiplier": _params["relays_to_tokens_multiplier"]}
+    elif _params["relays_to_tokens_multiplier"] == "Dynamic":
+        a_gfpr = (
+            (
+                _params["min_bootstrap_gateway_fee_per_relay"]
+                - _params["maturity_relay_charge"]
+            )
+            * (1 / (state["pokt_price_oracle"] * 1e6))
+            / (
+                _params["gateway_bootstrap_unwind_start"]
+                - _params["gateway_bootstrap_end"]
+            )
+        )
+
+        b_gfpr = (
+            _params["maturity_relay_charge"] * (1 / (state["pokt_price_oracle"] * 1e6))
+            - a_gfpr * _params["gateway_bootstrap_end"]
+        )
+
+        # If it is the first timestep we don't have relays completed yet
+        # And convert to billions for the unit
+        if state["processed_relays"]:
+            relays_per_day = state["processed_relays"] / 1000000000
+        else:
+            relays_per_day = 1
+        cap_relays_gfpr = min(
+            max(relays_per_day, _params["gateway_bootstrap_unwind_start"]),
+            _params["gateway_bootstrap_end"],
+        )
+        gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1e6
+
+        uses_supply_growth = True
+
+        a_rttm = (
+            (
+                _params["max_bootstrap_servicer_cost_per_relay"]
+                - _params["maturity_relay_cost"]
+            )
+            / (state["pokt_price_oracle"] * 1e6)
+            / (
+                _params["servicer_bootstrap_unwind_start"]
+                - _params["servicer_bootstrap_end"]
+            )
+        )
+        cap_relays_rttm = min(
+            max(relays_per_day, _params["servicer_bootstrap_unwind_start"]),
+            _params["servicer_bootstrap_end"],
+        )
+        b_rttm = (
+            _params["maturity_relay_charge"] / (state["pokt_price_oracle"] * 1e6)
+        ) - a_rttm * _params["servicer_bootstrap_end"]
+
+        rttm_uncap = (a_rttm * cap_relays_rttm + b_rttm) * 1e6
+        rttm_cap = (_params["supply_grow_cap"] * state["floating_supply"]) / (
+            relays_per_day * 1000000000 * 365.2
+        ) * 1e6 + gfpr
+
+        if uses_supply_growth:
+            rttm = min(rttm_uncap, rttm_cap)
+        else:
+            rttm = rttm_uncap
+        return {"relays_to_tokens_multiplier": rttm}
+    else:
+        assert False, "Not implemented"
+
+
+def s_update_gfpr(_params, substep, state_history, state, _input) -> tuple:
+    return ("gateway_fee_per_relay", _input["gateway_fee_per_relay"])
+
+
+def s_update_rttm(_params, substep, state_history, state, _input) -> tuple:
+    return ("relays_to_tokens_multiplier", _input["relays_to_tokens_multiplier"])

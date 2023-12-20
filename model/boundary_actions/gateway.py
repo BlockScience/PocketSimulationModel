@@ -23,9 +23,9 @@ def gateway_join_ba_simple_unfiform(
             {
                 "name": "",
                 "stake_amount": 150000
-                * 10e6,  # The amount of uPOKT in escrow (i.e. a security deposit)
+                * 1e6,  # The amount of uPOKT in escrow (i.e. a security deposit)
                 "personal_holdings": 1500000
-                * 10e6,  # Unstaked POKT the gateway personally holds
+                * 1e6,  # Unstaked POKT the gateway personally holds
             },
         )
     else:

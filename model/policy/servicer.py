@@ -73,7 +73,7 @@ def servicer_relay_policy(
     # Payment from the requestor
     if application.delegate:
         relay_charge = (
-            domain[0]["session"]["number_of_relays"] * params["gateway_fee_per_relay"]
+            domain[0]["session"]["number_of_relays"] * state["gateway_fee_per_relay"]
         )
         space1: modify_gateway_pokt_space = {
             "public_key": application.delegate,

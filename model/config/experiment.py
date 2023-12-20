@@ -11,6 +11,12 @@ experimental_setups = {
         "monte_carlo_n": 1,
         "T": 365,
     },
+    "BaseDynamic": {
+        "config_option_state": "Base",
+        "config_option_params": "BaseDynamic",
+        "monte_carlo_n": 1,
+        "T": 365,
+    },
 }
 
 for i in range(1, 28):

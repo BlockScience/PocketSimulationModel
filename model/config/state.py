@@ -49,7 +49,7 @@ def build_state(config_option) -> StateType:
     state["n_transactions"] = None
     state["relay_log"] = None
     state["servicer_relay_log"] = None
-    state["floating_supply"] = 1521517215 * 10e6
+    state["floating_supply"] = 1521517215 * 1e6
     state["understaked_servicers"] = []
     state["understaked_gateways"] = []
     state["understaked_applications"] = []
@@ -57,6 +57,8 @@ def build_state(config_option) -> StateType:
     state["POKT_minted"] = 0
     state["period_slashing_costs"] = 0
     state["period_jailing_opportunity_cost"] = 0
+    state["relays_to_tokens_multiplier"] = None
+    state["gateway_fee_per_relay"] = None
 
     state = deepcopy(state)
     return state
@@ -71,8 +73,8 @@ application_config = {
     "Test": [
         Application(
             name="A1",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             services=[],
             geo_zone="Zone 1",
             number_of_services=1,
@@ -83,8 +85,8 @@ application_config = {
         ),
         Application(
             name="A2",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             services=[],
             geo_zone="Zone 2",
             number_of_services=2,
@@ -95,8 +97,8 @@ application_config = {
         ),
         Application(
             name="A3",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             services=[],
             geo_zone="Zone 3",
             number_of_services=1,
@@ -109,8 +111,8 @@ application_config = {
     "Base": [
         Application(
             name="A1",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             services=[],
             geo_zone="Zone 1",
             number_of_services=1,
@@ -121,8 +123,8 @@ application_config = {
         ),
         Application(
             name="A2",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             services=[],
             geo_zone="Zone 2",
             number_of_services=2,
@@ -133,8 +135,8 @@ application_config = {
         ),
         Application(
             name="A3",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             services=[],
             geo_zone="Zone 3",
             number_of_services=1,
@@ -154,8 +156,8 @@ gateways_config = {
             name="P1",
             stake_status="Staked",
             delegators=[],
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
         )
     ],
     "Base": [
@@ -163,8 +165,8 @@ gateways_config = {
             name="P1",
             stake_status="Staked",
             delegators=[],
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
         )
     ],
 }
@@ -201,8 +203,8 @@ for i in range(1, 6):
             servicer_salary=0,
             report_card=None,
             test_scores=None,
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             service_url=None,
             services=[],
             geo_zone="Zone ".format(i % 5 + 1),
@@ -222,8 +224,8 @@ for i in range(1, 11):
             servicer_salary=0,
             report_card=None,
             test_scores=None,
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             service_url=None,
             services=[],
             geo_zone="Zone ".format(i % 5 + 1),
@@ -239,8 +241,8 @@ validators_config = {
     "Test": [
         Validator(
             name="Mega Validator",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             service_url=None,
             operator_public_key=None,
             stake_status="Staked",
@@ -249,8 +251,8 @@ validators_config = {
     "Base": [
         Validator(
             name="Mega Validator",
-            pokt_holdings=15000 * 10e6,
-            staked_pokt=15000 * 10e6,
+            pokt_holdings=15000 * 1e6,
+            staked_pokt=15000 * 1e6,
             service_url=None,
             operator_public_key=None,
             stake_status="Staked",

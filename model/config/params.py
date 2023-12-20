@@ -12,6 +12,7 @@ from itertools import product
 config_option_map = {
     "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
     "Base": {"System": "Base", "Behaviors": "Base", "Functional": "Base"},
+    "BaseDynamic": {"System": "BaseDynamic", "Behaviors": "Base", "Functional": "Base"},
 }
 
 
@@ -57,7 +58,7 @@ def create_sweep(prefix, sweep, config_option_map_sweep):
 
 system_param_config: Dict[str, SystemParamsType] = {
     "Test": {
-        "minimum_stake_servicer": [15000 * 10e6],
+        "minimum_stake_servicer": [15000 * 1e6],
         "minimum_stake_period_servicer": [10],
         "minimum_pause_time": [10],
         "max_chains_servicer": [15],
@@ -74,33 +75,34 @@ system_param_config: Dict[str, SystemParamsType] = {
         "maximum_servicers_per_session": [5],
         # "application_unstaking_time": [None],
         "application_fee_per_relay": [27.42],
-        "minimum_application_stake": [15000 * 10e6],
+        "minimum_application_stake": [15000 * 1e6],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
         "servicer_allocation": [0.85],
-        "stake_per_app_delegation": [15000 * 10e6],
+        "stake_per_app_delegation": [15000 * 1e6],
         "gateway_fee_per_relay": [27.42],
-        "gateway_minimum_stake": [150000 * 10e6],
+        "gateway_minimum_stake": [150000 * 1e6],
         # "gateway_unstaking_time": [None],
         # "session_block_frequency": [None],
         "session_token_bucket_coefficient": [100],
         "dao_fee_percentage": [0.1],
         "validator_fee_percentage": [0.9],
-        # "maturity_relay_cost": [None],
-        # "maturity_relay_charge": [None],
-        # "min_bootstrap_gateway_fee_per_relay": [None],
-        # "max_bootstrap_servicer_cost_per_relay": [None],
-        # "servicer_bootstrap_unwind_start": [None],
-        # "servicer_bootstrap_end": [None],
-        # "gateway_bootstrap_unwind_start": [None],
-        # "gateway_bootstrap_unwind_end": [None],
+        "maturity_relay_cost": [0.000001971 * 0.75],
+        "maturity_relay_charge": [0.000001971],
+        "min_bootstrap_gateway_fee_per_relay": [0.00000085],
+        "max_bootstrap_servicer_cost_per_relay": [0.000005],
+        "servicer_bootstrap_unwind_start": [1.5],
+        "servicer_bootstrap_end": [10],
+        "gateway_bootstrap_unwind_start": [3],  # In billion
+        "gateway_bootstrap_end": [20],  # In billion
         "transaction_fee": [0.01],
+        "supply_grow_cap": [0.05]
         # "supported_services": [None],
     },
     "Base": {
-        "minimum_stake_servicer": [15000 * 10e6],
+        "minimum_stake_servicer": [15000 * 1e6],
         "minimum_stake_period_servicer": [10],
         "minimum_pause_time": [10],
         "max_chains_servicer": [15],
@@ -110,22 +112,34 @@ system_param_config: Dict[str, SystemParamsType] = {
         "minimum_servicers_per_session": [1],
         "maximum_servicers_per_session": [5],
         "application_fee_per_relay": [27.42],
-        "minimum_application_stake": [15000 * 10e6],
+        "minimum_application_stake": [15000 * 1e6],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
         "servicer_allocation": [0.85],
-        "stake_per_app_delegation": [15000 * 10e6],
+        "stake_per_app_delegation": [15000 * 1e6],
         "gateway_fee_per_relay": [27.42],
-        "gateway_minimum_stake": [150000 * 10e6],
+        "gateway_minimum_stake": [150000 * 1e6],
         "session_token_bucket_coefficient": [100],
         "dao_fee_percentage": [0.1],
         "validator_fee_percentage": [0.9],
         "transaction_fee": [0.01],
+        "min_bootstrap_gateway_fee_per_relay": [0.00000085],
+        "maturity_relay_charge": [0.000001971],
+        "gateway_bootstrap_unwind_start": [3],  # In billion
+        "gateway_bootstrap_end": [20],  # In billion
+        "supply_grow_cap": [0.05],
+        "servicer_bootstrap_end": [10],
+        "max_bootstrap_servicer_cost_per_relay": [0.000005],
+        "servicer_bootstrap_unwind_start": [1.5],
+        "maturity_relay_cost": [0.000001971 * 0.75],
     },
 }
 
+system_param_config["BaseDynamic"] = deepcopy(system_param_config["Base"])
+system_param_config["BaseDynamic"]["relays_to_tokens_multiplier"] = ["Dynamic"]
+system_param_config["BaseDynamic"]["gateway_fee_per_relay"] = ["Dynamic"]
 
 behavior_param_config: Dict[str, BehaviorParamsType] = {
     "Test": {
@@ -236,10 +250,10 @@ gateway_viability_sweep_ag1_ = build_params("Base")
 gateway_viability_sweep_ag1_["relays_to_tokens_multiplier"] = [25, 400]
 gateway_viability_sweep_ag1_["gateway_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["application_fee_per_relay"] = [20, 30]
-gateway_viability_sweep_ag1_["gateway_minimum_stake"] = [100000 * 10e6, 200000 * 10e6]
+gateway_viability_sweep_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
 gateway_viability_sweep_ag1_["application_minimum_stake"] = [
-    100000 * 10e6,
-    200000 * 10e6,
+    100000 * 1e6,
+    200000 * 1e6,
 ]
 gateway_viability_sweep_ag1_["application_max_number"] = [5, 20, 100]
 gateway_viability_sweep_ag1_["relays_per_session_gamma_distribution_scale"] = [
@@ -253,3 +267,11 @@ create_sweep(
     gateway_viability_sweep_ag1_,
     config_option_map_sweep,
 )
+
+network_failures_service_ag1_ = build_params("Base")
+network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-6, 1e-1]
+network_failures_service_ag1_["downtime_jail_duration"] = [
+    60 * 1e9,
+    3600 * 1e9,
+    28800 * 1e9,
+]
