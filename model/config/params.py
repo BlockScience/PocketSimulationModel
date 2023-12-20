@@ -165,6 +165,9 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "service_linking_probability_normal": [0.01],
         "service_linking_probability_just_joined": [0.5],
         "kick_bottom_probability": [0.5],
+        "oracle_price_lognormal_mean": [-3.1885519850880812],
+        "oracle_price_lognormal_stdev": [0.3638713191401966],
+        "oracle_price_interarrival_time_flag": [1],
     },
     "Base": {
         "application_max_number": [20],
@@ -189,6 +192,9 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "service_linking_probability_normal": [0.01],
         "service_linking_probability_just_joined": [0.5],
         "kick_bottom_probability": [0.5],
+        "oracle_price_lognormal_mean": [-3.1885519850880812],
+        "oracle_price_lognormal_stdev": [0.3638713191401966],
+        "oracle_price_interarrival_time_flag": [1],
     },
 }
 
