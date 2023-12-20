@@ -275,3 +275,23 @@ network_failures_service_ag1_["downtime_jail_duration"] = [
     3600 * 1e9,
     28800 * 1e9,
 ]
+
+def apply_list_function_to_sys_params_grid(
+    param_instance: SystemsParamType,
+    func: Callable[[List[float]], List[float]]
+) -> SystemsParamType:
+    """
+    Given a SystemParamsType (a TypedDict where )
+    """
+    new_dict = {
+        key: func(value) if isinstance(value, list) else value
+        for key, value in custom_instance.items()
+    }
+    new_instance = SystemsParamType(**new_dict)
+    return new_instance
+
+
+
+my_list = [1,2,3]
+print(f"{my_list} is an instance of list: {isinstance(my_list, list)}")
+print(f"{my_list} is an instance of List: {isinstance(my_list, List)}")
