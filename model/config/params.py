@@ -94,7 +94,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "min_bootstrap_gateway_fee_per_relay": [0.00000085],
         # "max_bootstrap_servicer_cost_per_relay": [None],
         # "servicer_bootstrap_unwind_start": [None],
-        # "servicer_bootstrap_end": [None],
+        "servicer_bootstrap_end": [10],
         "gateway_bootstrap_unwind_start": [3],  # In billion
         "gateway_bootstrap_end": [20],  # In billion
         "transaction_fee": [0.01],
@@ -130,6 +130,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "gateway_bootstrap_unwind_start": [3],  # In billion
         "gateway_bootstrap_end": [20],  # In billion
         "supply_grow_cap": [0.05],
+        "servicer_bootstrap_end": [10],
     },
 }
 

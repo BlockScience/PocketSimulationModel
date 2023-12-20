@@ -114,8 +114,12 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
         uses_supply_growth = True
 
         a_rttm = 0
+        print(a_rttm)
         cap_relays_rttm = 0
-        b_rttm = 0
+        b_rttm = (
+            _params["maturity_relay_charge"] / (state["pokt_price_oracle"] * 1e6)
+        ) - a_rttm * _params["servicer_bootstrap_end"]
+        print(b_rttm)
 
         rttm_uncap = (a_rttm * cap_relays_rttm + b_rttm) * 1e6
         rttm_cap = (_params["supply_grow_cap"] * state["floating_supply"]) / (
