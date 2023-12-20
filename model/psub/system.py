@@ -124,12 +124,13 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
                 - _params["servicer_bootstrap_end"]
             )
         )
-        print(a_rttm)
-        cap_relays_rttm = 0
+        cap_relays_rttm = min(
+            max(relays_per_day, _params["servicer_bootstrap_unwind_start"]),
+            _params["servicer_bootstrap_end"],
+        )
         b_rttm = (
             _params["maturity_relay_charge"] / (state["pokt_price_oracle"] * 1e6)
         ) - a_rttm * _params["servicer_bootstrap_end"]
-        print(b_rttm)
 
         rttm_uncap = (a_rttm * cap_relays_rttm + b_rttm) * 1e6
         rttm_cap = (_params["supply_grow_cap"] * state["floating_supply"]) / (
@@ -140,8 +141,7 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
             rttm = min(rttm_uncap, rttm_cap)
         else:
             rttm = rttm_uncap
-        print(rttm)
-        return {"relays_to_tokens_multiplier": 100}
+        return {"relays_to_tokens_multiplier": rttm}
     else:
         assert False, "Not implemented"
 
