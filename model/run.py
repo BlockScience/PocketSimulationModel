@@ -45,13 +45,23 @@ def add_config(exp: Experiment, monte_carlo_runs: int, t: int, params, initial_s
     )
 
 
-def run(exp) -> pd.DataFrame:
+def run(exp, context=None, disable_deepcopy=False) -> pd.DataFrame:
     """
     Run simulation
     """
     # execute in local mode
-    exec_mode = ExecutionMode()
-    ctx = ExecutionContext(context=exec_mode.local_mode)
+    if context is None:
+        exec_mode = ExecutionMode()
+        _context = exec_mode.local_mode
+    else:
+        _context = context
+
+    if disable_deepcopy:
+        ctx = ExecutionContext(
+            context=_context, additional_objs={"deepcopy_off": disable_deepcopy}
+        )
+    else:
+        ctx = ExecutionContext(context=_context)
 
     sim = Executor(exec_context=ctx, configs=exp.configs)
     raw_system_events, _, _ = sim.execute()
@@ -219,7 +229,7 @@ def postprocessing(df: pd.DataFrame, meta_data, compute_kpis=True) -> pd.DataFra
     return df, simulation_kpis
 
 
-def run_experiments(experiment_keys):
+def run_experiments(experiment_keys, disable_postprocessing=False, **kwargs):
     meta_data = []
 
     experimental_setup = experimental_setups[experiment_keys[0]]
@@ -255,13 +265,16 @@ def run_experiments(experiment_keys):
             ]
         )
 
-    raw = run(exp)
+    raw = run(exp, **kwargs)
     meta_data = pd.DataFrame(
         meta_data, columns=["Experiment Name", "State Set", "Params Set"]
     )
-    df, simulation_kpis = postprocessing(raw, meta_data)
 
-    return df, simulation_kpis
+    if disable_postprocessing:
+        return raw, None
+    else:
+        df, simulation_kpis = postprocessing(raw, meta_data)
+        return df, simulation_kpis
 
 
 def write_to_csv(df, data_folder, over_write=False):
