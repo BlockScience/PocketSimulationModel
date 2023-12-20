@@ -61,9 +61,18 @@ def p_update_gfpr(_params, substep, state_history, state) -> dict:
             _params["maturity_relay_charge"] * (1 / (state["pokt_price_oracle"] * 1e6))
             - a_gfpr * _params["gateway_bootstrap_end"]
         )
-        cap_relays_gfpr = 0
-        gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1000
-        # print(gfpr)
+
+        # If it is the first timestep we don't have relays completed yet
+        # And convert to billions for the unit
+        if state["processed_relays"]:
+            relays_per_day = state["processed_relays"] / 1000000000
+        else:
+            relays_per_day = 1
+        cap_relays_gfpr = min(
+            max(relays_per_day, _params["gateway_bootstrap_unwind_start"]),
+            _params["gateway_bootstrap_end"],
+        )
+        gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1e6
         return {"gateway_fee_per_relay": gfpr}
     else:
         assert False, "Not implemented"

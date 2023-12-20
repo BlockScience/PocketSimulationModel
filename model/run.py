@@ -51,7 +51,7 @@ def run(exp) -> pd.DataFrame:
     """
     # execute in local mode
     exec_mode = ExecutionMode()
-    ctx = ExecutionContext(context=exec_mode.single_mode)
+    ctx = ExecutionContext(context=exec_mode.local_mode)
 
     sim = Executor(exec_context=ctx, configs=exp.configs)
     raw_system_events, _, _ = sim.execute()
