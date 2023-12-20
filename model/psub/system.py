@@ -152,3 +152,7 @@ def s_update_gfpr(_params, substep, state_history, state, _input) -> tuple:
 
 def s_update_rttm(_params, substep, state_history, state, _input) -> tuple:
     return ("relays_to_tokens_multiplier", _input["relays_to_tokens_multiplier"])
+
+
+def p_events(_params, substep, state_history, state) -> dict:
+    return {}
