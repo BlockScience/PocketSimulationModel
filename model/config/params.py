@@ -13,6 +13,7 @@ config_option_map = {
     "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
     "Base": {"System": "Base", "Behaviors": "Base", "Functional": "Base"},
     "BaseDynamic": {"System": "BaseDynamic", "Behaviors": "Base", "Functional": "Base"},
+    "BaseEvent": {"System": "Base", "Behaviors": "BaseEvent", "Functional": "Base"},
 }
 
 
@@ -165,6 +166,7 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "service_linking_probability_normal": [0.01],
         "service_linking_probability_just_joined": [0.5],
         "kick_bottom_probability": [0.5],
+        "event": [None],
     },
     "Base": {
         "application_max_number": [20],
@@ -189,9 +191,12 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "service_linking_probability_normal": [0.01],
         "service_linking_probability_just_joined": [0.5],
         "kick_bottom_probability": [0.5],
+        "event": [None],
     },
 }
 
+behavior_param_config["BaseEvent"] = deepcopy(behavior_param_config["Base"])
+behavior_param_config["BaseEvent"]['event'] = ["servicer_shutdown_by_geozone_random"]
 
 functional_param_config: Dict[str, FunctionalParamsType] = {
     "Test": {
