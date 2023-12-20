@@ -98,6 +98,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "gateway_bootstrap_unwind_start": [3],  # In billion
         "gateway_bootstrap_end": [20],  # In billion
         "transaction_fee": [0.01],
+        "supply_grow_cap": [0.05]
         # "supported_services": [None],
     },
     "Base": {
@@ -128,6 +129,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "maturity_relay_charge": [0.000001971],
         "gateway_bootstrap_unwind_start": [3],  # In billion
         "gateway_bootstrap_end": [20],  # In billion
+        "supply_grow_cap": [0.05],
     },
 }
 

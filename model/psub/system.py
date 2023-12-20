@@ -82,6 +82,35 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
     if type(_params["relays_to_tokens_multiplier"]) in [float, int]:
         return {"relays_to_tokens_multiplier": _params["relays_to_tokens_multiplier"]}
     elif _params["relays_to_tokens_multiplier"] == "Dynamic":
+        a_gfpr = (
+            (
+                _params["min_bootstrap_gateway_fee_per_relay"]
+                - _params["maturity_relay_charge"]
+            )
+            * (1 / (state["pokt_price_oracle"] * 1e6))
+            / (
+                _params["gateway_bootstrap_unwind_start"]
+                - _params["gateway_bootstrap_end"]
+            )
+        )
+
+        b_gfpr = (
+            _params["maturity_relay_charge"] * (1 / (state["pokt_price_oracle"] * 1e6))
+            - a_gfpr * _params["gateway_bootstrap_end"]
+        )
+
+        # If it is the first timestep we don't have relays completed yet
+        # And convert to billions for the unit
+        if state["processed_relays"]:
+            relays_per_day = state["processed_relays"] / 1000000000
+        else:
+            relays_per_day = 1
+        cap_relays_gfpr = min(
+            max(relays_per_day, _params["gateway_bootstrap_unwind_start"]),
+            _params["gateway_bootstrap_end"],
+        )
+        gfpr = (a_gfpr * cap_relays_gfpr + b_gfpr) * 1e6
+
         uses_supply_growth = True
 
         a_rttm = 0
@@ -89,7 +118,9 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
         b_rttm = 0
 
         rttm_uncap = (a_rttm * cap_relays_rttm + b_rttm) * 1e6
-        rttm_cap = 0
+        rttm_cap = (_params["supply_grow_cap"] * state["floating_supply"]) / (
+            relays_per_day * 1000000000 * 365.2
+        ) * 1e6 + gfpr
 
         if uses_supply_growth:
             rttm = min(rttm_uncap, rttm_cap)
