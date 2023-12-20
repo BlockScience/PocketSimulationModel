@@ -84,7 +84,11 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
     elif _params["relays_to_tokens_multiplier"] == "Dynamic":
         uses_supply_growth = True
 
-        rttm_uncap = 0
+        a_rttm = 0
+        cap_relays_rttm = 0
+        b_rttm = 0
+
+        rttm_uncap = (a_rttm * cap_relays_rttm + b_rttm) * 1e6
         rttm_cap = 0
 
         if uses_supply_growth:
