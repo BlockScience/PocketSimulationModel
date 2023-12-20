@@ -89,11 +89,11 @@ system_param_config: Dict[str, SystemParamsType] = {
         "session_token_bucket_coefficient": [100],
         "dao_fee_percentage": [0.1],
         "validator_fee_percentage": [0.9],
-        # "maturity_relay_cost": [None],
+        "maturity_relay_cost": [0.000001971 * 0.75],
         "maturity_relay_charge": [0.000001971],
         "min_bootstrap_gateway_fee_per_relay": [0.00000085],
-        # "max_bootstrap_servicer_cost_per_relay": [None],
-        # "servicer_bootstrap_unwind_start": [None],
+        "max_bootstrap_servicer_cost_per_relay": [0.000005],
+        "servicer_bootstrap_unwind_start": [1.5],
         "servicer_bootstrap_end": [10],
         "gateway_bootstrap_unwind_start": [3],  # In billion
         "gateway_bootstrap_end": [20],  # In billion
@@ -131,6 +131,9 @@ system_param_config: Dict[str, SystemParamsType] = {
         "gateway_bootstrap_end": [20],  # In billion
         "supply_grow_cap": [0.05],
         "servicer_bootstrap_end": [10],
+        "max_bootstrap_servicer_cost_per_relay": [0.000005],
+        "servicer_bootstrap_unwind_start": [1.5],
+        "maturity_relay_cost": [0.000001971 * 0.75],
     },
 }
 

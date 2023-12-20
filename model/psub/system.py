@@ -113,7 +113,17 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
 
         uses_supply_growth = True
 
-        a_rttm = 0
+        a_rttm = (
+            (
+                _params["max_bootstrap_servicer_cost_per_relay"]
+                - _params["maturity_relay_cost"]
+            )
+            / (state["pokt_price_oracle"] * 1e6)
+            / (
+                _params["servicer_bootstrap_unwind_start"]
+                - _params["servicer_bootstrap_end"]
+            )
+        )
         print(a_rttm)
         cap_relays_rttm = 0
         b_rttm = (
