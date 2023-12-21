@@ -1,5 +1,6 @@
 from ..action_chains import fee_reward_ac, block_reward_ac
 import numpy as np
+from model.config.events import event_map
 
 
 def p_block_reward(_params, substep, state_history, state) -> tuple:
@@ -155,4 +156,14 @@ def s_update_rttm(_params, substep, state_history, state, _input) -> tuple:
 
 
 def p_events(_params, substep, state_history, state) -> dict:
-    return {}
+    if _params["event"]:
+        event = event_map[_params["event"]]
+        if event["time"] == state["timestep"]:
+            if event["type"] == 'servicer_shutdown':
+                print(event)
+            else:
+                assert False, "not implemented"
+
+        return {}
+    else:
+        return {}
