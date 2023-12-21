@@ -174,7 +174,7 @@ def p_events(_params, substep, state_history, state) -> dict:
             elif event["type"] == "service_shutdown":
                 if event["service"] == "random":
                     service = random.choice(state["Services"])
-                    service.shut_down = True
+                    service.shutdown = True
                 else:
                     assert False, "Not implemented"
 
@@ -183,7 +183,7 @@ def p_events(_params, substep, state_history, state) -> dict:
         elif event["type"] == "service_shutdown":
             if event["time"] + event["shutdown_time"] == state["timestep"]:
                 for service in state["Services"]:
-                    service.shut_down = False
+                    service.shutdown = False
 
         return {}
     else:
