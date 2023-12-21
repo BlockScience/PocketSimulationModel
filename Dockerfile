@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.11.0
+FROM continuumio/miniconda3
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN apt-get update

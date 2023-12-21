@@ -56,6 +56,7 @@ class Servicer:
         self.jail_lost_revenue_history = {}
         self.staked_pokt_total_inflow = staked_pokt
         self.total_revenues = 0
+        self.shut_down = False
 
     def services_by_revenue(self):
         out = [

@@ -1,4 +1,5 @@
 from ..types import StateType, ParamType, ServiceEntityType
+from copy import deepcopy
 from ..spaces import (
     servicer_join_space,
     servicer_entity_space,
@@ -92,21 +93,27 @@ def servicer_relay_policy(
     # Log which servicers did which work, modulo added to the first
     split_relays = n_relays // len(session["servicers"])
     modulo_relays = n_relays % len(session["servicers"])
+    bad_relays = 0
     for i in range(len(session["servicers"])):
         amt = split_relays
         if i == 0:
             amt += modulo_relays
         s = session["servicers"][i]
-        if s in servicer_relay_log:
-            servicer_relay_log[s] += amt
+        if s.shut_down:
+            relay_log[(service, geo_zone)] -= amt
+            bad_relays += amt
         else:
-            servicer_relay_log[s] = amt
+            if s in servicer_relay_log:
+                servicer_relay_log[s] += amt
+            else:
+                servicer_relay_log[s] = amt
 
     # Burn per relay policy
     space2: servicer_relay_space = domain[0]
 
     # Space for if the session should be removed
     space3: Union[servicer_relay_space, None] = domain[0]
+    space3["session"]["number_of_relays"] -= bad_relays
 
     return (space1, space2, space3)
 

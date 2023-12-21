@@ -1,5 +1,7 @@
 from ..action_chains import fee_reward_ac, block_reward_ac
 import numpy as np
+from model.config.events import event_map
+import random
 
 
 def p_block_reward(_params, substep, state_history, state) -> tuple:
@@ -152,3 +154,37 @@ def s_update_gfpr(_params, substep, state_history, state, _input) -> tuple:
 
 def s_update_rttm(_params, substep, state_history, state, _input) -> tuple:
     return ("relays_to_tokens_multiplier", _input["relays_to_tokens_multiplier"])
+
+
+def p_events(_params, substep, state_history, state) -> dict:
+    if _params["event"]:
+        event = event_map[_params["event"]]
+        if event["time"] == state["timestep"]:
+            if event["type"] == "servicer_shutdown":
+                if event["attribute"] == "geozone":
+                    if event["attribute_value"] == "random":
+                        geo_zone = random.choice(state["Geozones"])
+                        for servicer in state["Servicers"]:
+                            if servicer.geo_zone == geo_zone:
+                                servicer.shut_down = True
+                    else:
+                        assert False, "not implemented"
+                else:
+                    assert False, "not implemented"
+            elif event["type"] == "service_shutdown":
+                if event["service"] == "random":
+                    service = random.choice(state["Services"])
+                    service.shutdown = True
+                else:
+                    assert False, "Not implemented"
+
+            else:
+                assert False, "not implemented"
+        elif event["type"] == "service_shutdown":
+            if event["time"] + event["shutdown_time"] == state["timestep"]:
+                for service in state["Services"]:
+                    service.shutdown = False
+
+        return {}
+    else:
+        return {}

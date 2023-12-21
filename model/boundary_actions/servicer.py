@@ -221,7 +221,16 @@ def jailing_ba_basic(
     for servicer in state["Servicers"]:
         if servicer.pause_height:
             continue
-        if random.random() < params["servicer_jailing_probability"]:
+        elif servicer.shut_down:
+            space = (
+                {
+                    "block_height": state["height"],
+                    "jailer_address": None,
+                    "node_address": servicer,
+                },
+            )
+            out.append(space)
+        elif random.random() < params["servicer_jailing_probability"]:
             space = (
                 {
                     "block_height": state["height"],
