@@ -170,8 +170,17 @@ def p_events(_params, substep, state_history, state) -> dict:
                         assert False, "not implemented"
                 else:
                     assert False, "not implemented"
+            elif event["type"] == "service_shutdown":
+                if event['servicer'] == "random":
+                    print("X")
+                else:
+                    assert False, "Not implemented"
+                
             else:
                 assert False, "not implemented"
+        elif event["type"] == "service_shutdown":
+            if event["time"] + event["shutdown_time"] == state["timestep"]:
+                print("Y")
 
         return {}
     else:
