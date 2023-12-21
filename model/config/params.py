@@ -283,9 +283,7 @@ network_failures_service_ag1_["downtime_jail_duration"] = [
 ]
 network_failures_service_ag1_["servicer_service_density_starting"] = [0.1, 0.5, 1]
 network_failures_service_ag1_["event"] = [
-    "servicer_shutdown_by_geozone_random_t1",
-    "servicer_shutdown_by_geozone_random_t7",
-    "servicer_shutdown_by_geozone_random_t500",
+    "servicer_shutdown_by_geozone_random",
     "service_shutdown_random_t1",
     "service_shutdown_random_t7",
     "service_shutdown_random_t500",
