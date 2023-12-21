@@ -3,6 +3,7 @@ import numpy as np
 from model.config.events import event_map
 import random
 
+
 def p_block_reward(_params, substep, state_history, state) -> tuple:
     block_reward_ac(state, _params)
     return {}
@@ -159,9 +160,9 @@ def p_events(_params, substep, state_history, state) -> dict:
     if _params["event"]:
         event = event_map[_params["event"]]
         if event["time"] == state["timestep"]:
-            if event["type"] == 'servicer_shutdown':
-                if event["attribute"] == 'geozone':
-                    if event['attribute_value'] == 'random':
+            if event["type"] == "servicer_shutdown":
+                if event["attribute"] == "geozone":
+                    if event["attribute_value"] == "random":
                         geo_zone = random.choice(state["Geozones"])
                         for servicer in state["Servicers"]:
                             if servicer.geo_zone == geo_zone:
@@ -171,16 +172,18 @@ def p_events(_params, substep, state_history, state) -> dict:
                 else:
                     assert False, "not implemented"
             elif event["type"] == "service_shutdown":
-                if event['service'] == "random":
-                    print("X")
+                if event["service"] == "random":
+                    service = random.choice(state["Services"])
+                    service.shut_down = True
                 else:
                     assert False, "Not implemented"
-                
+
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
             if event["time"] + event["shutdown_time"] == state["timestep"]:
-                print("Y")
+                for service in state["Services"]:
+                    service.shut_down = False
 
         return {}
     else:
