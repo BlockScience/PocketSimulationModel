@@ -56,6 +56,12 @@ def relay_requests_ac(state, params, relay_log, servicer_relay_log):
     if spaces[0]["session"]["number_of_relays"] == 0:
         out["processed_relays"] = 0
         return out
+
+    # If service is shutdown then no relays can go through
+    if spaces[0]["session"]["service"].shutdown:
+        out["processed_relays"] = 0
+        return out
+
     create_new_session(state, params, spaces[:1])
 
     # spaces = burn_per_session_policy(state, params, spaces)
