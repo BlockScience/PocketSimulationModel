@@ -196,7 +196,7 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
 }
 
 behavior_param_config["BaseEvent"] = deepcopy(behavior_param_config["Base"])
-behavior_param_config["BaseEvent"]['event'] = ["servicer_shutdown_by_geozone_random"]
+behavior_param_config["BaseEvent"]['event'] = ["service_shutdown_random"]
 
 functional_param_config: Dict[str, FunctionalParamsType] = {
     "Test": {
