@@ -9,11 +9,11 @@ by cadCAD
 cadCAD Version: 0.5.0
 Execution Mode: multi_proc
 Simulation Dimensions:
-Entire Simulation: (Models, Unique Timesteps, Params, Total Runs, Sub-States) = (3, 1095, 195, 3, 25)
-     Simulation 0: (Timesteps, Params, Runs, Sub-States) = (365, 65, 1, 25)
-     Simulation 1: (Timesteps, Params, Runs, Sub-States) = (365, 65, 1, 25)
-     Simulation 2: (Timesteps, Params, Runs, Sub-States) = (365, 65, 1, 25)
+Entire Simulation: (Models, Unique Timesteps, Params, Total Runs, Sub-States) = (3, 1095, 225, 3, 27)
+     Simulation 0: (Timesteps, Params, Runs, Sub-States) = (365, 75, 1, 27)
+     Simulation 1: (Timesteps, Params, Runs, Sub-States) = (365, 75, 1, 27)
+     Simulation 2: (Timesteps, Params, Runs, Sub-States) = (365, 75, 1, 27)
 Execution Method: parallelize_simulations
 Execution Mode: parallelized
-2023-12-19 17:44:21.400205
-Total execution time: 83.49s
+2023-12-21 12:32:07.415964
+Total execution time: 347.84s

@@ -1,0 +1,51 @@
+
+                  ___________    ____
+  ________ __ ___/ / ____/   |  / __ \
+ / ___/ __` / __  / /   / /| | / / / /
+/ /__/ /_/ / /_/ / /___/ ___ |/ /_/ /
+\___/\__,_/\__,_/\____/_/  |_/_____/
+by cadCAD
+
+cadCAD Version: 0.5.0
+Execution Mode: single_proc
+Simulation Dimensions:
+Entire Simulation: (Models, Unique Timesteps, Params, Total Runs, Sub-States) = (1, 365, 75, 1, 27)
+     Simulation 0: (Timesteps, Params, Runs, Sub-States) = (365, 75, 1, 27)
+
+                  ___________    ____
+  ________ __ ___/ / ____/   |  / __ \
+ / ___/ __` / __  / /   / /| | / / / /
+/ /__/ /_/ / /_/ / /___/ ___ |/ /_/ /
+\___/\__,_/\__,_/\____/_/  |_/_____/
+by cadCAD
+
+cadCAD Version: 0.5.0
+Execution Mode: single_proc
+Simulation Dimensions:
+Entire Simulation: (Models, Unique Timesteps, Params, Total Runs, Sub-States) = (1, 365, 75, 1, 27)
+     Simulation 0: (Timesteps, Params, Runs, Sub-States) = (365, 75, 1, 27)
+
+                  ___________    ____
+  ________ __ ___/ / ____/   |  / __ \
+ / ___/ __` / __  / /   / /| | / / / /
+/ /__/ /_/ / /_/ / /___/ ___ |/ /_/ /
+\___/\__,_/\__,_/\____/_/  |_/_____/
+by cadCAD
+
+cadCAD Version: 0.5.0
+Execution Mode: single_proc
+Simulation Dimensions:
+Entire Simulation: (Models, Unique Timesteps, Params, Total Runs, Sub-States) = (1, 365, 75, 1, 27)
+     Simulation 0: (Timesteps, Params, Runs, Sub-States) = (365, 75, 1, 27)
+Execution Method: single_proc_exec
+Execution Mode: single_threaded
+2023-12-21 12:41:35.285131
+Execution Method: single_proc_exec
+Execution Mode: single_threaded
+2023-12-21 12:41:35.319696
+Execution Method: single_proc_exec
+Execution Mode: single_threaded
+2023-12-21 12:41:35.352735
+Total execution time: 62.33s
+Total execution time: 64.11s
+Total execution time: 64.62s
