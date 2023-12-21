@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
 
-GRID_NUMBERS = {"gateway_viability_sweep_ag1_": 288}
+GRID_NUMBERS = {
+    "gateway_viability_sweep_ag1_": 288,
+    "network_failures_service_ag1_": 48,
+}
 
 
 def check_if_exists(s3, bucket, key):
