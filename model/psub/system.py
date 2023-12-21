@@ -1,7 +1,7 @@
 from ..action_chains import fee_reward_ac, block_reward_ac
 import numpy as np
 from model.config.events import event_map
-
+import random
 
 def p_block_reward(_params, substep, state_history, state) -> tuple:
     block_reward_ac(state, _params)
@@ -160,7 +160,16 @@ def p_events(_params, substep, state_history, state) -> dict:
         event = event_map[_params["event"]]
         if event["time"] == state["timestep"]:
             if event["type"] == 'servicer_shutdown':
-                print(event)
+                if event["attribute"] == 'geozone':
+                    if event['attribute_value'] == 'random':
+                        geo_zone = random.choice(state["Geozones"])
+                        for servicer in state["Servicers"]:
+                            if servicer.geo_zone == geo_zone:
+                                servicer.shut_down = True
+                    else:
+                        assert False, "not implemented"
+                else:
+                    assert False, "not implemented"
             else:
                 assert False, "not implemented"
 
