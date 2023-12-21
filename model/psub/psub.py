@@ -208,7 +208,7 @@ events_block = {
     "policies": {
         "events": p_events,
     },
-    "variables": {},
+    "variables": {"Servicers": s_update_servicers,},
 }
 
 psub_blocks = [
