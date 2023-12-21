@@ -271,12 +271,17 @@ def find_service_density(state):
     return density
 
 
-def enforce_density_service_servicers(state, params_density):
+def enforce_density_service_servicers(state, params):
     pairs = list(product(state["Servicers"], state["Services"]))
     random.shuffle(pairs)
+    params_density = deepcopy(params)
+    if type(params_density["servicer_service_density_starting"]) == list:
+        for key in params_density:
+            params_density[key] = params_density[key][0]
     while (
         len(pairs) > 0
-        and find_service_density(state) < params_density["target_density"]
+        and find_service_density(state)
+        < params_density["servicer_service_density_starting"]
     ):
         pair = pairs.pop()
         space = ({"service": pair[1], "servicer": pair[0]},)

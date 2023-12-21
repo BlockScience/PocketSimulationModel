@@ -6,7 +6,12 @@ from cadCAD import configs
 from cadCAD.configuration.utils import config_sim
 from cadCAD.configuration import Experiment
 from copy import deepcopy
-from model.config import build_state, build_params, experimental_setups
+from model.config import (
+    build_state,
+    build_params,
+    experimental_setups,
+    enforce_density_service_servicers,
+)
 import os
 from .kpis import create_simulation_kpis
 
@@ -235,6 +240,8 @@ def run_experiments(experiment_keys, disable_postprocessing=False, **kwargs):
     experimental_setup = experimental_setups[experiment_keys[0]]
     state = build_state(experimental_setup["config_option_state"])
     params = build_params(experimental_setup["config_option_params"])
+    if params["servicer_service_density_starting"][0]:
+        enforce_density_service_servicers(state, params)
     exp = load_config(
         experimental_setup["monte_carlo_n"], experimental_setup["T"], params, state
     )
@@ -250,6 +257,9 @@ def run_experiments(experiment_keys, disable_postprocessing=False, **kwargs):
         experimental_setup = experimental_setups[key]
         state = build_state(experimental_setup["config_option_state"])
         params = build_params(experimental_setup["config_option_params"])
+        if params["servicer_service_density_starting"][0]:
+            enforce_density_service_servicers(state, params)
+
         add_config(
             exp,
             experimental_setup["monte_carlo_n"],
