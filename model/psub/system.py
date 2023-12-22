@@ -2,6 +2,8 @@ from ..action_chains import fee_reward_ac, block_reward_ac
 import numpy as np
 from model.config.events import event_map
 import random
+from ..policy import service_join_policy
+from ..mechanisms import add_service
 
 
 def p_block_reward(_params, substep, state_history, state) -> tuple:
@@ -178,7 +180,11 @@ def p_events(_params, substep, state_history, state) -> dict:
                 else:
                     assert False, "Not implemented"
             elif event["type"] == "service_join":
-                print("X")
+                spaces = (
+                    {"name": "ABC", "gateway_api_prefix": "ABC", "service_id": "ABC"},
+                )
+                spaces = service_join_policy(state, _params, spaces)
+                add_service(state, _params, spaces)
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
