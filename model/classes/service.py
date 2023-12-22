@@ -20,3 +20,4 @@ class Service:
         self.service_id = service_id
         self.servicers = servicers
         self.join_height = join_height
+        self.shutdown = False

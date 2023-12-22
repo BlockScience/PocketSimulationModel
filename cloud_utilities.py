@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
 
-GRID_NUMBERS = {"gateway_viability_sweep_ag1_": 288}
+GRID_NUMBERS = {
+    "gateway_viability_sweep_ag1_": 288,
+    "network_failures_service_ag1_": 48,
+}
 
 
 def check_if_exists(s3, bucket, key):
@@ -78,8 +81,6 @@ def run_tasks(ecs, experiments):
 
 
 def download_experiment_kpi(experiment, s3):
-    experiment = "gateway_viability_sweep_ag1_"
-
     runs = create_expected_runs_dataframe(s3, experiment)
     assert runs["Complete"].all()
 

@@ -55,6 +55,7 @@ from .system import (
     p_update_rttm,
     s_update_rttm,
     s_update_gfpr,
+    p_events,
 )
 from .validator import s_update_validators
 
@@ -202,6 +203,13 @@ leave_block = {
     },
 }
 
+# Any special events like oracle issues, shutdowns, etc.
+events_block = {
+    "policies": {
+        "events": p_events,
+    },
+    "variables": {"Servicers": s_update_servicers, "Services": s_update_services},
+}
 
 psub_blocks = [
     meta_update_block,
@@ -214,4 +222,5 @@ psub_blocks = [
     block_and_fee_rewards_block,
     undelegation_unservice_block,
     leave_block,
+    events_block,
 ]

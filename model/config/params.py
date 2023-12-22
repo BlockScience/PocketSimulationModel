@@ -13,6 +13,7 @@ config_option_map = {
     "Test": {"System": "Test", "Behaviors": "Test", "Functional": "Test"},
     "Base": {"System": "Base", "Behaviors": "Base", "Functional": "Base"},
     "BaseDynamic": {"System": "BaseDynamic", "Behaviors": "Base", "Functional": "Base"},
+    "BaseEvent": {"System": "Base", "Behaviors": "BaseEvent", "Functional": "Base"},
 }
 
 
@@ -168,6 +169,8 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "oracle_price_lognormal_mean": [-3.1885519850880812],
         "oracle_price_lognormal_stdev": [0.3638713191401966],
         "oracle_price_interarrival_time_flag": [1],
+        "event": [None],
+        "servicer_service_density_starting": [None],
     },
     "Base": {
         "application_max_number": [20],
@@ -195,9 +198,13 @@ behavior_param_config: Dict[str, BehaviorParamsType] = {
         "oracle_price_lognormal_mean": [-3.1885519850880812],
         "oracle_price_lognormal_stdev": [0.3638713191401966],
         "oracle_price_interarrival_time_flag": [1],
+        "event": [None],
+        "servicer_service_density_starting": [None],
     },
 }
 
+behavior_param_config["BaseEvent"] = deepcopy(behavior_param_config["Base"])
+behavior_param_config["BaseEvent"]["event"] = ["servicer_shutdown_by_geozone_random"]
 
 functional_param_config: Dict[str, FunctionalParamsType] = {
     "Test": {
@@ -275,9 +282,22 @@ create_sweep(
 )
 
 network_failures_service_ag1_ = build_params("Base")
-network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-6, 1e-1]
+network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-1]
 network_failures_service_ag1_["downtime_jail_duration"] = [
     60 * 1e9,
-    3600 * 1e9,
     28800 * 1e9,
 ]
+network_failures_service_ag1_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag1_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+
+
+create_sweep(
+    "network_failures_service_ag1_",
+    network_failures_service_ag1_,
+    config_option_map_sweep,
+)
