@@ -2,6 +2,7 @@ from ..action_chains import fee_reward_ac, block_reward_ac
 import numpy as np
 from model.config.events import event_map
 import random
+import dill
 
 
 def p_block_reward(_params, substep, state_history, state) -> tuple:
@@ -25,7 +26,10 @@ def s_update_processed_relays(_params, substep, state_history, state, _input) ->
 
 
 def p_update_price(_params, substep, state_history, state) -> dict:
-    pokt_price_oracle = np.lognorm(params["oracle_price_lognormal_mean"], params["oracle_price_lognormal_std"])
+    with open('../../data/kde_oracle_returns.pkl', 'rb') as file:
+        kde_oracle_returns = dill.load(file)
+        kde_oracle_returns.set_bandwidth(params["oracle_price_kde_bandwidth"])
+    pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0])*state["pokt_price_oracle"]
 
     '''
     pokt_price_true = (
