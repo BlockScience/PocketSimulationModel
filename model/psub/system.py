@@ -26,23 +26,23 @@ def s_update_processed_relays(_params, substep, state_history, state, _input) ->
 
 
 def p_update_price(_params, substep, state_history, state) -> dict:
-    with open('../../data/kde_oracle_returns.pkl', 'rb') as file:
-        kde_oracle_returns = dill.load(file)
-        kde_oracle_returns.set_bandwidth(params["oracle_price_kde_bandwidth"])
-    pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0])*state["pokt_price_oracle"]
+    # Hold it in the DAO because we don't have much of a choice of where else to hold
+    if state["timestep"] == 0:
+        with open("configuration_data/kde_oracle_returns.pkl", "rb") as file:
+            kde_oracle_returns = dill.load(file)
+            kde_oracle_returns.set_bandwidth(_params["oracle_price_kde_bandwidth"])
+            state["DAO"].kde = kde_oracle_returns
+    else:
+        kde_oracle_returns = state["DAO"].kde
+    pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
+        "pokt_price_oracle"
+    ]
 
-    '''
-    pokt_price_true = (
-        np.random.normal(0.00332054298962304, 0.06562764398482432) + 1
-    ) * state["pokt_price_true"]
-    pokt_price_oracle = (
-        0.95 * state["pokt_price_oracle"]
-        + (pokt_price_true + np.random.normal(0, 0.03) * pokt_price_true) * 0.05
-    )
-    return {"pokt_price_true": pokt_price_true, "pokt_price_oracle": pokt_price_oracle}
-    '''
+    return {
+        "pokt_price_true": pokt_price_oracle,
+        "pokt_price_oracle": pokt_price_oracle,
+    }
 
-    return {"pokt_price_true": pokt_price_oracle, "pokt_price_oracle": pokt_price_oracle}
 
 def s_update_pokt_price_true(_params, substep, state_history, state, _input) -> tuple:
     return ("pokt_price_true", _input["pokt_price_true"])
