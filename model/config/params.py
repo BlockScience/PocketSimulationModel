@@ -308,7 +308,7 @@ servicer_viability_ag1_["application_minimum_stake"] = [
     100000 * 1e6,
     200000 * 1e6,
 ]
-servicer_viability_ag1_["dao_fee_percentage"] = [0.05, 0.15]
+servicer_viability_ag1_["dao_allocation"] = [0.05, 0.15]
 servicer_viability_ag1_["validator_fee_percentage"] = [0.01, 0.1]
 servicer_viability_ag1_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
 servicer_viability_ag1_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
@@ -319,3 +319,8 @@ create_sweep(
     servicer_viability_ag1_,
     config_option_map_sweep,
 )
+for key in config_option_map_sweep:
+    if key.startswith("servicer_viability_ag1"):
+        config_option_map_sweep[key]["dao_fee_percentage"] = [
+            1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
+        ]
