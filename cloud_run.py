@@ -5,11 +5,12 @@ from model import run_experiments
 import pickle
 import sys
 from datetime import datetime
+from cadCAD.engine import ExecutionMode
 
 print(datetime.now())
 
 experiments = sys.argv[1:]
-df, simulation_kpis = run_experiments(experiments)
+df, simulation_kpis = run_experiments(experiments, context=ExecutionMode().single_mode)
 
 for key in df["Experiment Name"].unique():
     file_name = open("data/{}.pkl".format(key), "ab")
