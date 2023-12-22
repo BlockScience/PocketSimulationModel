@@ -101,6 +101,8 @@ BehaviorParamsType = NewType(
             "service_linking_probability_normal": List[float],
             "service_linking_probability_just_joined": List[float],
             "kick_bottom_probability": List[float],
+            "oracle_price_kde_bandwidth": List[float],
+            "oracle_price_interarrival_time_flag": List[int],
         },
     ),
 )
@@ -182,6 +184,8 @@ ParamType = NewType(
             "service_linking_probability_normal": List[float],
             "service_linking_probability_just_joined": List[float],
             "kick_bottom_probability": List[float],
+            "oracle_price_kde_bandwidth": List[float],
+            "oracle_price_interarrival_time_flag": List[int],
             "application_join_function": List[Literal["simple_unfiform"]],
             "servicer_join_function": List[Literal["simple_unfiform"]],
             "service_join_function": List[Literal["simple_unfiform"]],
