@@ -295,3 +295,13 @@ create_sweep(
     network_failures_service_ag1_,
     config_option_map_sweep,
 )
+
+servicer_viability_ag1_ = build_params("Base")
+servicer_viability_ag1_["service_leave_probability"] = [0.0]
+servicer_viability_ag1_["service_join_function"] = "off"
+
+create_sweep(
+    "servicer_viability_ag1_",
+    servicer_viability_ag1_,
+    config_option_map_sweep,
+)

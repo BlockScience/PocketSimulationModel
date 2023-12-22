@@ -48,3 +48,11 @@ for i in range(1, 49):
         "monte_carlo_n": 1,
         "T": 365,
     }
+
+for i in range(1, 2):
+    experimental_setups["servicer_viability_ag1_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "servicer_viability_ag1_{}".format(i),
+        "monte_carlo_n": 1,
+        "T": 365,
+    }
