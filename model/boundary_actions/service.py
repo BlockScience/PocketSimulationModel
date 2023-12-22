@@ -9,6 +9,8 @@ def service_join_ba(
 ) -> Tuple[Union[service_join_space, None]]:
     if params["service_join_function"] == "simple_unfiform":
         return service_join_ba_simple_unfiform(state, params)
+    elif params["service_join_function"] == "off":
+        return (None,)
     else:
         assert False, "Invalid service_join_function"
 
