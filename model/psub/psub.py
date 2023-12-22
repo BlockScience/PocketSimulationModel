@@ -70,7 +70,6 @@ meta_update_block = {
     "variables": {
         "day": s_update_day,
         "height": s_update_height,
-        "pokt_price_true": s_update_pokt_price_true,
         "pokt_price_oracle": s_update_pokt_price_oracle,
         "n_transactions": s_update_n_transactions,
         "POKT_burned": s_set_to_zero_pokt_burned,

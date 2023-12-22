@@ -39,7 +39,6 @@ def p_update_price(_params, substep, state_history, state) -> dict:
     ]
 
     return {
-        "pokt_price_true": pokt_price_oracle,
         "pokt_price_oracle": pokt_price_oracle,
     }
 
