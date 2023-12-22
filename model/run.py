@@ -214,6 +214,8 @@ def compute_KPIs(df: pd.DataFrame):
     df["n_understaked_servicers"] = df["understaked_servicers"].apply(len)
     df["n_understaked_gateways"] = df["understaked_gateways"].apply(len)
     df["n_understaked_applications"] = df["understaked_applications"].apply(len)
+    for DAO in df["DAO"].values:
+        DAO.kde = None
 
 
 def postprocessing(df: pd.DataFrame, meta_data, compute_kpis=True) -> pd.DataFrame:
