@@ -177,14 +177,15 @@ def p_events(_params, substep, state_history, state) -> dict:
                     service.shutdown = True
                 else:
                     assert False, "Not implemented"
-
+            elif event["type"] == "service_join":
+                print("X")
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
             if event["time"] + event["shutdown_time"] == state["timestep"]:
                 for service in state["Services"]:
                     service.shutdown = False
-
         return {}
+
     else:
         return {}

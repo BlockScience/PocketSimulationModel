@@ -29,4 +29,8 @@ event_map = {
         "service": "random",
         "shutdown_time": 500,
     },
+    "service_join": {
+        "time": 182,
+        "type": "service_join",
+    },
 }
