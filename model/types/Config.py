@@ -74,6 +74,7 @@ SystemParamsType = NewType(
         },
     ),
 )
+
 BehaviorParamsType = NewType(
     "BehaviorParams",
     TypedDict(
