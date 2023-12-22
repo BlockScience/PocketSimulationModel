@@ -211,7 +211,10 @@ def compute_KPIs(df: pd.DataFrame):
     df["n_understaked_applications"] = df["understaked_applications"].apply(len)
 
 
-def postprocessing(df: pd.DataFrame, meta_data, compute_kpis=True) -> pd.DataFrame:
+def postprocessing(df: pd.DataFrame, meta_data,
+                   compute_kpis=True, compute_thresh = True,
+                   scenario: str = "gvs") -> pd.DataFrame:
+    # NOTE: Function currently defaults to the "gvs"
     # Get only the last timestep
     df = df.groupby(["simulation", "subset", "run", "timestep"]).last().reset_index()
     df = pd.concat([df, df["simulation"].apply(lambda x: meta_data.loc[x])], axis=1)
@@ -223,10 +226,15 @@ def postprocessing(df: pd.DataFrame, meta_data, compute_kpis=True) -> pd.DataFra
     if compute_kpis:
         compute_KPIs(df)
         simulation_kpis = create_simulation_kpis(df)
+        if compute_thresh:
+            simulation_thresh = calc_thresh_ineq_met(df = df,
+                                                    scenario = scenario)
+        else:
+            simulation_thresh = None
     else:
         simulation_kpis = None
 
-    return df, simulation_kpis
+    return df, simulation_kpis, simulation_thresh
 
 
 def run_experiments(experiment_keys, disable_postprocessing=False, **kwargs):
@@ -273,8 +281,8 @@ def run_experiments(experiment_keys, disable_postprocessing=False, **kwargs):
     if disable_postprocessing:
         return raw, None
     else:
-        df, simulation_kpis = postprocessing(raw, meta_data)
-        return df, simulation_kpis
+        df, simulation_kpis, simulation_thresh = postprocessing(raw, meta_data)
+        return df, simulation_kpis, simulation_thresh
 
 
 def write_to_csv(df, data_folder, over_write=False):
