@@ -81,8 +81,6 @@ def run_tasks(ecs, experiments):
 
 
 def download_experiment_kpi(experiment, s3):
-    experiment = "gateway_viability_sweep_ag1_"
-
     runs = create_expected_runs_dataframe(s3, experiment)
     assert runs["Complete"].all()
 
