@@ -19,9 +19,9 @@ def check_if_exists(s3, bucket, key):
 def create_expected_runs_dataframe(s3, experiment_name):
     data = [
         [
-            "gateway_viability_sweep_ag1_{}".format(x),
-            "data/{}.pkl".format("gateway_viability_sweep_ag1_{}".format(x)),
-            "data/Simulation-{}.pkl".format("gateway_viability_sweep_ag1_{}".format(x)),
+            "{}{}".format(experiment_name, x),
+            "data/{}.pkl".format("{}{}".format(experiment_name, x)),
+            "data/Simulation-{}.pkl".format("{}{}".format(experiment_name, x)),
         ]
         for x in range(1, GRID_NUMBERS[experiment_name] + 1)
     ]
