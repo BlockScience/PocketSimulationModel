@@ -11,5 +11,6 @@ COPY aws-credentials.csv .
 COPY model model
 COPY data data
 COPY cloud_run.py .
+COPY configuration_data configuration_data
 RUN aws configure import --csv file://aws-credentials.csv
 ENTRYPOINT ["python", "cloud_run.py"]
