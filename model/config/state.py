@@ -59,6 +59,7 @@ def build_state(config_option) -> StateType:
     state["period_jailing_opportunity_cost"] = 0
     state["relays_to_tokens_multiplier"] = None
     state["gateway_fee_per_relay"] = None
+    state["relay_multiplier"] = {}
 
     state = deepcopy(state)
     return state

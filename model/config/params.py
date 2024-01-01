@@ -323,8 +323,38 @@ create_sweep(
     servicer_viability_ag1_,
     config_option_map_sweep,
 )
+
+network_viability_ag1_ = build_params("Base")
+network_viability_ag1_["relays_to_tokens_multiplier"] = [100, 200]
+network_viability_ag1_["gateway_fee_per_relay"] = [20, 30]
+network_viability_ag1_["application_fee_per_relay"] = [20, 30]
+network_viability_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
+network_viability_ag1_["application_minimum_stake"] = [
+    100000 * 1e6,
+    200000 * 1e6,
+]
+network_viability_ag1_["dao_allocation"] = [0.05, 0.15]
+network_viability_ag1_["validator_fee_percentage"] = [0.01, 0.1]
+network_viability_ag1_["relays_per_session_gamma_distribution_shape"] = [250, 500, 750]
+network_viability_ag1_["service_linking_probability_normal"] = [0.001, 0.01, 0.1]
+
+
+network_viability_ag1_["event"] = [
+    "double_relays_1_service",
+    "double_relays_3_services",
+    "double_relays_5_services",
+]
+
+create_sweep(
+    "network_viability_ag1_",
+    network_viability_ag1_,
+    config_option_map_sweep,
+)
+
 for key in config_option_map_sweep:
-    if key.startswith("servicer_viability_ag1"):
+    if key.startswith("servicer_viability_ag1") or key.startswith(
+        "network_viability_ag1_"
+    ):
         config_option_map_sweep[key]["dao_fee_percentage"] = [
             1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
         ]
