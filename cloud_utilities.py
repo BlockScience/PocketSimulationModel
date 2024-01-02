@@ -5,6 +5,7 @@ GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
     "network_failures_service_ag1_": 48,
     "servicer_viability_ag1_": 1152,
+    "network_viability_ag1_": 1152,
 }
 
 
@@ -16,7 +17,7 @@ def check_if_exists(s3, bucket, key):
         return False
 
 
-def create_expected_runs_dataframe(s3, experiment_name):
+def create_expected_runs_dataframe(s3, experiment_name, run_all=False):
     data = [
         [
             "{}{}".format(experiment_name, x),
@@ -28,11 +29,14 @@ def create_expected_runs_dataframe(s3, experiment_name):
     df = pd.DataFrame(data, columns=["Experiment", "Full Simulation File", "KPI File"])
 
     # Figure out if runs were complete
-    a = df["Full Simulation File"].apply(
-        lambda x: check_if_exists(s3, "pocketsimulation", x)
-    )
-    b = df["KPI File"].apply(lambda x: check_if_exists(s3, "pocketsimulation", x))
-    df["Complete"] = a & b
+    if run_all:
+        df["Complete"] = False
+    else:
+        a = df["Full Simulation File"].apply(
+            lambda x: check_if_exists(s3, "pocketsimulation", x)
+        )
+        b = df["KPI File"].apply(lambda x: check_if_exists(s3, "pocketsimulation", x))
+        df["Complete"] = a & b
     return df
 
 

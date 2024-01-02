@@ -193,6 +193,12 @@ def p_events(_params, substep, state_history, state) -> dict:
                 )
                 spaces = service_join_policy(state, _params, spaces)
                 add_service(state, _params, spaces)
+            elif event["type"] == "service_relay_multiply":
+                n_services = event["num_services"]
+                multiple = event["multiple"]
+                s = random.choices(state["Services"], k=n_services)
+                for si in s:
+                    state["relay_multiplier"][si] = multiple
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
@@ -203,3 +209,7 @@ def p_events(_params, substep, state_history, state) -> dict:
 
     else:
         return {}
+
+
+def s_relay_multiplier(_params, substep, state_history, state, _input) -> tuple:
+    return ("relay_multiplier", state["relay_multiplier"])

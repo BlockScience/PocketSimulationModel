@@ -107,6 +107,9 @@ def submit_relay_requests_policy_v1(
     service = random.choice(state["Services"])
 
     number_of_relays = domain[0]["number_of_relays"]
+    if service in state["relay_multiplier"]:
+        number_of_relays = number_of_relays * state["relay_multiplier"][service]
+
     max_relays_allowed = int(
         domain[0]["application_address"].staked_pokt
         * params["session_token_bucket_coefficient"]

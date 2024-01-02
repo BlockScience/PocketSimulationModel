@@ -56,6 +56,7 @@ from .system import (
     s_update_rttm,
     s_update_gfpr,
     p_events,
+    s_relay_multiplier,
 )
 from .validator import s_update_validators
 
@@ -207,7 +208,11 @@ events_block = {
     "policies": {
         "events": p_events,
     },
-    "variables": {"Servicers": s_update_servicers, "Services": s_update_services},
+    "variables": {
+        "Servicers": s_update_servicers,
+        "Services": s_update_services,
+        "relay_multiplier": s_relay_multiplier,
+    },
 }
 
 psub_blocks = [

@@ -64,7 +64,10 @@ def compute_kpi_e(unique_servicers):
                 for x in servicers.values()
             ]
         )
-        kpi_e[key] = np.exp(-slashing_cost / jailing_cost)
+        if jailing_cost > 0:
+            kpi_e[key] = np.exp(-slashing_cost / jailing_cost)
+        else:
+            kpi_e[key] = None
     return pd.Series(kpi_e)
 
 

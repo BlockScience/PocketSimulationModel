@@ -33,4 +33,22 @@ event_map = {
         "time": 182,
         "type": "service_join",
     },
+    "double_relays_1_service": {
+        "time": 182,
+        "type": "service_relay_multiply",
+        "num_services": 1,
+        "multiple": 2,
+    },
+    "double_relays_3_services": {
+        "time": 182,
+        "type": "service_relay_multiply",
+        "num_services": 3,
+        "multiple": 2,
+    },
+    "double_relays_5_services": {
+        "time": 182,
+        "type": "service_relay_multiply",
+        "num_services": 5,
+        "multiple": 2,
+    },
 }
