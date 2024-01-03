@@ -20,7 +20,8 @@ def s_update_day(_params, substep, state_history, state, _input) -> tuple:
 
 
 def p_transactions(_params, substep, state_history, state) -> dict:
-    return {"n_transactions": np.random.normal(300000, 15000)}
+    n_transactions = 36692.90516650191 + 0.8457022264621301 * state["processed_relays"]
+    return {"n_transactions": n_transactions}
 
 
 def s_update_n_transactions(_params, substep, state_history, state, _input) -> tuple:

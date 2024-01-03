@@ -66,13 +66,11 @@ meta_update_block = {
     "policies": {
         "t": p_update_time,
         "price": p_update_price,
-        "transactions": p_transactions,
     },
     "variables": {
         "day": s_update_day,
         "height": s_update_height,
         "pokt_price_oracle": s_update_pokt_price_oracle,
-        "n_transactions": s_update_n_transactions,
         "POKT_burned": s_set_to_zero_pokt_burned,
         "POKT_minted": s_set_to_zero_pokt_minted,
         "period_slashing_costs": s_set_to_zero_slashing_cost,
@@ -152,10 +150,14 @@ relay_requests_block = {
 
 # Block for jailing or slashing behaviors
 jailing_slashing_block = {
-    "policies": {"jailing_slashing": p_jailing_slashing},
+    "policies": {
+        "jailing_slashing": p_jailing_slashing,
+        "transactions": p_transactions,
+    },
     "variables": {
         "Servicers": s_update_servicers,
         "Gateways": s_update_gateways,
+        "n_transactions": s_update_n_transactions,
     },
 }
 
