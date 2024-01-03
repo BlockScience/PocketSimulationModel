@@ -351,9 +351,29 @@ create_sweep(
     config_option_map_sweep,
 )
 
+network_failures_oracle_ag1_ = build_params("Base")
+network_failures_oracle_ag1_["relays_to_tokens_multiplier"] = [100, 200]
+network_failures_oracle_ag1_["gateway_fee_per_relay"] = [20, 30]
+network_failures_oracle_ag1_["application_fee_per_relay"] = [20, 30]
+network_failures_oracle_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
+network_failures_oracle_ag1_["application_minimum_stake"] = [
+    100000 * 1e6,
+    200000 * 1e6,
+]
+network_failures_oracle_ag1_["dao_allocation"] = [0.05, 0.15]
+network_failures_oracle_ag1_["validator_fee_percentage"] = [0.01, 0.1]
+
+create_sweep(
+    "network_failures_oracle_ag1_",
+    network_failures_oracle_ag1_,
+    config_option_map_sweep,
+)
+
 for key in config_option_map_sweep:
-    if key.startswith("servicer_viability_ag1") or key.startswith(
-        "network_viability_ag1_"
+    if (
+        key.startswith("servicer_viability_ag1")
+        or key.startswith("network_viability_ag1_")
+        or key.startswith("network_failures_oracle_ag1_")
     ):
         config_option_map_sweep[key]["dao_fee_percentage"] = [
             1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
