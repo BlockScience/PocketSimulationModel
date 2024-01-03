@@ -20,7 +20,9 @@ def s_update_day(_params, substep, state_history, state, _input) -> tuple:
 
 
 def p_transactions(_params, substep, state_history, state) -> dict:
-    n_transactions = 36692.90516650191 + 0.8457022264621301 * state["processed_relays"]
+    n_transactions = int(
+        36692.90516650191 + 0.8457022264621301 * state["processed_relays"]
+    )
     return {"n_transactions": n_transactions}
 
 
