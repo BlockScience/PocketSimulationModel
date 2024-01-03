@@ -36,9 +36,13 @@ def p_update_price(_params, substep, state_history, state) -> dict:
             state["DAO"].kde = kde_oracle_returns
     else:
         kde_oracle_returns = state["DAO"].kde
-    pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
-        "pokt_price_oracle"
-    ]
+
+    if state["oracle_shutdown"]:
+        pokt_price_oracle = state["pokt_price_oracle"]
+    else:
+        pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
+            "pokt_price_oracle"
+        ]
 
     return {
         "pokt_price_oracle": pokt_price_oracle,
@@ -141,7 +145,7 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
             _params["servicer_bootstrap_end"],
         )
         b_rttm = (
-            _params["maturity_relay_charge"] / (state["pokt_price_oracle"] * 1e6)
+            _params["maturity_relay_cost"] / (state["pokt_price_oracle"] * 1e6)
         ) - a_rttm * _params["servicer_bootstrap_end"]
 
         rttm_uncap = (a_rttm * cap_relays_rttm + b_rttm) * 1e6
@@ -153,6 +157,7 @@ def p_update_rttm(_params, substep, state_history, state) -> dict:
             rttm = min(rttm_uncap, rttm_cap)
         else:
             rttm = rttm_uncap
+
         return {"relays_to_tokens_multiplier": rttm}
     else:
         assert False, "Not implemented"
@@ -199,6 +204,8 @@ def p_events(_params, substep, state_history, state) -> dict:
                 s = random.choices(state["Services"], k=n_services)
                 for si in s:
                     state["relay_multiplier"][si] = multiple
+            elif event["type"] == "oracle_shutdown":
+                return {"oracle_shutdown": True}
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
@@ -213,3 +220,10 @@ def p_events(_params, substep, state_history, state) -> dict:
 
 def s_relay_multiplier(_params, substep, state_history, state, _input) -> tuple:
     return ("relay_multiplier", state["relay_multiplier"])
+
+
+def s_oracle_shutdown(_params, substep, state_history, state, _input) -> tuple:
+    if "oracle_shutdown" in _input:
+        return ("oracle_shutdown", _input["oracle_shutdown"])
+    else:
+        return ("oracle_shutdown", state["oracle_shutdown"])

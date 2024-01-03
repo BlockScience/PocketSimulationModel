@@ -64,3 +64,11 @@ for i in range(1, 1153):
         "monte_carlo_n": 1,
         "T": 365,
     }
+
+for i in range(1, 101):
+    experimental_setups["network_failures_oracle_ag1_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_oracle_ag1_{}".format(i),
+        "monte_carlo_n": 1,
+        "T": 365,
+    }
