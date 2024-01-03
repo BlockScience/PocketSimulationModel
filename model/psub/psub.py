@@ -57,6 +57,7 @@ from .system import (
     s_update_gfpr,
     p_events,
     s_relay_multiplier,
+    s_oracle_shutdown,
 )
 from .validator import s_update_validators
 
@@ -214,6 +215,7 @@ events_block = {
         "Servicers": s_update_servicers,
         "Services": s_update_services,
         "relay_multiplier": s_relay_multiplier,
+        "oracle_shutdown": s_oracle_shutdown,
     },
 }
 

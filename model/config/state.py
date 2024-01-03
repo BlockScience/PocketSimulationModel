@@ -60,6 +60,7 @@ def build_state(config_option) -> StateType:
     state["relays_to_tokens_multiplier"] = None
     state["gateway_fee_per_relay"] = None
     state["relay_multiplier"] = {}
+    state["oracle_shutdown"] = False
 
     state = deepcopy(state)
     return state

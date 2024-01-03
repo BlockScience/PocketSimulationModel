@@ -362,6 +362,7 @@ network_failures_oracle_ag1_["application_minimum_stake"] = [
 ]
 network_failures_oracle_ag1_["dao_allocation"] = [0.05, 0.15]
 network_failures_oracle_ag1_["validator_fee_percentage"] = [0.01, 0.1]
+network_failures_oracle_ag1_["event"] = ["oracle_shutdown"]
 
 create_sweep(
     "network_failures_oracle_ag1_",

@@ -200,6 +200,8 @@ def p_events(_params, substep, state_history, state) -> dict:
                 s = random.choices(state["Services"], k=n_services)
                 for si in s:
                     state["relay_multiplier"][si] = multiple
+            elif event["type"] == "oracle_shutdown":
+                print("X")
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
@@ -214,3 +216,10 @@ def p_events(_params, substep, state_history, state) -> dict:
 
 def s_relay_multiplier(_params, substep, state_history, state, _input) -> tuple:
     return ("relay_multiplier", state["relay_multiplier"])
+
+
+def s_oracle_shutdown(_params, substep, state_history, state, _input) -> tuple:
+    if "oracle_shutdown" in _input:
+        return ("oracle_shutdown", _input["oracle_shutdown"])
+    else:
+        return ("oracle_shutdown", state["oracle_shutdown"])

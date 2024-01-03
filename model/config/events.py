@@ -51,4 +51,8 @@ event_map = {
         "num_services": 5,
         "multiple": 2,
     },
+    "oracle_shutdown": {
+        "time": 182,
+        "type": "oracle_shutdown",
+    },
 }
