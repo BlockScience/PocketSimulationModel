@@ -36,9 +36,13 @@ def p_update_price(_params, substep, state_history, state) -> dict:
             state["DAO"].kde = kde_oracle_returns
     else:
         kde_oracle_returns = state["DAO"].kde
-    pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
-        "pokt_price_oracle"
-    ]
+
+    if state["oracle_shutdown"]:
+        pokt_price_oracle = state["pokt_price_oracle"]
+    else:
+        pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
+            "pokt_price_oracle"
+        ]
 
     return {
         "pokt_price_oracle": pokt_price_oracle,
@@ -201,7 +205,7 @@ def p_events(_params, substep, state_history, state) -> dict:
                 for si in s:
                     state["relay_multiplier"][si] = multiple
             elif event["type"] == "oracle_shutdown":
-                print("X")
+                return {"oracle_shutdown": True}
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
