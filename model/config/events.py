@@ -60,4 +60,11 @@ event_map = {
         "type": "oracle_delay_constant",
         "delay_time": 10,
     },
+    "oracle_distortion_A_constant_30": {
+        "time": 182,
+        "type": "oracle_distortion_constant",
+        "delay_time": 30,
+        "mu": -3.1885519850880812,
+        "sigma": 0.3638713191401966,
+    },
 }

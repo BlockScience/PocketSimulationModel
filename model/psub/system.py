@@ -224,6 +224,14 @@ def p_events(_params, substep, state_history, state) -> dict:
                 return {"oracle_shutdown": True}
             elif event["type"] == "oracle_delay_constant":
                 return {"oracle_shutdown": event["delay_time"]}
+            elif event["type"] == "oracle_distortion_constant":
+                return {
+                    "oracle_distortion": {
+                        "time": event["delay_time"],
+                        "mu": event["mu"],
+                        "sigma": event["sigma"],
+                    }
+                }
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
@@ -245,3 +253,10 @@ def s_oracle_shutdown(_params, substep, state_history, state, _input) -> tuple:
         return ("oracle_shutdown", _input["oracle_shutdown"])
     else:
         return ("oracle_shutdown", state["oracle_shutdown"])
+
+
+def s_oracle_distortion(_params, substep, state_history, state, _input) -> tuple:
+    if "oracle_distortion" in _input:
+        return ("oracle_distortion", _input["oracle_distortion"])
+    else:
+        return ("oracle_distortion", state["oracle_distortion"])

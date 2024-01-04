@@ -61,6 +61,7 @@ def build_state(config_option) -> StateType:
     state["gateway_fee_per_relay"] = None
     state["relay_multiplier"] = {}
     state["oracle_shutdown"] = False
+    state["oracle_distortion"] = None
 
     state = deepcopy(state)
     return state
