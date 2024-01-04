@@ -99,8 +99,9 @@ system_param_config: Dict[str, SystemParamsType] = {
         "gateway_bootstrap_unwind_start": [3],  # In billion
         "gateway_bootstrap_end": [20],  # In billion
         "transaction_fee": [0.01],
-        "supply_grow_cap": [0.05]
+        "supply_grow_cap": [0.05],
         # "supported_services": [None],
+        "oracle_interarrival_time_mean": [0.1],
     },
     "Base": {
         "minimum_stake_servicer": [15000 * 1e6],
@@ -135,6 +136,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "max_bootstrap_servicer_cost_per_relay": [0.000005],
         "servicer_bootstrap_unwind_start": [1.5],
         "maturity_relay_cost": [0.000001971 * 0.75],
+        "oracle_interarrival_time_mean": [0.1],
     },
 }
 
@@ -362,7 +364,14 @@ network_failures_oracle_ag1_["application_minimum_stake"] = [
 ]
 network_failures_oracle_ag1_["dao_allocation"] = [0.05, 0.15]
 network_failures_oracle_ag1_["validator_fee_percentage"] = [0.01, 0.1]
-network_failures_oracle_ag1_["event"] = ["oracle_shutdown"]
+network_failures_oracle_ag1_["oracle_interarrival_time_mean"] = [1, 0.10, 0.01]
+network_failures_oracle_ag1_["event"] = [
+    "oracle_shutdown",
+    "oracle_delay_constant_10",
+    "oracle_distortion_A_constant_30",
+    "oracle_distortion_B_constant_30",
+    "oracle_distortion_C_constant_30",
+]
 
 create_sweep(
     "network_failures_oracle_ag1_",

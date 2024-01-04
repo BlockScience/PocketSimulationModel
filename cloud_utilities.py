@@ -6,6 +6,7 @@ GRID_NUMBERS = {
     "network_failures_service_ag1_": 48,
     "servicer_viability_ag1_": 1152,
     "network_viability_ag1_": 1152,
+    "network_failures_oracle_ag1_": 1920,
 }
 
 

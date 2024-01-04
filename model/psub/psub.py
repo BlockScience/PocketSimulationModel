@@ -58,6 +58,7 @@ from .system import (
     p_events,
     s_relay_multiplier,
     s_oracle_shutdown,
+    s_oracle_distortion,
 )
 from .validator import s_update_validators
 
@@ -76,6 +77,8 @@ meta_update_block = {
         "POKT_minted": s_set_to_zero_pokt_minted,
         "period_slashing_costs": s_set_to_zero_slashing_cost,
         "period_jailing_opportunity_cost": s_set_to_zero_jail_cost,
+        "oracle_shutdown": s_oracle_shutdown,
+        "oracle_distortion": s_oracle_distortion,
     },
 }
 
@@ -216,6 +219,7 @@ events_block = {
         "Services": s_update_services,
         "relay_multiplier": s_relay_multiplier,
         "oracle_shutdown": s_oracle_shutdown,
+        "oracle_distortion": s_oracle_distortion,
     },
 }
 

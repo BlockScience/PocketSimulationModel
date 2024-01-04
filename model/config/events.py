@@ -55,4 +55,30 @@ event_map = {
         "time": 182,
         "type": "oracle_shutdown",
     },
+    "oracle_delay_constant_10": {
+        "time": 182,
+        "type": "oracle_delay_constant",
+        "delay_time": 10,
+    },
+    "oracle_distortion_A_constant_30": {
+        "time": 182,
+        "type": "oracle_distortion_constant",
+        "delay_time": 30,
+        "mu": 0.01,
+        "sigma": 0.025,
+    },
+    "oracle_distortion_B_constant_30": {
+        "time": 182,
+        "type": "oracle_distortion_constant",
+        "delay_time": 30,
+        "mu": 0.01,
+        "sigma": 0.01,
+    },
+    "oracle_distortion_C_constant_30": {
+        "time": 182,
+        "type": "oracle_distortion_constant",
+        "delay_time": 30,
+        "mu": 0.01,
+        "sigma": 0.001,
+    },
 }

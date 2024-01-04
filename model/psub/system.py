@@ -28,6 +28,8 @@ def s_update_processed_relays(_params, substep, state_history, state, _input) ->
 
 
 def p_update_price(_params, substep, state_history, state) -> dict:
+    oracle_distortion = None
+
     # Hold it in the DAO because we don't have much of a choice of where else to hold
     if state["timestep"] == 0:
         with open("configuration_data/kde_oracle_returns.pkl", "rb") as file:
@@ -39,13 +41,49 @@ def p_update_price(_params, substep, state_history, state) -> dict:
 
     if state["oracle_shutdown"]:
         pokt_price_oracle = state["pokt_price_oracle"]
+        if type(state["oracle_shutdown"]) == int:
+            countdown = state["oracle_shutdown"] - 1
+            if countdown == 0:
+                return {
+                    "pokt_price_oracle": pokt_price_oracle,
+                    "oracle_shutdown": False,
+                }
+            else:
+                return {
+                    "pokt_price_oracle": pokt_price_oracle,
+                    "oracle_shutdown": countdown,
+                }
+
     else:
-        pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
-            "pokt_price_oracle"
-        ]
+        pokt_price_oracle = state["pokt_price_oracle"]
+        # Find number of interarrivals and change oracle based upon
+        if state["oracle_distortion"]:
+            oracle_distortion = state["oracle_distortion"]
+            oracle_distortion["time"] -= 1
+
+        for _ in range(np.random.poisson(1 / _params["oracle_interarrival_time_mean"])):
+            if oracle_distortion:
+                pokt_price_oracle = (
+                    np.exp(
+                        np.random.normal(
+                            oracle_distortion["mu"], oracle_distortion["sigma"]
+                        )
+                    )
+                    * pokt_price_oracle
+                )
+
+            else:
+                pokt_price_oracle = (
+                    1 + kde_oracle_returns.resample(1)[0][0]
+                ) * pokt_price_oracle
+
+        if oracle_distortion:
+            if oracle_distortion["time"] == 0:
+                oracle_distortion = None
 
     return {
         "pokt_price_oracle": pokt_price_oracle,
+        "oracle_distortion": oracle_distortion,
     }
 
 
@@ -206,6 +244,16 @@ def p_events(_params, substep, state_history, state) -> dict:
                     state["relay_multiplier"][si] = multiple
             elif event["type"] == "oracle_shutdown":
                 return {"oracle_shutdown": True}
+            elif event["type"] == "oracle_delay_constant":
+                return {"oracle_shutdown": event["delay_time"]}
+            elif event["type"] == "oracle_distortion_constant":
+                return {
+                    "oracle_distortion": {
+                        "time": event["delay_time"],
+                        "mu": event["mu"],
+                        "sigma": event["sigma"],
+                    }
+                }
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
@@ -227,3 +275,10 @@ def s_oracle_shutdown(_params, substep, state_history, state, _input) -> tuple:
         return ("oracle_shutdown", _input["oracle_shutdown"])
     else:
         return ("oracle_shutdown", state["oracle_shutdown"])
+
+
+def s_oracle_distortion(_params, substep, state_history, state, _input) -> tuple:
+    if "oracle_distortion" in _input:
+        return ("oracle_distortion", _input["oracle_distortion"])
+    else:
+        return ("oracle_distortion", state["oracle_distortion"])
