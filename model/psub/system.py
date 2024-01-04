@@ -209,6 +209,8 @@ def p_events(_params, substep, state_history, state) -> dict:
                     state["relay_multiplier"][si] = multiple
             elif event["type"] == "oracle_shutdown":
                 return {"oracle_shutdown": True}
+            elif event["type"] == "oracle_delay_constant":
+                return {"oracle_shutdown": event["delay_time"]}
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":

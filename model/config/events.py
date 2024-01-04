@@ -55,4 +55,9 @@ event_map = {
         "time": 182,
         "type": "oracle_shutdown",
     },
+    "oracle_delay_constant_10": {
+        "time": 182,
+        "type": "oracle_delay_constant",
+        "delay_time": 10,
+    },
 }
