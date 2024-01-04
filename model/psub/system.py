@@ -40,9 +40,12 @@ def p_update_price(_params, substep, state_history, state) -> dict:
     if state["oracle_shutdown"]:
         pokt_price_oracle = state["pokt_price_oracle"]
     else:
-        pokt_price_oracle = (1 + kde_oracle_returns.resample(1)[0][0]) * state[
-            "pokt_price_oracle"
-        ]
+        pokt_price_oracle = state["pokt_price_oracle"]
+        # Find number of interarrivals and change oracle based upon
+        for _ in range(np.random.poisson(1 / _params["oracle_interarrival_time_mean"])):
+            pokt_price_oracle = (
+                1 + kde_oracle_returns.resample(1)[0][0]
+            ) * pokt_price_oracle
 
     return {
         "pokt_price_oracle": pokt_price_oracle,
