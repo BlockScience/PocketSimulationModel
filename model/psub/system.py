@@ -39,6 +39,19 @@ def p_update_price(_params, substep, state_history, state) -> dict:
 
     if state["oracle_shutdown"]:
         pokt_price_oracle = state["pokt_price_oracle"]
+        if type(state["oracle_shutdown"]) == int:
+            countdown = state["oracle_shutdown"] - 1
+            if countdown == 0:
+                return {
+                    "pokt_price_oracle": pokt_price_oracle,
+                    "oracle_shutdown": False,
+                }
+            else:
+                return {
+                    "pokt_price_oracle": pokt_price_oracle,
+                    "oracle_shutdown": countdown,
+                }
+
     else:
         pokt_price_oracle = state["pokt_price_oracle"]
         # Find number of interarrivals and change oracle based upon
