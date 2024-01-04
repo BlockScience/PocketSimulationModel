@@ -62,9 +62,20 @@ def p_update_price(_params, substep, state_history, state) -> dict:
             oracle_distortion["time"] -= 1
 
         for _ in range(np.random.poisson(1 / _params["oracle_interarrival_time_mean"])):
-            pokt_price_oracle = (
-                1 + kde_oracle_returns.resample(1)[0][0]
-            ) * pokt_price_oracle
+            if oracle_distortion:
+                pokt_price_oracle = (
+                    np.exp(
+                        np.random.normal(
+                            oracle_distortion["mu"], oracle_distortion["sigma"]
+                        )
+                    )
+                    * pokt_price_oracle
+                )
+
+            else:
+                pokt_price_oracle = (
+                    1 + kde_oracle_returns.resample(1)[0][0]
+                ) * pokt_price_oracle
 
         if oracle_distortion:
             if oracle_distortion["time"] == 0:

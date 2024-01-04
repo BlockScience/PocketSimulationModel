@@ -64,7 +64,7 @@ event_map = {
         "time": 182,
         "type": "oracle_distortion_constant",
         "delay_time": 30,
-        "mu": -3.1885519850880812,
-        "sigma": 0.3638713191401966,
+        "mu": 0.01,
+        "sigma": 0.025,
     },
 }
