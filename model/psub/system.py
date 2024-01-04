@@ -28,6 +28,8 @@ def s_update_processed_relays(_params, substep, state_history, state, _input) ->
 
 
 def p_update_price(_params, substep, state_history, state) -> dict:
+    oracle_distortion = None
+
     # Hold it in the DAO because we don't have much of a choice of where else to hold
     if state["timestep"] == 0:
         with open("configuration_data/kde_oracle_returns.pkl", "rb") as file:
@@ -55,13 +57,22 @@ def p_update_price(_params, substep, state_history, state) -> dict:
     else:
         pokt_price_oracle = state["pokt_price_oracle"]
         # Find number of interarrivals and change oracle based upon
+        if state["oracle_distortion"]:
+            oracle_distortion = state["oracle_distortion"]
+            oracle_distortion["time"] -= 1
+
         for _ in range(np.random.poisson(1 / _params["oracle_interarrival_time_mean"])):
             pokt_price_oracle = (
                 1 + kde_oracle_returns.resample(1)[0][0]
             ) * pokt_price_oracle
 
+        if oracle_distortion:
+            if oracle_distortion["time"] == 0:
+                oracle_distortion = None
+
     return {
         "pokt_price_oracle": pokt_price_oracle,
+        "oracle_distortion": oracle_distortion,
     }
 
 

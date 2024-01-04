@@ -78,6 +78,7 @@ meta_update_block = {
         "period_slashing_costs": s_set_to_zero_slashing_cost,
         "period_jailing_opportunity_cost": s_set_to_zero_jail_cost,
         "oracle_shutdown": s_oracle_shutdown,
+        "oracle_distortion": s_oracle_distortion,
     },
 }
 
