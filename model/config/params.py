@@ -75,7 +75,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "minimum_servicers_per_session": [1],
         "maximum_servicers_per_session": [5],
         # "application_unstaking_time": [None],
-        "application_fee_per_relay": [27.42],
+        "application_fee_per_relay": ["GFPR*1.25"],
         "minimum_application_stake": [15000 * 1e6],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [0],
@@ -113,7 +113,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "downtime_jail_duration": [3600000000000],  # In nanoseconds
         "minimum_servicers_per_session": [1],
         "maximum_servicers_per_session": [5],
-        "application_fee_per_relay": [27.42],
+        "application_fee_per_relay": ["GFPR*1.25"],
         "minimum_application_stake": [15000 * 1e6],
         "app_burn_per_session": [0],
         "app_burn_per_relay": [0],

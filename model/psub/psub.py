@@ -55,6 +55,7 @@ from .system import (
     p_update_rttm,
     s_update_rttm,
     s_update_gfpr,
+    s_update_afpr,
     p_events,
     s_relay_multiplier,
     s_oracle_shutdown,
@@ -90,6 +91,7 @@ gfpr_rttm_block = {
     "variables": {
         "relays_to_tokens_multiplier": s_update_rttm,
         "gateway_fee_per_relay": s_update_gfpr,
+        "application_fee_per_relay": s_update_afpr,
     },
 }
 

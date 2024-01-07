@@ -282,3 +282,14 @@ def s_oracle_distortion(_params, substep, state_history, state, _input) -> tuple
         return ("oracle_distortion", _input["oracle_distortion"])
     else:
         return ("oracle_distortion", state["oracle_distortion"])
+
+
+def s_update_afpr(_params, substep, state_history, state, _input) -> tuple:
+    if type(_params["application_fee_per_relay"]) in [float, int]:
+        return ("application_fee_per_relay", _params["application_fee_per_relay"])
+    else:
+        multiplier = float(_params["application_fee_per_relay"].replace("GFPR*", ""))
+        return (
+            "application_fee_per_relay",
+            _input["gateway_fee_per_relay"] * multiplier,
+        )
