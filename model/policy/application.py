@@ -125,7 +125,7 @@ def submit_relay_requests_policy_v1(
     else:
         max_relays_allowed = (
             domain[0]["application_address"].staked_pokt
-            // params["application_fee_per_relay"]
+            // state["application_fee_per_relay"]
         )
     number_of_relays = max(min(number_of_relays, max_relays_allowed), 0)
 

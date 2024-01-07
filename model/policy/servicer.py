@@ -83,7 +83,7 @@ def servicer_relay_policy(
     else:
         relay_charge = (
             domain[0]["session"]["number_of_relays"]
-            * params["application_fee_per_relay"]
+            * state["application_fee_per_relay"]
         )
         space1: modify_application_pokt_space = {
             "public_key": application,
