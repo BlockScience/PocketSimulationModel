@@ -266,6 +266,13 @@ def p_events(_params, substep, state_history, state) -> dict:
                 return {"oracle_shutdown": True}
             elif event["type"] == "oracle_delay_constant":
                 return {"oracle_shutdown": event["delay_time"]}
+            elif event["type"] == "oracle_delay_poisson":
+                t = int(
+                    round(
+                        np.random.poisson(1 / _params["oracle_interarrival_time_mean"])
+                    )
+                )
+                return {"oracle_shutdown": t}
             elif event["type"] == "oracle_distortion_constant":
                 return {
                     "oracle_distortion": {
