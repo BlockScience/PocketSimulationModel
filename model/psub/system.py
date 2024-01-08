@@ -281,6 +281,19 @@ def p_events(_params, substep, state_history, state) -> dict:
                         "sigma": event["sigma"],
                     }
                 }
+            elif event["type"] == "oracle_distortion_poisson":
+                t = int(
+                    round(
+                        np.random.poisson(1 / _params["oracle_interarrival_time_mean"])
+                    )
+                )
+                return {
+                    "oracle_distortion": {
+                        "time": t,
+                        "mu": event["mu"],
+                        "sigma": event["sigma"],
+                    }
+                }
             else:
                 assert False, "not implemented"
         elif event["type"] == "service_shutdown":
