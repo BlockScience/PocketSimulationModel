@@ -236,6 +236,12 @@ def p_events(_params, substep, state_history, state) -> dict:
                 )
                 spaces = service_join_policy(state, _params, spaces)
                 add_service(state, _params, spaces)
+
+                # For each of the services, scale the demand up to mock up increased activity
+                relay_multiplier = {}
+                n = len(state["Services"])
+                for service in state["Services"]:
+                    state["relay_multiplier"][service] = n / (n - 1)
             elif event["type"] == "service_relay_multiply":
                 n_services = event["num_services"]
                 multiple = event["multiple"]
