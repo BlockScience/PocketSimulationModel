@@ -367,10 +367,10 @@ network_failures_oracle_ag1_["validator_fee_percentage"] = [0.01, 0.1]
 network_failures_oracle_ag1_["oracle_interarrival_time_mean"] = [1, 0.10, 0.01]
 network_failures_oracle_ag1_["event"] = [
     "oracle_shutdown",
-    "oracle_delay_constant_10",
-    "oracle_distortion_A_constant_30",
-    "oracle_distortion_B_constant_30",
-    "oracle_distortion_C_constant_30",
+    "oracle_delay_poisson",
+    "oracle_distortion_A_poisson",
+    "oracle_distortion_B_poisson",
+    "oracle_distortion_C_poisson",
 ]
 
 create_sweep(
