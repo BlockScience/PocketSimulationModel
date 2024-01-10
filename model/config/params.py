@@ -260,7 +260,7 @@ test_sweep["relays_per_session_gamma_distribution_scale"] = [200000, 300000, 400
 create_sweep("Test", test_sweep, config_option_map_sweep)
 
 gateway_viability_sweep_ag1_ = build_params("Base")
-gateway_viability_sweep_ag1_["relays_to_tokens_multiplier"] = [25, 400]
+gateway_viability_sweep_ag1_["session_token_bucket_coefficient"] = [25, 400]
 gateway_viability_sweep_ag1_["gateway_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["application_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
