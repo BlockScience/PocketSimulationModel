@@ -65,7 +65,7 @@ for i in range(1, 1153):
         "T": 365,
     }
 
-for i in range(1, 1921):
+for i in range(1, 2689):
     experimental_setups["network_failures_oracle_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "network_failures_oracle_ag1_{}".format(i),

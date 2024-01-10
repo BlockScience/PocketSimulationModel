@@ -368,9 +368,12 @@ network_failures_oracle_ag1_["oracle_treatment_time_mean"] = [1, 10, 100]
 network_failures_oracle_ag1_["event"] = [
     "oracle_shutdown",
     "oracle_delay_poisson",
-    "oracle_distortion_A_poisson",
-    "oracle_distortion_B_poisson",
-    "oracle_distortion_C_poisson",
+    "oracle_distortion_unbiased_low_noise_poisson",
+    "oracle_distortion_unbiased_high_noise_poisson",
+    "oracle_distortion_positive_bias_low_noise_poisson",
+    "oracle_distortion_positive_bias_high_noise_poisson",
+    "oracle_distortion_negative_bias_low_noise_poisson",
+    "oracle_distortion_negative_bias_high_noise_poisson",
 ]
 
 create_sweep(
