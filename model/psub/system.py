@@ -61,7 +61,7 @@ def p_update_price(_params, substep, state_history, state) -> dict:
             oracle_distortion = state["oracle_distortion"]
             oracle_distortion["time"] -= 1
 
-        """for _ in range(np.random.poisson(1 / _params["oracle_interarrival_time_mean"])):
+        """for _ in range(np.random.poisson(_params["oracle_treatment_time_mean"])):
             if oracle_distortion:
                 pokt_price_oracle = (
                     np.exp(
@@ -267,11 +267,7 @@ def p_events(_params, substep, state_history, state) -> dict:
             elif event["type"] == "oracle_delay_constant":
                 return {"oracle_shutdown": event["delay_time"]}
             elif event["type"] == "oracle_delay_poisson":
-                t = int(
-                    round(
-                        np.random.poisson(1 / _params["oracle_interarrival_time_mean"])
-                    )
-                )
+                t = int(round(np.random.poisson(_params["oracle_treatment_time_mean"])))
                 return {"oracle_shutdown": t}
             elif event["type"] == "oracle_distortion_constant":
                 return {
@@ -282,11 +278,7 @@ def p_events(_params, substep, state_history, state) -> dict:
                     }
                 }
             elif event["type"] == "oracle_distortion_poisson":
-                t = int(
-                    round(
-                        np.random.poisson(1 / _params["oracle_interarrival_time_mean"])
-                    )
-                )
+                t = int(round(np.random.poisson(_params["oracle_treatment_time_mean"])))
                 return {
                     "oracle_distortion": {
                         "time": t,
