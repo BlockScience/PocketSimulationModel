@@ -80,14 +80,19 @@ def assign_servicer_salary_policy(
     if len(geo_servicers) == 0:
         servicers = [x for x in state["Servicers"] if not x.pause_height]
     out = []
-    payment_per = space["reward"] // len(servicers)
-    for servicer in servicers:
+
+    # Stake buckets
+    # Each servicer's stake is mapped to one of 4 buckets of 15K increments that denotes their reward share
+    stake_bins = [max(1, min(x.staked_pokt // 15000000000, 4)) for x in servicers]
+
+    payment_per = space["reward"] // sum(stake_bins)
+    for servicer, sb in zip(servicers, stake_bins):
         if servicer not in servicer_earnings:
             servicer_earnings[servicer] = {}
         if service not in servicer_earnings[servicer]:
-            servicer_earnings[servicer][service] = payment_per
+            servicer_earnings[servicer][service] = int(payment_per * sb)
         else:
-            servicer_earnings[servicer][service] += payment_per
+            servicer_earnings[servicer][service] += int(payment_per * sb)
 
         space1: modify_servicer_pokt_space = {
             "amount": payment_per * servicer.QoS,

@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
+from time import sleep
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
     "network_failures_service_ag1_": 48,
     "servicer_viability_ag1_": 1152,
     "network_viability_ag1_": 1152,
-    "network_failures_oracle_ag1_": 1920,
+    "network_failures_oracle_ag1_": 2688,
 }
 
 
@@ -57,32 +58,34 @@ def create_queue_experiments(runs, chunk_size, join_char=","):
 
 
 def run_tasks(ecs, experiments):
-    ecs.run_task(
-        cluster="PocketRuns",
-        count=1,
-        launchType="FARGATE",
-        overrides={
-            "containerOverrides": [
-                {
-                    "name": "pocket",
-                    "command": experiments,
-                },
-            ],
-        },
-        taskDefinition="Simulation-Run",
-        networkConfiguration={
-            "awsvpcConfiguration": {
-                "subnets": [
-                    "subnet-03584b39cf34b8789",
-                    "subnet-0e214e434065774f3",
-                    "subnet-09452d6bdd5634c80",
+    print(
+        ecs.run_task(
+            cluster="PocketRuns",
+            count=1,
+            launchType="FARGATE",
+            overrides={
+                "containerOverrides": [
+                    {
+                        "name": "pocket",
+                        "command": experiments,
+                    },
                 ],
-                "securityGroups": [
-                    "sg-0da6cc582b0e773c5",
-                ],
-                "assignPublicIp": "ENABLED",
-            }
-        },
+            },
+            taskDefinition="Simulation-Run",
+            networkConfiguration={
+                "awsvpcConfiguration": {
+                    "subnets": [
+                        "subnet-03584b39cf34b8789",
+                        "subnet-0e214e434065774f3",
+                        "subnet-09452d6bdd5634c80",
+                    ],
+                    "securityGroups": [
+                        "sg-0da6cc582b0e773c5",
+                    ],
+                    "assignPublicIp": "ENABLED",
+                }
+            },
+        )["failures"]
     )
 
 

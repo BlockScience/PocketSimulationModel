@@ -85,22 +85,40 @@ event_map = {
         "mu": 0.01,
         "sigma": 0.001,
     },
-    "oracle_distortion_A_poisson": {
+    "oracle_distortion_unbiased_low_noise_poisson": {
         "time": 182,
         "type": "oracle_distortion_poisson",
-        "mu": 0.01,
-        "sigma": 0.025,
-    },
-    "oracle_distortion_B_poisson": {
-        "time": 182,
-        "type": "oracle_distortion_poisson",
-        "mu": 0.01,
+        "mu": 0,
         "sigma": 0.01,
     },
-    "oracle_distortion_C_poisson": {
+    "oracle_distortion_unbiased_high_noise_poisson": {
         "time": 182,
         "type": "oracle_distortion_poisson",
-        "mu": 0.01,
-        "sigma": 0.001,
+        "mu": 0,
+        "sigma": 0.05,
+    },
+    "oracle_distortion_positive_bias_low_noise_poisson": {
+        "time": 182,
+        "type": "oracle_distortion_poisson",
+        "mu": 0.05,
+        "sigma": 0.01,
+    },
+    "oracle_distortion_positive_bias_high_noise_poisson": {
+        "time": 182,
+        "type": "oracle_distortion_poisson",
+        "mu": 0.05,
+        "sigma": 0.05,
+    },
+    "oracle_distortion_negative_bias_low_noise_poisson": {
+        "time": 182,
+        "type": "oracle_distortion_poisson",
+        "mu": -0.05,
+        "sigma": 0.01,
+    },
+    "oracle_distortion_negative_bias_high_noise_poisson": {
+        "time": 182,
+        "type": "oracle_distortion_poisson",
+        "mu": -0.05,
+        "sigma": 0.05,
     },
 }

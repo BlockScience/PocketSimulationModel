@@ -101,7 +101,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "transaction_fee": [0.01],
         "supply_grow_cap": [0.05],
         # "supported_services": [None],
-        "oracle_interarrival_time_mean": [0.1],
+        "oracle_treatment_time_mean": [10],
     },
     "Base": {
         "minimum_stake_servicer": [15000 * 1e6],
@@ -136,7 +136,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "max_bootstrap_servicer_cost_per_relay": [0.000005],
         "servicer_bootstrap_unwind_start": [1.5],
         "maturity_relay_cost": [0.000001971 * 0.75],
-        "oracle_interarrival_time_mean": [0.1],
+        "oracle_treatment_time_mean": [10],
     },
 }
 
@@ -260,7 +260,7 @@ test_sweep["relays_per_session_gamma_distribution_scale"] = [200000, 300000, 400
 create_sweep("Test", test_sweep, config_option_map_sweep)
 
 gateway_viability_sweep_ag1_ = build_params("Base")
-gateway_viability_sweep_ag1_["relays_to_tokens_multiplier"] = [25, 400]
+gateway_viability_sweep_ag1_["session_token_bucket_coefficient"] = [25, 400]
 gateway_viability_sweep_ag1_["gateway_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["application_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
@@ -364,13 +364,16 @@ network_failures_oracle_ag1_["application_minimum_stake"] = [
 ]
 network_failures_oracle_ag1_["dao_allocation"] = [0.05, 0.15]
 network_failures_oracle_ag1_["validator_fee_percentage"] = [0.01, 0.1]
-network_failures_oracle_ag1_["oracle_interarrival_time_mean"] = [1, 0.10, 0.01]
+network_failures_oracle_ag1_["oracle_treatment_time_mean"] = [1, 10, 100]
 network_failures_oracle_ag1_["event"] = [
     "oracle_shutdown",
     "oracle_delay_poisson",
-    "oracle_distortion_A_poisson",
-    "oracle_distortion_B_poisson",
-    "oracle_distortion_C_poisson",
+    "oracle_distortion_unbiased_low_noise_poisson",
+    "oracle_distortion_unbiased_high_noise_poisson",
+    "oracle_distortion_positive_bias_low_noise_poisson",
+    "oracle_distortion_positive_bias_high_noise_poisson",
+    "oracle_distortion_negative_bias_low_noise_poisson",
+    "oracle_distortion_negative_bias_high_noise_poisson",
 ]
 
 create_sweep(

@@ -37,7 +37,7 @@ for i in range(1, 289):
     experimental_setups["gateway_viability_sweep_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "gateway_viability_sweep_ag1_{}".format(i),
-        "monte_carlo_n": 1,
+        "monte_carlo_n": 2,
         "T": 365,
     }
 
@@ -45,7 +45,7 @@ for i in range(1, 49):
     experimental_setups["network_failures_service_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "network_failures_service_ag1_{}".format(i),
-        "monte_carlo_n": 1,
+        "monte_carlo_n": 2,
         "T": 365,
     }
 
@@ -53,7 +53,7 @@ for i in range(1, 1153):
     experimental_setups["servicer_viability_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "servicer_viability_ag1_{}".format(i),
-        "monte_carlo_n": 1,
+        "monte_carlo_n": 2,
         "T": 365,
     }
 
@@ -61,14 +61,14 @@ for i in range(1, 1153):
     experimental_setups["network_viability_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "network_viability_ag1_{}".format(i),
-        "monte_carlo_n": 1,
+        "monte_carlo_n": 2,
         "T": 365,
     }
 
-for i in range(1, 1921):
+for i in range(1, 2689):
     experimental_setups["network_failures_oracle_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "network_failures_oracle_ag1_{}".format(i),
-        "monte_carlo_n": 1,
+        "monte_carlo_n": 2,
         "T": 365,
     }

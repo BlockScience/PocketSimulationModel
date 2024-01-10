@@ -44,7 +44,7 @@ def build_state(config_option) -> StateType:
     state["Sessions"] = []
     state["total_relays"] = None
     state["processed_relays"] = None
-    state["pokt_price_true"] = 0.06 / 1e6
+    # state["pokt_price_true"] = 0.06 / 1e6
     state["pokt_price_oracle"] = 0.06 / 1e6
     state["n_transactions"] = None
     state["relay_log"] = None
