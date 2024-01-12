@@ -19,7 +19,7 @@ def check_if_exists(s3, bucket, key):
         return False
 
 
-def create_expected_runs_dataframe(s3, experiment_name, run_all=False):
+def create_expected_runs_dataframe(s3, experiment_name, run_all=False, top=None):
     data = [
         [
             "{}{}".format(experiment_name, x),
@@ -29,6 +29,8 @@ def create_expected_runs_dataframe(s3, experiment_name, run_all=False):
         for x in range(1, GRID_NUMBERS[experiment_name] + 1)
     ]
     df = pd.DataFrame(data, columns=["Experiment", "Full Simulation File", "KPI File"])
+    if top:
+        df = df.iloc[:top]
 
     # Figure out if runs were complete
     if run_all:
@@ -106,3 +108,22 @@ def download_experiment_kpi(experiment, s3):
     df = pd.concat(dataframes)
     df = df.reset_index(drop=True)
     df.to_csv("simulation_data/{}.csv".format(experiment))
+
+
+def download_experiment_mc(experiment, s3, top=None):
+    runs = create_expected_runs_dataframe(s3, experiment, top=top)
+    assert runs["Complete"].all()
+
+    files = []
+    for file in runs["Full Simulation File"]:
+        file2 = file.replace("data", "simulation_data")
+        files.append(file2)
+        with open(file2, "wb") as f:
+            s3.download_fileobj("pocketsimulation", file, f)
+
+    dataframes = []
+    for file in files:
+        dataframes.append(pd.read_pickle(file))
+    df = pd.concat(dataframes)
+    df = df.reset_index(drop=True)
+    df.to_csv("simulation_data/{}MC.csv".format(experiment))
