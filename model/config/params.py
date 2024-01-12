@@ -50,11 +50,13 @@ def create_sweep(prefix, sweep, config_option_map_sweep):
     i = 1
 
     cartesian_product = list(product(*sweep.values()))
+    key_str_list = [f"{prefix}{i+1}" for i in range(len(cartesian_product))]
     for i in range(len(cartesian_product)):
         vals = cartesian_product[i]
         config_option_map_sweep["{}{}".format(prefix, i + 1)] = {}
         for k, x in zip(sweep.keys(), vals):
             config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = [x]
+    return key_str_list
 
 
 system_param_config: Dict[str, SystemParamsType] = {
