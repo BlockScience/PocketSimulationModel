@@ -100,6 +100,7 @@ def give_data_individual_names(
     if replacement_dict_to_use is None:
         replacement_dict_to_use = replacement_dict
 
+
     assert not (
         replacement_dict_to_use is None
     ), "The replacement dict should be set by now."
@@ -109,7 +110,9 @@ def give_data_individual_names(
         for col in df.select_dtypes(include="number").columns
         if ("param" in col) and len(df[col].unique()) == 2
     ]
-    print(binary_param_cols)
+    for col in binary_param_cols:
+        if col not in replacement_dict_to_use:
+            replacement_dict_to_use[col] = col.replace("param_", "")
     assert all([col in replacement_dict_to_use.keys() for col in binary_param_cols])
 
     df[col_name] = df.apply(
