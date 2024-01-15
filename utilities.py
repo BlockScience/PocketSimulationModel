@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def prepare_quantiles(simulation_data_path):
     df = pd.read_csv(simulation_data_path, index_col = 0)
@@ -40,6 +41,23 @@ def prepare_quantiles(simulation_data_path):
         g = df.groupby("timestep")[column]
         q[column] = pd.concat([g.quantile(.25),
                               g.quantile(.5),
+                              g.mean(),
                               g.quantile(.75)], axis=1)
+        q[column].columns = ["25th Quantile", "50th Quantile", "Average", "75th Quantile"]
         
     return q
+
+def plot_quantiles(q, columns):
+    n = len(q.keys())
+    rows = n // columns + (n % columns > 0)
+    width = 16
+    height = 6 * rows
+
+    fig, ax = plt.subplots(rows, columns, figsize=(width, height))
+    for i, key in enumerate(q):
+        i1 = i // columns
+        i2 = i % columns
+        ax_i = ax[i1, i2]
+        q[key].plot(kind='line', ax=ax_i)
+        ax_i.set_title(key)
+    plt.show()
