@@ -14,12 +14,12 @@ from model.config.experiment import *
 ## Methods for creating name strings     ##
 #
 replacement_dict = {
-    "relays_to_tokens_multiplier": "rttm",
+    "session_token_bucket_coefficient": "stbc",
     "gateway_fee_per_relay": "gfpr",
     "application_fee_per_relay": "afpr",
     "gateway_minimum_stake": "gms",
     "application_minimum_stake": "ams",
-    "param_relays_to_tokens_multiplier": "rttm",
+    "param_session_token_bucket_coefficient": "stbc",
     "param_gateway_fee_per_relay": "gfpr",
     "param_application_fee_per_relay": "afpr",
     "param_gateway_minimum_stake": "gms",
@@ -100,6 +100,7 @@ def give_data_individual_names(
     if replacement_dict_to_use is None:
         replacement_dict_to_use = replacement_dict
 
+
     assert not (
         replacement_dict_to_use is None
     ), "The replacement dict should be set by now."
@@ -109,8 +110,14 @@ def give_data_individual_names(
         for col in df.select_dtypes(include="number").columns
         if ("param" in col) and len(df[col].unique()) == 2
     ]
-    print(binary_param_cols)
+    for col in binary_param_cols:
+        if col not in replacement_dict_to_use:
+            replacement_dict_to_use[col] = col.replace("param_", "")
     assert all([col in replacement_dict_to_use.keys() for col in binary_param_cols])
+
+    # Make sure ordering is correct
+    binary_param_cols = [x for x in replacement_dict_to_use if x in binary_param_cols]
+
 
     df[col_name] = df.apply(
         lambda row: "_".join(
