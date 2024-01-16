@@ -19,7 +19,9 @@ def check_if_exists(s3, bucket, key):
         return False
 
 
-def create_expected_runs_dataframe(s3, experiment_name, run_all=False, top=None):
+def create_expected_runs_dataframe(
+    s3, experiment_name, run_all=False, top=None, random=False
+):
     data = [
         [
             "{}{}".format(experiment_name, x),
@@ -30,7 +32,10 @@ def create_expected_runs_dataframe(s3, experiment_name, run_all=False, top=None)
     ]
     df = pd.DataFrame(data, columns=["Experiment", "Full Simulation File", "KPI File"])
     if top:
-        df = df.iloc[:top]
+        if random:
+            df = df.sample(top)
+        else:
+            df = df.iloc[:top]
 
     # Figure out if runs were complete
     if run_all:
