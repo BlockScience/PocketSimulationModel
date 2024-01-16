@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from time import sleep
+import time
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
@@ -141,3 +142,16 @@ def download_experiment_mc(experiment, s3, top=None):
     df = pd.concat(dataframes)
     df = df.reset_index(drop=True)
     df.to_csv("simulation_data/{}MC.csv".format(experiment))
+
+
+def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=10):
+    queue = create_queue_experiments(runs, n)
+    while len(queue) > 0:
+        for _ in range(max_containers):
+            if len(queue) > 0:
+                q = list(queue.pop(0))
+                print(q)
+                run_tasks(ecs, list(q))
+        print()
+        print()
+        time.sleep(sleep_minutes * 60)
