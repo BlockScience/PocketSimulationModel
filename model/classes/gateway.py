@@ -21,3 +21,4 @@ class Gateway:
         self.pokt_holdings = pokt_holdings
         self.staked_pokt = staked_pokt
         self.fees_paid = 0
+        self.relays_served = 0
