@@ -78,7 +78,7 @@ def compute_kpi3(unique_gateways, simulation_kpis, r=0.05):
         gateways = unique_gateways[key].values()
         average_stake = sum([x.staked_pokt for x in gateways]) / len(gateways)
         for gateway in gateways:
-            gateway.kpi3 = (
+            """gateway.kpi3 = (
                 gateway.staked_pokt
                 - average_stake
                 - (1 + 1 / r) * gateway.fees_paid
@@ -88,7 +88,18 @@ def compute_kpi3(unique_gateways, simulation_kpis, r=0.05):
                     simulation_kpis.loc[key, "param_gateway_minimum_stake"]
                     - average_stake,
                 )
-            )
+            )"""
+
+            # All is converted to POKT in this hence the 1e6
+            Q = gateway.relays_served
+            gateway.kpi3 = (1 + 1 / r) * (
+                simulation_kpis.loc[key, "param_kpi_3_R"]
+                - simulation_kpis.loc[key, "param_gateway_fee_per_relay"] / 1e6
+            ) * Q - max(
+                0,
+                simulation_kpis.loc[key, "param_gateway_minimum_stake"]
+                - gateway.staked_pokt,
+            ) / 1e6
         vals = [x.kpi3 for x in gateways]
         kpi3[key] = sum(vals) / len(vals)
 

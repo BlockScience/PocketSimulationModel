@@ -104,6 +104,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "supply_grow_cap": [0.05],
         # "supported_services": [None],
         "oracle_treatment_time_mean": [10],
+        "kpi_3_R": [1.632 * 10**-5],
     },
     "Base": {
         "minimum_stake_servicer": [15000 * 1e6],
@@ -139,6 +140,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "servicer_bootstrap_unwind_start": [1.5],
         "maturity_relay_cost": [0.000001971 * 0.75],
         "oracle_treatment_time_mean": [10],
+        "kpi_3_R": [1.632 * 10**-5],
     },
 }
 

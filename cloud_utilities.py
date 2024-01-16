@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from time import sleep
+import time
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
@@ -19,7 +20,9 @@ def check_if_exists(s3, bucket, key):
         return False
 
 
-def create_expected_runs_dataframe(s3, experiment_name, run_all=False, top=None):
+def create_expected_runs_dataframe(
+    s3, experiment_name, run_all=False, top=None, random=False
+):
     data = [
         [
             "{}{}".format(experiment_name, x),
@@ -30,7 +33,10 @@ def create_expected_runs_dataframe(s3, experiment_name, run_all=False, top=None)
     ]
     df = pd.DataFrame(data, columns=["Experiment", "Full Simulation File", "KPI File"])
     if top:
-        df = df.iloc[:top]
+        if random:
+            df = df.sample(top)
+        else:
+            df = df.iloc[:top]
 
     # Figure out if runs were complete
     if run_all:
@@ -41,6 +47,15 @@ def create_expected_runs_dataframe(s3, experiment_name, run_all=False, top=None)
         )
         b = df["KPI File"].apply(lambda x: check_if_exists(s3, "pocketsimulation", x))
         df["Complete"] = a & b
+    return df
+
+
+def create_expected_runs_dataframe_multi(s3, experiments):
+    l = []
+    for experiment in experiments:
+        l.append(create_expected_runs_dataframe(s3, experiment))
+        l[-1]["Group"] = experiment
+    df = pd.concat(l)
     return df
 
 
@@ -127,3 +142,16 @@ def download_experiment_mc(experiment, s3, top=None):
     df = pd.concat(dataframes)
     df = df.reset_index(drop=True)
     df.to_csv("simulation_data/{}MC.csv".format(experiment))
+
+
+def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
+    queue = create_queue_experiments(runs, n)
+    while len(queue) > 0:
+        for _ in range(max_containers):
+            if len(queue) > 0:
+                q = list(queue.pop(0))
+                print(q)
+                run_tasks(ecs, list(q))
+        print()
+        print()
+        time.sleep(sleep_minutes * 60)

@@ -75,6 +75,9 @@ def relay_requests_ac(state, params, relay_log, servicer_relay_log):
     if type(spaces[0]["public_key"]) == Gateway:
         # Track the fees paid
         spaces[0]["public_key"].fees_paid += -spaces[0]["amount"]
+        spaces[0]["public_key"].relays_served += spaces[-1]["session"][
+            "number_of_relays"
+        ]
         modify_gateway_stake(state, params, spaces[:1])
     else:
         modify_application_stake(state, params, spaces[:1])
