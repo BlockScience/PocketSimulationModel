@@ -97,7 +97,8 @@ def compute_kpi3(unique_gateways, simulation_kpis, r=0.05):
                 - simulation_kpis.loc[key, "param_gateway_fee_per_relay"] / 1e6
             ) * Q - max(
                 0,
-                simulation_kpis.loc[key, "param_gateway_minimum_stake"] - average_stake,
+                simulation_kpis.loc[key, "param_gateway_minimum_stake"]
+                - gateway.staked_pokt,
             ) / 1e6
         vals = [x.kpi3 for x in gateways]
         kpi3[key] = sum(vals) / len(vals)
