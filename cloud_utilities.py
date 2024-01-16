@@ -144,7 +144,7 @@ def download_experiment_mc(experiment, s3, top=None):
     df.to_csv("simulation_data/{}MC.csv".format(experiment))
 
 
-def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=10):
+def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
     queue = create_queue_experiments(runs, n)
     while len(queue) > 0:
         for _ in range(max_containers):
