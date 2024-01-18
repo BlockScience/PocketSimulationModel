@@ -268,7 +268,7 @@ gateway_viability_sweep_ag1_["session_token_bucket_coefficient"] = [25, 400]
 gateway_viability_sweep_ag1_["gateway_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["application_fee_per_relay"] = [20, 30]
 gateway_viability_sweep_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
-gateway_viability_sweep_ag1_["application_minimum_stake"] = [
+gateway_viability_sweep_ag1_["minimum_application_stake"] = [
     100000 * 1e6,
     200000 * 1e6,
 ]
@@ -314,7 +314,7 @@ servicer_viability_ag1_["relays_to_tokens_multiplier"] = [100, 200]
 servicer_viability_ag1_["gateway_fee_per_relay"] = [20, 30]
 servicer_viability_ag1_["application_fee_per_relay"] = [20, 30]
 servicer_viability_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
-servicer_viability_ag1_["application_minimum_stake"] = [
+servicer_viability_ag1_["minimum_application_stake"] = [
     100000 * 1e6,
     200000 * 1e6,
 ]
@@ -335,7 +335,7 @@ network_viability_ag1_["relays_to_tokens_multiplier"] = [100, 200]
 network_viability_ag1_["gateway_fee_per_relay"] = [20, 30]
 network_viability_ag1_["application_fee_per_relay"] = [20, 30]
 network_viability_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
-network_viability_ag1_["application_minimum_stake"] = [
+network_viability_ag1_["minimum_application_stake"] = [
     100000 * 1e6,
     200000 * 1e6,
 ]
@@ -362,7 +362,7 @@ network_failures_oracle_ag1_["relays_to_tokens_multiplier"] = [100, 200]
 network_failures_oracle_ag1_["gateway_fee_per_relay"] = [20, 30]
 network_failures_oracle_ag1_["application_fee_per_relay"] = [20, 30]
 network_failures_oracle_ag1_["gateway_minimum_stake"] = [100000 * 1e6, 200000 * 1e6]
-network_failures_oracle_ag1_["application_minimum_stake"] = [
+network_failures_oracle_ag1_["minimum_application_stake"] = [
     100000 * 1e6,
     200000 * 1e6,
 ]
