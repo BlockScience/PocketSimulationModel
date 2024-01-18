@@ -56,6 +56,10 @@ def create_sweep(prefix, sweep, config_option_map_sweep):
         config_option_map_sweep["{}{}".format(prefix, i + 1)] = {}
         for k, x in zip(sweep.keys(), vals):
             config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = [x]
+
+    assert CORE_PARAM_KEYS == sorted(
+        list(config_option_map_sweep["{}{}".format(prefix, i + 1)].keys())
+    ), "Non-matching parameter keys, something was added!"
     return key_str_list
 
 
@@ -257,6 +261,7 @@ functional_param_config: Dict[str, FunctionalParamsType] = {
 config_option_map_sweep = {}
 
 test_sweep = build_params("Base")
+CORE_PARAM_KEYS = sorted(list(test_sweep.keys()))
 test_sweep["application_max_number"] = [20, 30, 40]
 test_sweep["servicer_max_number"] = [20, 30, 40]
 test_sweep["relays_per_session_gamma_distribution_scale"] = [200000, 300000, 400000]
