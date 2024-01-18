@@ -72,3 +72,12 @@ for i in range(1, 2689):
         "monte_carlo_n": 5,
         "T": 365,
     }
+
+
+for i in range(1, 289):
+    experimental_setups["gateway_viability_sweep_ag2_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "gateway_viability_sweep_ag2_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
