@@ -18,12 +18,12 @@ replacement_dict = {
     "gateway_fee_per_relay": "gfpr",
     "application_fee_per_relay": "afpr",
     "gateway_minimum_stake": "gms",
-    "application_minimum_stake": "ams",
+    "minimum_application_stake": "ams",
     "param_session_token_bucket_coefficient": "stbc",
     "param_gateway_fee_per_relay": "gfpr",
     "param_application_fee_per_relay": "afpr",
     "param_gateway_minimum_stake": "gms",
-    "param_application_minimum_stake": "ams",
+    "param_minimum_application_stake": "ams",
 }
 
 name_map = lambda x: "_".join(
@@ -100,7 +100,6 @@ def give_data_individual_names(
     if replacement_dict_to_use is None:
         replacement_dict_to_use = replacement_dict
 
-
     assert not (
         replacement_dict_to_use is None
     ), "The replacement dict should be set by now."
@@ -117,7 +116,6 @@ def give_data_individual_names(
 
     # Make sure ordering is correct
     binary_param_cols = [x for x in replacement_dict_to_use if x in binary_param_cols]
-
 
     df[col_name] = df.apply(
         lambda row: "_".join(
