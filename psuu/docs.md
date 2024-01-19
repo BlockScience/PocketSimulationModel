@@ -1,6 +1,7 @@
-Description of files:
-- adaptive_multigrid.py: the general methods for performing adaptive multigrid search with a general fitness function to maximize.
-- gvs_threshold_calc.py: Methods for calculating specific threshold inequalities for the Gateway Servicer Viability scenario.
-- gvs_adaptive_grid.ipynb: A proof-of-concept implementation for searching parameter constellations that vary two variables, using the methods in adaptive_multigrid and gvs_adaptive_grid.
+## File Structure
 
-- 
+1. thresholds_calcs.py: All calculations for thresholds
+2. meta_programming.py: Convenience functions for writing out the next iteration of adaptive grid code
+3. fitness_functions: Folder of functions which decide on how to measure success
+4. core.py: Core functionality of the PSUU workflow
+5. variable_configs.py: A mapping of the experiments to which are control variables vs. independent variables

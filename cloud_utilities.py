@@ -10,6 +10,10 @@ GRID_NUMBERS = {
     "network_viability_ag1_": 1152,
     "network_failures_oracle_ag1_": 2688,
     "gateway_viability_sweep_ag2_": 288,
+    "gateway_viability_sweep_ag3_": 288,
+    "gateway_viability_sweep_ag4_": 288,
+    "gateway_viability_sweep_ag5_": 288,
+    "gateway_viability_sweep_ag6_": 288,
 }
 
 
