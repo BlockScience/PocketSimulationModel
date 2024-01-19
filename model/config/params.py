@@ -335,6 +335,27 @@ create_sweep(
     config_option_map_sweep,
 )
 
+gateway_viability_sweep_ag4_ = build_params("Base")
+gateway_viability_sweep_ag4_["session_token_bucket_coefficient"] = [165.625, 212.5]
+gateway_viability_sweep_ag4_["gateway_fee_per_relay"] = [21.25, 22.5]
+gateway_viability_sweep_ag4_["application_fee_per_relay"] = [25.0, 26.25]
+gateway_viability_sweep_ag4_["gateway_minimum_stake"] = [137500000000.0, 150000000000.0]
+gateway_viability_sweep_ag4_["minimum_application_stake"] = [
+    187500000000.0,
+    200000000000.0,
+]
+gateway_viability_sweep_ag4_["application_max_number"] = [5, 20, 100]
+gateway_viability_sweep_ag4_["relays_per_session_gamma_distribution_scale"] = [
+    100000,
+    300000,
+    900000,
+]
+create_sweep(
+    "gateway_viability_sweep_ag4_",
+    gateway_viability_sweep_ag4_,
+    config_option_map_sweep,
+)
+
 network_failures_service_ag1_ = build_params("Base")
 network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-1]
 network_failures_service_ag1_["downtime_jail_duration"] = [

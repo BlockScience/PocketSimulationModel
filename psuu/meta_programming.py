@@ -29,3 +29,7 @@ def build_next_param_config_code(
             combos + 1, next_name, next_name
         )
     )
+    print()
+    print()
+    print("Add the following to GRID_NUMBERS in cloud_utility.py")
+    print('"{}": {}'.format(next_name, combos))
