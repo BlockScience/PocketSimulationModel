@@ -81,16 +81,6 @@ def get_data_from_param_grid(
     return simulation_kpis
 
 
-def mock_get_data_from_param_grid(
-    param_grid: Dict[str, List],
-    base_params_str="Base",
-    other_params_to_sweep: Dict[str, List] = None,
-    prefix: str = "individual",
-):
-    simulation_kpis = pd.read_csv("gateway_viability_sweep_ag1_.csv")
-    return simulation_kpis
-
-
 def give_data_individual_names(
     df: pd.DataFrame,
     col_name: str = "individual_name",

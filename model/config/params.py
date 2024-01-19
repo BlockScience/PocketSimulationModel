@@ -291,9 +291,9 @@ create_sweep(
 )
 
 gateway_viability_sweep_ag2_ = build_params("Base")
-gateway_viability_sweep_ag2_["session_token_bucket_coefficient"] = [25, 212.5]
+gateway_viability_sweep_ag2_["session_token_bucket_coefficient"] = [25.0, 212.5]
 gateway_viability_sweep_ag2_["gateway_fee_per_relay"] = [20.0, 25.0]
-gateway_viability_sweep_ag2_["application_fee_per_relay"] = [25.0, 30]
+gateway_viability_sweep_ag2_["application_fee_per_relay"] = [25.0, 30.0]
 gateway_viability_sweep_ag2_["gateway_minimum_stake"] = [100000000000.0, 150000000000.0]
 gateway_viability_sweep_ag2_["minimum_application_stake"] = [
     150000000000.0,
@@ -312,6 +312,28 @@ create_sweep(
     config_option_map_sweep,
 )
 
+
+gateway_viability_sweep_ag3_ = build_params("Base")
+gateway_viability_sweep_ag3_["session_token_bucket_coefficient"] = [118.75, 212.5]
+gateway_viability_sweep_ag3_["gateway_fee_per_relay"] = [20.0, 22.5]
+gateway_viability_sweep_ag3_["application_fee_per_relay"] = [25.0, 27.5]
+gateway_viability_sweep_ag3_["gateway_minimum_stake"] = [125000000000.0, 150000000000.0]
+gateway_viability_sweep_ag3_["minimum_application_stake"] = [
+    175000000000.0,
+    200000000000.0,
+]
+gateway_viability_sweep_ag3_["application_max_number"] = [5, 20, 100]
+gateway_viability_sweep_ag3_["relays_per_session_gamma_distribution_scale"] = [
+    100000,
+    300000,
+    900000,
+]
+
+create_sweep(
+    "gateway_viability_sweep_ag3_",
+    gateway_viability_sweep_ag3_,
+    config_option_map_sweep,
+)
 
 network_failures_service_ag1_ = build_params("Base")
 network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-1]
