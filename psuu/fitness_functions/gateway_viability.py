@@ -1,34 +1,5 @@
 import pandas as pd
 
-#####################################
-## Global values re-used across    ##
-## various scenarios.              ##
-#####################################
-
-############################################
-## Define constants outside the functions ##
-## so they aren't defined every time the  ##
-## function is called.                    ##
-############################################
-
-# Values for Gateway Viability
-s1_val = 0
-s2_val = 0.9
-
-t1_val = -182_000
-t2_val = 0.9
-
-u1_val = 0.5  # Placeholder while we wait for actual value.
-u2_val = 0.9
-
-v1_val = 0.25  # Document suggests this may be revised upward
-
-w1 = 0.9
-w2 = 1.1
-
-a1 = 0
-a2 = 100
-
 
 def calc_gvs_thresh_ineq_met(df: pd.DataFrame, num_gvs_ineq=4) -> float:
     ############################################
