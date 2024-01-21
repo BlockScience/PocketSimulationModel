@@ -1,4 +1,4 @@
-from gvs_threshold_calc import calc_gvs_thresh_ineq_met
+from psuu.fitness_functions.gateway_viability import calc_gvs_thresh_ineq_met
 
 scenario_configs = {}
 scenario_configs["gateway_viability_sweep_ag"] = {
