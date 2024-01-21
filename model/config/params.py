@@ -46,8 +46,7 @@ def build_params(config_option: str, singles: bool = False) -> ParamType:
     return params
 
 
-def create_sweep(prefix, sweep, config_option_map_sweep):
-    i = 1
+def create_sweep(prefix, sweep, config_option_map_sweep) -> List[str]:
 
     cartesian_product = list(product(*sweep.values()))
     key_str_list = [f"{prefix}{i+1}" for i in range(len(cartesian_product))]
@@ -56,6 +55,8 @@ def create_sweep(prefix, sweep, config_option_map_sweep):
         config_option_map_sweep["{}{}".format(prefix, i + 1)] = {}
         for k, x in zip(sweep.keys(), vals):
             config_option_map_sweep["{}{}".format(prefix, i + 1)][k] = [x]
+    return key_str_list 
+
 
     assert CORE_PARAM_KEYS == sorted(
         list(config_option_map_sweep["{}{}".format(prefix, i + 1)].keys())
