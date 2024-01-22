@@ -1,8 +1,5 @@
-from psuu.fitness_functions.gateway_viability import calc_gvs_thresh_ineq_met
-
 scenario_configs = {}
 scenario_configs["gateway_viability_sweep_ag"] = {
-    "fitness_function": calc_gvs_thresh_ineq_met,
     "variable_params": [
         "session_token_bucket_coefficient",
         "gateway_fee_per_relay",
@@ -15,4 +12,12 @@ scenario_configs["gateway_viability_sweep_ag"] = {
         "relays_per_session_gamma_distribution_scale",
     ],
     "threshold_inequalities": ["servicer_npv", "servicer_capital_costs", "gateway_npv"],
+    "threshold_parameters": {
+        "a1": 0.1,
+        "a2": 0.9,
+        "s1": 750 * 1e6,
+        "s2": 0.9,
+        "t1": 7500 * 1e6,
+        "t2": 0.9,
+    },
 }
