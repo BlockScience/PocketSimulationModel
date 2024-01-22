@@ -16,8 +16,8 @@ KPI_MAP = {
 
 # Note that these are meant to applied to subsets of the dataframe, i.e. do the grouping and then apply this
 THRESHOLD_INEQUALITIES_MAP = {
-    "servicer_npv": lambda df, min, max, frac: threshold_mc_fraction(
-        df, min, max, frac, "servicer_npv"
+    "servicer_npv": lambda df, threshold_parameters: threshold_mc_fraction(
+        df, threshold_parameters["s1"], None, threshold_parameters["s2"], "servicer_npv"
     ),
     "servicer_capital_costs": lambda df, threshold_parameters: threshold_average(
         df,
@@ -31,8 +31,8 @@ THRESHOLD_INEQUALITIES_MAP = {
     "servicer_jailing_cost": lambda df, min, max, frac: threshold_mc_fraction(
         df, min, max, frac, "servicer_jailing_cost"
     ),
-    "gateway_npv": lambda df, min, max, frac: threshold_mc_fraction(
-        df, min, max, frac, "gateway_npv"
+    "gateway_npv": lambda df, threshold_parameters: threshold_mc_fraction(
+        df, threshold_parameters["t1"], None, threshold_parameters["t2"], "gateway_npv"
     ),
     "circulating_supply_available_supply_ratio": lambda df, min, max: threshold_kpi_ratios(
         df, min, max, "circulating_supply_available_supply_ratio"
