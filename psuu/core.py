@@ -44,11 +44,15 @@ THRESHOLD_INEQUALITIES_MAP = {
         None,
         "circulating_supply_available_supply_ratio",
     ),
-    "net_inflation": lambda df, min, max: threshold_average(
-        df, min, max, "net_inflation"
+    "net_inflation": lambda df, threshold_parameters: threshold_average(
+        df, threshold_parameters["y1"], threshold_parameters["y2"], "net_inflation"
     ),
-    "dao_value_capture": lambda df, min, max, frac: threshold_mc_fraction(
-        df, min, max, frac, "dao_value_capture"
+    "dao_value_capture": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["z1"],
+        threshold_parameters["z2"],
+        threshold_parameters["z3"],
+        "dao_value_capture",
     ),
     "net_inflation_dao_value_capture_elasticity": lambda df, min, max: threshold_elasticity(
         df, min, max, "net_inflation_dao_value_capture_elasticity"
@@ -58,12 +62,21 @@ THRESHOLD_INEQUALITIES_MAP = {
     ),
 }
 
-KPI_CLEANUP_MAP = {"KPI 14": "kpi_14", "KPI 1": "kpi_1", "KPI 3": "kpi_3"}
+KPI_CLEANUP_MAP = {
+    "KPI 14": "kpi_14",
+    "KPI 1": "kpi_1",
+    "KPI 3": "kpi_3",
+    "KPI D": "kpi_D",
+}
 
 
 def load_kpis(sweep):
     kpis = pd.read_csv("simulation_data/{}.csv".format(sweep), index_col=0)
     kpis = kpis.rename(columns=KPI_CLEANUP_MAP)
+    kpis["kpi_4"] = kpis["circulating_supply"]
+    kpis["kpi_5"] = kpis["floating_supply"]
+    kpis["kpi_D"] = kpis["net_mint_rate_cummulative"]
+    kpis["kpi_10"] = kpis["dao_value_capture"]
     return kpis
 
 
