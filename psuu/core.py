@@ -54,8 +54,11 @@ THRESHOLD_INEQUALITIES_MAP = {
         threshold_parameters["z3"],
         "dao_value_capture",
     ),
-    "net_inflation_dao_value_capture_elasticity": lambda df, min, max: threshold_elasticity(
-        df, min, max, "net_inflation_dao_value_capture_elasticity"
+    "net_inflation_dao_value_capture_elasticity": lambda df, threshold_parameters: threshold_elasticity(
+        df,
+        threshold_parameters["x1"],
+        threshold_parameters["x2"],
+        "net_inflation_dao_value_capture_elasticity",
     ),
     "network_load_balancing": lambda df, min, max, frac: threshold_load_balancing(
         df, min, max, frac, "network_load_balancing"
@@ -119,11 +122,14 @@ def threshold_average(df, min, max, entity) -> float:
         "servicer_capital_costs",
         "net_inflation",
         "circulating_supply_available_supply_ratio",
+        "net_inflation_dao_value_capture_elasticity",
     ]:
         raise ValueError("Error: unsupported threshold inequality type")
 
     if "ratio" in entity:
         kpi = "ratio"
+    elif "elasticity" in entity:
+        kpi = "elasticity"
     else:
         kpi = KPI_MAP[entity]
 
@@ -161,10 +167,13 @@ def threshold_elasticity(df, min, max, entity):
 
     kpi = KPI_MAP[entity]
 
-    df_delta = df.pct_change()
-    df_delta["elasticity"] = df_delta[kpi[0]] / df_delta[kpi[1]]
-    df.drop(df.index[:1], inplace=True)
-    df["elasticity"] = df_delta["elasticity"]
+    # df_delta = df.pct_change()
+    # df_delta["elasticity"] = df_delta[kpi[0]] / df_delta[kpi[1]]
+    # df.drop(df.index[:1], inplace=True)
+    # df["elasticity"] = df_delta["elasticity"]
+
+    df = df.copy()
+    df["elasticity"] = df[kpi[0]] / df[kpi[1]]
 
     return threshold_average(df, min, max, entity)
 
