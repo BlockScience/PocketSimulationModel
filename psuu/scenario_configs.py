@@ -14,4 +14,5 @@ scenario_configs["gateway_viability_sweep_ag"] = {
         "application_max_number",
         "relays_per_session_gamma_distribution_scale",
     ],
+    "threshold_inequalities": ["servicer_npv", "servicer_capital_costs", "gateway_npv"],
 }
