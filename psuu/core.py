@@ -17,8 +17,11 @@ THRESHOLD_INEQUALITIES_MAP = {
     "servicer_npv": lambda df, min, max, frac: threshold_mc_fraction(
         df, min, max, frac, "servicer_npv"
     ),
-    "servicer_capital_costs": lambda df, min, max: threshold_average(
-        df, min, max, "servicer_capital_costs"
+    "servicer_capital_costs": lambda df, threshold_parameters: threshold_average(
+        df,
+        threshold_parameters["a1"],
+        threshold_parameters["a2"],
+        "servicer_capital_costs",
     ),
     "servicer_slashing_cost": lambda df, min, max, frac: threshold_mc_fraction(
         df, min, max, frac, "servicer_slashing_cost"
