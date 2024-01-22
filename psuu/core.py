@@ -13,6 +13,7 @@ KPI_MAP = {
     "net_inflation_dao_value_capture_elasticity": ["kpi_D", "kpi_10"],
 }
 
+# Note that these are meant to applied to subsets of the dataframe, i.e. do the grouping and then apply this
 THRESHOLD_INEQUALITIES_MAP = {
     "servicer_npv": lambda df, min, max, frac: threshold_mc_fraction(
         df, min, max, frac, "servicer_npv"
@@ -95,7 +96,7 @@ def threshold_mc_fraction(df, min, max, frac, entity):
     return df_for_analysis
 
 
-def threshold_average(df, min, max, entity):
+def threshold_average(df, min, max, entity) -> float:
     if entity not in [
         "servicer_capital_costs",
         "net_inflation",
@@ -108,37 +109,19 @@ def threshold_average(df, min, max, entity):
     else:
         kpi = KPI_MAP[entity]
 
-    # find average over timesteps within run and simulation
-    df_with_means = df.groupby(["simulation", "run"], as_index=False).mean()
-
-    # find average over Monte Carlo runs
-    df_with_means["kpi_mean"] = df_with_means.groupby(["simulation"])[kpi].transform(
-        "mean"
-    )
-
-    # recast dataframe with one parameter constellation per simulation
-    df_for_analysis = df_with_means[df_with_means["run"] == 1].reset_index()
+    # Get average
+    avg = df[kpi].mean()
 
     if min and max:
-        df_for_analysis[entity + "_threshold"] = (
-            (df_with_means[df_with_means["run"] == 1]["kpi_mean"] > min)
-            and (df_with_means[df_with_means["run"] == 1]["kpi_mean"] < max)
-        ).values
+        return avg > min and avg < max
     elif min and not max:
-        df_for_analysis[entity + "_threshold"] = (
-            df_with_means[df_with_means["run"] == 1]["kpi_mean"] > min
-        ).values
+        return avg > min
     elif max and not min:
-        df_for_analysis[entity + "_threshold"] = (
-            df_with_means[df_with_means["run"] == 1]["kpi_mean"] < max
-        ).values
+        return avg < max
     else:
         raise ValueError(
             "Error: must provide at least one maximum or minimum threshold value"
         )
-
-    # return the recast dataframe, which contains one row per simulation (i.e. one row per parameter constellation)
-    return df_for_analysis
 
 
 def threshold_kpi_ratios(df, min, max, entity):
