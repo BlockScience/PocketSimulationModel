@@ -1,3 +1,5 @@
+import pandas as pd
+
 KPI_MAP = {
     "servicer_npv": "kpi_1",
     "gateway_npv": "kpi_3",
@@ -138,3 +140,18 @@ def threshold_elasticity(df, min, max, entity):
     df["elasticity"] = df_delta["elasticity"]
 
     return threshold_average(df, min, max, entity)
+
+
+def compute_threshold_inequalities(
+    kpis, variable_params, threshold_parameters, threshold_inequalities
+):
+    grouping = kpis.groupby(["param_" + x for x in variable_params])
+    df_thresholds = [
+        grouping.apply(
+            lambda x: THRESHOLD_INEQUALITIES_MAP[key](x, threshold_parameters)
+        )
+        for key in threshold_inequalities
+    ]
+    df_thresholds = pd.concat(df_thresholds, axis=1)
+    df_thresholds.columns = [x + "_success" for x in threshold_inequalities]
+    return df_thresholds
