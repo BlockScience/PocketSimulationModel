@@ -53,6 +53,14 @@ THRESHOLD_INEQUALITIES_MAP = {
     ),
 }
 
+KPI_CLEANUP_MAP = {"KPI 14": "kpi_14", "KPI 1": "kpi_1", "KPI 3": "kpi_3"}
+
+
+def load_kpis(sweep):
+    kpis = pd.read_csv("simulation_data/{}.csv".format(sweep), index_col=0)
+    kpis = kpis.rename(columns=KPI_CLEANUP_MAP)
+    return kpis
+
 
 def threshold_mc_fraction(df, min, max, frac, entity):
     if entity not in [
