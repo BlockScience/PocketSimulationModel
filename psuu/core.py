@@ -1,4 +1,6 @@
 import pandas as pd
+from model.config.params import *
+from .scenario_configs import scenario_configs
 
 KPI_MAP = {
     "servicer_npv": "kpi_1",
@@ -163,3 +165,25 @@ def compute_threshold_inequalities(
     df_thresholds = pd.concat(df_thresholds, axis=1)
     df_thresholds.columns = [x + "_success" for x in threshold_inequalities]
     return df_thresholds
+
+
+def load_sweep(sweep):
+    sweep_family = sweep[: sweep.index("_ag") + 3]
+    kpis = load_kpis(sweep)
+    param_config = globals()[sweep]
+    next_name = sweep[:-2] + str(int(sweep[-2]) + 1) + "_"
+    variable_params = scenario_configs[sweep_family]["variable_params"]
+    control_params = scenario_configs[sweep_family]["control_params"]
+    threshold_inequalities = scenario_configs[sweep_family]["threshold_inequalities"]
+    threshold_parameters = scenario_configs[sweep_family]["threshold_parameters"]
+
+    return (
+        sweep_family,
+        kpis,
+        param_config,
+        next_name,
+        variable_params,
+        control_params,
+        threshold_inequalities,
+        threshold_parameters,
+    )
