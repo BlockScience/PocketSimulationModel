@@ -62,39 +62,28 @@ def threshold_mc_fraction(df, min, max, frac, entity):
     ]:
         raise ValueError("Error: unsupported threshold inequality type")
 
-    num_monte_carlo_sims = len(df.groupby(["run"]))
+    num_monte_carlo_sims = len(df)
     kpi = KPI_MAP[entity]
 
-    # find average over timesteps within run and simulation
-    df_with_means = df.groupby(["simulation", "run"], as_index=False).mean()
+    ineq = df[kpi]
+
+    # Success criteria
     if min and max:
-        df_with_means["inequality"] = df_with_means.groupby(["simulation"])[
-            kpi
-        ].transform(lambda x: (x > min) and (x < max))
+        ineq = (ineq > min) & (ineq < max)
     elif min and not max:
-        df_with_means["inequality"] = df_with_means.groupby(["simulation"])[
-            kpi
-        ].transform(lambda x: (x > min))
+        ineq = ineq > min
     elif max and not min:
-        df_with_means["inequality"] = df_with_means.groupby(["simulation"])[
-            kpi
-        ].transform(lambda x: (x < max))
+        ineq = ineq < max
     else:
         raise ValueError(
             "Error: must provide at least one maximum or minimum threshold value"
         )
 
-    # recast dataframe with one parameter constellation per simulation
-    df_for_analysis = df_with_means[df_with_means["run"] == 1].reset_index()
+    # Number of successful runs
+    ineq = ineq.mean()
 
-    # add column with fraction of Monte Carlo runs satisfying inequality to the recast dataframe
-    df_for_analysis[entity + "_threshold"] = (
-        df_with_means.groupby(["simulation"])["inequality"].sum() / num_monte_carlo_sims
-        > frac
-    )
-
-    # return the recast dataframe, which contains one row per simulation (i.e. one row per parameter constellation)
-    return df_for_analysis
+    # Successful fraction
+    return ineq >= frac
 
 
 def threshold_average(df, min, max, entity) -> float:
