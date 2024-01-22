@@ -13,6 +13,7 @@ KPI_MAP = {
     "net_inflation_dao_value_capture_elasticity": ["kpi_D", "kpi_10"],
 }
 
+
 # Note that these are meant to applied to subsets of the dataframe, i.e. do the grouping and then apply this
 THRESHOLD_INEQUALITIES_MAP = {
     "servicer_npv": lambda df, min, max, frac: threshold_mc_fraction(
