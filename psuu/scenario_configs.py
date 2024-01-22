@@ -24,7 +24,7 @@ scenario_configs["gateway_viability_sweep_ag"] = {
 scenario_configs["network_failures_oracle_ag"] = {
     "variable_params": [
         "relays_to_tokens_multiplier",
-        "gateway_fee_per_relays",
+        "gateway_fee_per_relay",
         "application_fee_per_relay",
         "gateway_minimum_stake",
         "minimum_application_stake",
@@ -44,7 +44,7 @@ scenario_configs["network_failures_oracle_ag"] = {
         "s2": 0.9,
         "t1": 7500 * 1e6,
         "t2": 0.9,
-        "v1": 0.3 * 1e6,
+        "v1": 0.3,
         "y1": -0.1,
         "y2": 0.05,
         "z1": 0.02,

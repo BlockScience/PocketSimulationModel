@@ -38,8 +38,11 @@ THRESHOLD_INEQUALITIES_MAP = {
     "gateway_npv": lambda df, threshold_parameters: threshold_mc_fraction(
         df, threshold_parameters["t1"], None, threshold_parameters["t2"], "gateway_npv"
     ),
-    "circulating_supply_available_supply_ratio": lambda df, min, max: threshold_kpi_ratios(
-        df, min, max, "circulating_supply_available_supply_ratio"
+    "circulating_supply_available_supply_ratio": lambda df, threshold_parameters: threshold_kpi_ratios(
+        df,
+        threshold_parameters["v1"],
+        None,
+        "circulating_supply_available_supply_ratio",
     ),
     "net_inflation": lambda df, min, max: threshold_average(
         df, min, max, "net_inflation"
@@ -133,6 +136,7 @@ def threshold_kpi_ratios(df, min, max, entity):
     # This must be a list with two KPI entries
     kpi = KPI_MAP[entity]
 
+    df = df.copy()
     df["ratio"] = df[kpi[0]] / df[kpi[1]]
 
     return threshold_average(df, min, max, entity)
