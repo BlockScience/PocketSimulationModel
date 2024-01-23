@@ -201,7 +201,7 @@ def application_stake_ba_basic(
             * params["average_session_per_application"]
             * state["relays_to_tokens_multiplier"]
         )
-        target_stake = max(target_stake, params["minimum_application_stake"])
+        target_stake = max(target_stake, buffer * params["minimum_application_stake"])
         if application.staked_pokt < target_stake:
             amount = max(
                 min(
