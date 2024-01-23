@@ -290,4 +290,5 @@ def enforce_density_service_servicers(state, params):
         pair = pairs.pop()
         space = ({"service": pair[1], "servicer": pair[0]},)
         space = service_linking_policy(state, params_density, space)
-        link_service_mechanism(state, params_density, space)
+        if space[0]:
+            link_service_mechanism(state, params_density, space)
