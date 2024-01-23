@@ -402,6 +402,7 @@ network_failures_service_ag1_["downtime_jail_duration"] = [
     60 * 1e9,
     28800 * 1e9,
 ]
+network_failures_service_ag1_["max_chains_servicer"] = [1, 20]
 network_failures_service_ag1_["servicer_service_density_starting"] = [0.1, 0.5, 1]
 network_failures_service_ag1_["event"] = [
     "servicer_shutdown_by_geozone_random",
@@ -499,9 +500,9 @@ create_sweep(
 
 for key in config_option_map_sweep:
     if (
-        key.startswith("servicer_viability_ag1")
-        or key.startswith("network_viability_ag1_")
-        or key.startswith("network_failures_oracle_ag1_")
+        key.startswith("servicer_viability_ag")
+        or key.startswith("network_viability_ag")
+        or key.startswith("network_failures_oracle_ag")
     ):
         config_option_map_sweep[key]["dao_fee_percentage"] = [
             1 - config_option_map_sweep[key]["validator_fee_percentage"][0]

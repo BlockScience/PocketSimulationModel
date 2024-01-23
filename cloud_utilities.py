@@ -5,7 +5,7 @@ import time
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
-    "network_failures_service_ag1_": 48,
+    "network_failures_service_ag1_": 96,
     "servicer_viability_ag1_": 1152,
     "network_viability_ag1_": 1152,
     "network_failures_oracle_ag1_": 2688,
@@ -55,10 +55,10 @@ def create_expected_runs_dataframe(
     return df
 
 
-def create_expected_runs_dataframe_multi(s3, experiments):
+def create_expected_runs_dataframe_multi(s3, experiments, run_all=False):
     l = []
     for experiment in experiments:
-        l.append(create_expected_runs_dataframe(s3, experiment))
+        l.append(create_expected_runs_dataframe(s3, experiment, run_all=run_all))
         l[-1]["Group"] = experiment
     df = pd.concat(l)
     return df
