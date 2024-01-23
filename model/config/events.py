@@ -122,3 +122,7 @@ event_map = {
         "sigma": 0.05,
     },
 }
+
+
+def get_event_metadata(event):
+    return event_map[event]
