@@ -1,5 +1,6 @@
 import pandas as pd
 from ..config.params import build_params
+from ..config.events import get_event_metadata
 import numpy as np
 
 
@@ -183,6 +184,24 @@ def compute_kpi_14(unique_servicers):
     return pd.Series(kpi_14)
 
 
+def kpi_c_pre_post(df, simulation_kpis):
+    key = df.iloc[0]["key"]
+    event = simulation_kpis.loc[key]["param_event"]
+    if event in [
+        "servicer_shutdown_by_geozone_random",
+        "service_shutdown_random_t1",
+        "service_shutdown_random_t7",
+        "service_shutdown_random_t500",
+    ]:
+        metadata = get_event_metadata(event)
+        time = metadata["time"]
+        pre = df[df["timestep"] < time]["kpi_c"].mean()
+        post = df["kpi_c"].iloc[-1]
+        return pd.Series({"kpi_c_pre": pre, "kpi_c_post": post})
+    else:
+        return pd.Series({"kpi_c_pre": None, "kpi_c_post": None})
+
+
 def create_simulation_kpis(df):
     # Get unique servicers
     unique_servicers = get_unique_servicers(df)
@@ -215,7 +234,7 @@ def create_simulation_kpis(df):
     params.columns = "param_" + params.columns
     params = params.applymap(lambda x: x[0])
     simulation_kpis = simulation_kpis.join(params)
-    # simulation_kpis["KPI 8"] = compute_kpi8(unique_servicers)
+    simulation_kpis["KPI 8"] = compute_kpi8(unique_servicers)
     simulation_kpis["KPI E"] = compute_kpi_e(unique_servicers)
     simulation_kpis["KPI 1"] = compute_kpi_1(
         unique_servicers,
@@ -241,5 +260,9 @@ def create_simulation_kpis(df):
         ]
     ].last()
     simulation_kpis = pd.concat([simulation_kpis, agg1, agg2, agg3], axis=1)
+
+    simulation_kpis[["kpi_c_pre", "kpi_c_post"]] = df.groupby("key").apply(
+        lambda x: kpi_c_pre_post(x, simulation_kpis)
+    )
 
     return simulation_kpis

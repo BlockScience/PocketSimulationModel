@@ -130,8 +130,8 @@ def download_experiment_kpi(experiment, s3):
     df.to_csv("simulation_data/{}.csv".format(experiment))
 
 
-def download_experiment_mc(experiment, s3, top=None):
-    runs = create_expected_runs_dataframe(s3, experiment, top=top)
+def download_experiment_mc(experiment, s3, top=None, random=False):
+    runs = create_expected_runs_dataframe(s3, experiment, top=top, random=random)
     assert runs["Complete"].all()
 
     files = []
