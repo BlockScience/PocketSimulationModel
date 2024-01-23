@@ -30,8 +30,8 @@ def application_join_ba_simple_unfiform(
         return (
             {
                 "name": "",
-                "stake_amount": 15000
-                * 1e6,  # The amount of uPOKT in escrow (i.e. a security deposit)
+                "stake_amount": params["minimum_application_stake"]
+                * 1.2,  # The amount of uPOKT in escrow (i.e. a security deposit)
                 "geo_zone": random.choice(
                     state["Geozones"]
                 ),  # The physical geo-location identifier this application is registered in
