@@ -145,9 +145,16 @@ scenario_configs["network_failures_service_ag"] = {
         "event",
     ],
     "threshold_inequalities": [
-        "servicer_slashing_cost",
+        # "servicer_slashing_cost",
         "servicer_jailing_cost",
-        "network_load_balancing",
+        # "network_load_balancing",
     ],
-    "threshold_parameters": {},
+    "threshold_parameters": {
+        "b1": 1e6,
+        "b2": 0.1,
+        "c1": 1e6,
+        "c2": 0.1,
+        "d1": 0.1,
+        "d2": 0.9,
+    },
 }

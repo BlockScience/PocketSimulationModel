@@ -29,11 +29,19 @@ THRESHOLD_INEQUALITIES_MAP = {
         threshold_parameters["a2"],
         "servicer_capital_costs",
     ),
-    "servicer_slashing_cost": lambda df, min, max, frac: threshold_mc_fraction(
-        df, min, max, frac, "servicer_slashing_cost"
+    "servicer_slashing_cost": lambda df, threshold_parameters: not threshold_mc_fraction(
+        df,
+        threshold_parameters["b1"],
+        None,
+        threshold_parameters["b2"],
+        "servicer_slashing_cost",
     ),
-    "servicer_jailing_cost": lambda df, min, max, frac: threshold_mc_fraction(
-        df, min, max, frac, "servicer_jailing_cost"
+    "servicer_jailing_cost": lambda df, threshold_parameters: not threshold_mc_fraction(
+        df,
+        threshold_parameters["c1"],
+        None,
+        threshold_parameters["c2"],
+        "servicer_jailing_cost",
     ),
     "gateway_npv": lambda df, threshold_parameters: threshold_mc_fraction(
         df, threshold_parameters["t1"], None, threshold_parameters["t2"], "gateway_npv"
@@ -70,6 +78,7 @@ KPI_CLEANUP_MAP = {
     "KPI 1": "kpi_1",
     "KPI 3": "kpi_3",
     "KPI D": "kpi_D",
+    "KPI 8": "kpi_8",
 }
 
 
@@ -80,6 +89,7 @@ def load_kpis(sweep):
     kpis["kpi_5"] = kpis["floating_supply"]
     kpis["kpi_D"] = kpis["net_mint_rate_cummulative"]
     kpis["kpi_10"] = kpis["dao_value_capture"]
+    kpis["kpi_11"] = kpis["KPI 11"]
     return kpis
 
 

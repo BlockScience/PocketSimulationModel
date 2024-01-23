@@ -55,10 +55,10 @@ def create_expected_runs_dataframe(
     return df
 
 
-def create_expected_runs_dataframe_multi(s3, experiments):
+def create_expected_runs_dataframe_multi(s3, experiments, run_all=False):
     l = []
     for experiment in experiments:
-        l.append(create_expected_runs_dataframe(s3, experiment))
+        l.append(create_expected_runs_dataframe(s3, experiment, run_all=run_all))
         l[-1]["Group"] = experiment
     df = pd.concat(l)
     return df
