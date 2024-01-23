@@ -196,7 +196,7 @@ def kpi_c_pre_post(df, simulation_kpis):
         metadata = get_event_metadata(event)
         time = metadata["time"]
         pre = df[df["timestep"] < time]["kpi_c"].mean()
-        post = df[df["timestep"] >= time]["kpi_c"].mean()
+        post = df["kpi_c"].iloc[-1]
         return pd.Series({"kpi_c_pre": pre, "kpi_c_post": post})
     else:
         return pd.Series({"kpi_c_pre": None, "kpi_c_post": None})
