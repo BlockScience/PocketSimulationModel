@@ -5,7 +5,7 @@ import time
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
-    "network_failures_service_ag1_": 48,
+    "network_failures_service_ag1_": 96,
     "servicer_viability_ag1_": 1152,
     "network_viability_ag1_": 1152,
     "network_failures_oracle_ag1_": 2688,

@@ -133,3 +133,21 @@ scenario_configs["servicer_viability_ag"] = {
         "z3": 0.9,
     },
 }
+
+scenario_configs["network_failures_service_ag"] = {
+    "variable_params": [
+        "slash_fraction_downtime",
+        "downtime_jail_duration",
+        "max_chains_servicer",
+    ],
+    "control_params": [
+        "servicer_service_density_starting",
+        "event",
+    ],
+    "threshold_inequalities": [
+        "servicer_slashing_cost",
+        "servicer_jailing_cost",
+        "network_load_balancing",
+    ],
+    "threshold_parameters": {},
+}
