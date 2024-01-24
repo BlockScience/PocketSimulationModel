@@ -3,6 +3,7 @@ from model.config.params import *
 from .scenario_configs import scenario_configs
 from math import isclose
 from typing import List, Union
+from .meta_programming import build_next_param_config_code
 
 KPI_MAP = {
     "servicer_npv": "kpi_1",
@@ -295,4 +296,30 @@ def update_param_grid(
         else:
             new_param_grid[key] = old_param_grid.get(key)
 
+    return new_param_grid
+
+
+def psuu_find_next_grid(sweep):
+    (
+        sweep_family,
+        kpis,
+        param_config,
+        next_name,
+        variable_params,
+        control_params,
+        threshold_inequalities,
+        threshold_parameters,
+    ) = load_sweep(sweep)
+
+    df_thresholds = compute_threshold_inequalities(
+        kpis, variable_params, threshold_parameters, threshold_inequalities
+    )
+    df_thresholds["Score"] = df_thresholds.astype(int).sum(axis=1)
+    best_param_grid = select_best_parameter_constellation(
+        df_thresholds, variable_params
+    )
+    new_param_grid = update_param_grid(param_config, best_param_grid)
+    build_next_param_config_code(
+        next_name, new_param_grid, variable_params, control_params, param_config
+    )
     return new_param_grid
