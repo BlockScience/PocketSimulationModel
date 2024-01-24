@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from time import sleep
 import time
+import boto3
+from psuu import psuu_find_next_grid
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
@@ -160,3 +162,23 @@ def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
         print()
         print()
         time.sleep(sleep_minutes * 60)
+
+
+def full_run_adaptive_grid(grid_names):
+    session = boto3.Session(profile_name="default")
+    s3 = session.client("s3")
+    ecs = boto3.client("ecs")
+
+    print("-----Creating Expected Runs Dataframe-----")
+    runs = create_expected_runs_dataframe_multi(s3, grid_names)
+    print("-----Launching Containers-----")
+    queue_and_launch(runs, ecs, 20, 20)
+    print("-----Downloading KPIs-----")
+    for name in grid_names:
+        download_experiment_kpi(name, s3)
+    print("-----Determining Next Grids-----")
+    for name in grid_names:
+        print()
+        print(name)
+        print()
+        psuu_find_next_grid(name)
