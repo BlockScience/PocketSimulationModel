@@ -33,3 +33,5 @@ def build_next_param_config_code(
     print()
     print("Add the following to GRID_NUMBERS in cloud_utility.py")
     print('"{}": {}'.format(next_name, combos))
+    print()
+    print("Don't forget to rebuild and upload the docker container to AWS!")
