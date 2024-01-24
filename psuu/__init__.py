@@ -5,4 +5,7 @@ from .core import (
     compute_threshold_inequalities,
     load_kpis,
     load_sweep,
+    select_best_parameter_constellation,
+    update_param_grid,
+    psuu_find_next_grid,
 )
