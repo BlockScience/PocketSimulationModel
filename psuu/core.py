@@ -11,10 +11,10 @@ KPI_MAP = {
     "dao_value_capture": "kpi_10",
     "servicer_jailing_cost": "kpi_11",
     "servicer_capital_costs": "kpi_14",
-    "network_load_balancing": "kpi_C",
     "net_inflation": "kpi_D",
     "circulating_supply_available_supply_ratio": ["kpi_4", "kpi_5"],
     "net_inflation_dao_value_capture_elasticity": ["kpi_D", "kpi_10"],
+    "network_load_balancing": "kpi_C_recovery",
 }
 
 
@@ -68,8 +68,12 @@ THRESHOLD_INEQUALITIES_MAP = {
         threshold_parameters["x2"],
         "net_inflation_dao_value_capture_elasticity",
     ),
-    "network_load_balancing": lambda df, min, max, frac: threshold_load_balancing(
-        df, min, max, frac, "network_load_balancing"
+    "network_load_balancing": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["d1"],
+        None,
+        threshold_parameters["d2"],
+        "network_load_balancing",
     ),
 }
 
@@ -90,6 +94,7 @@ def load_kpis(sweep):
     kpis["kpi_D"] = kpis["net_mint_rate_cummulative"]
     kpis["kpi_10"] = kpis["dao_value_capture"]
     kpis["kpi_11"] = kpis["KPI 11"]
+    kpis["kpi_C_recovery"] = kpis["kpi_c_post"] / kpis["kpi_c_pre"]
     return kpis
 
 
@@ -100,6 +105,7 @@ def threshold_mc_fraction(df, min, max, frac, entity):
         "dao_value_capture",
         "servicer_slashing_cost",
         "servicer_jailing_cost",
+        "network_load_balancing",
     ]:
         raise ValueError("Error: unsupported threshold inequality type")
 

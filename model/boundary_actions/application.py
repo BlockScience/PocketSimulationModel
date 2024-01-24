@@ -30,8 +30,8 @@ def application_join_ba_simple_unfiform(
         return (
             {
                 "name": "",
-                "stake_amount": 15000
-                * 1e6,  # The amount of uPOKT in escrow (i.e. a security deposit)
+                "stake_amount": params["minimum_application_stake"]
+                * 1.2,  # The amount of uPOKT in escrow (i.e. a security deposit)
                 "geo_zone": random.choice(
                     state["Geozones"]
                 ),  # The physical geo-location identifier this application is registered in
@@ -201,6 +201,7 @@ def application_stake_ba_basic(
             * params["average_session_per_application"]
             * state["relays_to_tokens_multiplier"]
         )
+        target_stake = max(target_stake, buffer * params["minimum_application_stake"])
         if application.staked_pokt < target_stake:
             amount = max(
                 min(
