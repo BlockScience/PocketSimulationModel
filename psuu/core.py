@@ -229,3 +229,15 @@ def load_sweep(sweep):
         threshold_inequalities,
         threshold_parameters,
     )
+
+
+def select_best_parameter_constellation(df_thresholds, variable_params):
+    mx = df_thresholds["Score"].max()
+    pc = df_thresholds[df_thresholds["Score"] == mx]
+    pc = pc.sample(1).iloc[0]
+    pc = pc.name
+    out = {}
+    assert len(pc) == len(variable_params)
+    for x, y in zip(pc, variable_params):
+        out[y] = x
+    return out
