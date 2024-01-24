@@ -12,8 +12,8 @@ def build_next_param_config_code(
     print()
     print()
     combos = 1
-    for x in new_param_grid.values():
-        combos = combos * len(x)
+    for x in variable_params:
+        combos = combos * len(param_config[x])
     for x in control_params:
         combos = combos * len(param_config[x])
     print("Add the following to model/config/experiment.py:")
