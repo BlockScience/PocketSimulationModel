@@ -1,6 +1,8 @@
 import pandas as pd
 from model.config.params import *
 from .scenario_configs import scenario_configs
+from math import isclose
+from typing import List, Union
 
 KPI_MAP = {
     "servicer_npv": "kpi_1",
@@ -241,3 +243,56 @@ def select_best_parameter_constellation(df_thresholds, variable_params):
     for x, y in zip(pc, variable_params):
         out[y] = x
     return out
+
+
+def update_param_grid(
+    old_param_grid: Dict[str, List],
+    best_individual: Dict[str, Union[float, int]],
+    relevant_keys: set = None,
+) -> Dict[str, List]:
+    """
+    Find the directional average of two param_sets for a given set of keys.
+
+    The best_individual_param_set should be a dictionary where the lists are single elements.
+    Relevant keys tells which to average over.
+
+    """
+
+    if relevant_keys is None:
+        relevant_keys = set(best_individual.keys())
+
+    # Check that Param Grid to merge with has two values per key.
+    assert all(
+        [len(val) == 2 for key, val in old_param_grid.items() if key in relevant_keys]
+    )
+
+    # Create empty param_grid
+    new_param_grid = {}
+
+    # Now we go through and replace one of the two
+    # associated bounds with the directional average of the list and the best individual's value.
+
+    # TODO: Check if it is worth converting to map structure; leverage numpy performance?
+
+    for key in old_param_grid.keys():
+        if key in relevant_keys:
+            # Directional average.
+            # TODO: Check if it is worth rewriting directional average as external function.
+            bounds = old_param_grid.get(key)
+            lb = min(bounds)
+            ub = max(bounds)
+            mid = 0.5 * (lb + ub)
+            best_val = best_individual.get(key)
+            if isclose(best_val, lb):
+                new_param_grid[key] = [lb, mid]
+            elif isclose(best_val, ub):
+                new_param_grid[key] = [mid, ub]
+            else:
+                print(lb, best_val, ub)
+                raise Exception(
+                    "Something is wrong. The best individual does not have its values close to either the prior upper or lower bound."
+                )
+        else:
+            new_param_grid[key] = old_param_grid.get(key)
+
+    return new_param_grid
