@@ -164,14 +164,14 @@ def compute_kpi_1(
     return pd.Series(kpi_1)
 
 
-def compute_kpi_14(unique_servicers):
+def compute_kpi_14(unique_servicers, r=0.05):
     # Add in KPI 14, average slashing
     kpi_14 = {}
     for key in unique_servicers:
         servicers = unique_servicers[key]
         for servicer in servicers.values():
             if servicer.total_revenues > 0:
-                servicer.kpi_14 = (
+                servicer.kpi_14 = r * (
                     servicer.staked_pokt_total_inflow / servicer.total_revenues
                 )
             else:
