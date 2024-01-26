@@ -311,6 +311,28 @@ create_sweep(
     config_option_map_sweep,
 )
 
+gateway_viability_sweep_ag2_ = build_params("Base")
+gateway_viability_sweep_ag2_["session_token_bucket_coefficient"] = [25, 212.5]
+gateway_viability_sweep_ag2_["gateway_fee_per_relay"] = [10, 55.0]
+gateway_viability_sweep_ag2_["application_fee_per_relay"] = [10, 55.0]
+gateway_viability_sweep_ag2_["gateway_minimum_stake"] = [100000000000.0, 150000000000.0]
+gateway_viability_sweep_ag2_["minimum_application_stake"] = [
+    10000000000.0,
+    15000000000.0,
+]
+gateway_viability_sweep_ag2_["application_max_number"] = [5, 20, 100]
+gateway_viability_sweep_ag2_["relays_per_session_gamma_distribution_scale"] = [
+    100000,
+    300000,
+    900000,
+]
+create_sweep(
+    "gateway_viability_sweep_ag2_",
+    gateway_viability_sweep_ag2_,
+    config_option_map_sweep,
+)
+
+
 servicer_viability_ag1_ = build_params("Base")
 servicer_viability_ag1_["service_leave_probability"] = [0.0]
 servicer_viability_ag1_["service_join_function"] = ["off"]
