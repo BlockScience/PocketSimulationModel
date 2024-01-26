@@ -277,9 +277,9 @@ gateway_viability_sweep_ag1_["minimum_application_stake"] = [
 ]
 gateway_viability_sweep_ag1_["application_max_number"] = [5, 20, 100]
 gateway_viability_sweep_ag1_["relays_per_session_gamma_distribution_scale"] = [
+    100000,
     300000,
-    1000000,
-    2000000,
+    900000,
 ]
 
 create_sweep(
