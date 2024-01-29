@@ -13,4 +13,5 @@ from .core import (
     decision_tree_feature_importance_plot,
     threshold_comparison_plot,
     build_machine_search_data,
+    build_all_machine_search_data,
 )

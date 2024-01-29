@@ -523,3 +523,10 @@ def build_machine_search_data(grids):
     df = pd.concat(l)
     df = df.reset_index()
     return df
+
+
+def build_all_machine_search_data(kpis):
+    out = {}
+    for key in kpis:
+        out[key] = build_machine_search_data(kpis[key])
+    return out
