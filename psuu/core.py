@@ -185,7 +185,7 @@ def load_kpis(sweep):
     return kpis
 
 
-def threshold_mc_fraction(df, min, max, frac, entity):
+def threshold_mc_fraction(df, min, max, frac, entity, scoring=False):
     if entity not in [
         "servicer_npv",
         "gateway_npv",
@@ -216,11 +216,14 @@ def threshold_mc_fraction(df, min, max, frac, entity):
     # Number of successful runs
     ineq = ineq.mean()
 
+    if scoring:
+        return ineq
+
     # Successful fraction
     return ineq >= frac
 
 
-def threshold_average(df, min, max, entity) -> float:
+def threshold_average(df, min, max, entity, scoring=False) -> float:
     if entity not in [
         "servicer_capital_costs",
         "net_inflation",
@@ -236,19 +239,34 @@ def threshold_average(df, min, max, entity) -> float:
     else:
         kpi = KPI_MAP[entity]
 
-    # Get average
-    avg = df[kpi].mean()
-
-    if min and max:
-        return avg > min and avg < max
-    elif min and not max:
-        return avg > min
-    elif max and not min:
-        return avg < max
+    if not scoring:
+        # Get average
+        avg = df[kpi].mean()
     else:
-        raise ValueError(
-            "Error: must provide at least one maximum or minimum threshold value"
-        )
+        avg = df[kpi]
+
+    if scoring:
+        if min and max:
+            return ((avg > min) & (avg < max)).mean()
+        elif min and not max:
+            return (avg > min).mean()
+        elif max and not min:
+            return (avg < max).mean()
+        else:
+            raise ValueError(
+                "Error: must provide at least one maximum or minimum threshold value"
+            )
+    else:
+        if min and max:
+            return avg > min and avg < max
+        elif min and not max:
+            return avg > min
+        elif max and not min:
+            return avg < max
+        else:
+            raise ValueError(
+                "Error: must provide at least one maximum or minimum threshold value"
+            )
 
 
 def threshold_kpi_ratios(df, min, max, entity):
@@ -285,12 +303,22 @@ def compute_threshold_inequalities(
     kpis, variable_params, threshold_parameters, threshold_inequalities, scoring=False
 ):
     grouping = kpis.groupby(["param_" + x for x in variable_params])
-    df_thresholds = [
-        grouping.apply(
-            lambda x: THRESHOLD_INEQUALITIES_MAP[key](x, threshold_parameters)
-        )
-        for key in threshold_inequalities
-    ]
+    if scoring:
+        df_thresholds = [
+            grouping.apply(
+                lambda x: THRESHOLD_INEQUALITIES_SCORING_MAP[key](
+                    x, threshold_parameters
+                )
+            )
+            for key in threshold_inequalities
+        ]
+    else:
+        df_thresholds = [
+            grouping.apply(
+                lambda x: THRESHOLD_INEQUALITIES_MAP[key](x, threshold_parameters)
+            )
+            for key in threshold_inequalities
+        ]
     df_thresholds = pd.concat(df_thresholds, axis=1)
     df_thresholds.columns = [x + "_success" for x in threshold_inequalities]
     return df_thresholds
