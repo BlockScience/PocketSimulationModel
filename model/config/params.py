@@ -311,6 +311,72 @@ create_sweep(
     config_option_map_sweep,
 )
 
+network_failures_service_ag2_ = build_params("Base")
+network_failures_service_ag2_["slash_fraction_downtime"] = [0.05000000005, 0.1]
+network_failures_service_ag2_["downtime_jail_duration"] = [
+    14430000000000.0,
+    28800000000000.0,
+]
+network_failures_service_ag2_["max_chains_servicer"] = [10.5, 20]
+network_failures_service_ag2_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag2_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+create_sweep(
+    "network_failures_service_ag2_",
+    network_failures_service_ag2_,
+    config_option_map_sweep,
+)
+
+network_failures_service_ag3_ = build_params("Base")
+network_failures_service_ag3_["slash_fraction_downtime"] = [
+    0.05000000005,
+    0.075000000025,
+]
+network_failures_service_ag3_["downtime_jail_duration"] = [
+    14430000000000.0,
+    21615000000000.0,
+]
+network_failures_service_ag3_["max_chains_servicer"] = [15.25, 20]
+network_failures_service_ag3_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag3_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+create_sweep(
+    "network_failures_service_ag3_",
+    network_failures_service_ag3_,
+    config_option_map_sweep,
+)
+
+network_failures_service_ag4_ = build_params("Base")
+network_failures_service_ag4_["slash_fraction_downtime"] = [
+    0.05000000005,
+    0.0625000000375,
+]
+network_failures_service_ag4_["downtime_jail_duration"] = [
+    18022500000000.0,
+    21615000000000.0,
+]
+network_failures_service_ag4_["max_chains_servicer"] = [15.25, 17.625]
+network_failures_service_ag4_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag4_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+create_sweep(
+    "network_failures_service_ag4_",
+    network_failures_service_ag4_,
+    config_option_map_sweep,
+)
+
 gateway_viability_sweep_ag2_ = build_params("Base")
 gateway_viability_sweep_ag2_["session_token_bucket_coefficient"] = [25, 212.5]
 gateway_viability_sweep_ag2_["gateway_fee_per_relay"] = [10, 55.0]

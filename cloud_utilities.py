@@ -16,6 +16,9 @@ GRID_NUMBERS = {
     "gateway_viability_sweep_ag4_": 288,
     "gateway_viability_sweep_ag5_": 288,
     "gateway_viability_sweep_ag6_": 288,
+    "network_failures_service_ag2_": 96,
+    "network_failures_service_ag3_": 96,
+    "network_failures_service_ag4_": 96,
 }
 
 
