@@ -4,6 +4,7 @@ from .scenario_configs import scenario_configs
 from math import isclose
 from typing import List, Union
 from .meta_programming import build_next_param_config_code
+import os
 
 KPI_MAP = {
     "servicer_npv": "kpi_1",
@@ -323,3 +324,26 @@ def psuu_find_next_grid(sweep):
         next_name, new_param_grid, variable_params, control_params, param_config
     )
     return new_param_grid
+
+
+def load_all_kpi_comparison_data():
+    kpi_files = [
+        x
+        for x in os.listdir("simulation_data")
+        if x.endswith(".csv") and not x.endswith("_MC.csv")
+    ]
+    out = {}
+    for file in kpi_files:
+        name = file.replace(".csv", "")
+        (
+            sweep_family,
+            kpis,
+            param_config,
+            next_name,
+            variable_params,
+            control_params,
+            threshold_inequalities,
+            threshold_parameters,
+        ) = load_sweep(name)
+        out[name] = {"variable_params": variable_params, "param_config": param_config}
+    return out
