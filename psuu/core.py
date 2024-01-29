@@ -202,7 +202,7 @@ def threshold_elasticity(df, min, max, entity):
 
 
 def compute_threshold_inequalities(
-    kpis, variable_params, threshold_parameters, threshold_inequalities
+    kpis, variable_params, threshold_parameters, threshold_inequalities, scoring=False
 ):
     grouping = kpis.groupby(["param_" + x for x in variable_params])
     df_thresholds = [
