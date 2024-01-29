@@ -345,11 +345,17 @@ def load_all_kpi_comparison_data():
             threshold_inequalities,
             threshold_parameters,
         ) = load_sweep(name)
+
+        df_thresholds = compute_threshold_inequalities(
+            kpis, variable_params, threshold_parameters, threshold_inequalities
+        )
+
         if sweep_family not in out:
             out[sweep_family] = {}
         number = int(name[:-1].replace(sweep_family, ""))
         out[sweep_family][number] = {
             "variable_params": variable_params,
             "param_config": param_config,
+            "threshold_passing": df_thresholds.mean(),
         }
     return out
