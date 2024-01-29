@@ -9,5 +9,7 @@ from .core import (
     update_param_grid,
     psuu_find_next_grid,
     load_all_kpi_comparison_data,
+    load_scenario_kpi_comparison_data,
+    decision_tree_feature_importance_plot,
     threshold_comparison_plot,
 )

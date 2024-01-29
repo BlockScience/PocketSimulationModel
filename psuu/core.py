@@ -8,6 +8,7 @@ import os
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
+
 KPI_MAP = {
     "servicer_npv": "kpi_1",
     "gateway_npv": "kpi_3",
@@ -357,10 +358,71 @@ def load_all_kpi_comparison_data():
         number = int(name[:-1].replace(sweep_family, ""))
         out[sweep_family][number] = {
             "variable_params": variable_params,
+            "control_params": control_params,
             "param_config": param_config,
             "threshold_passing": df_thresholds.mean(),
         }
     return out
+
+def load_scenario_kpi_comparison_data(scenario_sweep_category):
+    kpi_files = [
+        x
+        for x in os.listdir("simulation_data")
+        if x.endswith(".csv") and not x.endswith("_MC.csv") and x.startswith(scenario_sweep_category)
+    ]
+    out = {}
+    for file in kpi_files:
+        name = file.replace(".csv", "")
+        (
+            sweep_family,
+            kpis,
+            param_config,
+            next_name,
+            variable_params,
+            control_params,
+            threshold_inequalities,
+            threshold_parameters,
+        ) = load_sweep(name)
+
+        df_thresholds = compute_threshold_inequalities(
+            kpis, variable_params, threshold_parameters, threshold_inequalities
+        )
+
+        if sweep_family not in out:
+            out[sweep_family] = {}
+        number = int(name[:-1].replace(sweep_family, ""))
+        out[sweep_family][number] = {
+            "variable_params": variable_params,
+            "control_params": control_params,
+            "param_config": param_config,
+            "threshold_passing": df_thresholds.mean(),
+        }
+    return out
+
+def decision_tree_feature_importance_plot(scenario_sweep_category, adaptive_grid_number):
+    name = scenario_sweep_category + str(adaptive_grid_number) + "_"
+    (
+        sweep_family,
+        kpis,
+        param_config,
+        next_name,
+        variable_params,
+        control_params,
+        threshold_inequalities,
+        threshold_parameters,
+    ) = load_sweep(name)
+
+    df_thresholds = compute_threshold_inequalities(
+        kpis, variable_params, threshold_parameters, threshold_inequalities
+    )
+
+    variable_params = [ "param_" + x for x in variable_params ]
+
+    os.chdir("..")
+    from cadcad_machine_search.visualizations import param_sensitivity_plot
+
+    for ti in threshold_inequalities:
+        param_sensitivity_plot(df_thresholds, variable_params, ti + '_success', ti + ' inequality threshold')
 
 
 def threshold_comparison_plot(data):
