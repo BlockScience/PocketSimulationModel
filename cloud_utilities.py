@@ -19,6 +19,8 @@ GRID_NUMBERS = {
     "network_failures_service_ag2_": 96,
     "network_failures_service_ag3_": 96,
     "network_failures_service_ag4_": 96,
+    "network_failures_service_ag5_": 96,
+    "network_failures_service_ag6_": 96,
 }
 
 

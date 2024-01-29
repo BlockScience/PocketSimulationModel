@@ -354,6 +354,52 @@ create_sweep(
     config_option_map_sweep,
 )
 
+network_failures_service_ag5_ = build_params("Base")
+network_failures_service_ag5_["slash_fraction_downtime"] = [
+    0.05000000005,
+    0.05625000004375,
+]
+network_failures_service_ag5_["downtime_jail_duration"] = [
+    19818750000000.0,
+    21615000000000.0,
+]
+network_failures_service_ag5_["max_chains_servicer"] = [15.25, 16.4375]
+network_failures_service_ag5_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag5_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+create_sweep(
+    "network_failures_service_ag5_",
+    network_failures_service_ag5_,
+    config_option_map_sweep,
+)
+
+network_failures_service_ag6_ = build_params("Base")
+network_failures_service_ag6_["slash_fraction_downtime"] = [
+    0.053125000046874996,
+    0.05625000004375,
+]
+network_failures_service_ag6_["downtime_jail_duration"] = [
+    20716875000000.0,
+    21615000000000.0,
+]
+network_failures_service_ag6_["max_chains_servicer"] = [15.84375, 16.4375]
+network_failures_service_ag6_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag6_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+create_sweep(
+    "network_failures_service_ag6_",
+    network_failures_service_ag6_,
+    config_option_map_sweep,
+)
+
 network_failures_service_ag4_ = build_params("Base")
 network_failures_service_ag4_["slash_fraction_downtime"] = [
     0.05000000005,
