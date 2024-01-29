@@ -84,6 +84,86 @@ THRESHOLD_INEQUALITIES_MAP = {
     ),
 }
 
+# Note that these are meant to applied to subsets of the dataframe, i.e. do the grouping and then apply this
+THRESHOLD_INEQUALITIES_SCORING_MAP = {
+    "servicer_npv": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["s1"],
+        None,
+        threshold_parameters["s2"],
+        "servicer_npv",
+        scoring=True,
+    ),
+    "servicer_capital_costs": lambda df, threshold_parameters: threshold_average(
+        df,
+        threshold_parameters["a1"],
+        threshold_parameters["a2"],
+        "servicer_capital_costs",
+        scoring=True,
+    ),
+    "servicer_slashing_cost": lambda df, threshold_parameters: not threshold_mc_fraction(
+        df,
+        threshold_parameters["b1"],
+        None,
+        threshold_parameters["b2"],
+        "servicer_slashing_cost",
+        scoring=True,
+    ),
+    "servicer_jailing_cost": lambda df, threshold_parameters: not threshold_mc_fraction(
+        df,
+        threshold_parameters["c1"],
+        None,
+        threshold_parameters["c2"],
+        "servicer_jailing_cost",
+        scoring=True,
+    ),
+    "gateway_npv": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["t1"],
+        None,
+        threshold_parameters["t2"],
+        "gateway_npv",
+        scoring=True,
+    ),
+    "circulating_supply_available_supply_ratio": lambda df, threshold_parameters: threshold_kpi_ratios(
+        df,
+        threshold_parameters["v1"],
+        None,
+        "circulating_supply_available_supply_ratio",
+        scoring=True,
+    ),
+    "net_inflation": lambda df, threshold_parameters: threshold_average(
+        df,
+        threshold_parameters["y1"],
+        threshold_parameters["y2"],
+        "net_inflation",
+        scoring=True,
+    ),
+    "dao_value_capture": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["z1"],
+        threshold_parameters["z2"],
+        threshold_parameters["z3"],
+        "dao_value_capture",
+        scoring=True,
+    ),
+    "net_inflation_dao_value_capture_elasticity": lambda df, threshold_parameters: threshold_elasticity(
+        df,
+        threshold_parameters["x1"],
+        threshold_parameters["x2"],
+        "net_inflation_dao_value_capture_elasticity",
+        scoring=True,
+    ),
+    "network_load_balancing": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["d1"],
+        None,
+        threshold_parameters["d2"],
+        "network_load_balancing",
+        scoring=True,
+    ),
+}
+
 KPI_CLEANUP_MAP = {
     "KPI 14": "kpi_14",
     "KPI 1": "kpi_1",
@@ -105,7 +185,7 @@ def load_kpis(sweep):
     return kpis
 
 
-def threshold_mc_fraction(df, min, max, frac, entity):
+def threshold_mc_fraction(df, min, max, frac, entity, scoring=False):
     if entity not in [
         "servicer_npv",
         "gateway_npv",
@@ -136,11 +216,14 @@ def threshold_mc_fraction(df, min, max, frac, entity):
     # Number of successful runs
     ineq = ineq.mean()
 
+    if scoring:
+        return ineq
+
     # Successful fraction
     return ineq >= frac
 
 
-def threshold_average(df, min, max, entity) -> float:
+def threshold_average(df, min, max, entity, scoring=False) -> float:
     if entity not in [
         "servicer_capital_costs",
         "net_inflation",
@@ -156,22 +239,37 @@ def threshold_average(df, min, max, entity) -> float:
     else:
         kpi = KPI_MAP[entity]
 
-    # Get average
-    avg = df[kpi].mean()
-
-    if min and max:
-        return avg > min and avg < max
-    elif min and not max:
-        return avg > min
-    elif max and not min:
-        return avg < max
+    if not scoring:
+        # Get average
+        avg = df[kpi].mean()
     else:
-        raise ValueError(
-            "Error: must provide at least one maximum or minimum threshold value"
-        )
+        avg = df[kpi]
+
+    if scoring:
+        if min and max:
+            return ((avg > min) & (avg < max)).mean()
+        elif min and not max:
+            return (avg > min).mean()
+        elif max and not min:
+            return (avg < max).mean()
+        else:
+            raise ValueError(
+                "Error: must provide at least one maximum or minimum threshold value"
+            )
+    else:
+        if min and max:
+            return avg > min and avg < max
+        elif min and not max:
+            return avg > min
+        elif max and not min:
+            return avg < max
+        else:
+            raise ValueError(
+                "Error: must provide at least one maximum or minimum threshold value"
+            )
 
 
-def threshold_kpi_ratios(df, min, max, entity):
+def threshold_kpi_ratios(df, min, max, entity, scoring=False):
     if entity not in ["circulating_supply_available_supply_ratio"]:
         raise ValueError("Error: unsupported threshold inequality type")
 
@@ -181,10 +279,10 @@ def threshold_kpi_ratios(df, min, max, entity):
     df = df.copy()
     df["ratio"] = df[kpi[0]] / df[kpi[1]]
 
-    return threshold_average(df, min, max, entity)
+    return threshold_average(df, min, max, entity, scoring=scoring)
 
 
-def threshold_elasticity(df, min, max, entity):
+def threshold_elasticity(df, min, max, entity, scoring=False):
     if entity not in ["net_inflation_dao_value_capture_elasticity"]:
         raise ValueError("Error: unsupported threshold inequality type")
 
@@ -198,19 +296,29 @@ def threshold_elasticity(df, min, max, entity):
     df = df.copy()
     df["elasticity"] = df[kpi[0]] / df[kpi[1]]
 
-    return threshold_average(df, min, max, entity)
+    return threshold_average(df, min, max, entity, scoring=scoring)
 
 
 def compute_threshold_inequalities(
-    kpis, variable_params, threshold_parameters, threshold_inequalities
+    kpis, variable_params, threshold_parameters, threshold_inequalities, scoring=False
 ):
     grouping = kpis.groupby(["param_" + x for x in variable_params])
-    df_thresholds = [
-        grouping.apply(
-            lambda x: THRESHOLD_INEQUALITIES_MAP[key](x, threshold_parameters)
-        )
-        for key in threshold_inequalities
-    ]
+    if scoring:
+        df_thresholds = [
+            grouping.apply(
+                lambda x: THRESHOLD_INEQUALITIES_SCORING_MAP[key](
+                    x, threshold_parameters
+                )
+            )
+            for key in threshold_inequalities
+        ]
+    else:
+        df_thresholds = [
+            grouping.apply(
+                lambda x: THRESHOLD_INEQUALITIES_MAP[key](x, threshold_parameters)
+            )
+            for key in threshold_inequalities
+        ]
     df_thresholds = pd.concat(df_thresholds, axis=1)
     df_thresholds.columns = [x + "_success" for x in threshold_inequalities]
     return df_thresholds
@@ -318,6 +426,27 @@ def psuu_find_next_grid(sweep):
     df_thresholds = compute_threshold_inequalities(
         kpis, variable_params, threshold_parameters, threshold_inequalities
     )
+
+    df_thresholds_scoring = compute_threshold_inequalities(
+        kpis,
+        variable_params,
+        threshold_parameters,
+        threshold_inequalities,
+        scoring=True,
+    )
+
+    print("Current Threshold Passing Percents:")
+    print(df_thresholds.mean())
+    print()
+    if any(df_thresholds.mean() == 0):
+        print("Found 0% passing columns, backing those off with scoring...")
+        print()
+        for key in df_thresholds:
+            if df_thresholds[key].mean() == 0:
+                df_thresholds[key] = df_thresholds_scoring[key]
+        print("New Threshold Values Average:")
+        print(df_thresholds.mean())
+        print()
     df_thresholds["Score"] = df_thresholds.astype(int).sum(axis=1)
     best_param_grid = select_best_parameter_constellation(
         df_thresholds, variable_params
