@@ -5,6 +5,8 @@ from math import isclose
 from typing import List, Union
 from .meta_programming import build_next_param_config_code
 import os
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 KPI_MAP = {
     "servicer_npv": "kpi_1",
@@ -359,3 +361,79 @@ def load_all_kpi_comparison_data():
             "threshold_passing": df_thresholds.mean(),
         }
     return out
+
+
+def threshold_comparison_plot(data):
+    print("KPIs are referenced as:")
+    for i, x in enumerate(data[1]["threshold_passing"].index):
+        print("{}: {}".format(x, i + 1))
+    variable_params = data[1]["variable_params"]
+    rows = max(data.keys())
+    columns = 1 + len(variable_params)
+    fig, axes = plt.subplots(rows, ncols=columns, figsize=(20, 3.5 * rows))
+
+    for i in range(rows):
+        data_i = data[i + 1]
+        for j in range(columns):
+            ax = axes[i][j]
+            if j == columns - 1:
+                passing = data_i["threshold_passing"]
+                temp = passing.copy()
+                temp.index = list(range(1, len(passing) + 1))
+                temp.plot(kind="bar", ax=ax)
+                ax.set_title("Threshold Passing Percent")
+                ax.bar_label(ax.containers[0])
+                ax.set_ylim([0, 1.1])
+            else:
+                param_name = variable_params[j]
+                xmin = data[1]["param_config"][param_name][0]
+                xmax = data[1]["param_config"][param_name][1]
+                if xmin >= 10000:
+                    display_xmin = "{:.2e}".format(xmin)
+                else:
+                    display_xmin = xmin
+                if xmax >= 10000:
+                    display_xmax = "{:.2e}".format(xmax)
+                else:
+                    display_xmax = xmax
+                rng = xmax - xmin
+                ax.set_xlim(xmin - rng * 0.25, xmax + rng * 0.25)
+                ax.set_ylim(0, 10)
+                y = 5
+                height = 1
+
+                x1 = data[i + 1]["param_config"][param_name][0]
+                x2 = data[i + 1]["param_config"][param_name][1]
+
+                display_x1 = x1
+                display_x2 = x2
+
+                if x1 >= 10000:
+                    display_x1 = "{:.2e}".format(x1)
+                if x2 >= 10000:
+                    display_x2 = "{:.2e}".format(x2)
+
+                ax.hlines(y, xmin, xmax, color="black")
+                ax.vlines(xmin, y - 1, y + 1, color="black")
+                ax.vlines(xmax, y - 1, y + 1, color="black")
+                ax.text(
+                    xmin,
+                    y - 2.2,
+                    display_xmin,
+                    horizontalalignment="center",
+                    fontsize=14,
+                )
+                ax.text(
+                    xmax,
+                    y - 2.2,
+                    display_xmax,
+                    horizontalalignment="center",
+                    fontsize=14,
+                )
+                ax.set_title(
+                    "{} = \n [{}, {}]".format(param_name, display_x1, display_x2)
+                )
+                ax.add_patch(Rectangle((x1, y - 1), x2 - x1, 2, color="red", alpha=0.3))
+                ax.axis("off")
+
+    plt.show()
