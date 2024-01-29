@@ -426,6 +426,27 @@ def psuu_find_next_grid(sweep):
     df_thresholds = compute_threshold_inequalities(
         kpis, variable_params, threshold_parameters, threshold_inequalities
     )
+
+    df_thresholds_scoring = compute_threshold_inequalities(
+        kpis,
+        variable_params,
+        threshold_parameters,
+        threshold_inequalities,
+        scoring=True,
+    )
+
+    print("Current Threshold Passing Percents:")
+    print(df_thresholds.mean())
+    print()
+    if any(df_thresholds.mean() == 0):
+        print("Found 0% passing columns, backing those off with scoring...")
+        print()
+        for key in df_thresholds:
+            if df_thresholds[key].mean() == 0:
+                df_thresholds[key] = df_thresholds_scoring[key]
+        print("New Threshold Values Average:")
+        print(df_thresholds.mean())
+        print()
     df_thresholds["Score"] = df_thresholds.astype(int).sum(axis=1)
     best_param_grid = select_best_parameter_constellation(
         df_thresholds, variable_params
