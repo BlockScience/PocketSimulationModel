@@ -269,7 +269,7 @@ def threshold_average(df, min, max, entity, scoring=False) -> float:
             )
 
 
-def threshold_kpi_ratios(df, min, max, entity):
+def threshold_kpi_ratios(df, min, max, entity, scoring=False):
     if entity not in ["circulating_supply_available_supply_ratio"]:
         raise ValueError("Error: unsupported threshold inequality type")
 
@@ -279,10 +279,10 @@ def threshold_kpi_ratios(df, min, max, entity):
     df = df.copy()
     df["ratio"] = df[kpi[0]] / df[kpi[1]]
 
-    return threshold_average(df, min, max, entity)
+    return threshold_average(df, min, max, entity, scoring=scoring)
 
 
-def threshold_elasticity(df, min, max, entity):
+def threshold_elasticity(df, min, max, entity, scoring=False):
     if entity not in ["net_inflation_dao_value_capture_elasticity"]:
         raise ValueError("Error: unsupported threshold inequality type")
 
@@ -296,7 +296,7 @@ def threshold_elasticity(df, min, max, entity):
     df = df.copy()
     df["elasticity"] = df[kpi[0]] / df[kpi[1]]
 
-    return threshold_average(df, min, max, entity)
+    return threshold_average(df, min, max, entity, scoring=scoring)
 
 
 def compute_threshold_inequalities(
