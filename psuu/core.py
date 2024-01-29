@@ -84,6 +84,86 @@ THRESHOLD_INEQUALITIES_MAP = {
     ),
 }
 
+# Note that these are meant to applied to subsets of the dataframe, i.e. do the grouping and then apply this
+THRESHOLD_INEQUALITIES_SCORING_MAP = {
+    "servicer_npv": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["s1"],
+        None,
+        threshold_parameters["s2"],
+        "servicer_npv",
+        scoring=True,
+    ),
+    "servicer_capital_costs": lambda df, threshold_parameters: threshold_average(
+        df,
+        threshold_parameters["a1"],
+        threshold_parameters["a2"],
+        "servicer_capital_costs",
+        scoring=True,
+    ),
+    "servicer_slashing_cost": lambda df, threshold_parameters: not threshold_mc_fraction(
+        df,
+        threshold_parameters["b1"],
+        None,
+        threshold_parameters["b2"],
+        "servicer_slashing_cost",
+        scoring=True,
+    ),
+    "servicer_jailing_cost": lambda df, threshold_parameters: not threshold_mc_fraction(
+        df,
+        threshold_parameters["c1"],
+        None,
+        threshold_parameters["c2"],
+        "servicer_jailing_cost",
+        scoring=True,
+    ),
+    "gateway_npv": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["t1"],
+        None,
+        threshold_parameters["t2"],
+        "gateway_npv",
+        scoring=True,
+    ),
+    "circulating_supply_available_supply_ratio": lambda df, threshold_parameters: threshold_kpi_ratios(
+        df,
+        threshold_parameters["v1"],
+        None,
+        "circulating_supply_available_supply_ratio",
+        scoring=True,
+    ),
+    "net_inflation": lambda df, threshold_parameters: threshold_average(
+        df,
+        threshold_parameters["y1"],
+        threshold_parameters["y2"],
+        "net_inflation",
+        scoring=True,
+    ),
+    "dao_value_capture": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["z1"],
+        threshold_parameters["z2"],
+        threshold_parameters["z3"],
+        "dao_value_capture",
+        scoring=True,
+    ),
+    "net_inflation_dao_value_capture_elasticity": lambda df, threshold_parameters: threshold_elasticity(
+        df,
+        threshold_parameters["x1"],
+        threshold_parameters["x2"],
+        "net_inflation_dao_value_capture_elasticity",
+        scoring=True,
+    ),
+    "network_load_balancing": lambda df, threshold_parameters: threshold_mc_fraction(
+        df,
+        threshold_parameters["d1"],
+        None,
+        threshold_parameters["d2"],
+        "network_load_balancing",
+        scoring=True,
+    ),
+}
+
 KPI_CLEANUP_MAP = {
     "KPI 14": "kpi_14",
     "KPI 1": "kpi_1",
