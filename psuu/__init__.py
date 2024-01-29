@@ -12,4 +12,6 @@ from .core import (
     load_scenario_kpi_comparison_data,
     decision_tree_feature_importance_plot,
     threshold_comparison_plot,
+    build_machine_search_data,
+    build_all_machine_search_data,
 )
