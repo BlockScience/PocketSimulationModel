@@ -345,5 +345,11 @@ def load_all_kpi_comparison_data():
             threshold_inequalities,
             threshold_parameters,
         ) = load_sweep(name)
-        out[name] = {"variable_params": variable_params, "param_config": param_config}
+        if sweep_family not in out:
+            out[sweep_family] = {}
+        number = int(name[:-1].replace(sweep_family, ""))
+        out[sweep_family][number] = {
+            "variable_params": variable_params,
+            "param_config": param_config,
+        }
     return out
