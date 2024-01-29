@@ -8,4 +8,6 @@ from .core import (
     select_best_parameter_constellation,
     update_param_grid,
     psuu_find_next_grid,
+    load_all_kpi_comparison_data,
+    threshold_comparison_plot,
 )
