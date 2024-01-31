@@ -21,6 +21,11 @@ GRID_NUMBERS = {
     "network_failures_service_ag4_": 96,
     "network_failures_service_ag5_": 96,
     "network_failures_service_ag6_": 96,
+    "servicer_viability_ag2_": 1152,
+    "servicer_viability_ag3_": 1152,
+    "servicer_viability_ag4_": 1152,
+    "servicer_viability_ag5_": 1152,
+    "servicer_viability_ag6_": 1152,
 }
 
 

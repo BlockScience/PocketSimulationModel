@@ -545,6 +545,75 @@ servicer_viability_ag1_["validator_fee_percentage"] = [0.01, 0.1]
 servicer_viability_ag1_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
 servicer_viability_ag1_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
 
+servicer_viability_ag2_ = build_params("Base")
+servicer_viability_ag2_["relays_to_tokens_multiplier"] = [100, 150.0]
+servicer_viability_ag2_["gateway_fee_per_relay"] = [10, 55.0]
+servicer_viability_ag2_["application_fee_per_relay"] = [10, 55.0]
+servicer_viability_ag2_["gateway_minimum_stake"] = [100000000000.0, 150000000000.0]
+servicer_viability_ag2_["minimum_application_stake"] = [10000000000.0, 15000000000.0]
+servicer_viability_ag2_["dao_allocation"] = [0.05, 0.1]
+servicer_viability_ag2_["validator_fee_percentage"] = [0.01, 0.055]
+servicer_viability_ag2_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag2_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag2_", servicer_viability_ag2_, config_option_map_sweep
+)
+
+servicer_viability_ag3_ = build_params("Base")
+servicer_viability_ag3_["relays_to_tokens_multiplier"] = [100, 125.0]
+servicer_viability_ag3_["gateway_fee_per_relay"] = [10, 32.5]
+servicer_viability_ag3_["application_fee_per_relay"] = [10, 32.5]
+servicer_viability_ag3_["gateway_minimum_stake"] = [100000000000.0, 125000000000.0]
+servicer_viability_ag3_["minimum_application_stake"] = [12500000000.0, 15000000000.0]
+servicer_viability_ag3_["dao_allocation"] = [0.07500000000000001, 0.1]
+servicer_viability_ag3_["validator_fee_percentage"] = [0.0325, 0.055]
+servicer_viability_ag3_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag3_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag3_", servicer_viability_ag3_, config_option_map_sweep
+)
+
+servicer_viability_ag4_ = build_params("Base")
+servicer_viability_ag4_["relays_to_tokens_multiplier"] = [100, 112.5]
+servicer_viability_ag4_["gateway_fee_per_relay"] = [10, 21.25]
+servicer_viability_ag4_["application_fee_per_relay"] = [10, 21.25]
+servicer_viability_ag4_["gateway_minimum_stake"] = [100000000000.0, 112500000000.0]
+servicer_viability_ag4_["minimum_application_stake"] = [12500000000.0, 13750000000.0]
+servicer_viability_ag4_["dao_allocation"] = [0.08750000000000001, 0.1]
+servicer_viability_ag4_["validator_fee_percentage"] = [0.0325, 0.04375]
+servicer_viability_ag4_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag4_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag4_", servicer_viability_ag4_, config_option_map_sweep
+)
+
+servicer_viability_ag5_ = build_params("Base")
+servicer_viability_ag5_["relays_to_tokens_multiplier"] = [100, 106.25]
+servicer_viability_ag5_["gateway_fee_per_relay"] = [10, 15.625]
+servicer_viability_ag5_["application_fee_per_relay"] = [10, 15.625]
+servicer_viability_ag5_["gateway_minimum_stake"] = [106250000000.0, 112500000000.0]
+servicer_viability_ag5_["minimum_application_stake"] = [12500000000.0, 13125000000.0]
+servicer_viability_ag5_["dao_allocation"] = [0.08750000000000001, 0.09375]
+servicer_viability_ag5_["validator_fee_percentage"] = [0.0325, 0.038125]
+servicer_viability_ag5_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag5_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag5_", servicer_viability_ag5_, config_option_map_sweep
+)
+
+servicer_viability_ag6_ = build_params("Base")
+servicer_viability_ag6_["relays_to_tokens_multiplier"] = [103.125, 106.25]
+servicer_viability_ag6_["gateway_fee_per_relay"] = [10, 12.8125]
+servicer_viability_ag6_["application_fee_per_relay"] = [10, 12.8125]
+servicer_viability_ag6_["gateway_minimum_stake"] = [109375000000.0, 112500000000.0]
+servicer_viability_ag6_["minimum_application_stake"] = [12500000000.0, 12812500000.0]
+servicer_viability_ag6_["dao_allocation"] = [0.08750000000000001, 0.09062500000000001]
+servicer_viability_ag6_["validator_fee_percentage"] = [0.0353125, 0.038125]
+servicer_viability_ag6_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag6_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag6_", servicer_viability_ag6_, config_option_map_sweep
+)
 
 create_sweep(
     "servicer_viability_ag1_",
