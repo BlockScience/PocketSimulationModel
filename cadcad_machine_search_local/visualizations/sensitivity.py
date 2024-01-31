@@ -30,7 +30,7 @@ def f(X: pd.DataFrame,
     plot_tree(model,
               rounded=True,
               proportion=True,
-              fontsize=8,
+              fontsize=14,
               feature_names=X.columns,
               class_names=['threshold not met', 'threshold met'],
               filled=True,
@@ -43,8 +43,10 @@ def f(X: pd.DataFrame,
                 ax=ax_rf,
                 label='small')
     plt.setp(ax_rf.xaxis.get_majorticklabels(), rotation=45)
+    ax_rf.tick_params(axis='x', labelsize=14)
+    ax_rf.set_xlabel("Parameters", fontsize=14)
     ax_rf.set_title(f'Feature importance for the {label}')
-
+    
     return df.assign(target=target)
 
 
@@ -56,6 +58,7 @@ def param_sensitivity_plot(df: pd.DataFrame,
     Plot the sensivity of the 'target' column vs
     a list of control parameters, which are data frame columns.
     """
+    
     features = set(control_params) - {target}
     X = df.loc[:, list(features)]
     y = (df[target] > 0)

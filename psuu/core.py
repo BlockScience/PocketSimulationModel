@@ -543,8 +543,8 @@ def decision_tree_feature_importance_plot(scenario_sweep_category):
         for x in kpis[scenario_sweep_category][1]['variable_params']
     ]
     threshold_inequalities = kpis[scenario_sweep_category][1]['threshold_inequalities']
-    os.chdir("..")
-    from cadcad_machine_search.visualizations import param_sensitivity_plot
+    #os.chdir("..")
+    from cadcad_machine_search_local.visualizations import param_sensitivity_plot
     for ti in threshold_inequalities:
         param_sensitivity_plot(
             df,
