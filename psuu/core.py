@@ -528,39 +528,26 @@ def load_scenario_kpi_comparison_data(scenario_sweep_category):
             "variable_params": variable_params,
             "control_params": control_params,
             "param_config": param_config,
+            "threshold_inequalities": threshold_inequalities,
             "thresholds": df_thresholds,
             "threshold_passing": df_thresholds.mean(),
         }
     return out
 
 
-def decision_tree_feature_importance_plot(
-    scenario_sweep_category, adaptive_grid_number
-):
-    name = scenario_sweep_category + str(adaptive_grid_number) + "_"
-    (
-        sweep_family,
-        kpis,
-        param_config,
-        next_name,
-        variable_params,
-        control_params,
-        threshold_inequalities,
-        threshold_parameters,
-    ) = load_sweep(name)
-
-    df_thresholds = compute_threshold_inequalities(
-        kpis, variable_params, threshold_parameters, threshold_inequalities
-    )
-
-    variable_params = ["param_" + x for x in variable_params]
-
+def decision_tree_feature_importance_plot(scenario_sweep_category):
+    kpis = load_scenario_kpi_comparison_data(scenario_sweep_category)
+    df = build_machine_search_data(kpis[scenario_sweep_category])
+    variable_params = [
+        "param_" + x
+        for x in kpis[scenario_sweep_category][1]['variable_params']
+    ]
+    threshold_inequalities = kpis[scenario_sweep_category][1]['threshold_inequalities']
     os.chdir("..")
     from cadcad_machine_search.visualizations import param_sensitivity_plot
-
     for ti in threshold_inequalities:
         param_sensitivity_plot(
-            df_thresholds,
+            df,
             variable_params,
             ti + "_success",
             ti + " inequality threshold",
