@@ -21,12 +21,14 @@ scenarios_dict["gateway_viability_sweep_ag"]["param_abbreviations"] = {
                                                              }
 scenarios_dict["gateway_viability_sweep_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 14"]
 
-scenarios_dict["TODO"] = dict()
-scenarios_dict["TODO"]["sweep_title"] = "TODO"
-scenarios_dict["TODO"]["param_abbreviations"] = {
-                                           "TODO" : "TODO"
+scenarios_dict["network_failures_service_ag"] = dict()
+scenarios_dict["network_failures_service_ag"]["sweep_title"] = "Network Failures Service"
+scenarios_dict["network_failures_service_ag"]["param_abbreviations"] = {
+                                              "param_slash_fraction_downtime" : "SFD",
+                                              "param_max_chains_servicer" : "MCS",
+                                              "param_downtime_jail_duration": "DJD"
                                            }
-scenarios_dict["TODO"]["KPIs"] = ["TODO", "TODO"]
+scenarios_dict["network_failures_service_ag"]["KPIs"] = ["'KPI 8'", "KPI 11", "KPI C"]
 
 
 #################################
@@ -67,7 +69,7 @@ def make_initial_vs_final_plot(df: pd.DataFrame,
                                kpi_names_to_use: List[str] = None,
                                ag_iter_col_name: str = "AG iteration",
                                start_iter: int = 1,
-                               end_iter: int = 5,
+                               end_iter: int = 6,
                                fig_height: float = 8,
                                fig_width: float = 10):
 
