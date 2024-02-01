@@ -22,13 +22,13 @@ scenarios_dict["gateway_viability_sweep_ag"]["param_abbreviations"] = {
 scenarios_dict["gateway_viability_sweep_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 14"]
 
 scenarios_dict["network_failures_service_ag"] = dict()
-scenarios_dict["network_failures_service_ag"]["sweep_title"] = "Network Failures Service"
+scenarios_dict["network_failures_service_ag"]["sweep title"] = "Network Failures Service"
 scenarios_dict["network_failures_service_ag"]["param_abbreviations"] = {
                                               "param_slash_fraction_downtime" : "SFD",
                                               "param_max_chains_servicer" : "MCS",
                                               "param_downtime_jail_duration": "DJD"
                                            }
-scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 8", "KPI 11", "KPI C"]
+scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 11", "KPI C"]
 
 
 #################################
@@ -41,20 +41,19 @@ scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 8", "KPI 11", "KPI
 
 def read_and_format_data(directory: str = "simulation_data",
                         scenario_sweep_category: str = None,
-                        ag_iter_col_name: str = "AG iteration"):
+                        ag_iter_col_name: str = "AG iteration",
+                        start_iter: int = 1,
+                        end_iter: int = 6):
     # Find all .csv files in the directory that begin with the given string
     matching_files = [
-                    file for file 
-                    in os.listdir(directory) 
-                    if file.startswith(scenario_sweep_category) 
-                    and file.endswith('.csv')
-                    and not(file.endswith("MC.csv"))
+                    f"{scenario_sweep_category}{file_num}_.csv"
+                    for file_num in range(start_iter, end_iter + 1)
                     ]
 
     # Load each matching file into a DataFrame
     data_frames = [pd.read_csv(os.path.join(directory, file)) for file in matching_files]
     for ag_num in range(len(data_frames)):
-        data_frames[ag_num][ag_iter_col_name] = ag_num
+        data_frames[ag_num][ag_iter_col_name] = ag_num + 1
 
     # Assuming data_frames is the list of DataFrames to be merged
     merged_df = pd.concat(data_frames, ignore_index=True)
