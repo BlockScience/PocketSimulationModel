@@ -28,7 +28,7 @@ scenarios_dict["network_failures_service_ag"]["param_abbreviations"] = {
                                               "param_max_chains_servicer" : "MCS",
                                               "param_downtime_jail_duration": "DJD"
                                            }
-scenarios_dict["network_failures_service_ag"]["KPIs"] = ["'KPI 8'", "KPI 11", "KPI C"]
+scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 8", "KPI 11", "KPI C"]
 
 
 #################################
