@@ -75,7 +75,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "slash_fraction_downtime": [0.000001000000000000],
         # "replay_attack_burn_multiplier": [3],
         # "max_jailed_blocks": [37960],
-        "downtime_jail_duration": [3600000000000],  # In nanoseconds
+        # "downtime_jail_duration": [3600000000000],  # In nanoseconds
         "minimum_servicers_per_session": [1],
         "maximum_servicers_per_session": [5],
         # "application_unstaking_time": [None],
@@ -85,15 +85,14 @@ system_param_config: Dict[str, SystemParamsType] = {
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
-        "servicer_allocation": [0.85],
         "stake_per_app_delegation": [15000 * 1e6],
         "gateway_fee_per_relay": [27.42],
         "gateway_minimum_stake": [150000 * 1e6],
         # "gateway_unstaking_time": [None],
         # "session_block_frequency": [None],
         "session_token_bucket_coefficient": [100],
-        "dao_fee_percentage": [0.1],
-        "validator_fee_percentage": [0.9],
+        "dao_fee_percentage": [0.9],
+        "validator_fee_percentage": [0.1],
         "maturity_relay_cost": [0.000001971 * 0.75],
         "maturity_relay_charge": [0.000001971],
         "min_bootstrap_gateway_fee_per_relay": [0.00000085],
@@ -115,7 +114,7 @@ system_param_config: Dict[str, SystemParamsType] = {
         "max_chains_servicer": [15],
         "relays_to_tokens_multiplier": [161.29],
         "slash_fraction_downtime": [0.000001000000000000],
-        "downtime_jail_duration": [3600000000000],  # In nanoseconds
+        # "downtime_jail_duration": [3600000000000],  # In nanoseconds
         "minimum_servicers_per_session": [1],
         "maximum_servicers_per_session": [5],
         "application_fee_per_relay": ["GFPR*1.25"],
@@ -124,13 +123,12 @@ system_param_config: Dict[str, SystemParamsType] = {
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
-        "servicer_allocation": [0.85],
         "stake_per_app_delegation": [15000 * 1e6],
         "gateway_fee_per_relay": [27.42],
         "gateway_minimum_stake": [150000 * 1e6],
         "session_token_bucket_coefficient": [100],
-        "dao_fee_percentage": [0.1],
-        "validator_fee_percentage": [0.9],
+        "dao_fee_percentage": [0.9],
+        "validator_fee_percentage": [0.1],
         "transaction_fee": [0.01],
         "min_bootstrap_gateway_fee_per_relay": [0.00000085],
         "maturity_relay_charge": [0.000001971],
@@ -291,10 +289,6 @@ create_sweep(
 
 network_failures_service_ag1_ = build_params("Base")
 network_failures_service_ag1_["slash_fraction_downtime"] = [1e-10, 1e-1]
-network_failures_service_ag1_["downtime_jail_duration"] = [
-    60 * 1e9,
-    28800 * 1e9,
-]
 network_failures_service_ag1_["max_chains_servicer"] = [1, 20]
 network_failures_service_ag1_["servicer_service_density_starting"] = [0.1, 0.5, 1]
 network_failures_service_ag1_["event"] = [
@@ -311,117 +305,6 @@ create_sweep(
     config_option_map_sweep,
 )
 
-network_failures_service_ag2_ = build_params("Base")
-network_failures_service_ag2_["slash_fraction_downtime"] = [0.05000000005, 0.1]
-network_failures_service_ag2_["downtime_jail_duration"] = [
-    14430000000000.0,
-    28800000000000.0,
-]
-network_failures_service_ag2_["max_chains_servicer"] = [10.5, 20]
-network_failures_service_ag2_["servicer_service_density_starting"] = [0.1, 0.5, 1]
-network_failures_service_ag2_["event"] = [
-    "servicer_shutdown_by_geozone_random",
-    "service_shutdown_random_t1",
-    "service_shutdown_random_t7",
-    "service_shutdown_random_t500",
-]
-create_sweep(
-    "network_failures_service_ag2_",
-    network_failures_service_ag2_,
-    config_option_map_sweep,
-)
-
-network_failures_service_ag3_ = build_params("Base")
-network_failures_service_ag3_["slash_fraction_downtime"] = [
-    0.05000000005,
-    0.075000000025,
-]
-network_failures_service_ag3_["downtime_jail_duration"] = [
-    14430000000000.0,
-    21615000000000.0,
-]
-network_failures_service_ag3_["max_chains_servicer"] = [15.25, 20]
-network_failures_service_ag3_["servicer_service_density_starting"] = [0.1, 0.5, 1]
-network_failures_service_ag3_["event"] = [
-    "servicer_shutdown_by_geozone_random",
-    "service_shutdown_random_t1",
-    "service_shutdown_random_t7",
-    "service_shutdown_random_t500",
-]
-create_sweep(
-    "network_failures_service_ag3_",
-    network_failures_service_ag3_,
-    config_option_map_sweep,
-)
-
-network_failures_service_ag5_ = build_params("Base")
-network_failures_service_ag5_["slash_fraction_downtime"] = [
-    0.05000000005,
-    0.05625000004375,
-]
-network_failures_service_ag5_["downtime_jail_duration"] = [
-    19818750000000.0,
-    21615000000000.0,
-]
-network_failures_service_ag5_["max_chains_servicer"] = [15.25, 16.4375]
-network_failures_service_ag5_["servicer_service_density_starting"] = [0.1, 0.5, 1]
-network_failures_service_ag5_["event"] = [
-    "servicer_shutdown_by_geozone_random",
-    "service_shutdown_random_t1",
-    "service_shutdown_random_t7",
-    "service_shutdown_random_t500",
-]
-create_sweep(
-    "network_failures_service_ag5_",
-    network_failures_service_ag5_,
-    config_option_map_sweep,
-)
-
-network_failures_service_ag6_ = build_params("Base")
-network_failures_service_ag6_["slash_fraction_downtime"] = [
-    0.053125000046874996,
-    0.05625000004375,
-]
-network_failures_service_ag6_["downtime_jail_duration"] = [
-    20716875000000.0,
-    21615000000000.0,
-]
-network_failures_service_ag6_["max_chains_servicer"] = [15.84375, 16.4375]
-network_failures_service_ag6_["servicer_service_density_starting"] = [0.1, 0.5, 1]
-network_failures_service_ag6_["event"] = [
-    "servicer_shutdown_by_geozone_random",
-    "service_shutdown_random_t1",
-    "service_shutdown_random_t7",
-    "service_shutdown_random_t500",
-]
-create_sweep(
-    "network_failures_service_ag6_",
-    network_failures_service_ag6_,
-    config_option_map_sweep,
-)
-
-network_failures_service_ag4_ = build_params("Base")
-network_failures_service_ag4_["slash_fraction_downtime"] = [
-    0.05000000005,
-    0.0625000000375,
-]
-network_failures_service_ag4_["downtime_jail_duration"] = [
-    18022500000000.0,
-    21615000000000.0,
-]
-network_failures_service_ag4_["max_chains_servicer"] = [15.25, 17.625]
-network_failures_service_ag4_["servicer_service_density_starting"] = [0.1, 0.5, 1]
-network_failures_service_ag4_["event"] = [
-    "servicer_shutdown_by_geozone_random",
-    "service_shutdown_random_t1",
-    "service_shutdown_random_t7",
-    "service_shutdown_random_t500",
-]
-create_sweep(
-    "network_failures_service_ag4_",
-    network_failures_service_ag4_,
-    config_option_map_sweep,
-)
 
 gateway_viability_sweep_ag2_ = build_params("Base")
 gateway_viability_sweep_ag2_["session_token_bucket_coefficient"] = [25, 212.5]
@@ -679,11 +562,6 @@ create_sweep(
 
 
 for key in config_option_map_sweep:
-    if (
-        key.startswith("servicer_viability_ag")
-        or key.startswith("network_viability_ag")
-        or key.startswith("network_failures_oracle_ag")
-    ):
-        config_option_map_sweep[key]["dao_fee_percentage"] = [
-            1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
-        ]
+    config_option_map_sweep[key]["dao_fee_percentage"] = [
+        1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
+    ]

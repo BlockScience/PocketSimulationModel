@@ -137,7 +137,6 @@ scenario_configs["servicer_viability_ag"] = {
 scenario_configs["network_failures_service_ag"] = {
     "variable_params": [
         "slash_fraction_downtime",
-        "downtime_jail_duration",
         "max_chains_servicer",
     ],
     "control_params": [
@@ -154,8 +153,8 @@ scenario_configs["network_failures_service_ag"] = {
         "b2": 0.1,
         "c1": 1e6,
         "c2": 0.1,
-        # Switched d1 to be equal to post / pre, so .9 -> 10% away from original
-        "d1": 0.9,
+        # Switched d1 to be equal to post / pre, so .8 -> 20% away from original
+        "d1": 0.8,
         "d2": 0.9,
     },
 }
