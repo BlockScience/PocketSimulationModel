@@ -156,7 +156,7 @@ def download_experiment_mc(experiment, s3, top=None, random=False):
     df.to_csv("simulation_data/{}MC.csv".format(experiment))
 
 
-def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=17):
+def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
     queue = create_queue_experiments(runs, n)
     while len(queue) > 0:
         live = ecs.list_tasks(cluster="PocketRuns")["taskArns"]
