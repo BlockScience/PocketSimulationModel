@@ -7,7 +7,7 @@ from psuu import psuu_find_next_grid
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
-    "network_failures_service_ag1_": 96,
+    "network_failures_service_ag1_": 48,
     "servicer_viability_ag1_": 1152,
     "network_viability_ag1_": 3456,
     "network_failures_oracle_ag1_": 2688,
@@ -16,11 +16,6 @@ GRID_NUMBERS = {
     "gateway_viability_sweep_ag4_": 288,
     "gateway_viability_sweep_ag5_": 288,
     "gateway_viability_sweep_ag6_": 288,
-    "network_failures_service_ag2_": 96,
-    "network_failures_service_ag3_": 96,
-    "network_failures_service_ag4_": 96,
-    "network_failures_service_ag5_": 96,
-    "network_failures_service_ag6_": 96,
     "servicer_viability_ag2_": 1152,
     "servicer_viability_ag3_": 1152,
     "servicer_viability_ag4_": 1152,
