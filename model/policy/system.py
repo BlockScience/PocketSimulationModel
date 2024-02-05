@@ -59,6 +59,11 @@ def block_reward_policy_aggregate(
     space4: dao_block_reward_space = {
         "reward_amount": reward * params["dao_allocation"]
     }
+
+    assert isclose(
+        space1["reward"] + space3["reward_amount"] + space4["reward_amount"], reward
+    )
+
     return (space1, space2, space3, space4)
 
 
