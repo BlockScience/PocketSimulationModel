@@ -85,7 +85,6 @@ system_param_config: Dict[str, SystemParamsType] = {
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
-        "servicer_allocation": [0.85],
         "stake_per_app_delegation": [15000 * 1e6],
         "gateway_fee_per_relay": [27.42],
         "gateway_minimum_stake": [150000 * 1e6],
@@ -124,7 +123,6 @@ system_param_config: Dict[str, SystemParamsType] = {
         "app_burn_per_relay": [0],
         "block_proposer_allocation": [0.05],
         "dao_allocation": [0.1],
-        "servicer_allocation": [0.85],
         "stake_per_app_delegation": [15000 * 1e6],
         "gateway_fee_per_relay": [27.42],
         "gateway_minimum_stake": [150000 * 1e6],
@@ -679,11 +677,6 @@ create_sweep(
 
 
 for key in config_option_map_sweep:
-    if (
-        key.startswith("servicer_viability_ag")
-        or key.startswith("network_viability_ag")
-        or key.startswith("network_failures_oracle_ag")
-    ):
-        config_option_map_sweep[key]["dao_fee_percentage"] = [
-            1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
-        ]
+    config_option_map_sweep[key]["dao_fee_percentage"] = [
+        1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
+    ]

@@ -45,9 +45,13 @@ def block_reward_policy_aggregate(
 
     reward = int(space["relays"] * state["relays_to_tokens_multiplier"])
 
+    servicer_allocation = (
+        1 - params["block_proposer_allocation"] - params["dao_allocation"]
+    )
+
     space1: assign_servicer_salary_space = {
         "geo_zone": space["geo_zone"],
-        "reward": reward * params["servicer_allocation"],
+        "reward": reward * servicer_allocation,
         "service": space["service"],
     }
 
