@@ -159,23 +159,32 @@ def download_experiment_mc(experiment, s3, top=None, random=False):
 def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
     queue = create_queue_experiments(runs, n)
     while len(queue) > 0:
-        for _ in range(max_containers):
-            if len(queue) > 0:
-                q = list(queue.pop(0))
-                print(q)
-                run_tasks(ecs, list(q))
-        print()
-        print()
-        time.sleep(sleep_minutes * 60)
+        live = ecs.list_container_instances("PocketRuns")["containerInstanceArns"]
+        if len(live) == 12:
+            time.sleep(60)
+        else:
+            q = list(queue.pop(0))
+            print(q)
+            run_tasks(ecs, list(q))
+
+        # for _ in range(max_containers):
+        #    if len(queue) > 0:
+        #        q = list(queue.pop(0))
+        #        print(q)
+        #        run_tasks(ecs, list(q))
+        # print()
+        # print()
+        # time.sleep(sleep_minutes * 60)
 
 
-def full_run_adaptive_grid(grid_names):
+def full_run_adaptive_grid(grid_names, run_all=False):
+    start = time.time()
     session = boto3.Session(profile_name="default")
     s3 = session.client("s3")
     ecs = boto3.client("ecs")
 
     print("-----Creating Expected Runs Dataframe-----")
-    runs = create_expected_runs_dataframe_multi(s3, grid_names)
+    runs = create_expected_runs_dataframe_multi(s3, grid_names, run_all=run_all)
     print("-----Launching Containers-----")
     queue_and_launch(runs, ecs, 20, 20)
     print("-----Downloading KPIs-----")
@@ -187,3 +196,6 @@ def full_run_adaptive_grid(grid_names):
         print(name)
         print()
         psuu_find_next_grid(name)
+    end = time.time()
+    print()
+    print("Runs took {} hours.".format((end - start) / 60 / 60))
