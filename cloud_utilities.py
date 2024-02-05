@@ -156,11 +156,11 @@ def download_experiment_mc(experiment, s3, top=None, random=False):
     df.to_csv("simulation_data/{}MC.csv".format(experiment))
 
 
-def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
+def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=17):
     queue = create_queue_experiments(runs, n)
     while len(queue) > 0:
-        live = ecs.list_container_instances("PocketRuns")["containerInstanceArns"]
-        if len(live) == 12:
+        live = ecs.list_tasks(cluster="PocketRuns")["taskArns"]
+        if len(live) == max_containers:
             time.sleep(60)
         else:
             q = list(queue.pop(0))
