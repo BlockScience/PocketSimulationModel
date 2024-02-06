@@ -637,6 +637,19 @@ create_sweep(
     config_option_map_sweep,
 )
 
+servicer_viability_ag3_ = build_params("Base")
+servicer_viability_ag3_["relays_to_tokens_multiplier"] = [100, 125.0]
+servicer_viability_ag3_["gateway_fee_per_relay"] = [10, 32.5]
+servicer_viability_ag3_["application_fee_per_relay"] = [77.5, 100]
+servicer_viability_ag3_["gateway_minimum_stake"] = [100000000000.0, 125000000000.0]
+servicer_viability_ag3_["minimum_application_stake"] = [10000000000.0, 12500000000.0]
+servicer_viability_ag3_["dao_allocation"] = [0.1, 0.125]
+servicer_viability_ag3_["validator_fee_percentage"] = [0.055, 0.0775]
+servicer_viability_ag3_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag3_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag3_", servicer_viability_ag3_, config_option_map_sweep
+)
 
 for key in config_option_map_sweep:
     config_option_map_sweep[key]["dao_fee_percentage"] = [
