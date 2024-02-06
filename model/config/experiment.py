@@ -160,3 +160,35 @@ for i in range(1, 3457):
         "monte_carlo_n": 5,
         "T": 365,
     }
+
+for i in range(1, 3073):
+    experimental_setups["network_failures_oracle_ag2_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_oracle_ag2_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 3457):
+    experimental_setups["network_viability_ag2_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_viability_ag2_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 1153):
+    experimental_setups["servicer_viability_ag2_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "servicer_viability_ag2_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 49):
+    experimental_setups["network_failures_service_ag2_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_service_ag2_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }

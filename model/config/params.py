@@ -561,6 +561,83 @@ create_sweep(
 )
 
 
+network_failures_service_ag2_ = build_params("Base")
+network_failures_service_ag2_["slash_fraction_downtime"] = [1e-10, 0.05000000005]
+network_failures_service_ag2_["max_chains_servicer"] = [1, 10.5]
+network_failures_service_ag2_["servicer_service_density_starting"] = [0.1, 0.5, 1]
+network_failures_service_ag2_["event"] = [
+    "servicer_shutdown_by_geozone_random",
+    "service_shutdown_random_t1",
+    "service_shutdown_random_t7",
+    "service_shutdown_random_t500",
+]
+create_sweep(
+    "network_failures_service_ag2_",
+    network_failures_service_ag2_,
+    config_option_map_sweep,
+)
+
+
+servicer_viability_ag2_ = build_params("Base")
+servicer_viability_ag2_["relays_to_tokens_multiplier"] = [100, 150.0]
+servicer_viability_ag2_["gateway_fee_per_relay"] = [10, 55.0]
+servicer_viability_ag2_["application_fee_per_relay"] = [55.0, 100]
+servicer_viability_ag2_["gateway_minimum_stake"] = [100000000000.0, 150000000000.0]
+servicer_viability_ag2_["minimum_application_stake"] = [10000000000.0, 15000000000.0]
+servicer_viability_ag2_["dao_allocation"] = [0.1, 0.15]
+servicer_viability_ag2_["validator_fee_percentage"] = [0.055, 0.1]
+servicer_viability_ag2_["service_linking_probability_just_joined"] = [0.1, 0.5, 0.9]
+servicer_viability_ag2_["kick_bottom_probability"] = [0.01, 0.05, 0.1]
+create_sweep(
+    "servicer_viability_ag2_", servicer_viability_ag2_, config_option_map_sweep
+)
+
+network_viability_ag2_ = build_params("Base")
+network_viability_ag2_["relays_to_tokens_multiplier"] = [150.0, 200]
+network_viability_ag2_["gateway_fee_per_relay"] = [10, 55.0]
+network_viability_ag2_["application_fee_per_relay"] = [55.0, 100]
+network_viability_ag2_["gateway_minimum_stake"] = [100000000000.0, 150000000000.0]
+network_viability_ag2_["minimum_application_stake"] = [10000000000.0, 15000000000.0]
+network_viability_ag2_["dao_allocation"] = [0.05, 0.1]
+network_viability_ag2_["validator_fee_percentage"] = [0.055, 0.1]
+network_viability_ag2_["relays_per_session_gamma_distribution_shape"] = [250, 500, 750]
+network_viability_ag2_["service_linking_probability_normal"] = [0.001, 0.01, 0.1]
+network_viability_ag2_["event"] = [
+    "double_relays_1_service",
+    "double_relays_3_services",
+    "double_relays_5_services",
+]
+create_sweep("network_viability_ag2_", network_viability_ag2_, config_option_map_sweep)
+
+network_failures_oracle_ag2_ = build_params("Base")
+network_failures_oracle_ag2_["relays_to_tokens_multiplier"] = [100, 150.0]
+network_failures_oracle_ag2_["gateway_fee_per_relay"] = [10, 55.0]
+network_failures_oracle_ag2_["application_fee_per_relay"] = [10, 55.0]
+network_failures_oracle_ag2_["gateway_minimum_stake"] = [100000000000.0, 150000000000.0]
+network_failures_oracle_ag2_["minimum_application_stake"] = [
+    15000000000.0,
+    20000000000.0,
+]
+network_failures_oracle_ag2_["dao_allocation"] = [0.05, 0.1]
+network_failures_oracle_ag2_["validator_fee_percentage"] = [0.055, 0.1]
+network_failures_oracle_ag2_["oracle_treatment_time_mean"] = [1, 10, 100]
+network_failures_oracle_ag2_["event"] = [
+    "oracle_shutdown",
+    "oracle_delay_poisson",
+    "oracle_distortion_unbiased_low_noise_poisson",
+    "oracle_distortion_unbiased_high_noise_poisson",
+    "oracle_distortion_positive_bias_low_noise_poisson",
+    "oracle_distortion_positive_bias_high_noise_poisson",
+    "oracle_distortion_negative_bias_low_noise_poisson",
+    "oracle_distortion_negative_bias_high_noise_poisson",
+]
+create_sweep(
+    "network_failures_oracle_ag2_",
+    network_failures_oracle_ag2_,
+    config_option_map_sweep,
+)
+
+
 for key in config_option_map_sweep:
     config_option_map_sweep[key]["dao_fee_percentage"] = [
         1 - config_option_map_sweep[key]["validator_fee_percentage"][0]

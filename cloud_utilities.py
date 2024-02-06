@@ -21,6 +21,9 @@ GRID_NUMBERS = {
     "servicer_viability_ag4_": 1152,
     "servicer_viability_ag5_": 1152,
     "servicer_viability_ag6_": 1152,
+    "network_failures_service_ag2_": 48,
+    "network_viability_ag2_": 3456,
+    "network_failures_oracle_ag2_": 288,
 }
 
 
@@ -161,7 +164,7 @@ def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
     while len(queue) > 0:
         live = ecs.list_tasks(cluster="PocketRuns")["taskArns"]
         if len(live) == max_containers:
-            time.sleep(60)
+            time.sleep(15)
         else:
             q = list(queue.pop(0))
             print(q)
