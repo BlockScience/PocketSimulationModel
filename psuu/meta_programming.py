@@ -84,6 +84,11 @@ def build_next_param_config_code_multi(
     for next_name, new_param_grid, variable_params, control_params, param_config in zip(
         next_names, new_param_grids, variable_params_l, control_params_l, param_config_l
     ):
+        combos = 1
+        for x in variable_params:
+            combos = combos * len(param_config[x])
+        for x in control_params:
+            combos = combos * len(param_config[x])
         l.append('"{}": {}'.format(next_name, combos))
     print(",".join(l))
     print()
