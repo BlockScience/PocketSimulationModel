@@ -24,6 +24,7 @@ GRID_NUMBERS = {
     "network_failures_service_ag2_": 48,
     "network_viability_ag2_": 3456,
     "network_failures_oracle_ag2_": 288,
+    "servicer_viability_ag3_": 1152,
 }
 
 
