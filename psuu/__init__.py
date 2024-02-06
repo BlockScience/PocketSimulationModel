@@ -1,4 +1,7 @@
-from .meta_programming import build_next_param_config_code
+from .meta_programming import (
+    build_next_param_config_code,
+    build_next_param_config_code_multi,
+)
 from .scenario_configs import scenario_configs
 from .core import (
     THRESHOLD_INEQUALITIES_MAP,

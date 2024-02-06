@@ -3,7 +3,7 @@ import numpy as np
 from time import sleep
 import time
 import boto3
-from psuu import psuu_find_next_grid
+from psuu import psuu_find_next_grid, build_next_param_config_code_multi
 
 GRID_NUMBERS = {
     "gateway_viability_sweep_ag1_": 288,
@@ -25,6 +25,7 @@ GRID_NUMBERS = {
     "network_viability_ag2_": 3456,
     "network_failures_oracle_ag2_": 288,
     "servicer_viability_ag3_": 1152,
+    "servicer_viability_ag4_": 1152,
 }
 
 
@@ -190,11 +191,20 @@ def full_run_adaptive_grid(grid_names, run_all=False):
     for name in grid_names:
         download_experiment_kpi(name, s3)
     print("-----Determining Next Grids-----")
+    l = []
     for name in grid_names:
         print()
         print(name)
         print()
-        psuu_find_next_grid(name)
+        l.append(psuu_find_next_grid(name))
+    build_next_param_config_code_multi(
+        [x[0] for x in l],
+        [x[1] for x in l],
+        [x[2] for x in l],
+        [x[3] for x in l],
+        [x[4] for x in l],
+    )
+
     end = time.time()
     print()
     print("Runs took {} hours.".format((end - start) / 60 / 60))

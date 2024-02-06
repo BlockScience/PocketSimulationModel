@@ -452,10 +452,10 @@ def psuu_find_next_grid(sweep):
         df_thresholds, variable_params
     )
     new_param_grid = update_param_grid(param_config, best_param_grid)
-    build_next_param_config_code(
-        next_name, new_param_grid, variable_params, control_params, param_config
-    )
-    return new_param_grid
+    # build_next_param_config_code(
+    #    next_name, new_param_grid, variable_params, control_params, param_config
+    # )
+    return (next_name, new_param_grid, variable_params, control_params, param_config)
 
 
 def load_all_kpi_comparison_data():
@@ -539,12 +539,12 @@ def decision_tree_feature_importance_plot(scenario_sweep_category):
     kpis = load_scenario_kpi_comparison_data(scenario_sweep_category)
     df = build_machine_search_data(kpis[scenario_sweep_category])
     variable_params = [
-        "param_" + x
-        for x in kpis[scenario_sweep_category][1]['variable_params']
+        "param_" + x for x in kpis[scenario_sweep_category][1]["variable_params"]
     ]
-    threshold_inequalities = kpis[scenario_sweep_category][1]['threshold_inequalities']
-    #os.chdir("..")
+    threshold_inequalities = kpis[scenario_sweep_category][1]["threshold_inequalities"]
+    # os.chdir("..")
     from cadcad_machine_search_local.visualizations import param_sensitivity_plot
+
     for ti in threshold_inequalities:
         param_sensitivity_plot(
             df,
