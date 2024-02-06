@@ -170,15 +170,10 @@ def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
             q = list(queue.pop(0))
             print(q)
             run_tasks(ecs, list(q))
-
-        # for _ in range(max_containers):
-        #    if len(queue) > 0:
-        #        q = list(queue.pop(0))
-        #        print(q)
-        #        run_tasks(ecs, list(q))
-        # print()
-        # print()
-        # time.sleep(sleep_minutes * 60)
+    live = ecs.list_tasks(cluster="PocketRuns")["taskArns"]
+    while len(live) > 0:
+        time.sleep(60)
+        live = ecs.list_tasks(cluster="PocketRuns")["taskArns"]
 
 
 def full_run_adaptive_grid(grid_names, run_all=False):
