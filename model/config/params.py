@@ -711,11 +711,11 @@ create_sweep(
 
 
 network_viability_ag3_ = build_params("Base")
-network_viability_ag3_["relays_to_tokens_multiplier"] = [150.0, 175.0]
+network_viability_ag3_["relays_to_tokens_multiplier"] = [175.0, 200]
 network_viability_ag3_["gateway_fee_per_relay"] = [10, 32.5]
-network_viability_ag3_["application_fee_per_relay"] = [55.0, 77.5]
+network_viability_ag3_["application_fee_per_relay"] = [77.5, 100]
 network_viability_ag3_["gateway_minimum_stake"] = [100000000000.0, 125000000000.0]
-network_viability_ag3_["minimum_application_stake"] = [12500000000.0, 15000000000.0]
+network_viability_ag3_["minimum_application_stake"] = [10000000000.0, 12500000000.0]
 network_viability_ag3_["dao_allocation"] = [0.05, 0.07500000000000001]
 network_viability_ag3_["validator_fee_percentage"] = [0.0775, 0.1]
 network_viability_ag3_["relays_per_session_gamma_distribution_shape"] = [250, 500, 750]
@@ -726,35 +726,6 @@ network_viability_ag3_["event"] = [
     "double_relays_5_services",
 ]
 create_sweep("network_viability_ag3_", network_viability_ag3_, config_option_map_sweep)
-
-
-network_failures_oracle_ag3_ = build_params("Base")
-network_failures_oracle_ag3_["relays_to_tokens_multiplier"] = [100, 125.0]
-network_failures_oracle_ag3_["gateway_fee_per_relay"] = [10, 32.5]
-network_failures_oracle_ag3_["application_fee_per_relay"] = [10, 32.5]
-network_failures_oracle_ag3_["gateway_minimum_stake"] = [100000000000.0, 125000000000.0]
-network_failures_oracle_ag3_["minimum_application_stake"] = [
-    15000000000.0,
-    17500000000.0,
-]
-network_failures_oracle_ag3_["dao_allocation"] = [0.05, 0.07500000000000001]
-network_failures_oracle_ag3_["validator_fee_percentage"] = [0.0775, 0.1]
-network_failures_oracle_ag3_["oracle_treatment_time_mean"] = [1, 10, 100]
-network_failures_oracle_ag3_["event"] = [
-    "oracle_shutdown",
-    "oracle_delay_poisson",
-    "oracle_distortion_unbiased_low_noise_poisson",
-    "oracle_distortion_unbiased_high_noise_poisson",
-    "oracle_distortion_positive_bias_low_noise_poisson",
-    "oracle_distortion_positive_bias_high_noise_poisson",
-    "oracle_distortion_negative_bias_low_noise_poisson",
-    "oracle_distortion_negative_bias_high_noise_poisson",
-]
-create_sweep(
-    "network_failures_oracle_ag3_",
-    network_failures_oracle_ag3_,
-    config_option_map_sweep,
-)
 
 for key in config_option_map_sweep:
     config_option_map_sweep[key]["dao_fee_percentage"] = [
