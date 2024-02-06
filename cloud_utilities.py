@@ -26,6 +26,11 @@ GRID_NUMBERS = {
     "network_failures_oracle_ag2_": 288,
     "servicer_viability_ag3_": 1152,
     "servicer_viability_ag4_": 1152,
+    "servicer_viability_ag5_": 1152,
+    "servicer_viability_ag6_": 1152,
+    "network_failures_service_ag3_": 3072,
+    "network_viability_ag3_": 3072,
+    "network_failures_oracle_ag3_": 3072,
 }
 
 
@@ -177,19 +182,19 @@ def queue_and_launch(runs, ecs, n, sleep_minutes, max_containers=12):
         live = ecs.list_tasks(cluster="PocketRuns")["taskArns"]
 
 
-def full_run_adaptive_grid(grid_names, run_all=False):
+def full_run_adaptive_grid(grid_names, run_all=False, skip_running=False):
     start = time.time()
     session = boto3.Session(profile_name="default")
     s3 = session.client("s3")
     ecs = boto3.client("ecs")
-
-    print("-----Creating Expected Runs Dataframe-----")
-    runs = create_expected_runs_dataframe_multi(s3, grid_names, run_all=run_all)
-    print("-----Launching Containers-----")
-    queue_and_launch(runs, ecs, 20, 20)
-    print("-----Downloading KPIs-----")
-    for name in grid_names:
-        download_experiment_kpi(name, s3)
+    if not skip_running:
+        print("-----Creating Expected Runs Dataframe-----")
+        runs = create_expected_runs_dataframe_multi(s3, grid_names, run_all=run_all)
+        print("-----Launching Containers-----")
+        queue_and_launch(runs, ecs, 20, 20)
+        print("-----Downloading KPIs-----")
+        for name in grid_names:
+            download_experiment_kpi(name, s3)
     print("-----Determining Next Grids-----")
     l = []
     for name in grid_names:
