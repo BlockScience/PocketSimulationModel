@@ -22,7 +22,7 @@ scenarios_dict["gateway_viability_sweep_ag"]["param_abbreviations"] = {
 scenarios_dict["gateway_viability_sweep_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 14"]
 
 scenarios_dict["network_failures_service_ag"] = dict()
-scenarios_dict["network_failures_service_ag"]["sweep title"] = "Network Failures Service"
+scenarios_dict["network_failures_service_ag"]["sweep title"] = "Network Failures Servicer"
 scenarios_dict["network_failures_service_ag"]["param_abbreviations"] = {
                                               "param_slash_fraction_downtime" : "SFD",
                                               "param_max_chains_servicer" : "MCS",
@@ -30,9 +30,36 @@ scenarios_dict["network_failures_service_ag"]["param_abbreviations"] = {
                                            }
 scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 11", "KPI C"]
 
+scenarios_dict["servicer_viability_ag"] = dict()
+scenarios_dict["servicer_viability_ag"]["sweep title"] = "Servicer Viability"
+scenarios_dict["servicer_viability_ag"]["param_abbreviations"] = {
+                                                             "param_relays_to_tokens_multiplier" : "TTRM",
+                                                             "param_gateway_fee_per_relay" : "GFPR",
+                                                             "param_application_fee_per_relay": "AFPR",
+                                                             "param_gateway_minimum_stake": "GMS",
+                                                             "param_minimum_application_stake": "AMS",
+                                                             "param_dao_allocation": "DAL",
+                                                             "param_validator_fee_percentage": "VFP"
+                                                             }
+scenarios_dict["servicer_viability_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 4", "KPI 5", "KPI D", "KPI 10", "KPI 14"]
 
 #################################
 ## End scenario dictionary.    ##
+#################################
+
+#################################
+## Begin KPI cleanup map.      ##
+#################################
+
+KPI_CLEANUP_MAP = {
+    "circulating_supply": "KPI 4",
+    "floating_supply": "KPI 5",
+    "net_mint_rate_cummulative": "KPI D",
+    "dao_value_capture": "KPI 10",
+}
+
+#################################
+## End KPI cleanup map.      ##
 #################################
 
 #################################
@@ -57,6 +84,10 @@ def read_and_format_data(directory: str = "simulation_data",
 
     # Assuming data_frames is the list of DataFrames to be merged
     merged_df = pd.concat(data_frames, ignore_index=True)
+
+    # Rename KPI columns to final forms for reporting
+    merged_df = merged_df.rename(columns=KPI_CLEANUP_MAP)
+    
     return merged_df
 
 
@@ -102,7 +133,7 @@ def make_initial_vs_final_plot(df: pd.DataFrame,
                       figsize=(fig_height,  fig_width), 
                       sharex='row', sharey='row', 
                       gridspec_kw={'hspace': 0.5})
-    
+    fig.subplots_adjust(top=0.95)
     title_to_use = scenario.get("sweep title")
     fig.suptitle(f"{title_to_use}: \n Impact of {param_name} ({param_abbr}) \n on selected KPIs.")
 
