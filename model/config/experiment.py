@@ -104,7 +104,7 @@ for i in range(1, 1153):
         "T": 365,
     }
 
-for i in range(1, 2689):
+for i in range(1, 3073):
     experimental_setups["network_failures_oracle_ag1_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "network_failures_oracle_ag1_{}".format(i),
@@ -238,6 +238,91 @@ for i in range(1, 3457):
     experimental_setups["network_viability_ag3_{}".format(i)] = {
         "config_option_state": "Base",
         "config_option_params": "network_viability_ag3_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 49):
+    experimental_setups["network_failures_service_ag4_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_service_ag4_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+
+for i in range(1, 3457):
+    experimental_setups["network_viability_ag4_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_viability_ag4_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+
+for i in range(1, 3073):
+    experimental_setups["network_failures_oracle_ag3_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_oracle_ag3_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 49):
+    experimental_setups["network_failures_service_ag5_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_service_ag5_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+
+for i in range(1, 3457):
+    experimental_setups["network_viability_ag5_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_viability_ag5_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+
+for i in range(1, 3073):
+    experimental_setups["network_failures_oracle_ag4_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_oracle_ag4_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 49):
+    experimental_setups["network_failures_service_ag6_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_service_ag6_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+
+for i in range(1, 3457):
+    experimental_setups["network_viability_ag6_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_viability_ag6_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 3073):
+    experimental_setups["network_failures_oracle_ag2_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_oracle_ag2_{}".format(i),
+        "monte_carlo_n": 5,
+        "T": 365,
+    }
+
+for i in range(1, 3073):
+    experimental_setups["network_failures_oracle_ag3_{}".format(i)] = {
+        "config_option_state": "Base",
+        "config_option_params": "network_failures_oracle_ag3_{}".format(i),
         "monte_carlo_n": 5,
         "T": 365,
     }
