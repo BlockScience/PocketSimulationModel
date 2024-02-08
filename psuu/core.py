@@ -535,7 +535,7 @@ def load_scenario_kpi_comparison_data(scenario_sweep_category):
     return out
 
 
-def decision_tree_feature_importance_plot(scenario_sweep_category):
+def decision_tree_feature_importance_plot(scenario_sweep_category, height = 12, width = 36, font_size = 12):
     kpis = load_scenario_kpi_comparison_data(scenario_sweep_category)
     df = build_machine_search_data(kpis[scenario_sweep_category])
     variable_params = [
@@ -544,13 +544,16 @@ def decision_tree_feature_importance_plot(scenario_sweep_category):
     threshold_inequalities = kpis[scenario_sweep_category][1]["threshold_inequalities"]
     # os.chdir("..")
     from cadcad_machine_search_local.visualizations import param_sensitivity_plot
-
+    
     for ti in threshold_inequalities:
         param_sensitivity_plot(
             df,
             variable_params,
             ti + "_success",
             ti + " inequality threshold",
+            height,
+            width,
+            font_size
         )
 
 
@@ -561,7 +564,7 @@ def threshold_comparison_plot(data):
     variable_params = data[1]["variable_params"]
     rows = max(data.keys())
     columns = 1 + len(variable_params)
-    fig, axes = plt.subplots(rows, ncols=columns, figsize=(20, 3.5 * rows))
+    fig, axes = plt.subplots(rows, ncols=columns, figsize=(30, 3.5 * rows))
 
     for i in range(rows):
         data_i = data[i + 1]
@@ -593,8 +596,11 @@ def threshold_comparison_plot(data):
                 y = 5
                 height = 1
 
-                x1 = data[i + 1]["param_config"][param_name][0]
-                x2 = data[i + 1]["param_config"][param_name][1]
+                #JS Fix Feb 7 '24: extract actual final grid values
+                #x1 = data[i + 1]["param_config"][param_name][0]
+                #x2 = data[i + 1]["param_config"][param_name][1]
+                x1 = min(data[i + 1]["thresholds"].index.get_level_values('param_' + param_name))
+                x2 = max(data[i + 1]["thresholds"].index.get_level_values('param_' + param_name))
 
                 display_x1 = x1
                 display_x2 = x2

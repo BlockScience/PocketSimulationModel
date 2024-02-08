@@ -11,7 +11,8 @@ def f(X: pd.DataFrame,
       target: str,
       ax_dt: object,
       ax_rf: object,
-      label: str = 'target'):
+      label: str = 'target',
+      font_size: int = 12):
     """
     Fit DT and RF classifiers for summarizing the sensivity.
     """
@@ -22,38 +23,45 @@ def f(X: pd.DataFrame,
     model.fit(X, y)
     rf.fit(X, y)
 
-    df = (pd.DataFrame(list(zip(X.columns, rf.feature_importances_)),
-                       columns=['features', 'importance'])
-          .sort_values(by='importance', ascending=False)
-          )
-
-    plot_tree(model,
-              rounded=True,
-              proportion=True,
-              fontsize=14,
-              feature_names=X.columns,
-              class_names=['threshold not met', 'threshold met'],
-              filled=True,
-              ax=ax_dt)
-    ax_dt.set_title(
-        f'Decision tree for {label}, score: {model.score(X, y) :.0%}. N: {len(X) :.2e}')
-    sns.barplot(data=df,
-                x=df.features,
-                y=df.importance,
-                ax=ax_rf,
-                label='small')
-    plt.setp(ax_rf.xaxis.get_majorticklabels(), rotation=45)
-    ax_rf.tick_params(axis='x', labelsize=14)
-    ax_rf.set_xlabel("Parameters", fontsize=14)
-    ax_rf.set_title(f'Feature importance for the {label}')
+    if model.get_depth() > 0:
     
-    return df.assign(target=target)
+        df = (pd.DataFrame(list(zip(X.columns, rf.feature_importances_)),
+                           columns=['features', 'importance'])
+              .sort_values(by='importance', ascending=False)
+              )
+    
+        plot_tree(model,
+                  rounded=True,
+                  proportion=True,
+                  fontsize=font_size,
+                  feature_names=X.columns,
+                  class_names=['threshold not met', 'threshold met'],
+                  filled=True,
+                  ax=ax_dt)
+        ax_dt.set_title(
+            f'Decision tree for {label}, score: {model.score(X, y) :.0%}. N: {len(X) :.2e}')
+        sns.barplot(data=df,
+                    x=df.features,
+                    y=df.importance,
+                    ax=ax_rf,
+                    label='small')
+        plt.setp(ax_rf.xaxis.get_majorticklabels(), rotation=45)
+        ax_rf.tick_params(axis='x', labelsize=14)
+        ax_rf.set_xlabel("Parameters", fontsize=14)
+        ax_rf.set_title(f'Feature importance for the {label}')
+        
+        return df.assign(target=target)
+    else:
+        raise ValueError
 
 
 def param_sensitivity_plot(df: pd.DataFrame,
                            control_params: set,
                            target: str,
-                           label: str = 'target'):
+                           label: str = 'target',
+                           height: int = 12,
+                           width: int = 36,
+                           font_size: int = 12):
     """
     Plot the sensivity of the 'target' column vs
     a list of control parameters, which are data frame columns.
@@ -64,10 +72,13 @@ def param_sensitivity_plot(df: pd.DataFrame,
     y = (df[target] > 0)
     # Visualize
     fig, axes = plt.subplots(nrows=2,
-                             figsize=(36, 12),
+                             figsize=(width, height),
                              dpi=100,
                              gridspec_kw={'height_ratios': [3, 1]})
-    f(X, y, 'target', axes[0], axes[1], label)
+    try:
+        f(X, y, 'target', axes[0], axes[1], label, font_size)
+    except ValueError:
+        plt.close()
     return None
 
 
