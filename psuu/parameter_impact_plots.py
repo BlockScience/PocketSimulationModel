@@ -26,14 +26,13 @@ scenarios_dict["network_failures_service_ag"]["sweep title"] = "Network Failures
 scenarios_dict["network_failures_service_ag"]["param_abbreviations"] = {
                                               "param_slash_fraction_downtime" : "SFD",
                                               "param_max_chains_servicer" : "MCS",
-                                              "param_downtime_jail_duration": "DJD"
                                            }
-scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 11", "KPI C"]
+scenarios_dict["network_failures_service_ag"]["KPIs"] = ["KPI 8", "KPI 11", "KPI C"]
 
 scenarios_dict["servicer_viability_ag"] = dict()
 scenarios_dict["servicer_viability_ag"]["sweep title"] = "Servicer Viability"
 scenarios_dict["servicer_viability_ag"]["param_abbreviations"] = {
-                                                             "param_relays_to_tokens_multiplier" : "TTRM",
+                                                             "param_relays_to_tokens_multiplier" : "RTTM",
                                                              "param_gateway_fee_per_relay" : "GFPR",
                                                              "param_application_fee_per_relay": "AFPR",
                                                              "param_gateway_minimum_stake": "GMS",
@@ -42,6 +41,33 @@ scenarios_dict["servicer_viability_ag"]["param_abbreviations"] = {
                                                              "param_validator_fee_percentage": "VFP"
                                                              }
 scenarios_dict["servicer_viability_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 4", "KPI 5", "KPI D", "KPI 10", "KPI 14"]
+
+scenarios_dict["network_viability_ag"] = dict()
+scenarios_dict["network_viability_ag"]["sweep title"] = "Network Viability"
+scenarios_dict["network_viability_ag"]["param_abbreviations"] = {
+                                                             "param_relays_to_tokens_multiplier" : "RTTM",
+                                                             "param_gateway_fee_per_relay" : "GFPR",
+                                                             "param_application_fee_per_relay": "AFPR",
+                                                             "param_gateway_minimum_stake": "GMS",
+                                                             "param_minimum_application_stake": "AMS",
+                                                             "param_dao_allocation": "DAL",
+                                                             "param_validator_fee_percentage": "VFP"
+                                                             }
+scenarios_dict["network_viability_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 4", "KPI 5", "KPI D", "KPI 10"]
+
+scenarios_dict["network_failures_oracle_ag"] = dict()
+scenarios_dict["network_failures_oracle_ag"]["sweep title"] = "Network Failures Oracle"
+scenarios_dict["network_failures_oracle_ag"]["param_abbreviations"] = {
+                                                             "param_relays_to_tokens_multiplier" : "RTTM",
+                                                             "param_gateway_fee_per_relay" : "GFPR",
+                                                             "param_application_fee_per_relay": "AFPR",
+                                                             "param_gateway_minimum_stake": "GMS",
+                                                             "param_minimum_application_stake": "AMS",
+                                                             "param_dao_allocation": "DAL",
+                                                             "param_validator_fee_percentage": "VFP"
+                                                             }
+scenarios_dict["network_failures_oracle_ag"]["KPIs"] = ["KPI 1", "KPI 3", "KPI 4", "KPI 5", "KPI D", "KPI 10", "KPI 14"]
+
 
 #################################
 ## End scenario dictionary.    ##

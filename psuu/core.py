@@ -212,7 +212,7 @@ def threshold_mc_fraction(df, min, max, frac, entity, scoring=False):
         raise ValueError(
             "Error: must provide at least one maximum or minimum threshold value"
         )
-
+    
     # Number of successful runs
     ineq = ineq.mean()
 
@@ -321,13 +321,17 @@ def compute_threshold_inequalities(
         ]
     df_thresholds = pd.concat(df_thresholds, axis=1)
     df_thresholds.columns = [x + "_success" for x in threshold_inequalities]
+    
     return df_thresholds
 
 
 def load_sweep(sweep):
     sweep_family = sweep[: sweep.index("_ag") + 3]
     kpis = load_kpis(sweep)
-    param_config = globals()[sweep]
+    try:
+        param_config = globals()[sweep]
+    except KeyError:
+        param_config = {}
     next_name = sweep[:-2] + str(int(sweep[-2]) + 1) + "_"
     variable_params = scenario_configs[sweep_family]["variable_params"]
     control_params = scenario_configs[sweep_family]["control_params"]
