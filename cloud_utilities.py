@@ -37,6 +37,9 @@ GRID_NUMBERS = {
     "network_viability_ag6_": 3456,
     "network_failures_oracle_ag2_": 3072,
     "network_failures_oracle_ag3_": 3072,
+    "network_failures_oracle_ag4_": 3072,
+    "network_failures_oracle_ag5_": 3072,
+    "network_failures_oracle_ag6_": 3072,
 }
 
 

@@ -943,6 +943,93 @@ create_sweep(
     config_option_map_sweep,
 )
 
+network_failures_oracle_ag4_ = build_params("Base")
+network_failures_oracle_ag4_["relays_to_tokens_multiplier"] = [100, 112.5]
+network_failures_oracle_ag4_["gateway_fee_per_relay"] = [10, 21.25]
+network_failures_oracle_ag4_["application_fee_per_relay"] = [43.75, 55.0]
+network_failures_oracle_ag4_["gateway_minimum_stake"] = [112500000000.0, 125000000000.0]
+network_failures_oracle_ag4_["minimum_application_stake"] = [
+    18750000000.0,
+    20000000000.0,
+]
+network_failures_oracle_ag4_["dao_allocation"] = [0.0625, 0.07500000000000001]
+network_failures_oracle_ag4_["validator_fee_percentage"] = [0.01, 0.02125]
+network_failures_oracle_ag4_["oracle_treatment_time_mean"] = [1, 10, 100]
+network_failures_oracle_ag4_["event"] = [
+    "oracle_shutdown",
+    "oracle_delay_poisson",
+    "oracle_distortion_unbiased_low_noise_poisson",
+    "oracle_distortion_unbiased_high_noise_poisson",
+    "oracle_distortion_positive_bias_low_noise_poisson",
+    "oracle_distortion_positive_bias_high_noise_poisson",
+    "oracle_distortion_negative_bias_low_noise_poisson",
+    "oracle_distortion_negative_bias_high_noise_poisson",
+]
+create_sweep(
+    "network_failures_oracle_ag4_",
+    network_failures_oracle_ag4_,
+    config_option_map_sweep,
+)
+
+network_failures_oracle_ag5_ = build_params("Base")
+network_failures_oracle_ag5_["relays_to_tokens_multiplier"] = [100, 106.25]
+network_failures_oracle_ag5_["gateway_fee_per_relay"] = [10, 15.625]
+network_failures_oracle_ag5_["application_fee_per_relay"] = [43.75, 49.375]
+network_failures_oracle_ag5_["gateway_minimum_stake"] = [112500000000.0, 118750000000.0]
+network_failures_oracle_ag5_["minimum_application_stake"] = [
+    19375000000.0,
+    20000000000.0,
+]
+network_failures_oracle_ag5_["dao_allocation"] = [0.0625, 0.06875]
+network_failures_oracle_ag5_["validator_fee_percentage"] = [0.015625, 0.02125]
+network_failures_oracle_ag5_["oracle_treatment_time_mean"] = [1, 10, 100]
+network_failures_oracle_ag5_["event"] = [
+    "oracle_shutdown",
+    "oracle_delay_poisson",
+    "oracle_distortion_unbiased_low_noise_poisson",
+    "oracle_distortion_unbiased_high_noise_poisson",
+    "oracle_distortion_positive_bias_low_noise_poisson",
+    "oracle_distortion_positive_bias_high_noise_poisson",
+    "oracle_distortion_negative_bias_low_noise_poisson",
+    "oracle_distortion_negative_bias_high_noise_poisson",
+]
+create_sweep(
+    "network_failures_oracle_ag5_",
+    network_failures_oracle_ag5_,
+    config_option_map_sweep,
+)
+
+network_failures_oracle_ag6_ = build_params("Base")
+network_failures_oracle_ag6_["relays_to_tokens_multiplier"] = [100, 103.125]
+network_failures_oracle_ag6_["gateway_fee_per_relay"] = [10, 12.8125]
+network_failures_oracle_ag6_["application_fee_per_relay"] = [46.5625, 49.375]
+network_failures_oracle_ag6_["gateway_minimum_stake"] = [115625000000.0, 118750000000.0]
+network_failures_oracle_ag6_["minimum_application_stake"] = [
+    19687500000.0,
+    20000000000.0,
+]
+network_failures_oracle_ag6_["dao_allocation"] = [0.065625, 0.06875]
+network_failures_oracle_ag6_["validator_fee_percentage"] = [
+    0.018437500000000002,
+    0.02125,
+]
+network_failures_oracle_ag6_["oracle_treatment_time_mean"] = [1, 10, 100]
+network_failures_oracle_ag6_["event"] = [
+    "oracle_shutdown",
+    "oracle_delay_poisson",
+    "oracle_distortion_unbiased_low_noise_poisson",
+    "oracle_distortion_unbiased_high_noise_poisson",
+    "oracle_distortion_positive_bias_low_noise_poisson",
+    "oracle_distortion_positive_bias_high_noise_poisson",
+    "oracle_distortion_negative_bias_low_noise_poisson",
+    "oracle_distortion_negative_bias_high_noise_poisson",
+]
+create_sweep(
+    "network_failures_oracle_ag6_",
+    network_failures_oracle_ag6_,
+    config_option_map_sweep,
+)
+
 for key in config_option_map_sweep:
     config_option_map_sweep[key]["dao_fee_percentage"] = [
         1 - config_option_map_sweep[key]["validator_fee_percentage"][0]
